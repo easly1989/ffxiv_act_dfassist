@@ -83,7 +83,7 @@ internal static class Log
     internal static void D(object format, params object[] args)
     {
 #if DEBUG
-            Write(Color.Gray, format, args);
+            Write(System.Drawing.Color.Gray, format, args);
 #endif
     }
 
