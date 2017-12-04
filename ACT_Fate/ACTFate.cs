@@ -3,7 +3,6 @@
 // reference:System.Web.Extensions.dll
 using System;
 using System.Reflection;
-using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -15,8 +14,6 @@ using System.Text;
 using System.Net;
 using System.Collections.Specialized;
 using System.Linq;
-using Windows.UI.Notifications;
-using Windows.Data.Xml.Dom;
 
 [assembly: AssemblyTitle("FFXIV F.A.T.E")]
 //[assembly: AssemblyDescription("FATE Log")]
@@ -25,9 +22,9 @@ using Windows.Data.Xml.Dom;
 
 namespace FFXIV_FATE_ACT_Plugin
 {
-    public class ACTFate : UserControl, IActPluginV1
+    public class ACTFate : System.Windows.Forms.UserControl, IActPluginV1
     {
-        private Label lblStatus;
+        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Timer timer;
         private bool active = false;
         private FileInfo fileInfo;
@@ -45,26 +42,26 @@ namespace FFXIV_FATE_ACT_Plugin
             }
         }
         private ConcurrentDictionary<int, ProcessNet> networks = new ConcurrentDictionary<int, ProcessNet>();
-        private Label label1;
-        private ComboBox comboBoxLanguage;
-        private GroupBox groupBox1;
-        private TextBox textTelegramToken;
-        private Label label3;
-        private TextBox textTelegramChatID;
-        private Label label2;
-        private CheckBox checkBoxTelegram;
-        private GroupBox groupBox2;
-        private Label label4;
-        private TreeView telegramFateTreeView;
-        private CheckBox checkBoxTelegramDutyFinder;
-        private CheckBox checkBoxToastNotification;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxLanguage;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textTelegramToken;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textTelegramChatID;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBoxTelegram;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TreeView telegramFateTreeView;
+        private System.Windows.Forms.CheckBox checkBoxTelegramDutyFinder;
+        private System.Windows.Forms.CheckBox checkBoxToastNotification;
         private static string APP_ID = "Advanced Combat Tracker"; // 아무거나 쓰면 됨 유니크하게
         public ACTFate()
         {
             InitializeComponent();
         }
 
-        public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
+        public void InitPlugin(System.Windows.Forms.TabPage pluginScreenSpace, System.Windows.Forms.Label pluginStatusText)
         {
 
             ShortCutCreator.TryCreateShortcut(APP_ID, APP_ID);
@@ -150,10 +147,10 @@ namespace FFXIV_FATE_ACT_Plugin
             //tree
             telegramChkFates = "";
             List<string> c = new List<string>();
-            foreach (TreeNode area in this.telegramFateTreeView.Nodes)
+            foreach (System.Windows.Forms.TreeNode area in this.telegramFateTreeView.Nodes)
             {
                 if (area.Checked) c.Add((string)area.Tag);
-                foreach (TreeNode fate in area.Nodes)
+                foreach (System.Windows.Forms.TreeNode fate in area.Nodes)
                 {
                     if (fate.Checked) c.Add((string)fate.Tag);
                 }
@@ -295,6 +292,7 @@ namespace FFXIV_FATE_ACT_Plugin
             this.comboBoxLanguage.Name = "comboBoxLanguage";
             this.comboBoxLanguage.Size = new System.Drawing.Size(121, 20);
             this.comboBoxLanguage.TabIndex = 6;
+            this.comboBoxLanguage.SelectedIndexChanged += comboBoxLanguage_SelectedIndexChanged;
             // 
             // groupBox1
             // 
@@ -585,6 +583,7 @@ namespace FFXIV_FATE_ACT_Plugin
         private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             selLng = (string)comboBoxLanguage.SelectedValue;
+            loadFates();
         }
         
         private void loadFates()
@@ -605,7 +604,7 @@ namespace FFXIV_FATE_ACT_Plugin
             foreach (JProperty item in data["areas"])
             {
                 string key = item.Name;
-                TreeNode areaNode = this.telegramFateTreeView.Nodes.Add(data["areas"][key][selLng].ToString());
+                System.Windows.Forms.TreeNode areaNode = this.telegramFateTreeView.Nodes.Add(data["areas"][key][selLng].ToString());
                 areaNode.Tag = "AREA:" + key;
                 if (c.Contains((string)areaNode.Tag)) areaNode.Checked = true;
                 foreach (JProperty fate in data["fates"])
@@ -613,7 +612,7 @@ namespace FFXIV_FATE_ACT_Plugin
                     if (data["fates"][fate.Name]["area_code"].ToString().Equals(key) == false) continue;
                     string text = data["fates"][fate.Name]["name"][selLng].ToString();
                     if (text == null || text == "") text = data["fates"][fate.Name]["name"]["en"].ToString();
-                    TreeNode fateNode = areaNode.Nodes.Add(text);
+                    System.Windows.Forms.TreeNode fateNode = areaNode.Nodes.Add(text);
                     fateNode.Tag = fate.Name;
                     if (c.Contains((string)fateNode.Tag)) fateNode.Checked = true;
                 }
@@ -628,13 +627,13 @@ namespace FFXIV_FATE_ACT_Plugin
         private bool isTelegramDutyAlertEnable;
         private bool isToastNotificationEnable;
 
-        private void fateTreeView_AfterCheck(object sender, TreeViewEventArgs e)
+        private void fateTreeView_AfterCheck(object sender, System.Windows.Forms.TreeViewEventArgs e)
         {
             if (lockTreeEvent) return;
             lockTreeEvent = true;
             if (((string)e.Node.Tag).Contains("AREA:"))
             {
-                foreach (TreeNode node in e.Node.Nodes)
+                foreach (System.Windows.Forms.TreeNode node in e.Node.Nodes)
                 {
                     node.Checked = e.Node.Checked;
                 }
@@ -648,7 +647,7 @@ namespace FFXIV_FATE_ACT_Plugin
                 else
                 {
                     bool flag = true;
-                    foreach (TreeNode node in e.Node.Parent.Nodes)
+                    foreach (System.Windows.Forms.TreeNode node in e.Node.Parent.Nodes)
                     {
                         flag &= node.Checked;
                     }
@@ -662,9 +661,9 @@ namespace FFXIV_FATE_ACT_Plugin
             lockTreeEvent = false;
         }
 
-        private void updateSelectedFates(TreeNodeCollection nodes)
+        private void updateSelectedFates(System.Windows.Forms.TreeNodeCollection nodes)
         {
-            foreach (TreeNode node in nodes)
+            foreach (System.Windows.Forms.TreeNode node in nodes)
             {
                 if (node.Checked) telegramSelectedFates.Push((string)node.Tag);
                 updateSelectedFates(node.Nodes);
@@ -757,7 +756,7 @@ namespace FFXIV_FATE_ACT_Plugin
             try
             {
                 // Get a toast XML template
-                Windows.Data.Xml.Dom.XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03); // 이거 xml 로 UI 만들면 되나본데 모르니까 생략
+                Windows.Data.Xml.Dom.XmlDocument toastXml = Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(Windows.UI.Notifications.ToastTemplateType.ToastImageAndText03);
 
                 // Fill in the text elements
                 Windows.Data.Xml.Dom.XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
@@ -772,11 +771,13 @@ namespace FFXIV_FATE_ACT_Plugin
                 imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
 
                 // Create the toast and attach event listeners
-                ToastNotification toast = new ToastNotification(toastXml);
+                Windows.UI.Notifications.ToastNotification toast = new Windows.UI.Notifications.ToastNotification(toastXml);
 
                 // Show the toast. Be sure to specify the AppUserModelId on your application's shortcut!
-                ToastNotificationManager.CreateToastNotifier(APP_ID).Show(toast);
-            } catch (Exception e) {
+                Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier(APP_ID).Show(toast);
+            }
+            catch (Exception e)
+            {
                 Log.Ex(e, "error");
             }
             
