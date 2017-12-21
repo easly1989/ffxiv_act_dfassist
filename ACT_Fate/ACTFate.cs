@@ -14,6 +14,7 @@ using System.Text;
 using System.Net;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading.Tasks;
 
 [assembly: AssemblyTitle("FFXIV F.A.T.E")]
 //[assembly: AssemblyDescription("FATE Log")]
@@ -70,34 +71,46 @@ namespace FFXIV_FATE_ACT_Plugin
             this.lblStatus.Text = "FFXIV F.A.T.E Plugin Started.";
             pluginScreenSpace.Text = "FATE Parser";
 
-            pluginScreenSpace.Controls.Add(this);
-            xmlSettings = new SettingsSerializer(this);
-
-            foreach (ActPluginData plugin in ActGlobals.oFormActMain.ActPlugins)
+            Task.Factory.StartNew(() =>
             {
-                if (plugin.pluginObj != this) continue;
-                fileInfo = plugin.pluginFile;
-                break;
-            }
+                this.lblStatus.Text = "Downloading Data.json";
+
+                loadJSONData();
+                this.lblStatus.Text = "Downloaded Data.json";
+
+                pluginStatusText.Invoke(new Action(delegate ()
+                {
+                    this.lblStatus.Text = "FFXIV F.A.T.E Plugin Started.";
+
+                    pluginScreenSpace.Controls.Add(this);
+                    xmlSettings = new SettingsSerializer(this);
+
+                    foreach (ActPluginData plugin in ActGlobals.oFormActMain.ActPlugins)
+                    {
+                        if (plugin.pluginObj != this) continue;
+                        fileInfo = plugin.pluginFile;
+                        break;
+                    }
 
 
-            if (timer == null)
-            {
-                timer = new System.Windows.Forms.Timer();
-                timer.Interval = 30 * 1000;
-                timer.Tick += Timer_Tick;
-            }
-            timer.Enabled = true;
+                    if (timer == null)
+                    {
+                        timer = new System.Windows.Forms.Timer();
+                        timer.Interval = 30 * 1000;
+                        timer.Tick += Timer_Tick;
+                    }
+                    timer.Enabled = true;
 
-            updateFFXIVProcesses();
+                    updateFFXIVProcesses();
 
 
-            loadJSONData();
+                    LoadSettings();
+                    this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+                    selLng = (string)this.comboBoxLanguage.SelectedValue;
+                    loadFates();
 
-            LoadSettings();
-            this.comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            selLng = (string)this.comboBoxLanguage.SelectedValue;
-            loadFates();
+                }));
+            });
         }
 
         void LoadSettings()
@@ -484,7 +497,7 @@ namespace FFXIV_FATE_ACT_Plugin
             string text = pid + "|" + server + "|" + eventType + "|";
 
             
-            int pos = 0;
+            int pos = 0; bool isFate = false;
             switch (eventType)
             {
                 case App.Network.EventType.INSTANCE_ENTER:
@@ -497,7 +510,8 @@ namespace FFXIV_FATE_ACT_Plugin
                 case App.Network.EventType.FATE_BEGIN:
                 case App.Network.EventType.FATE_PROGRESS:
                 case App.Network.EventType.FATE_END:
-                    text += getTextFate(args[0]) + "|" + getTextFateArea(args[0]) + "|";pos++;
+                    isFate = true;
+                    text += getTextFate(args[0]) + "|" + getTextFateArea(args[0]) + "|"; pos++;
                     break;
                 case App.Network.EventType.MATCH_BEGIN:
                     text += (App.Network.MatchType)args[0] + "|"; pos++;
@@ -534,6 +548,11 @@ namespace FFXIV_FATE_ACT_Plugin
                 text += args[i] + "|";
             }
 
+            if (isFate)
+            {
+                text += args[0] + "|";
+            }
+
             sendToACT(text);
 
             postToToastWindowsNotificationIfNeeded(server, eventType, args);
@@ -558,9 +577,40 @@ namespace FFXIV_FATE_ACT_Plugin
         private string telegramChkFates;
         private ConcurrentStack<string> telegramSelectedFates = new ConcurrentStack<string>();
 
+        private string downloadData(string url)
+        {
+            WebClient webClient = new WebClient();
+            webClient.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.BypassCache);
+            StringBuilder stringBuilder = new StringBuilder();
+            try
+            {
+                using (Stream stream = webClient.OpenRead(url + new Random().Next()))
+                {
+                    using (StreamReader streamReader = new StreamReader(stream))
+                    {
+                        for (; ; )
+                        {
+                            string text3 = streamReader.ReadLine();
+                            if (text3 == null)
+                            {
+                                break;
+                            }
+                            stringBuilder.Append(text3);
+                        }
+                    }
+                }
+                return stringBuilder.ToString();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         private void loadJSONData()
         {
-            string jsonString = File.ReadAllText(fileInfo.Directory.FullName + "/data.json");
+            string jsonString = downloadData("https://raw.githubusercontent.com/wanaff14/ACTFate/update/data.json?_=" + System.DateTimeOffset.Now.Ticks);
+            if (jsonString == null) jsonString = File.ReadAllText(fileInfo.Directory.FullName + "/data.json");
             var json = JObject.Parse(jsonString);
 
             List<Language> languages = new List<Language>();
@@ -657,6 +707,7 @@ namespace FFXIV_FATE_ACT_Plugin
             telegramSelectedFates.Clear();
             updateSelectedFates(telegramFateTreeView.Nodes);
 
+            SaveSettings();
 
             lockTreeEvent = false;
         }
