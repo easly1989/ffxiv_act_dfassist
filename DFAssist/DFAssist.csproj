@@ -44,6 +44,9 @@
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack.Shell.1.1.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -58,6 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Language.cs" />
+    <Compile Include="MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="FFXIVPacketHandler.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -72,6 +79,7 @@
     <Compile Include="Network\TcpPacket.cs" />
     <Compile Include="Network\TcpRow.cs" />
     <Compile Include="Network\TcpTable.cs" />
+    <Compile Include="ProcessNet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shell\IPersistFile.cs" />
     <Compile Include="Shell\IPropertyStore.cs" />
@@ -80,6 +88,9 @@
     <Compile Include="Shell\ShellIidGuid.cs" />
     <Compile Include="Shell\ShortCutCreator.cs" />
     <Compile Include="Shell\STGM.cs" />
+    <EmbeddedResource Include="MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
