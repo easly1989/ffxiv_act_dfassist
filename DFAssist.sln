@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist", "DFAssist\DFAssist.csproj", "{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIV_FATE_ACT_Plugin", "ACT_Fate\FFXIV_FATE_ACT_Plugin.csproj", "{0A8BC2CF-BCBA-4A7F-974A-11F078BED997}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A8BC2CF-BCBA-4A7F-974A-11F078BED997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A8BC2CF-BCBA-4A7F-974A-11F078BED997}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A8BC2CF-BCBA-4A7F-974A-11F078BED997}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A8BC2CF-BCBA-4A7F-974A-11F078BED997}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

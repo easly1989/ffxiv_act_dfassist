@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Cache;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,7 +21,6 @@ using System.Xml;
 using Advanced_Combat_Tracker;
 using DFAssist.Shell;
 using Newtonsoft.Json.Linq;
-using Advanced_Combat_Tracker;
 
 namespace DFAssist
 {
@@ -63,6 +63,16 @@ namespace DFAssist
         {
             InitializeComponent();
 
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
+                var name = new AssemblyName(Assembly.GetExecutingAssembly().FullName).Name + "." + new AssemblyName(args.Name).Name + ".dll";
+                using (var assemblyStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name))
+                {
+                    byte[] assemblyBuffer = new byte[assemblyStream.Length];
+                    assemblyStream.Read(assemblyBuffer, 0, assemblyBuffer.Length);
+                    return Assembly.Load(assemblyBuffer);
+                }
+            };
+
             _networks = new ConcurrentDictionary<int, ProcessNet>();
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config\\ACTFate.config.xml");
             _telegramSelectedFates = new ConcurrentStack<string>();
@@ -85,23 +95,25 @@ namespace DFAssist
 
                 pluginStatusText.Invoke(new Action(delegate
                 {
-                    _labelStatus.Text = "FFXIV F.A.T.E Plugin Started.";
+                    _labelStatus.Text = "DFAssist Plugin Started.";
 
                     pluginScreenSpace.Controls.Add(this);
                     _xmlSettingsSerializer = new SettingsSerializer(this);
 
                     foreach (var plugin in ActGlobals.oFormActMain.ActPlugins)
                     {
-                        if (plugin.pluginObj != this) continue;
+                        if (plugin.pluginObj != this)
+                            continue;
                         _fileInfo = plugin.pluginFile;
                         break;
                     }
 
-
                     if (_timer == null)
                     {
-                        _timer = new Timer();
-                        _timer.Interval = 30 * 1000;
+                        _timer = new Timer
+                        {
+                            Interval = 30000
+                        };
                         _timer.Tick += Timer_Tick;
                     }
 
@@ -109,10 +121,9 @@ namespace DFAssist
 
                     UpdateFfxivProcesses();
 
-
                     LoadSettings();
                     _comboBoxLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
-                    _selectedLanguage = (string) _comboBoxLanguage.SelectedValue;
+                    _selectedLanguage = (string)_comboBoxLanguage.SelectedValue;
                     LoadFates();
                 }));
             });
@@ -175,24 +186,25 @@ namespace DFAssist
 
         private void SaveSettings()
         {
-            //tree
             _telegramChkFates = "";
             var c = new List<string>();
             foreach (TreeNode area in TelegramFateTreeView.Nodes)
             {
-                if (area.Checked) c.Add((string) area.Tag);
+                if (area.Checked) c.Add((string)area.Tag);
                 foreach (TreeNode fate in area.Nodes)
                     if (fate.Checked)
-                        c.Add((string) fate.Tag);
+                        c.Add((string)fate.Tag);
             }
 
             _telegramChkFates = string.Join("|", c);
 
             var fs = new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-            var xWriter = new XmlTextWriter(fs, Encoding.UTF8);
-            xWriter.Formatting = Formatting.Indented;
-            xWriter.Indentation = 1;
-            xWriter.IndentChar = '\t';
+            var xWriter = new XmlTextWriter(fs, Encoding.UTF8)
+            {
+                Formatting = Formatting.Indented,
+                Indentation = 1,
+                IndentChar = '\t'
+            };
             xWriter.WriteStartDocument(true);
             xWriter.WriteStartElement("Config"); // <Config>
             xWriter.WriteStartElement("SettingsSerializer"); // <Config><SettingsSerializer>
@@ -242,16 +254,17 @@ namespace DFAssist
                 }
 
             for (var i = 0; i < toDelete.Count; i++)
+            {
                 try
                 {
-                    ProcessNet pn;
-                    _networks.TryRemove(toDelete[i], out pn);
+                    _networks.TryRemove(toDelete[i], out ProcessNet pn);
                     FFXIVPacketHandler.OnEventReceived -= Network_onReceiveEvent;
                 }
                 catch (Exception e)
                 {
-                    Log.Ex(e, "error");
+                    Logger.LogException(e, "error");
                 }
+            }
         }
 
         private void InitializeComponent()
@@ -489,29 +502,10 @@ namespace DFAssist
         private string DownloadData(string url)
         {
             var webClient = new WebClient();
-            webClient.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
-            var stringBuilder = new StringBuilder();
-            try
-            {
-                using (var stream = webClient.OpenRead(url + new Random().Next()))
-                {
-                    using (var streamReader = new StreamReader(stream))
-                    {
-                        for (;;)
-                        {
-                            var text3 = streamReader.ReadLine();
-                            if (text3 == null) break;
-                            stringBuilder.Append(text3);
-                        }
-                    }
-                }
-
-                return stringBuilder.ToString();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            webClient.Headers.Add("user-agent", "avoid 403");
+            var downloadString = webClient.DownloadString(url);
+            webClient.Dispose();
+            return downloadString;
         }
 
         private void LoadData()
@@ -522,10 +516,10 @@ namespace DFAssist
             var json = JObject.Parse(jsonString);
             var langs = json["languages"];
 
-            _comboBoxLanguage.DataSource = langs.Select(language => ((JProperty) language).Name).Select(key => new Language {Name = langs[key].ToString(), Code = key}).ToArray();
+            _comboBoxLanguage.DataSource = langs.Select(language => ((JProperty)language).Name).Select(key => new Language { Name = langs[key].ToString(), Code = key }).ToArray();
             _comboBoxLanguage.DisplayMember = "Name";
             _comboBoxLanguage.ValueMember = "Code";
-            _selectedLanguage = (string) _comboBoxLanguage.SelectedValue;
+            _selectedLanguage = (string)_comboBoxLanguage.SelectedValue;
 
             _data = json;
         }
@@ -548,7 +542,7 @@ namespace DFAssist
                 var key = item.Name;
                 var areaNode = TelegramFateTreeView.Nodes.Add(_data["areas"][key][_selectedLanguage].ToString());
                 areaNode.Tag = "AREA:" + key;
-                if (c.Contains((string) areaNode.Tag)) areaNode.Checked = true;
+                if (c.Contains((string)areaNode.Tag)) areaNode.Checked = true;
                 foreach (JProperty fate in _data["fates"])
                 {
                     if (_data["fates"][fate.Name]["area_code"].ToString().Equals(key) == false) continue;
@@ -556,7 +550,7 @@ namespace DFAssist
                     if (text == null || text == "") text = _data["fates"][fate.Name]["name"]["en"].ToString();
                     var fateNode = areaNode.Nodes.Add(text);
                     fateNode.Tag = fate.Name;
-                    if (c.Contains((string) fateNode.Tag)) fateNode.Checked = true;
+                    if (c.Contains((string)fateNode.Tag)) fateNode.Checked = true;
                 }
             }
 
@@ -569,7 +563,7 @@ namespace DFAssist
         {
             foreach (TreeNode node in nodes)
             {
-                if (node.Checked) _telegramSelectedFates.Push((string) node.Tag);
+                if (node.Checked) _telegramSelectedFates.Push((string)node.Tag);
                 UpdateSelectedFates(node.Nodes);
             }
         }
@@ -605,13 +599,10 @@ namespace DFAssist
             switch (eventType)
             {
                 case EventType.MATCH_ALERT:
-                    //text += getTextRoulette(args[0]) + "|"; pos++;
-                    //text += getTextInstance(args[1]) + "|"; pos++;
                     if (_isTelegramDutyAlertEnable)
                         ToastWindowNotification(head + GetTextRoulette(args[0]) + " >> " + GetTextInstance(args[1]));
                     break;
                 case EventType.FATE_BEGIN:
-                    //text += getTextFate(args[0]) + "|" + getTextFateArea(args[0]) + "|"; pos++;
                     if (_telegramSelectedFates.Contains(args[0].ToString()))
                         ToastWindowNotification(head + GetTextFateArea(args[0]) + " >> " + GetTextFate(args[0]));
                     break;
@@ -788,7 +779,7 @@ namespace DFAssist
             PostToToastWindowsNotificationIfNeeded(server, eventType, args);
             PostToTelegramIfNeeded(server, eventType, args);
         }
-        
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (_active == false) return;
