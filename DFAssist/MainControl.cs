@@ -510,7 +510,7 @@ namespace DFAssist
 
         private void LoadData()
         {
-            var jsonString = DownloadData("https://raw.githubusercontent.com/wanaff14/ACTFate/update/data.json?_=" + DateTimeOffset.Now.Ticks) ??
+            var jsonString = DownloadData("https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data.json") ??
                              File.ReadAllText(_fileInfo.Directory?.FullName + "/data.json");
 
             var json = JObject.Parse(jsonString);
