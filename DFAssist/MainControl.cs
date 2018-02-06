@@ -57,7 +57,7 @@ namespace DFAssist
         private GroupBox _groupBox2;
         private SettingsSerializer _xmlSettingsSerializer;
 
-        public TreeView TelegramFateTreeView { get; private set; }
+        public TreeView TelegramFateTreeView;
 
         public MainControl()
         {
