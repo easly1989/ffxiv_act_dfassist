@@ -76,11 +76,11 @@
     <Compile Include="Logger.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Network\Connection.cs" />
+    <Compile Include="Network\EventType.cs" />
+    <Compile Include="Network\IpPacket.cs" />
     <Compile Include="Network\MatchEndType.cs" />
     <Compile Include="Network\MatchType.cs" />
     <Compile Include="Network\Network.cs" />
-    <Compile Include="Network\EventType.Event.cs" />
-    <Compile Include="Network\IpPacket.Packet.cs" />
     <Compile Include="Network\State.cs" />
     <Compile Include="Network\TcpFlags.cs" />
     <Compile Include="Network\TcpPacket.cs" />
