@@ -12,12 +12,12 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Cache;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using Windows.UI.Notifications;
 using Advanced_Combat_Tracker;
 using DFAssist.Shell;
 using Newtonsoft.Json.Linq;
@@ -63,18 +63,25 @@ namespace DFAssist
         {
             InitializeComponent();
 
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => {
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
+            {
                 var name = new AssemblyName(Assembly.GetExecutingAssembly().FullName).Name + "." + new AssemblyName(args.Name).Name + ".dll";
                 using (var assemblyStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name))
                 {
-                    byte[] assemblyBuffer = new byte[assemblyStream.Length];
-                    assemblyStream.Read(assemblyBuffer, 0, assemblyBuffer.Length);
-                    return Assembly.Load(assemblyBuffer);
+                    if (assemblyStream != null)
+                    {
+                        var assemblyBuffer = new byte[assemblyStream.Length];
+                        assemblyStream.Read(assemblyBuffer, 0, assemblyBuffer.Length);
+                        return Assembly.Load(assemblyBuffer);
+                    }
                 }
+
+                Logger.LogError($"Unable to load {args.Name} assembly.");
+                return null;
             };
 
             _networks = new ConcurrentDictionary<int, ProcessNet>();
-            _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config\\ACTFate.config.xml");
+            _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config\\DFAssist.config.xml");
             _telegramSelectedFates = new ConcurrentStack<string>();
         }
 
@@ -95,7 +102,7 @@ namespace DFAssist
 
                 pluginStatusText.Invoke(new Action(delegate
                 {
-                    _labelStatus.Text = "DFAssist Plugin Started.";
+                    _labelStatus.Text = @"DFAssist Plugin Started.";
 
                     pluginScreenSpace.Controls.Add(this);
                     _xmlSettingsSerializer = new SettingsSerializer(this);
@@ -170,7 +177,7 @@ namespace DFAssist
                 }
                 catch (Exception ex)
                 {
-                    _labelStatus.Text = "Error loading settings: " + ex.Message;
+                    _labelStatus.Text = @"Error loading settings: " + ex.Message;
                 }
 
                 xReader.Close();
@@ -222,9 +229,8 @@ namespace DFAssist
             processes.AddRange(Process.GetProcessesByName("ffxiv"));
             processes.AddRange(Process.GetProcessesByName("ffxiv_dx11"));
 
-            for (var i = 0; i < processes.Count; i++)
+            foreach (var process in processes)
             {
-                var process = processes[i];
                 try
                 {
                     if (_networks.ContainsKey(process.Id)) continue;
@@ -240,6 +246,7 @@ namespace DFAssist
 
             var toDelete = new List<int>();
             foreach (var entry in _networks)
+            {
                 if (entry.Value.Process.HasExited)
                 {
                     entry.Value.Network.StopCapture();
@@ -252,12 +259,13 @@ namespace DFAssist
                     else
                         entry.Value.Network.StartCapture(entry.Value.Process);
                 }
+            }
 
-            for (var i = 0; i < toDelete.Count; i++)
+            foreach (var t in toDelete)
             {
                 try
                 {
-                    _networks.TryRemove(toDelete[i], out ProcessNet pn);
+                    _networks.TryRemove(t, out var _);
                     FFXIVPacketHandler.OnEventReceived -= Network_onReceiveEvent;
                 }
                 catch (Exception e)
@@ -293,7 +301,7 @@ namespace DFAssist
             _label1.Name = "_label1";
             _label1.Size = new Size(61, 12);
             _label1.TabIndex = 7;
-            _label1.Text = "Language";
+            _label1.Text = @"Language";
             // 
             // comboBoxLanguage
             // 
@@ -317,7 +325,7 @@ namespace DFAssist
             _groupBox1.Size = new Size(533, 51);
             _groupBox1.TabIndex = 9;
             _groupBox1.TabStop = false;
-            _groupBox1.Text = "Telegram";
+            _groupBox1.Text = @"Telegram";
             // 
             // textTelegramToken
             // 
@@ -333,7 +341,7 @@ namespace DFAssist
             _label3.Name = "_label3";
             _label3.Size = new Size(40, 12);
             _label3.TabIndex = 8;
-            _label3.Text = "Token";
+            _label3.Text = @"Token";
             // 
             // textTelegramChatID
             // 
@@ -349,7 +357,7 @@ namespace DFAssist
             _label2.Name = "_label2";
             _label2.Size = new Size(46, 12);
             _label2.TabIndex = 6;
-            _label2.Text = "Chat ID";
+            _label2.Text = @"Chat ID";
             // 
             // checkBoxTelegram
             // 
@@ -358,7 +366,7 @@ namespace DFAssist
             _checkBoxTelegram.Name = "_checkBoxTelegram";
             _checkBoxTelegram.Size = new Size(58, 16);
             _checkBoxTelegram.TabIndex = 5;
-            _checkBoxTelegram.Text = "Active";
+            _checkBoxTelegram.Text = @"Active";
             _checkBoxTelegram.UseVisualStyleBackColor = true;
             _checkBoxTelegram.CheckedChanged += CheckBoxTelegram_CheckedChanged;
             // 
@@ -372,7 +380,7 @@ namespace DFAssist
             _groupBox2.Size = new Size(533, 457);
             _groupBox2.TabIndex = 10;
             _groupBox2.TabStop = false;
-            _groupBox2.Text = "Alert";
+            _groupBox2.Text = @"Alert";
             // 
             // label4
             // 
@@ -381,7 +389,7 @@ namespace DFAssist
             _label4.Name = "_label4";
             _label4.Size = new Size(48, 12);
             _label4.TabIndex = 10;
-            _label4.Text = "F.A.T.E";
+            _label4.Text = @"F.A.T.E";
             // 
             // telegramFateTreeView
             // 
@@ -401,7 +409,7 @@ namespace DFAssist
             _checkBoxTelegramDutyFinder.Name = "_checkBoxTelegramDutyFinder";
             _checkBoxTelegramDutyFinder.Size = new Size(88, 16);
             _checkBoxTelegramDutyFinder.TabIndex = 8;
-            _checkBoxTelegramDutyFinder.Text = "Duty Finder";
+            _checkBoxTelegramDutyFinder.Text = @"Duty Finder";
             _checkBoxTelegramDutyFinder.UseVisualStyleBackColor = true;
             _checkBoxTelegramDutyFinder.CheckedChanged += CheckBoxTelegramDutyFinder_CheckedChanged;
             // 
@@ -412,7 +420,7 @@ namespace DFAssist
             _checkBoxToastNotification.Name = "_checkBoxToastNotification";
             _checkBoxToastNotification.Size = new Size(160, 16);
             _checkBoxToastNotification.TabIndex = 11;
-            _checkBoxToastNotification.Text = "Active Toast Notification";
+            _checkBoxToastNotification.Text = @"Active Toast Notification";
             _checkBoxToastNotification.UseVisualStyleBackColor = true;
             _checkBoxToastNotification.CheckedChanged += CheckBoxToastNotification_CheckedChanged;
             // 
@@ -477,7 +485,7 @@ namespace DFAssist
                 Logger.LogException(e, "ignore");
             }
 
-            return areaCode == null ? code.ToString() : areaCode;
+            return areaCode ?? code.ToString();
         }
 
         private string GetTextRoulette(int code)
@@ -530,24 +538,26 @@ namespace DFAssist
             TelegramFateTreeView.Nodes.Clear();
 
             var c = new List<string>();
-            if (_telegramChkFates != null && _telegramChkFates != "")
+            if (!string.IsNullOrEmpty(_telegramChkFates))
             {
                 var sp = _telegramChkFates.Split('|');
-                for (var i = 0; i < sp.Length; i++) c.Add(sp[i]);
+                c.AddRange(sp);
             }
 
             _lockTreeEvent = true;
-            foreach (JProperty item in _data["areas"])
+            foreach (var jToken in _data["areas"])
             {
+                var item = (JProperty) jToken;
                 var key = item.Name;
                 var areaNode = TelegramFateTreeView.Nodes.Add(_data["areas"][key][_selectedLanguage].ToString());
                 areaNode.Tag = "AREA:" + key;
                 if (c.Contains((string)areaNode.Tag)) areaNode.Checked = true;
-                foreach (JProperty fate in _data["fates"])
+                foreach (var jToken1 in _data["fates"])
                 {
+                    var fate = (JProperty) jToken1;
                     if (_data["fates"][fate.Name]["area_code"].ToString().Equals(key) == false) continue;
                     var text = _data["fates"][fate.Name]["name"][_selectedLanguage].ToString();
-                    if (text == null || text == "") text = _data["fates"][fate.Name]["name"]["en"].ToString();
+                    if (string.IsNullOrEmpty(text)) text = _data["fates"][fate.Name]["name"]["en"].ToString();
                     var fateNode = areaNode.Nodes.Add(text);
                     fateNode.Tag = fate.Name;
                     if (c.Contains((string)fateNode.Tag)) fateNode.Checked = true;
@@ -611,42 +621,47 @@ namespace DFAssist
 
         private void PostToTelegram(string message)
         {
-            string chatID = _textTelegramChatId.Text, token = _textTelegramToken.Text;
-            if (chatID == null || chatID == "" || token == null || token == "") return;
+            string chatId = _textTelegramChatId.Text, token = _textTelegramToken.Text;
+            if (string.IsNullOrEmpty(chatId) || token == null || token == "") return;
 
             using (var client = new WebClient())
             {
                 client.UploadValues("https://api.telegram.org/bot" + token + "/sendMessage", new NameValueCollection
                 {
-                    {"chat_id", chatID},
+                    {"chat_id", chatId},
                     {"text", message}
                 });
             }
         }
 
-        private void ToastWindowNotification(string text)
+        private static void ToastWindowNotification(string text)
         {
             try
             {
                 // Get a toast XML template
-                Windows.Data.Xml.Dom.XmlDocument toastXml = Windows.UI.Notifications.ToastNotificationManager.GetTemplateContent(Windows.UI.Notifications.ToastTemplateType.ToastImageAndText03);
+                var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
 
                 // Fill in the text elements
-                Windows.Data.Xml.Dom.XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
-                for (var i = 0; i < stringElements.Length; i++)
-                    stringElements[i].AppendChild(toastXml.CreateTextNode(text));
+                var stringElements = toastXml.GetElementsByTagName("text");
+                foreach (var t in stringElements)
+                {
+                    t.AppendChild(toastXml.CreateTextNode(text));
+                }
 
                 // Specify the absolute path to an image
                 var imagePath = "file:///" + Path.GetFullPath("toastImageAndText.png");
 
-                Windows.Data.Xml.Dom.XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
-                imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
+                var imageElements = toastXml.GetElementsByTagName("image");
+                var xmlNamedNodeMap = imageElements?[0].Attributes;
+                var namedItem = xmlNamedNodeMap?.GetNamedItem("src");
+                if (namedItem != null)
+                    namedItem.NodeValue = imagePath;
 
                 // Create the toast and attach event listeners
-                Windows.UI.Notifications.ToastNotification toast = new Windows.UI.Notifications.ToastNotification(toastXml);
+                var toast = new ToastNotification(toastXml);
 
                 // Show the toast. Be sure to specify the AppUserModelId on your application's shortcut!
-                Windows.UI.Notifications.ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
+                ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
             }
             catch (Exception e)
             {
