@@ -56,12 +56,14 @@ namespace DFAssist
         private SettingsSerializer _xmlSettingsSerializer;
         private GroupBox _groupBox3;
         private RichTextBox _richTextBox1;
+        private CheckBox _checkBox1;
+        private Button _button1;
         public TreeView TelegramFateTreeView;
 
         public MainControl()
         {
-            LoadData();
             InitializeComponent();
+            Logger.SetLoggerTextBox(_richTextBox1);
 
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
@@ -124,6 +126,7 @@ namespace DFAssist
 
                     UpdateFfxivProcesses();
 
+                    LoadData();
                     LoadSettings();
                     _comboBoxLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
                     _selectedLanguage = (string)_comboBoxLanguage.SelectedValue;
@@ -135,7 +138,8 @@ namespace DFAssist
         public void DeInitPlugin()
         {
             _active = false;
-            Logger.RichTextBox = null;
+            Logger.SetLoggerTextBox(null);
+
             if (_labelStatus != null)
             {
                 _labelStatus.Text = @"DFAssist Plugin Unloaded.";
@@ -288,6 +292,8 @@ namespace DFAssist
             this._checkBoxToastNotification = new System.Windows.Forms.CheckBox();
             this._groupBox3 = new System.Windows.Forms.GroupBox();
             this._richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this._button1 = new System.Windows.Forms.Button();
+            this._checkBox1 = new System.Windows.Forms.CheckBox();
             this._groupBox1.SuspendLayout();
             this._groupBox2.SuspendLayout();
             this._groupBox3.SuspendLayout();
@@ -304,15 +310,14 @@ namespace DFAssist
             // 
             // _comboBoxLanguage
             // 
+            this._comboBoxLanguage.DisplayMember = "Name";
             this._comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._comboBoxLanguage.FormattingEnabled = true;
             this._comboBoxLanguage.Location = new System.Drawing.Point(88, 14);
             this._comboBoxLanguage.Name = "_comboBoxLanguage";
             this._comboBoxLanguage.Size = new System.Drawing.Size(121, 21);
             this._comboBoxLanguage.TabIndex = 6;
-
-            _comboBoxLanguage.DisplayMember = "Name";
-            _comboBoxLanguage.ValueMember = "Code";
+            this._comboBoxLanguage.ValueMember = "Code";
             // 
             // _groupBox1
             // 
@@ -420,26 +425,51 @@ namespace DFAssist
             this._checkBoxToastNotification.TabIndex = 11;
             this._checkBoxToastNotification.Text = "Active Toast Notification";
             this._checkBoxToastNotification.UseVisualStyleBackColor = true;
+            this._checkBoxToastNotification.CheckedChanged += new System.EventHandler(this._checkBoxToastNotification_CheckedChanged);
             // 
-            // groupBox3
+            // _groupBox3
             // 
+            this._groupBox3.Controls.Add(this._checkBox1);
+            this._groupBox3.Controls.Add(this._button1);
             this._groupBox3.Controls.Add(this._richTextBox1);
             this._groupBox3.Location = new System.Drawing.Point(563, 49);
             this._groupBox3.Name = "_groupBox3";
             this._groupBox3.Size = new System.Drawing.Size(710, 523);
             this._groupBox3.TabIndex = 12;
             this._groupBox3.TabStop = false;
-            this._groupBox3.Text = @"Log";
+            this._groupBox3.Text = "Log";
             // 
-            // richTextBox1
+            // _richTextBox1
             // 
-            this._richTextBox1.Location = new System.Drawing.Point(6, 23);
+            this._richTextBox1.Location = new System.Drawing.Point(6, 52);
             this._richTextBox1.Name = "_richTextBox1";
-            this._richTextBox1.Size = new System.Drawing.Size(698, 482);
+            this._richTextBox1.ReadOnly = true;
+            this._richTextBox1.Size = new System.Drawing.Size(698, 465);
             this._richTextBox1.TabIndex = 0;
             this._richTextBox1.Text = "";
-            _richTextBox1.ReadOnly = true;
-            _richTextBox1.AllowDrop = false;
+            // 
+            // button1
+            // 
+            this._button1.Location = new System.Drawing.Point(629, 20);
+            this._button1.Name = "_button1";
+            this._button1.Size = new System.Drawing.Size(75, 23);
+            this._button1.TabIndex = 1;
+            this._button1.Text = "Clear Logs";
+            this._button1.UseVisualStyleBackColor = true;
+            this._button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // checkBox1
+            // 
+            this._checkBox1.AutoSize = true;
+            this._checkBox1.Checked = true;
+            this._checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this._checkBox1.Location = new System.Drawing.Point(7, 22);
+            this._checkBox1.Name = "_checkBox1";
+            this._checkBox1.Size = new System.Drawing.Size(100, 17);
+            this._checkBox1.TabIndex = 2;
+            this._checkBox1.Text = "Enable Logging";
+            this._checkBox1.UseVisualStyleBackColor = true;
+            this._checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // MainControl
             // 
@@ -456,12 +486,11 @@ namespace DFAssist
             this._groupBox2.ResumeLayout(false);
             this._groupBox2.PerformLayout();
             this._groupBox3.ResumeLayout(false);
+            this._groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            Logger.RichTextBox = _richTextBox1;
         }
-
 
         private string GetTextInstance(int code)
         {
@@ -813,6 +842,30 @@ namespace DFAssist
             if (_active == false) return;
 
             UpdateFfxivProcesses();
+        }
+
+        private void _checkBoxToastNotification_CheckedChanged(object sender, EventArgs e)
+        {
+            Logger.LogInfo("Test");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _richTextBox1.Clear();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!_checkBox1.Checked)
+            {
+                Logger.SetLoggerTextBox(null);
+                _button1.Enabled = false;
+            }
+            else
+            {
+                Logger.SetLoggerTextBox(_richTextBox1);
+                _button1.Enabled = true;
+            }
         }
     }
 }
