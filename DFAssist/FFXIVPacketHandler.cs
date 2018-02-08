@@ -152,7 +152,7 @@ namespace DFAssist
                         FireEvent(pid, EventType.INSTANCE_EXIT, new int[] { code });
                     }
                 }
-                else if (opcode == 0x0143) // FATE in progress
+                else if (opcode == 0x0143) // Fate in progress
                 {
                     var type = data[0];
 
@@ -162,14 +162,14 @@ namespace DFAssist
                         var progress = data[8];
                         FireEvent(pid, EventType.FATE_PROGRESS, new int[] { code, progress });
                     }
-                    else if (type == 0x79) // FATE is over
+                    else if (type == 0x79) // Fate is over
                     {
                         var code = BitConverter.ToUInt16(data, 4);
                         var status = BitConverter.ToUInt16(data, 28);
-                        Logger.LogInfo("FATE Abrupted = " + code + ", status = " + status);
+                        Logger.LogInfo("Fate Abrupted = " + code + ", status = " + status);
                         FireEvent(pid, EventType.FATE_END, new int[] { code, status });
                     }
-                    else if (type == 0x74) // FATE just started
+                    else if (type == 0x74) // Fate just started
                     {
                         var code = BitConverter.ToUInt16(data, 4);
                         Logger.LogInfo("Unforeseen occurrence = " + code);

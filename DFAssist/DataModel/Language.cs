@@ -1,4 +1,4 @@
-﻿namespace DFAssist
+﻿namespace DFAssist.DataModel
 {
     public class Language
     {

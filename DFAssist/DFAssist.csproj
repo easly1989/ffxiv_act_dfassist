@@ -68,7 +68,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Language.cs" />
+    <Compile Include="Data.cs" />
+    <Compile Include="DataModel\Area.cs" />
+    <Compile Include="DataModel\Fate.cs" />
+    <Compile Include="DataModel\GameData.cs" />
+    <Compile Include="DataModel\Instance.cs" />
+    <Compile Include="DataModel\Language.cs" />
+    <Compile Include="DataModel\Roulette.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
