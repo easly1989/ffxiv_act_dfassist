@@ -105,6 +105,8 @@ namespace DFAssist
                     new Language {Name = "日本語", Code = "ja-jp"},
                     new Language {Name = "Français", Code = "fr-fr"},
                 };
+                _comboBoxLanguage.DisplayMember = "Name";
+                _comboBoxLanguage.ValueMember = "Code";
 
                 pluginStatusText.Invoke(new Action(delegate
                 {
@@ -126,7 +128,6 @@ namespace DFAssist
 
                     UpdateFfxivProcesses();
 
-                    LoadData();
                     LoadSettings();
                     _comboBoxLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
                     _selectedLanguage = (string)_comboBoxLanguage.SelectedValue;
@@ -291,9 +292,9 @@ namespace DFAssist
             this._checkBoxTelegramDutyFinder = new System.Windows.Forms.CheckBox();
             this._checkBoxToastNotification = new System.Windows.Forms.CheckBox();
             this._groupBox3 = new System.Windows.Forms.GroupBox();
-            this._richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this._button1 = new System.Windows.Forms.Button();
             this._checkBox1 = new System.Windows.Forms.CheckBox();
+            this._button1 = new System.Windows.Forms.Button();
+            this._richTextBox1 = new System.Windows.Forms.RichTextBox();
             this._groupBox1.SuspendLayout();
             this._groupBox2.SuspendLayout();
             this._groupBox3.SuspendLayout();
@@ -310,14 +311,13 @@ namespace DFAssist
             // 
             // _comboBoxLanguage
             // 
-            this._comboBoxLanguage.DisplayMember = "Name";
             this._comboBoxLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._comboBoxLanguage.FormattingEnabled = true;
             this._comboBoxLanguage.Location = new System.Drawing.Point(88, 14);
             this._comboBoxLanguage.Name = "_comboBoxLanguage";
             this._comboBoxLanguage.Size = new System.Drawing.Size(121, 21);
             this._comboBoxLanguage.TabIndex = 6;
-            this._comboBoxLanguage.ValueMember = "Code";
+            this._comboBoxLanguage.SelectedIndexChanged += new System.EventHandler(this._comboBoxLanguage_SelectedIndexChanged);
             // 
             // _groupBox1
             // 
@@ -439,26 +439,7 @@ namespace DFAssist
             this._groupBox3.TabStop = false;
             this._groupBox3.Text = "Log";
             // 
-            // _richTextBox1
-            // 
-            this._richTextBox1.Location = new System.Drawing.Point(6, 52);
-            this._richTextBox1.Name = "_richTextBox1";
-            this._richTextBox1.ReadOnly = true;
-            this._richTextBox1.Size = new System.Drawing.Size(698, 465);
-            this._richTextBox1.TabIndex = 0;
-            this._richTextBox1.Text = "";
-            // 
-            // button1
-            // 
-            this._button1.Location = new System.Drawing.Point(629, 20);
-            this._button1.Name = "_button1";
-            this._button1.Size = new System.Drawing.Size(75, 23);
-            this._button1.TabIndex = 1;
-            this._button1.Text = "Clear Logs";
-            this._button1.UseVisualStyleBackColor = true;
-            this._button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // checkBox1
+            // _checkBox1
             // 
             this._checkBox1.AutoSize = true;
             this._checkBox1.Checked = true;
@@ -470,6 +451,25 @@ namespace DFAssist
             this._checkBox1.Text = "Enable Logging";
             this._checkBox1.UseVisualStyleBackColor = true;
             this._checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // _button1
+            // 
+            this._button1.Location = new System.Drawing.Point(629, 20);
+            this._button1.Name = "_button1";
+            this._button1.Size = new System.Drawing.Size(75, 23);
+            this._button1.TabIndex = 1;
+            this._button1.Text = "Clear Logs";
+            this._button1.UseVisualStyleBackColor = true;
+            this._button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // _richTextBox1
+            // 
+            this._richTextBox1.Location = new System.Drawing.Point(6, 52);
+            this._richTextBox1.Name = "_richTextBox1";
+            this._richTextBox1.ReadOnly = true;
+            this._richTextBox1.Size = new System.Drawing.Size(698, 465);
+            this._richTextBox1.TabIndex = 0;
+            this._richTextBox1.Text = "";
             // 
             // MainControl
             // 
@@ -569,7 +569,7 @@ namespace DFAssist
         private void LoadData()
         {
             _selectedLanguage = (string)_comboBoxLanguage.SelectedValue;
-            var jsonString = DownloadData($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data/{_selectedLanguage}.json");
+            var jsonString = File.ReadAllText(@"D:\GIT\ffxiv_act_dfassist\data\en-us.json"); //DownloadData($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data/{_selectedLanguage}.json");
 
             var json = JObject.Parse(jsonString);        
             _data = json;
@@ -866,6 +866,11 @@ namespace DFAssist
                 Logger.SetLoggerTextBox(_richTextBox1);
                 _button1.Enabled = true;
             }
+        }
+
+        private void _comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }
