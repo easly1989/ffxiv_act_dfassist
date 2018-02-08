@@ -1059,7 +1059,7 @@
       "healer": "2",
       "dps": "4"
     },
-	
+
     // 4.05 Raids
     "695": {
       "name": "Deltastice v1.0 (sadique)",
@@ -1085,8 +1085,8 @@
       "healer": "2",
       "dps": "4"
     },
-	
-	//4.05 Party Contents
+
+    //4.05 Party Contents
     "712": {
       "name": "les Canaux perdus d'Uznair",
       "tank": "0",
@@ -1119,16 +1119,16 @@
       "healer": "6",
       "dps": "15"
     },
-	
-	//4.1 Party Contents
+
+    //4.1 Party Contents
     "725": {
       "name": "les Canaux cachés d'Uznair",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-	
-	//4.11 Raids
+
+    //4.11 Raids
     "733": {
       "name": "l'Abîme infini de Bahamut (fatal)",
       "tank": "2",
@@ -1557,10 +1557,9 @@
       "tank": "0",
       "healer": "0",
       "dps": "0"
-    }
-  },
-  
-	//Event Instance
+    },
+
+    //Event Instance
     "571": {
       "name": "le Manoir hanté",
       "tank": "0",

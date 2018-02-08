@@ -1,6 +1,6 @@
 {
   // Version
-  "version": "20171029.1", 
+  "version": "20171029.1",
 
   // Duty
   "instances": {
@@ -1059,7 +1059,7 @@
       "healer": "2",
       "dps": "4"
     },
-	
+
     // 4.05 Raids
     "695": {
       "name": "次元の狭間オメガ：デルタ編1 (Savage)",
@@ -1086,7 +1086,7 @@
       "dps": "4"
     },
 
-  //4.05 Party Contents
+    //4.05 Party Contents
     "712": {
       "name": "宝物庫 ウズネアカナル",
       "tank": "0",
@@ -1127,8 +1127,8 @@
       "healer": "0",
       "dps": "0"
     },
-	
-	//4.11 Raids
+
+    //4.11 Raids
     "733": {
       "name": "絶バハムート討滅戦",
       "tank": "2",
@@ -1557,10 +1557,9 @@
       "tank": "0",
       "healer": "0",
       "dps": "0"
-    }
-  },
-  
-	//Event Instance
+    },
+
+    //Event Instance
     "571": {
       "name": "亡霊屋敷 ホーンテッドマナー",
       "tank": "0",
