@@ -75,6 +75,7 @@
     <Compile Include="DataModel\Instance.cs" />
     <Compile Include="DataModel\Language.cs" />
     <Compile Include="DataModel\Roulette.cs" />
+    <Compile Include="Localization.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -101,6 +102,7 @@
     <Compile Include="Shell\ShellIidGuid.cs" />
     <Compile Include="Shell\ShortCutCreator.cs" />
     <Compile Include="Shell\STGM.cs" />
+    <Compile Include="WebInteractions.cs" />
     <EmbeddedResource Include="MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>

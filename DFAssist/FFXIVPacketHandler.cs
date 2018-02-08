@@ -73,7 +73,7 @@ namespace DFAssist
                                     var read = messages.Read(buffer, 0, 4);
                                     if (read < 4)
                                     {
-                                        //Logger.LogError("l-analyze-error-length", read, i, messageCount);
+                                        Logger.Error("l-analyze-error-length", read, i, messageCount);
                                         break;
                                     }
                                     var messageLength = BitConverter.ToInt32(buffer, 0);
@@ -86,7 +86,7 @@ namespace DFAssist
                                 }
                                 catch (Exception ex)
                                 {
-                                    Logger.LogException(ex, "l-analyze-error-general");
+                                    Logger.Exception(ex, "l-analyze-error-general");
                                 }
                             }
                         }
@@ -119,7 +119,7 @@ namespace DFAssist
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "l-analyze-error");
+                Logger.Exception(ex, "l-analyze-error");
             }
         }
 
@@ -143,12 +143,12 @@ namespace DFAssist
 
                     if (type == 0x0B)
                     {
-                        Logger.LogInfo("Entering instance = " + code);
+                        Logger.Info("l-field-instance-entered", Data.GetInstance(code).Name);
                         FireEvent(pid, EventType.INSTANCE_ENTER, new int[] { code });
                     }
                     else if (type == 0x0C)
                     {
-                        Logger.LogInfo("Leaving instance = " + code);
+                        Logger.Info("l-field-instance-left");
                         FireEvent(pid, EventType.INSTANCE_EXIT, new int[] { code });
                     }
                 }
@@ -166,13 +166,12 @@ namespace DFAssist
                     {
                         var code = BitConverter.ToUInt16(data, 4);
                         var status = BitConverter.ToUInt16(data, 28);
-                        Logger.LogInfo("Fate Abrupted = " + code + ", status = " + status);
                         FireEvent(pid, EventType.FATE_END, new int[] { code, status });
                     }
                     else if (type == 0x74) // Fate just started
                     {
                         var code = BitConverter.ToUInt16(data, 4);
-                        Logger.LogInfo("Unforeseen occurrence = " + code);
+                        Logger.Info("l-fate-occured-info", Data.GetFate(code).Name);
                         FireEvent(pid, EventType.FATE_BEGIN, new int[] { code });
                     }
                 }
@@ -189,7 +188,7 @@ namespace DFAssist
 
                         if (rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
                         {
-                            Logger.LogInfo("Applied for Duty Roulette = " + rouletteCode);
+                            Logger.Info("l-queue-started-roulette", Data.GetRoulette(rouletteCode));
                             FireEvent(pid, EventType.MATCH_BEGIN, new[] { (int)MatchType.ROULETTE, rouletteCode });
                         }
                         else // Specific Duty (Dungeon/Trial/Raid)
@@ -213,22 +212,20 @@ namespace DFAssist
                                 args.Add(item);
                             }
 
-                            Logger.LogInfo("Applied for Specific Duty = ", string.Join(", ", instances) + ", count = " + instances.Count);
+                            Logger.Info("l-queue-started-general", string.Join(", ", instances.Select(x => Data.GetInstance(x).Name).ToArray()));
                             FireEvent(pid, EventType.MATCH_BEGIN, args.ToArray());
                         }
                     }
                     else if (status == 3) // Cancel
                     {
                         state = reason == 8 ? State.QUEUED : State.IDLE;
-
-                        Logger.LogInfo("Duty matching canceled, reason = " + reason);
+                        Logger.Info("l-queue-stopped");
                         FireEvent(pid, EventType.MATCH_END, new[] { (int)MatchEndType.CANCELLED });
                     }
                     else if (status == 6) // Entered
                     {
                         state = State.IDLE;
-
-                        Logger.LogInfo("Duty started");
+                        Logger.Info("l-queue-entered");
                         FireEvent(pid, EventType.MATCH_END, new[] { (int)MatchEndType.ENTER_INSTANCE });
                     }
                     else if (status == 4) // Matched
@@ -238,21 +235,17 @@ namespace DFAssist
 
                         state = State.MATCHED;
                         
-                        Logger.LogInfo("Matched, Type = " + roulette + ", Duty = " + code);
+                        Logger.Info("l-queue-matched", Data.GetInstance(code).Name);
                         FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
                     }
                 }
                 else if (opcode == 0x006F)
                 {
-
+                    // used on standalone version to stop blink
                 }
-                else if (opcode == 0x0121) // Global Server
+                else if (opcode == 0x0121)
                 {
-                    var status = data[5];
-
-                    if (status == 128)
-
-                        Logger.LogInfo("Matching, Click ok in the application confirmation window (Global)");
+                    // used on standalone version to stop blink, for Global Server
                 }
                 else if (opcode == 0x0079) // Status during matching
                 {
@@ -261,6 +254,7 @@ namespace DFAssist
                     var tank = data[5];
                     var dps = data[6];
                     var healer = data[7];
+                    var instance = Data.GetInstance(code);
 
                     if (status == 1)
                     {
@@ -268,8 +262,8 @@ namespace DFAssist
 
                         if (state == State.MATCHED && _lastMember != member)
                         {
+                            // someone else canceled the duty
                             state = State.QUEUED;
-                            Logger.LogInfo("Matching progress, someone canceled");
                         }
                         else if (state == State.IDLE)
                         {
@@ -283,7 +277,7 @@ namespace DFAssist
                         return;
                     }
 
-                    Logger.LogInfo("Matching progress, Duty =" + code + ", " + status + ", Tank: " + tank + ", Healer: " + healer + ", DPS: " + dps);
+                    Logger.Info("l-queue-updated", instance.Name, status, tank, instance.Tank, healer, instance.Healer, dps, instance.Dps);
                     FireEvent(pid, EventType.MATCH_PROGRESS, new int[] { code, status, tank, healer, dps });
                 }
                 else if (opcode == 0x0080)
@@ -293,13 +287,13 @@ namespace DFAssist
 
                     state = State.MATCHED;
 
-                    Logger.LogSuccess("l-queue-matched " + code);
+                    Logger.Success("l-queue-matched ", Data.GetInstance(code).Name);
                     FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "[" + pid + "]l-analyze-error-general");
+                Logger.Exception(ex, "l-analyze-error-general");
             }
         }
 

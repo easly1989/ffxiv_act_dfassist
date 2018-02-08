@@ -1,0 +1,78 @@
+﻿{
+  "app-name": "Duty/FATE Assist",
+
+  "l-plugin-started": "Plugin Started!",
+  "l-plugin-stopped": "Plugin Stopped!",
+
+  "l-settings-load-error": "Error loading settings: {0}.",
+  "l-assembly-load-error": "Unable to load {0} assembly.",
+
+  "l-unknown-instance": "Unknown Duty ({0})",
+  "l-unknown-roulette": "Unknown Roulette ({0})",
+  "l-unknown-area": "Unknown Area ({0})",
+  "l-unknown-fate": "Unknown FATE ({0})",
+
+  "l-process-set-success": "P: FFXIV Process Selected: {0}",
+  "l-process-set-failed": "P: Failed to set FFXIV Process.",
+  "l-process-remove-failed": "P: Failed to remove FFXIV Process.",
+
+  "l-toast-notification-error": "T: Unable to show toast notification.",
+
+  "l-data-updated": "D: D/F Data updated to Version {0}.",
+  "l-data-is-latest": "D: Using Latest D/F Data (Version {0}).",
+  "l-data-error": "D: Error occured while processing D/F Data",
+
+  "l-packet-error-ip": "P: IP Packet Parsing Error",
+  "l-packet-error-tcp": "P: TCP Packet Parsing Error",
+
+  "l-network-started": "N: Started Reading Network Packet",
+  "l-network-starting": "N: Starting Network Reading...",
+  "l-network-stopped": "N: Stopped Reading Network",
+  "l-network-stopping": "N: Requesting for Stop Network Reading...",
+  "l-network-error-starting": "N: Failed to Start",
+  "l-network-error-stopping": "N: Failed to Stop",
+  "l-network-error-already-started": "N: Already Started",
+  "l-network-error-already-stopped": "N: Already Stopped",
+  "l-network-error-no-connection": "N: Could not find Game Server Connection",
+  "l-network-error-receiving-packet": "N: Error while Receiving Packet",
+  "l-network-error-filtering-packet": "N: Error while Packet Filtering",
+  "l-network-error-finding-lobby": "N: Error while receeving lobby server information",
+  "l-network-detected-connection-closing": "N: Detected Game Server Disconnection",
+  "l-network-detected-connection": "N: Detected Game Server Connection: {0}",
+
+  "l-firewall-registered": "FW: Registered",
+  "l-firewall-error": "FW: Error while registering",
+
+  "l-analyze-error-length": "A: Length Error while analyzing Message: {0}, {1}/{2}",
+  "l-analyze-error-general": "A: Error while analyzing Message",
+  "l-analyze-error": "A: Error while handling Message",
+
+  "l-queue-started-general": "Q: Matching started [{0}]",
+  "l-queue-started-roulette": "Q: Duty Roulette Matching Started [{0}]",
+  "l-queue-stopped": "Q: Matching Stopped",
+  "l-queue-entered": "Q: Entered Instance Area",
+  "l-queue-matched": "Q: Matched [{0}]",
+  "l-queue-updated": "Q: Matching State Updated [{0}, {1}, {2}/{3}, {4}/{5}, {6}/{7}]",
+
+  "l-fate-occured-info": "F: {0} FATE spawned!",
+
+  "l-field-instance-entered": "I: Entered Instance Area [{0}]",
+  "l-field-instance-left": "I: Left Instance Area",
+
+  "ui-language-display-text": "Language",
+
+  "ui-toast-notification-display-text": "Enable Toast Notifications",
+  "ui-toast-notification-test": "This is a Toast test!",
+
+  "ui-log-display-text": "Logs",
+  "ui-log-enable-display-text": "Enable Logging",
+  "ui-log-clear-display-text": "Clear Logs",
+
+  "ui-telegram-display-text": "Enable Telegram Notifications",
+  "ui-telegram-token-display-text": "Token",
+  "ui-telegram-chatid-display-text": "Chat Id",
+
+  "ui-alerts-display-text": "Alerts",
+  "ui-alerts-fate-display-text": "F.A.T.E.",
+  "ui-alerts-dutyfinder-display-text": "Duty Finder"
+}

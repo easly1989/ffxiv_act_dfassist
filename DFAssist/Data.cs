@@ -19,7 +19,8 @@ namespace DFAssist
 
         public static void Initialize(string language)
         {
-            var json = File.ReadAllText(@"D:\GIT\ffxiv_act_dfassist\data\en-us.json"); //$"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data/{language}.json";
+            //var json = WebInteractions.DownloadString($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data/{language}.json");
+            var json = File.ReadAllText($@"D:\GIT\ffxiv_act_dfassist\data\{language}.json");
             Fill(json, language);
         }
 
@@ -50,7 +51,7 @@ namespace DFAssist
 
                     if (Initialized)
                     {
-                        Logger.LogInfo( "l-data-updated", Version);
+                        Logger.Info( "l-data-updated", Version);
                     }
 
                     Initialized = true;
@@ -58,12 +59,12 @@ namespace DFAssist
                 }
                 else
                 {
-                    Logger.LogInfo("l-data-is-latest", Version);
+                    Logger.Info("l-data-is-latest", Version);
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "l-data-error");
+                Logger.Exception(ex, "l-data-error");
             }
         }
 
@@ -74,10 +75,7 @@ namespace DFAssist
                 return instance;
             }
 
-            if (code != 0)
-                Logger.LogError($"Missing instance code: {code}");
-
-            return new Instance { Name = "<unknown-instance>" };
+            return new Instance { Name = Localization.GetText("l-unknown-instance", code) };
         }
 
         public static Roulette GetRoulette(int code)
@@ -87,10 +85,7 @@ namespace DFAssist
                 return roulette;
             }
 
-            if (code != 0)
-                Logger.LogError($"Missing Roulette code: {code}");
-
-            return new Roulette { Name = "<unknown-roulette>" };
+            return new Roulette { Name = Localization.GetText("l-unknown-roulette", code) };
         }
 
         public static Area GetArea(int code)
@@ -100,10 +95,7 @@ namespace DFAssist
                 return area;
             }
 
-            if (code != 0)
-                Logger.LogError($"Missing area code: {code}");
-
-            return new Area { Name = "<unknown-area>" };
+            return new Area { Name = Localization.GetText("l-unknown-area", code) };
         }
 
         public static Fate GetFate(int code)
@@ -113,10 +105,7 @@ namespace DFAssist
                 return Fates[code];
             }
 
-            if (code != 0)
-                Logger.LogError($"Missing FATE code: {code}");
-
-            return new Fate { Name = "<unknown-fate>" };
+            return new Fate { Name = Localization.GetText("l-unknown-fate", code) };
         }
     }
 }

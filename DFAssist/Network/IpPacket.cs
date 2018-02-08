@@ -47,7 +47,7 @@ namespace DFAssist
                 Data = null;
 
                 IsValid = false;
-                Logger.LogException(ex, "l-packet-error-ip");
+                Logger.Exception(ex, "l-packet-error-ip");
             }
         }
     }

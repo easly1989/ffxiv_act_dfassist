@@ -44,11 +44,11 @@ namespace DFAssist
             {
                 try
                 {
-                    Logger.LogInfo("[" + _pid + "]l-network-starting");
+                    Logger.Info("l-network-starting");
 
                     if (IsRunning)
                     {
-                        Logger.LogError("[" + _pid + "]l-network-error-already-started");
+                        Logger.Error("l-network-error-already-started");
                         return;
                     }
 
@@ -56,7 +56,7 @@ namespace DFAssist
 
                     if (_connections.Count < 2)
                     {
-                        Logger.LogError("[" + _pid + "]l-network-error-no-connection");
+                        Logger.Error("l-network-error-no-connection");
                         return;
                     }
 
@@ -74,11 +74,11 @@ namespace DFAssist
                     _socket.BeginReceive(_recvBuffer, 0, _recvBuffer.Length, 0, OnReceive, null);
                     IsRunning = true;
 
-                    Logger.LogSuccess("[" + _pid + "]l-network-started:" + localAddress);
+                    Logger.Success("l-network-started");
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogException(ex, "[" + _pid + "]l-network-error-starting");
+                    Logger.Exception(ex, "l-network-error-starting");
                 }
             });
         }
@@ -89,17 +89,17 @@ namespace DFAssist
             {
                 if (!IsRunning)
                 {
-                    Logger.LogError("[" + _pid + "]l-network-error-already-stopped");
+                    Logger.Error("l-network-error-already-stopped");
                     return;
                 }
 
                 _socket.Close();
                 _connections.Clear();
-                Logger.LogInfo("[" + _pid + "]l-network-stopping");
+                Logger.Info("l-network-stopping");
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "[" + _pid + "]l-network-error-stopping");
+                Logger.Exception(ex, "l-network-error-stopping");
             }
         }
 
@@ -115,7 +115,7 @@ namespace DFAssist
 
                 // Connection was lost, a new update is requested
                 update = true;
-                Logger.LogError("[" + _pid + "]l-network-detected-connection-closing");
+                Logger.Error("l-network-detected-connection-closing");
                 break;
             }
 
@@ -127,7 +127,7 @@ namespace DFAssist
 
             foreach (var connection in _connections)
             {
-                Logger.LogInfo("[" + _pid + "]l-network-detected-connection: " + connection);
+                Logger.Info("l-network-detected-connection", connection);
             }
         }
 
@@ -145,11 +145,11 @@ namespace DFAssist
             {
                 IsRunning = false;
                 _socket = null;
-                Logger.LogSuccess("[" + _pid + "]l-network-stopped");
+                Logger.Success("l-network-stopped");
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "[" + _pid + "]l-network-error-receiving-packet");
+                Logger.Exception(ex, "l-network-error-receiving-packet");
             }
         }
 
@@ -186,13 +186,9 @@ namespace DFAssist
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "[" + _pid + "]l-network-error-filtering-packet");
+                Logger.Exception(ex, "l-network-error-filtering-packet");
             }
         }
-
-
-
-
 
         private void RegisterToFirewall()
         {
@@ -222,11 +218,11 @@ namespace DFAssist
 
                 netAuthApps.Add(networkApp);
 
-                Logger.LogSuccess("[" + _pid + "]l-firewall-registered");
+                Logger.Success("l-firewall-registered");
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "[" + _pid + "]l-firewall-error");
+                Logger.Exception(ex, "l-firewall-error");
             }
         }
 
@@ -272,7 +268,7 @@ namespace DFAssist
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, "[" + _pid + "]l-network-error-finding-lobby");
+                Logger.Exception(ex, "l-network-error-finding-lobby");
             }
 
             return ipep;

@@ -41,7 +41,7 @@ namespace DFAssist
 
                 IsValid = false;
 
-                Logger.LogException(ex, "l-packet-error-tcp");
+                Logger.Exception(ex, "l-packet-error-tcp");
             }
         }
     }
