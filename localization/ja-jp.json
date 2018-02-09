@@ -62,7 +62,8 @@
   "ui-language-display-text": "言語",
 
   "ui-toast-notification-display-text": "Toast通知を有効にする",
-  "ui-toast-notification-test": "これはトーストテストです！",
+  "ui-toast-notification-test-title": "これを見たら...",
+  "ui-toast-notification-test-message": "... トーストは機能する!",
 
   "ui-log-display-text": "ログ",
   "ui-log-enable-display-text": "ロギングを有効にします",

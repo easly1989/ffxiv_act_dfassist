@@ -62,7 +62,8 @@
   "ui-language-display-text": "Langue",
 
   "ui-toast-notification-display-text": "Activer les notifications Toast",
-  "ui-toast-notification-test": "Ceci est un test de Toast!",
+  "ui-toast-notification-test-title": "Si tu vois ça...",
+  "ui-toast-notification-test-message": "... Toasts fonctionne!",
 
   "ui-log-display-text": "Journaux",
   "ui-log-enable-display-text": "Activer la journalisation",

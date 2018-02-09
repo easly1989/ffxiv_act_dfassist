@@ -547,19 +547,19 @@ namespace DFAssist
 
         private void PostToToastWindowsNotificationIfNeeded(string server, EventType eventType, int[] args)
         {
-            if (eventType != EventType.FATE_BEGIN && eventType != EventType.MATCH_ALERT) return;
             if (_isToastNotificationEnabled == false) return;
+            if (eventType != EventType.FATE_BEGIN && eventType != EventType.MATCH_ALERT) return;
 
             var head = _networks.Count <= 1 ? "" : "[" + server + "] ";
             switch (eventType)
             {
                 case EventType.MATCH_ALERT:
                     if (_isDutyAlertEnabled)
-                        ToastWindowNotification(head + GetRouletteName(args[0]) + " >> " + GetInstanceName(args[1]));
+                        ToastWindowNotification(head + GetRouletteName(args[0]), ">> " + GetInstanceName(args[1]));
                     break;
                 case EventType.FATE_BEGIN:
                     if (_telegramSelectedFates.Contains(args[0].ToString()))
-                        ToastWindowNotification(head + GetAreaNameFromFate(args[0]) + " >> " + GetFateName(args[0]));
+                        ToastWindowNotification(head + GetAreaNameFromFate(args[0]), ">> " + GetFateName(args[0]));
                     break;
             }
         }
@@ -579,32 +579,25 @@ namespace DFAssist
             }
         }
 
-        private static void ToastWindowNotification(string text)
+        private static void ToastWindowNotification(string title, string message)
         {
             try
             {
                 // Get a toast XML template
                 var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
 
-                // Fill in the text elements
-                foreach (var node in toastXml.GetElementsByTagName("text").ToArray())
+
+                var stringElements = toastXml.GetElementsByTagName("text");
+                if (stringElements.Length < 2)
                 {
-                    node.AppendChild(toastXml.CreateTextNode(text));
+                    Logger.Error("l-toast-notification-error");
+                    return;
                 }
 
-                // Specify the absolute path to an image
-                var imagePath = "file:///" + Path.GetFullPath("toastImageAndText.png");
+                stringElements[0].AppendChild(toastXml.CreateTextNode(title));
+                stringElements[1].AppendChild(toastXml.CreateTextNode(message));
 
-                var imageElements = toastXml.GetElementsByTagName("image");
-                var xmlNamedNodeMap = imageElements?[0].Attributes;
-                var namedItem = xmlNamedNodeMap?.GetNamedItem("src");
-                if (namedItem != null)
-                    namedItem.NodeValue = imagePath;
-
-                // Create the toast and attach event listeners
                 var toast = new ToastNotification(toastXml);
-
-                // Show the toast. Be sure to specify the AppUserModelId on your application's shortcut!
                 ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
             }
             catch (Exception e)
@@ -751,7 +744,7 @@ namespace DFAssist
         private void ToastNotificationCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (_toadNotificationCheckBox.Checked && !_pluginInitializing)
-                ToastWindowNotification(Localization.GetText("ui-toast-notification-test"));
+                ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
             _isToastNotificationEnabled = _toadNotificationCheckBox.Checked;
         }
 

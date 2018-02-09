@@ -62,7 +62,8 @@
   "ui-language-display-text": "언어",
 
   "ui-toast-notification-display-text": "토스트 알림 사용",
-  "ui-toast-notification-test": "이것은 토스트 테스트입니다!",
+  "ui-toast-notification-test-title": "이걸 보면...",
+  "ui-toast-notification-test-message": "... 토스트가 작동합니다!",
 
   "ui-log-display-text": "로그",
   "ui-log-enable-display-text": "로깅을 사용하도록 설정",
