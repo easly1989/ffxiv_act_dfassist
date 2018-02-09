@@ -1086,7 +1086,7 @@
       "dps": "4"
     },
 
-    //4.05 Party Contents
+    // 4.05 Party Contents
     "712": {
       "name": "The Lost Canals of Uznair",
       "tank": "0",
@@ -1120,7 +1120,7 @@
       "dps": "15"
     },
 
-    //4.1 Party Contents
+    // 4.1 Party Contents
     "725": {
       "name": "The Hidden Canals of Uznair",
       "tank": "0",
@@ -1128,7 +1128,7 @@
       "dps": "0"
     },
 
-    //4.11 Raids
+    // 4.11 Raids
     "733": {
       "name": "Unending Coil of Bahamut (Ultimate)",
       "tank": "2",
@@ -1136,6 +1136,84 @@
       "dps": "4"
     },
 
+    // 4.2 Rise of a New Sun
+    // 4.2 Dungeon
+    "742": {
+      "name": "Hells' Lid",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "743": {
+      "name": "the Fractal Continuum (Hard)",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+
+    // 4.2 Trials
+    "746": {
+      "name": "Jade Stoa",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "758": {
+      "name": "Jade Stoa (Extreme)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+
+    // 4.2 Raids
+    "748": {
+      "name": "Sigmascape V1.0",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "749": {
+      "name": "Sigmascape V2.0",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "750": {
+      "name": "Sigmascape V3.0",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "751": {
+      "name": "Sigmascape V4.0",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "752": {
+      "name": "Sigmascape V1.0 (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "753": {
+      "name": "Sigmascape V2.0 (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "754": {
+      "name": "Sigmascape V3.0 (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "755": {
+      "name": "Sigmascape V4.0 (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
 
     // Guildhests
     "190": {
@@ -1324,50 +1402,15 @@
 
 
     // PvP
-    "175": {
-      "name": "The Fold",
+    "729": {
+      "name": "Astragalos",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "336": {
-      "name": "The Fold",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "337": {
-      "name": "The Fold (Matched Party)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "352": {
-      "name": "The Fold (Light Party)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "184": {
-      "name": "The Fold (Matched Party)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "186": {
-      "name": "The Fold (Light Party)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
+    // Frontline
     "376": {
       "name": "The Borderland Ruins (Secure)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "422": {
-      "name": "The Borderland Ruins (Slaughter)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -1378,55 +1421,79 @@
       "healer": "0",
       "dps": "0"
     },
-    "518": {
-      "name": "The Feast (8 on 8 - Matched Party)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "525": {
-      "name": "The Feast (4 on 4 - Solo)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "526": {
-      "name": "The Feast (4 on 4 - Light Party)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "527": {
-      "name": "The Feast (4 on 4 - Solo)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "528": {
-      "name": "The Feast (4 on 4 - Light Party)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "618": {
-      "name": "The Feast (8 on 8 - Custom Match - Feasting Grounds)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
-    "619": {
-      "name": "The Feast (4 on 4 - Custom Match - Feasting Grounds)",
-      "tank": "0",
-      "healer": "0",
-      "dps": "0"
-    },
     "554": {
       "name": "The Fields of Glory (Shatter)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-
+    // The Feast
+    "525": {
+      "name": "The Feast (4 on 4 - Training)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "527": {
+      "name": "The Feast (4 on 4 - Ranked)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "149": {
+      "name": "★The Feast (4 on 4 - Light Party)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "632": {
+      "name": "The Feast (4 on 4 - Training)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "644": {
+      "name": "The Feast (4 on 4 - Ranked)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "745": {
+      "name": "The Feast (Team Ranked)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "765": {
+      "name": "The Feast (Ranked)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "766": {
+      "name": "The Feast (Training)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "619": {
+      "name": "The Feast (Custom Match - Feasting Grounds)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "646": {
+      "name": "The Feast (Custom Match - Lichenweed)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "767": {
+      "name": "The Feast (Custom Match - Crystal Tower)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
 
     // Deep Dungeons
     "561": {
@@ -1559,13 +1626,20 @@
       "dps": "0"
     },
 
-    //Event Instance
+    // Event Instance
     "571": {
       "name": "Haunted Manor",
       "tank": "0",
       "healer": "0",
       "dps": "0"
+    },
+    "741": {
+      "name": "Valentione's Ceremony",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
     }
+
   },
 
   // Duty Roulette
@@ -1582,6 +1656,34 @@
     "10": "The Feast (8 on 8) - Training",
     "13": "The Feast (4 on 4) - Ranked",
     "15": "Duty Roulette: Alliance Raids"
+  },
+
+  // Duty from Quests
+  "quests": {
+    "533": "A Spectacle for the Ages",
+    "560": "A Bloody Reunion",
+    "592": "One Life for One World",
+    "633": "The Carteneau Flats: Heliodrome",
+    "665": "It's Probably a Trap",
+    "705": "In Thal's Name",
+    "707": "With Heart and Steel",
+    "688": "Naadam",
+    "708": "Blood on the Deck",
+    "709": "The Face of True Evil",
+    "710": "Matsuba Mayhem",
+    "711": "The Battle on Bekko",
+    "717": "Curious Gorge Meets His Match",
+    "722": "Our Unsung Heroes",
+    "718": "The Heart of the Problem",
+    "713": "Darkwing Dragon",
+    "684": "The Resonant",
+    "706": "Raising the Sword",
+    "715": "The Orphans and the Broken Blade",
+    "716": "Our Compromise",
+    "714": "Blood Dragoon",
+    "723": "When Clans Collide",
+    "690": "Interdimensional Rift",
+    "403": "Return of the Bull"
   },
 
   // FATEs
