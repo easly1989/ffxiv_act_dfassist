@@ -35,6 +35,7 @@ namespace DFAssist
         private bool _pluginInitializing;
         private bool _isDutyAlertEnabled;
         private bool _isTelegramEnabled;
+        private bool _mainFormIsLoaded;
         private bool _isToastNotificationEnabled;
         private string _checkedFates;
         private Timer _timer;
@@ -69,6 +70,21 @@ namespace DFAssist
 
             _networks = new ConcurrentDictionary<int, ProcessNet>();
             _telegramSelectedFates = new ConcurrentStack<string>();
+
+            ActGlobals.oFormActMain.Load += ActMainFormOnLoad;
+        }
+
+        private void MonitorProcess()
+        {
+            if (_timer == null)
+            {
+                _timer = new Timer { Interval = 30000 };
+                _timer.Tick += Timer_Tick;
+            }
+
+            _timer.Enabled = true;
+
+            UpdateProcesses();
         }
 
         /// <summary>
@@ -328,18 +344,11 @@ namespace DFAssist
             pluginScreenSpace.Controls.Add(this);
             _xmlSettingsSerializer = new SettingsSerializer(this);
 
-            if (_timer == null)
-            {
-                _timer = new Timer { Interval = 30000 };
-                _timer.Tick += Timer_Tick;
-            }
-
-            _timer.Enabled = true;
-
-            UpdateProcesses();
-
             LoadSettings();
             LoadFates();
+
+            if (_mainFormIsLoaded)
+                MonitorProcess();
 
             _pluginInitializing = false;
         }
@@ -361,6 +370,8 @@ namespace DFAssist
             }
 
             _timer.Enabled = false;
+            ActGlobals.oFormActMain.Load -= ActMainFormOnLoad;
+
             SaveSettings();
         }
         #endregion
@@ -443,6 +454,7 @@ namespace DFAssist
             var processes = new List<Process>();
             processes.AddRange(Process.GetProcessesByName("ffxiv"));
             processes.AddRange(Process.GetProcessesByName("ffxiv_dx11"));
+            processes.AddRange(Process.GetProcessesByName("notepad++"));
 
             foreach (var process in processes)
             {
@@ -751,6 +763,12 @@ namespace DFAssist
         private void ClearLogsButton_Click(object sender, EventArgs e)
         {
             _richTextBox1.Clear();
+        }
+
+        private void ActMainFormOnLoad(object sender, EventArgs e)
+        {
+            _mainFormIsLoaded = true;
+            MonitorProcess();
         }
 
         private void EnableLoggingCheckBox_CheckedChanged(object sender, EventArgs e)

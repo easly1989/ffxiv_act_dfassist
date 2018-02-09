@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using DFAssist.DataModel;
 using Newtonsoft.Json;
 
@@ -18,7 +19,7 @@ namespace DFAssist
 
         public static void Initialize(string language)
         {
-            var json = WebInteractions.DownloadString($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data/{language}.json");
+            var json = File.ReadAllText($@"D:\GIT\ffxiv_act_dfassist\data\{language}.json");
             Fill(json, language);
         }
 
