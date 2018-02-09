@@ -12,9 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using Windows.UI.Notifications;
@@ -34,11 +32,11 @@ namespace DFAssist
 
         private bool _isPluginEnabled;
         private bool _lockTreeEvent;
+        private bool _pluginInitializing;
         private bool _isDutyAlertEnabled;
         private bool _isTelegramEnabled;
         private bool _isToastNotificationEnabled;
         private string _checkedFates;
-        private IDisposable _initDisposable;
         private Timer _timer;
         private Label _label1;
         private Label _label2;
@@ -67,24 +65,6 @@ namespace DFAssist
         {
             InitializeComponent();
             Logger.SetTextBox(_richTextBox1);
-
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
-            {
-                var name = new AssemblyName(Assembly.GetExecutingAssembly().FullName).Name + "." + new AssemblyName(args.Name).Name + ".dll";
-                using (var assemblyStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name))
-                {
-                    if (assemblyStream != null)
-                    {
-                        var assemblyBuffer = new byte[assemblyStream.Length];
-                        assemblyStream.Read(assemblyBuffer, 0, assemblyBuffer.Length);
-                        return Assembly.Load(assemblyBuffer);
-                    }
-                }
-
-                Logger.Error("l-assembly-load-error", args.Name);
-                return null;
-            };
-
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
 
             _networks = new ConcurrentDictionary<int, ProcessNet>();
@@ -317,60 +297,57 @@ namespace DFAssist
         #region IActPluginV1 Implementations
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
+            if(_pluginInitializing)
+                return;
+
+            _pluginInitializing = true;
             // The shortcut must be created to work with windows 8/10 Toasts
             ShortCutCreator.TryCreateShortcut(AppId, AppId);
 
             _isPluginEnabled = true;
             _labelStatus = pluginStatusText;
 
-            _initDisposable = Task.Factory.StartNew(() =>
+            _languageComboBox.DataSource = new[]
             {
-                // should languages be online? for the moment i think it is ok for them to be here
-                _languageComboBox.DataSource = new[]
-                {
                     new Language {Name = "English", Code = "en-us"},
                     new Language {Name = "한국어", Code = "ko-kr"},
                     new Language {Name = "日本語", Code = "ja-jp"},
                     new Language {Name = "Français", Code = "fr-fr"}
                 };
-                _languageComboBox.DisplayMember = "Name";
-                _languageComboBox.ValueMember = "Code";
+            _languageComboBox.DisplayMember = "Name";
+            _languageComboBox.ValueMember = "Code";
 
-                pluginStatusText.Invoke(new Action(() =>
-                {
-                    _labelStatus.Text = @"Starting...";
+            _labelStatus.Text = @"Starting...";
 
-                    LoadData();
-                    UpdateTranslations();
+            LoadData();
+            UpdateTranslations();
 
-                    _labelStatus.Text = Localization.GetText("l-plugin-started");
-                    pluginScreenSpace.Text = Localization.GetText("app-name");
+            _labelStatus.Text = Localization.GetText("l-plugin-started");
+            pluginScreenSpace.Text = Localization.GetText("app-name");
 
-                    pluginScreenSpace.Controls.Add(this);
-                    _xmlSettingsSerializer = new SettingsSerializer(this);
+            pluginScreenSpace.Controls.Add(this);
+            _xmlSettingsSerializer = new SettingsSerializer(this);
 
-                    if (_timer == null)
-                    {
-                        _timer = new Timer { Interval = 30000 };
-                        _timer.Tick += Timer_Tick;
-                    }
+            if (_timer == null)
+            {
+                _timer = new Timer { Interval = 30000 };
+                _timer.Tick += Timer_Tick;
+            }
 
-                    _timer.Enabled = true;
+            _timer.Enabled = true;
 
-                    UpdateProcesses();
+            UpdateProcesses();
 
-                    LoadSettings();
-                    LoadFates();
-                }));
-            });
+            LoadSettings();
+            LoadFates();
+
+            _pluginInitializing = false;
         }
 
         public void DeInitPlugin()
         {
             _isPluginEnabled = false;
             Logger.SetTextBox(null);
-
-            _initDisposable?.Dispose();
 
             if (_labelStatus != null)
             {
@@ -773,7 +750,7 @@ namespace DFAssist
 
         private void ToastNotificationCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if(_toadNotificationCheckBox.Checked)
+            if (_toadNotificationCheckBox.Checked && !_pluginInitializing)
                 ToastWindowNotification(Localization.GetText("ui-toast-notification-test"));
             _isToastNotificationEnabled = _toadNotificationCheckBox.Checked;
         }
@@ -849,7 +826,7 @@ namespace DFAssist
             _telegramTokenTextBox.Enabled = _isTelegramEnabled;
             _isDutyAlertEnabled = _dutyFinderAlertCheckBox.Checked;
             _isToastNotificationEnabled = _toadNotificationCheckBox.Checked;
-            _selectedLanguage = (Language)_languageComboBox.SelectedValue;
+            _selectedLanguage = (Language)_languageComboBox.SelectedItem;
         }
 
         private void SaveSettings()
