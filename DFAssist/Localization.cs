@@ -10,7 +10,7 @@ namespace DFAssist
 
         public static void Initialize(string language)
         {
-            var json = File.ReadAllText($@"D:\GIT\ffxiv_act_dfassist\localization\{language}.json");
+            var json = WebInteractions.DownloadString($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/localization/{language}.json");
             _localizedMap = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
         }
 
