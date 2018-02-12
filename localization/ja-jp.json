@@ -5,6 +5,8 @@
   "l-plugin-stopped": "プラグインが停止しました!",
 
   "l-settings-load-error": "設定の読み込み中にエラー: {0}.",
+  "l-settings-save-error": "設定の保存中にエラー.",
+
   "l-assembly-load-error": "アセンブリをロードできません {0}.",
 
   "l-unknown-instance": "不明なコンテンツ ({0})",

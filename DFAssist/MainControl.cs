@@ -44,6 +44,7 @@ namespace DFAssist
         private Label _label3;
         private Label _label4;
         private Label _labelStatus;
+        private TabPage _labelTab;
         private Language _selectedLanguage;
         private TextBox _telegramChatIdTextBox;
         private TextBox _telegramTokenTextBox;
@@ -65,26 +66,12 @@ namespace DFAssist
         public MainControl()
         {
             InitializeComponent();
-            Logger.SetTextBox(_richTextBox1);
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
 
             _networks = new ConcurrentDictionary<int, ProcessNet>();
             _telegramSelectedFates = new ConcurrentStack<string>();
 
-            ActGlobals.oFormActMain.Load += ActMainFormOnLoad;
-        }
-
-        private void MonitorProcess()
-        {
-            if (_timer == null)
-            {
-                _timer = new Timer { Interval = 30000 };
-                _timer.Tick += Timer_Tick;
-            }
-
-            _timer.Enabled = true;
-
-            UpdateProcesses();
+            ActGlobals.oFormActMain.Shown += ActMainFormOnShown;
         }
 
         /// <summary>
@@ -313,42 +300,63 @@ namespace DFAssist
         #region IActPluginV1 Implementations
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
-            if(_pluginInitializing)
+            _labelStatus = pluginStatusText;
+            _labelTab = pluginScreenSpace;
+
+            if(_mainFormIsLoaded)
+                OnInit();
+        }
+
+        private void OnInit()
+        {
+            if (_pluginInitializing)
                 return;
 
             _pluginInitializing = true;
+
+            Logger.SetTextBox(_richTextBox1);
+            ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
+            
+            var defaultLanguage = new Language { Name = "English", Code = "en-us" };
+            LoadData(defaultLanguage);
+
             // The shortcut must be created to work with windows 8/10 Toasts
             ShortCutCreator.TryCreateShortcut(AppId, AppId);
 
             _isPluginEnabled = true;
-            _labelStatus = pluginStatusText;
 
             _languageComboBox.DataSource = new[]
             {
-                    new Language {Name = "English", Code = "en-us"},
-                    new Language {Name = "한국어", Code = "ko-kr"},
-                    new Language {Name = "日本語", Code = "ja-jp"},
-                    new Language {Name = "Français", Code = "fr-fr"}
-                };
+                defaultLanguage,
+                new Language {Name = "한국어", Code = "ko-kr"},
+                new Language {Name = "日本語", Code = "ja-jp"},
+                new Language {Name = "Français", Code = "fr-fr"}
+            };
             _languageComboBox.DisplayMember = "Name";
             _languageComboBox.ValueMember = "Code";
 
             _labelStatus.Text = @"Starting...";
 
-            LoadData();
             UpdateTranslations();
 
             _labelStatus.Text = Localization.GetText("l-plugin-started");
-            pluginScreenSpace.Text = Localization.GetText("app-name");
+            _labelTab.Text = Localization.GetText("app-name");
 
-            pluginScreenSpace.Controls.Add(this);
+            _labelTab.Controls.Add(this);
             _xmlSettingsSerializer = new SettingsSerializer(this);
 
             LoadSettings();
             LoadFates();
 
-            if (_mainFormIsLoaded)
-                MonitorProcess();
+            UpdateProcesses();
+
+            if (_timer == null)
+            {
+                _timer = new Timer { Interval = 30000 };
+                _timer.Tick += Timer_Tick;
+            }
+
+            _timer.Enabled = true;
 
             _pluginInitializing = false;
         }
@@ -356,7 +364,10 @@ namespace DFAssist
         public void DeInitPlugin()
         {
             _isPluginEnabled = false;
-            Logger.SetTextBox(null);
+
+            SaveSettings();
+
+            _labelTab = null;
 
             if (_labelStatus != null)
             {
@@ -370,9 +381,8 @@ namespace DFAssist
             }
 
             _timer.Enabled = false;
-            ActGlobals.oFormActMain.Load -= ActMainFormOnLoad;
 
-            SaveSettings();
+            Logger.SetTextBox(null);
         }
         #endregion
 
@@ -399,9 +409,9 @@ namespace DFAssist
         #endregion
 
         #region Load Methods
-        private void LoadData()
+        private void LoadData(Language defaultLanguage = null)
         {
-            var newLanguage = (Language)_languageComboBox.SelectedItem;
+            var newLanguage = defaultLanguage ?? (Language)_languageComboBox.SelectedItem;
             if (_selectedLanguage != null && newLanguage.Code.Equals(_selectedLanguage.Code))
                 return;
 
@@ -772,10 +782,10 @@ namespace DFAssist
             _richTextBox1.Clear();
         }
 
-        private void ActMainFormOnLoad(object sender, EventArgs e)
+        private void ActMainFormOnShown(object sender, EventArgs e)
         {
             _mainFormIsLoaded = true;
-            MonitorProcess();
+            OnInit();
         }
 
         private void EnableLoggingCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -849,36 +859,44 @@ namespace DFAssist
 
         private void SaveSettings()
         {
-            _checkedFates = string.Empty;
-
-            var fatesList = new List<string>();
-            foreach (TreeNode area in TelegramFateTreeView.Nodes)
+            try
             {
-                if (area.Checked)
-                    fatesList.Add((string)area.Tag);
+                _checkedFates = string.Empty;
 
-                foreach (TreeNode fate in area.Nodes)
+                var fatesList = new List<string>();
+                foreach (TreeNode area in TelegramFateTreeView.Nodes)
                 {
-                    if (fate.Checked)
-                        fatesList.Add((string)fate.Tag);
+                    if (area.Checked)
+                        fatesList.Add((string)area.Tag);
+
+                    foreach (TreeNode fate in area.Nodes)
+                    {
+                        if (fate.Checked)
+                            fatesList.Add((string)fate.Tag);
+                    }
+                }
+
+                _checkedFates = string.Join("|", fatesList);
+
+                using (var fileStream = new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                using (var xmlTextWriter = new XmlTextWriter(fileStream, Encoding.UTF8) { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' })
+                {
+                    xmlTextWriter.WriteStartDocument(true);
+                    xmlTextWriter.WriteStartElement("Config"); // <Config>
+                    xmlTextWriter.WriteStartElement("SettingsSerializer"); // <Config><SettingsSerializer>
+                    _xmlSettingsSerializer.ExportToXml(xmlTextWriter); // Fill the SettingsSerializer XML
+                    xmlTextWriter.WriteEndElement(); // </SettingsSerializer>
+                    xmlTextWriter.WriteEndElement(); // </Config>
+                    xmlTextWriter.WriteEndDocument(); // Tie up loose ends (shouldn't be any)
+                    xmlTextWriter.Flush(); // Flush the file buffer to disk
+                    xmlTextWriter.Close();
                 }
             }
-
-            _checkedFates = string.Join("|", fatesList);
-
-            using (var fileStream = new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-            using (var xmlTextWriter = new XmlTextWriter(fileStream, Encoding.UTF8) { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' })
+            catch (Exception ex)
             {
-                xmlTextWriter.WriteStartDocument(true);
-                xmlTextWriter.WriteStartElement("Config"); // <Config>
-                xmlTextWriter.WriteStartElement("SettingsSerializer"); // <Config><SettingsSerializer>
-                _xmlSettingsSerializer.ExportToXml(xmlTextWriter); // Fill the SettingsSerializer XML
-                xmlTextWriter.WriteEndElement(); // </SettingsSerializer>
-                xmlTextWriter.WriteEndElement(); // </Config>
-                xmlTextWriter.WriteEndDocument(); // Tie up loose ends (shouldn't be any)
-                xmlTextWriter.Flush(); // Flush the file buffer to disk
-                xmlTextWriter.Close();
+               Logger.Exception(ex, "l-settings-save-error");
             }
+
         }
         #endregion
     }

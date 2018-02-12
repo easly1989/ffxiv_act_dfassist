@@ -5,6 +5,8 @@
   "l-plugin-stopped": "플러그인이 중지되었습니다",
 
   "l-settings-load-error": "설정로드 오류: {0}.",
+  "l-settings-save-error": "설정 저장 중 오류 발생.",
+
   "l-assembly-load-error": "어셈블리를로드 할 수 없습니다 {0}.",
 
   "l-unknown-instance": "알 수 없는 임무 ({0})",

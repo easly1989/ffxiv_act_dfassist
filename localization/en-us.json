@@ -5,6 +5,8 @@
   "l-plugin-stopped": "Plugin Stopped!",
 
   "l-settings-load-error": "Error loading settings: {0}.",
+  "l-settings-save-error": "Error saving settings.",
+
   "l-assembly-load-error": "Unable to load {0} assembly.",
 
   "l-unknown-instance": "Unknown Duty ({0})",

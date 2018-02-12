@@ -5,6 +5,8 @@
   "l-plugin-stopped": "Plugin arrêté!",
 
   "l-settings-load-error": "Erreur lors du chargement des paramètres: {0}.",
+  "l-settings-save-error": "Erreur d'enregistrement des paramètres.",
+
   "l-assembly-load-error": "Impossible de charger l'assemblage {0}.",
 
   "l-unknown-instance": "Mission inconnue ({0})",
