@@ -20,7 +20,7 @@ namespace DFAssist
 
         private static void Write(Color color, object format, params object[] args)
         {
-            if (_richTextBox == null)
+            if (_richTextBox == null || _richTextBox.IsDisposed)
                 return;
 
             var formatted = format ?? "(null)";
@@ -63,22 +63,16 @@ namespace DFAssist
 
         public static void Exception(Exception ex, string key, params object[] args)
         {
-#if DEBUG
-            throw ex;
-#else
             var format = Localization.GetText(key);
             var message = ex.Message;
 
             message = Escape(message);
             Error($"{format}: {message}", args);
-#endif
         }
 
         public static void Debug(object format, params object[] args)
         {
-#if DEBUG
             Write(Color.Gray, format, args);
-#endif
         }
 
         public static void Buffer(byte[] buffer)

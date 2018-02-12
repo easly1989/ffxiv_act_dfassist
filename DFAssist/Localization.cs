@@ -16,7 +16,7 @@ namespace DFAssist
 
         public static string GetText(string key, params object[] args)
         {
-            return !_localizedMap.TryGetValue(key, out var value) ? $"<{key}>" : string.Format(value, args);
+            return _localizedMap == null || !_localizedMap.TryGetValue(key, out var value) ? $"<{key}>" : string.Format(value, args);
         }
     }
 }
