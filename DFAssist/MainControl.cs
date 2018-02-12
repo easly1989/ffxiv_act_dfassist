@@ -548,7 +548,10 @@ namespace DFAssist
             {
                 case EventType.MATCH_ALERT:
                     if (_isDutyAlertEnabled)
-                        PostToTelegram(head + GetRouletteName(args[0]) + " >> " + GetInstanceName(args[1]));
+                    {
+                        var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
+                        ToastWindowNotification(title, ">> " + GetInstanceName(args[1]));
+                    }
                     break;
                 case EventType.FATE_BEGIN:
                     if (_telegramSelectedFates.Contains(args[0].ToString()))
@@ -567,7 +570,11 @@ namespace DFAssist
             {
                 case EventType.MATCH_ALERT:
                     if (_isDutyAlertEnabled)
-                        ToastWindowNotification(head + GetRouletteName(args[0]), ">> " + GetInstanceName(args[1]));
+                    {
+                        var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
+                        ToastWindowNotification(title, ">> " + GetInstanceName(args[1]));
+                    }
+
                     break;
                 case EventType.FATE_BEGIN:
                     if (_telegramSelectedFates.Contains(args[0].ToString()))

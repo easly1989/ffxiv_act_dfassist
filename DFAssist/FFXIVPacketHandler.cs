@@ -196,7 +196,7 @@ namespace DFAssist
                             var instances = new List<int>();
                             for (var i = 0; i < 5; i++)
                             {
-                                var code = BitConverter.ToUInt16(data, 22 + (i * 2));
+                                var code = BitConverter.ToUInt16(data, i * 2);
                                 if (code == 0)
                                     break;
 
@@ -231,7 +231,7 @@ namespace DFAssist
                     else if (status == 4) // Matched
                     {
                         var roulette = data[20];
-                        var code = BitConverter.ToUInt16(data, 22);
+                        var code = BitConverter.ToUInt16(data, 0); 
 
                         state = State.MATCHED;
                         
