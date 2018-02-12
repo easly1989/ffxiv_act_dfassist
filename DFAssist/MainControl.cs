@@ -71,7 +71,14 @@ namespace DFAssist
             _networks = new ConcurrentDictionary<int, ProcessNet>();
             _telegramSelectedFates = new ConcurrentStack<string>();
 
-            ActGlobals.oFormActMain.Shown += ActMainFormOnShown;
+            foreach (Form form_loaded in Application.OpenForms)
+            {
+                if (form_loaded == ActGlobals.oFormActMain)
+                {
+                    _mainFormIsLoaded = true;
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -305,6 +312,8 @@ namespace DFAssist
 
             if(_mainFormIsLoaded)
                 OnInit();
+            else
+                ActGlobals.oFormActMain.Shown += ActMainFormOnShown;
         }
 
         private void OnInit()
@@ -464,7 +473,6 @@ namespace DFAssist
             var processes = new List<Process>();
             processes.AddRange(Process.GetProcessesByName("ffxiv"));
             processes.AddRange(Process.GetProcessesByName("ffxiv_dx11"));
-            processes.AddRange(Process.GetProcessesByName("notepad++"));
 
             foreach (var process in processes)
             {
