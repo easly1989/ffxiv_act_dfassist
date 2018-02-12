@@ -28,7 +28,10 @@ namespace DFAssist
             {
                 formatted = string.Format(formatted.ToString(), args);
             }
-            catch (FormatException) { }
+            catch (FormatException)
+            {
+                // do nothing
+            }
 
             var datetime = DateTime.Now.ToString("HH:mm:ss");
             var message = $"[{datetime}] {formatted}{Environment.NewLine}";

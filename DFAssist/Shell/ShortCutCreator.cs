@@ -68,7 +68,7 @@ namespace DFAssist.Shell
             if (hresult <= 1)
                 return;
 
-            throw new Exception("Failed with HRESULT: " + hresult.ToString("X"));
+            Logger.Error("Failed with HRESULT: " + hresult.ToString("X"));
         }
     }
 }

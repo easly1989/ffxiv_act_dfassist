@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using DFAssist.DataModel;
 using Newtonsoft.Json;
 
@@ -25,6 +24,9 @@ namespace DFAssist
 
         private static void Fill(string json, string language)
         {
+            if(string.IsNullOrWhiteSpace(json))
+                return;
+
             try
             {
                 var data = JsonConvert.DeserializeObject<GameData>(json);
