@@ -9,9 +9,11 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
+using System.EnterpriseServices.Internal;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -62,21 +64,56 @@ namespace DFAssist
 
         public TreeView TelegramFateTreeView;
 
+        private static readonly string[] Dependencies = {
+            "Microsoft.WindowsAPICodePack.dll",
+            "Microsoft.WindowsAPICodePack.Shell.dll",
+            "Microsoft.WindowsAPICodePack.ShellExtensions.dll",
+            "Newtonsoft.Json.dll",
+            "Windows.winmd"
+        };
+
         #region WinForm Required
         public MainControl()
         {
+            RegisterAssemblies();
             InitializeComponent();
-            _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
 
+            _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
             _networks = new ConcurrentDictionary<int, ProcessNet>();
             _telegramSelectedFates = new ConcurrentStack<string>();
 
-            foreach (Form form_loaded in Application.OpenForms)
+            foreach (Form formLoaded in Application.OpenForms)
             {
-                if (form_loaded == ActGlobals.oFormActMain)
+                if (formLoaded != ActGlobals.oFormActMain)
+                    continue;
+
+                _mainFormIsLoaded = true;
+                break;
+            }
+        }
+
+        /// <summary>
+        /// Registers all the external libraries, needed by the DFAssist to work
+        /// </summary>
+        private static void RegisterAssemblies()
+        {
+            var publish = new Publish();
+
+            var plugin = ActGlobals.oFormActMain.ActPlugins.FirstOrDefault(x => x.pluginFile.Name.Equals("DFAssist.dll"));
+            var folder = plugin?.pluginFile.DirectoryName;
+            if(folder == null)
+                return;
+
+            foreach (var dependency in Dependencies)
+            {
+                var dll = Path.Combine(folder, dependency);
+                try
                 {
-                    _mainFormIsLoaded = true;
-                    break;
+                    publish.GacInstall(dll);
+                }
+                catch (Exception)
+                {
+                    // try to continue anyway...
                 }
             }
         }
