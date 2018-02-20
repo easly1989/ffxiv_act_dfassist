@@ -254,7 +254,7 @@ namespace DFAssist
                     var tank = data[5];
                     var dps = data[6];
                     var healer = data[7];
-                    var instance = Data.GetInstance(code);
+                    var instance = Data.GetInstance(code, true); // Matching still uses the old ID 
 
                     if (status == 1)
                     {

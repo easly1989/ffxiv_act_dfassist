@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DFAssist.DataModel;
 using Newtonsoft.Json;
 
@@ -69,44 +70,27 @@ namespace DFAssist
             }
         }
 
-        public static Instance GetInstance(int code)
+        public static Instance GetInstance(int code, bool oldId = false)
         {
-            if (Instances.TryGetValue(code, out var instance))
-            {
-                return instance;
-            }
+            if (oldId)
+                return Instances.Values.FirstOrDefault(x => x.OldId == code);
 
-            return new Instance { Name = Localization.GetText("l-unknown-instance", code) };
+            return Instances.TryGetValue(code, out var instance) ? instance : new Instance { Name = Localization.GetText("l-unknown-instance", code) };
         }
 
         public static Roulette GetRoulette(int code)
         {
-            if (Roulettes.TryGetValue(code, out var roulette))
-            {
-                return roulette;
-            }
-
-            return new Roulette { Name = Localization.GetText("l-unknown-roulette", code) };
+            return Roulettes.TryGetValue(code, out var roulette) ? roulette : new Roulette { Name = Localization.GetText("l-unknown-roulette", code) };
         }
 
         public static Area GetArea(int code)
         {
-            if (Areas.TryGetValue(code, out var area))
-            {
-                return area;
-            }
-
-            return new Area { Name = Localization.GetText("l-unknown-area", code) };
+            return Areas.TryGetValue(code, out var area) ? area : new Area { Name = Localization.GetText("l-unknown-area", code) };
         }
 
         public static Fate GetFate(int code)
         {
-            if (Fates.ContainsKey(code))
-            {
-                return Fates[code];
-            }
-
-            return new Fate { Name = Localization.GetText("l-unknown-fate", code) };
+            return Fates.ContainsKey(code) ? Fates[code] : new Fate { Name = Localization.GetText("l-unknown-fate", code) };
         }
     }
 }
