@@ -1,102 +1,118 @@
 {
   // Version
-  "version": "20171029.1",
+  "version": "20180220.1",
 
   // Duty
   "instances": {
     // 2.0 A Realm Reborn
     // 2.0 Dungeons
-    "157": {
+    "4": {
+      "oldId": "157" ,
       "name": "Sastasha",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "158": {
+    "8": {
+      "oldId": "158",
       "name": "Brayflox's Longstop",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "159": {
+    "10": {
+      "oldId": "159",
       "name": "The Wanderer's Palace",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "161": {
+    "3": {
+      "oldId": "161",
       "name": "Copperbell Mines",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "162": {
+    "7": {
+      "oldId": "162",
       "name": "Halatali",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "163": {
+    "9": {
+      "oldId": "163",
       "name": "Sunken Temple of Qarn",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "164": {
+    "2": {
+      "oldId": "164",
       "name": "The Tam-Tara Deepcroft",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "166": {
+    "6": {
+      "oldId": "166",
       "name": "Haukke Manor",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "167": {
+    "14": {
+      "oldId": "167",
       "name": "Amdapor Keep",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "168": {
+    "11": {
+      "oldId": "168",
       "name": "The Stone Vigil",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "169": {
+    "1": {
+      "oldId": "169",
       "name": "The Thousand Maws of Toto-Rak",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "170": {
+    "12": {
+      "oldId": "170",
       "name": "Cutter's Cry",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "171": {
+    "13": {
+      "oldId": "171",
       "name": "Dzemael Darkhold",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "172": {
+    "5": {
+      "oldId": "172",
       "name": "The Aurum Vale",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "217": {
+    "15": {
+      "oldId": "217",
       "name": "Castrum Meridianum",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "224": {
+    "16": {
+      "oldId": "224",
       "name": "The Praetorium",
       "tank": "2",
       "healer": "2",
@@ -104,43 +120,50 @@
     },
 
     // 2.0 Trials
-    "202": {
+    "56": {
+      "oldId": "202",
       "name": "The Bowl of Embers",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "206": {
+    "57": {
+      "oldId": "206",
       "name": "The Navel",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "208": {
+    "58": {
+      "oldId": "208",
       "name": "The Howling Eye",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "292": {
+    "59": {
+      "oldId": "292",
       "name": "The Bowl of Embers (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "293": {
+    "61": {
+      "oldId": "293",
       "name": "The Navel (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "294": {
+    "60": {
+      "oldId": "294",
       "name": "The Howling Eye (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "332": {
+    "62": {
+      "oldId": "332",
       "name": "Cape Westwind",
       "tank": "2",
       "healer": "2",
@@ -150,19 +173,22 @@
 
     // 2.1 A Realm Awoken
     // 2.1 Dungeons
-    "160": {
+    "17": {
+      "oldId": "160",
       "name": "Pharos Sirius",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "349": {
+    "18": {
+      "oldId": "349",
       "name": "Copperbell Mines (Hard)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "350": {
+    "19": {
+      "oldId": "350",
       "name": "Haukke Manor (Hard)",
       "tank": "1",
       "healer": "1",
@@ -170,44 +196,51 @@
     },
 
     // 2.1 Trials
-    "207": {
-      "name": "Thornmarch",
+    "66": {
+      "oldId": "207",
+      "name": "Thornmarch (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "295": {
+    "63": {
+      "oldId": "295",
       "name": "The Bowl of Embers (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "296": {
+    "64": {
+      "oldId": "296",
       "name": "The Navel (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "297": {
+    "65": {
+      "oldId": "297",
       "name": "The Howling Eye (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "348": {
+    "68": {
+      "oldId": "348",
       "name": "The Minstrel's Ballad: Ultima's Bane",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     // 2.16 Trials
-    "368": {
+    "74": {
+      "oldId": "368",
       "name": "A Relic Reborn: the Chimera",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "369": {
+    "75": {
+      "oldId": "369",
       "name": "A Relic Reborn: the Hydra",
       "tank": "2",
       "healer": "2",
@@ -215,37 +248,43 @@
     },
 
     // 2.1 Raids
-    "174": {
+    "-174": {
+      "oldId": "174",
       "name": "The Labyrinth of the Ancients",
       "tank": "6",
       "healer": "6",
       "dps": "12"
     },
-    "241": {
+    "-241": {
+      "oldId": "241",
       "name": "Binding Coil of Bahamut - T1",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "242": {
+    "-242": {
+      "oldId": "242",
       "name": "Binding Coil of Bahamut - T2",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "243": {
+    "-243": {
+      "oldId": "243",
       "name": "Binding Coil of Bahamut - T3",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "244": {
+    "-244": {
+      "oldId": "244",
       "name": "Binding Coil of Bahamut - T4",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "245": {
+    "-245": {
+      "oldId": "245",
       "name": "Binding Coil of Bahamut - T5",
       "tank": "2",
       "healer": "2",
@@ -255,19 +294,22 @@
 
     // 2.2 Through the Maelstrom
     // 2.2 Dungeons
-    "363": {
+    "22": {
+      "oldId": "363",
       "name": "The Lost City of Amdapor",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "360": {
+    "21": {
+      "oldId": "360",
       "name": "Halatali (Hard)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "362": {
+    "20": {
+      "oldId": "362",
       "name": "Brayflox's Longstop (Hard)",
       "tank": "1",
       "healer": "1",
@@ -275,25 +317,29 @@
     },
 
     // 2.2 Trials
-    "281": {
-      "name": "The Whorleater",
+    "72": {
+      "oldId": "281",
+      "name": "The Whorleater (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "359": {
+    "73": {
+      "oldId": "359",
       "name": "The Whorleater (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "364": {
+    "67": {
+      "oldId": "364",
       "name": "Thornmarch (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "366": {
+    "76": {
+      "oldId": "366",
       "name": "Battle on the Big Bridge",
       "tank": "2",
       "healer": "2",
@@ -301,25 +347,29 @@
     },
 
     // 2.2 Raids
-    "355": {
+    "-355": {
+      "oldId": "355",
       "name": "Second Coil of Bahamut - T1",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "356": {
+    "-356": {
+      "oldId": "356",
       "name": "Second Coil of Bahamut - T2",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "357": {
+    "-357": {
+      "oldId": "357",
       "name": "Second Coil of Bahamut - T3",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "358": {
+    "-358": {
+      "oldId": "358",
       "name": "Second Coil of Bahamut - T4",
       "tank": "2",
       "healer": "2",
@@ -329,19 +379,22 @@
 
     // 2.3 Defenders of Eorzea
     // 2.3 Dungeons
-    "361": {
+    "23": {
+      "oldId": "361",
       "name": "Hullbreaker Isle",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "365": {
+    "25": {
+      "oldId": "365",
       "name": "The Stone Vigil (Hard)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "373": {
+    "24": {
+      "oldId": "373",
       "name": "The Tam-Tara Deepcroft (Hard)",
       "tank": "1",
       "healer": "1",
@@ -349,13 +402,15 @@
     },
 
     // 2.3 Trials
-    "374": {
-      "name": "The Striking Tree",
+    "77": {
+      "oldId": "374",
+      "name": "The Striking Tree (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "375": {
+    "78": {
+      "oldId": "375",
       "name": "The Striking Tree (Extreme)",
       "tank": "2",
       "healer": "2",
@@ -363,31 +418,36 @@
     },
 
     // 2.3 Raids
-    "372": {
+    "-372": {
+      "oldId": "372",
       "name": "Syrcus Tower",
       "tank": "3",
       "healer": "6",
       "dps": "15"
     },
-    "380": {
+    "-380": {
+      "oldId": "380",
       "name": "Second Coil of Bahamut S - T1",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "381": {
+    "-381": {
+      "oldId": "381",
       "name": "Second Coil of Bahamut S - T2",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "382": {
+    "-382": {
+      "oldId": "382",
       "name": "Second Coil of Bahamut S - T3",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "383": {
+    "-383": {
+      "oldId": "383",
       "name": "Second Coil of Bahamut S - T4",
       "tank": "2",
       "healer": "2",
@@ -397,19 +457,22 @@
 
     // 2.4 Dreams of Ice
     // 2.4 Dungeons
-    "371": {
+    "27": {
+      "oldId": "371",
       "name": "Snowcloak",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "367": {
+    "26": {
+      "oldId": "367",
       "name": "Sunken Temple of Qarn (Hard)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "387": {
+    "28": {
+      "oldId": "387",
       "name": "Sastasha (Hard)",
       "tank": "1",
       "healer": "1",
@@ -417,19 +480,22 @@
     },
 
     // 2.4 Trials
-    "377": {
-      "name": "Akh Afah Amphitheatre",
+    "79": {
+      "oldId": "377",
+      "name": "Akh Afah Amphitheatre (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "378": {
+    "80": {
+      "oldId": "378",
       "name": "Akh Afah Amphitheatre (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "142": {
+    "81": {
+      "oldId": "142",
       "name": "The Dragon's Neck",
       "tank": "2",
       "healer": "2",
@@ -437,25 +503,29 @@
     },
 
     // 2.4 Raids
-    "193": {
+    "-193": {
+      "oldId": "193",
       "name": "Final Coil of Bahamut - T1",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "194": {
+    "-194": {
+      "oldId": "194",
       "name": "Final Coil of Bahamut - T2",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "195": {
+    "-195": {
+      "oldId": "195",
       "name": "Final Coil of Bahamut - T3",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "196": {
+    "-196": {
+      "oldId": "196",
       "name": "Final Coil of Bahamut - T4",
       "tank": "2",
       "healer": "2",
@@ -465,19 +535,22 @@
 
     // 2.5 Before the Fall
     // 2.5 Dungeons
-    "150": {
+    "32": {
+      "oldId": "150",
       "name": "The Keeper of the Lake",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "188": {
+    "30": {
+      "oldId": "188",
       "name": "The Wanderer's Palace (Hard)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "189": {
+    "29": {
+      "oldId": "189",
       "name": "Amdapor Keep (Hard)",
       "tank": "1",
       "healer": "1",
@@ -485,26 +558,30 @@
     },
 
     // 2.5 Trials
-    "426": {
+    "84": {
+      "oldId": "426",
       "name": "The Chrysalis",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "394": {
+    "82": {
+      "oldId": "394",
       "name": "Urth's Fount",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "396": {
+    "85": {
+      "oldId": "396",
       "name": "Battle in the Big Keep",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     // 2.55 Trials
-    "143": {
+    "83": {
+      "oldId": "143",
       "name": "The Steps of Faith",
       "tank": "2",
       "healer": "2",
@@ -512,7 +589,8 @@
     },
 
     // 2.5 Raids
-    "151": {
+    "111": {
+      "oldId": "151",
       "name": "The World of Darkness",
       "tank": "3",
       "healer": "6",
@@ -522,49 +600,57 @@
 
     // 3.0 Heavensward
     // 3.0 Dungeons
-    "435": {
+    "39": {
+      "oldId": "435",
       "name": "The Aery",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "416": {
+    "31": {
+      "oldId": "416",
       "name": "The Great Gubal Library",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "421": {
+    "34": {
+      "oldId": "421",
       "name": "The Vault",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "430": {
+    "35": {
+      "oldId": "430",
       "name": "The Fractal Continuum",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "434": {
+    "36": {
+      "oldId": "434",
       "name": "The Dusk Vigil",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "438": {
+    "38": {
+      "oldId": "438",
       "name": "Aetherochemical Research Facility",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "441": {
+    "37": {
+      "oldId": "441",
       "name": "Sohm Al",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "420": {
+    "33": {
+      "oldId": "420",
       "name": "Neverreap",
       "tank": "1",
       "healer": "1",
@@ -572,31 +658,36 @@
     },
 
     // 3.0 Trials
-    "432": {
-      "name": "Thok ast Thok",
+    "86": {
+      "oldId": "432",
+      "name": "Thok ast Thok (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "436": {
-      "name": "The Limitless Blue",
+    "88": {
+      "oldId": "436",
+      "name": "The Limitless Blue (Hard)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "437": {
+    "90": {
+      "oldId": "437",
       "name": "The Singularity Reactor",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "446": {
+    "87": {
+      "oldId": "446",
       "name": "Thok ast Thok (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "447": {
+    "89": {
+      "oldId": "447",
       "name": "The Limitless Blue (Extreme)",
       "tank": "2",
       "healer": "2",
@@ -604,51 +695,59 @@
     },
 
     // 3.01 Raids
-    "442": {
-      "name": "A - Fist of the Father",
+    "-442": {
+      "oldId": "442",
+      "name": "(A1) The Fist of the Father",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "443": {
-      "name": "A - Cuff of the Father",
+    "-443": {
+      "oldId": "443",
+      "name": "(A2) The Cuff of the Father",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "444": {
-      "name": "A - Arm of the Father",
+    "-444": {
+      "oldId": "444",
+      "name": "(A3) The Arm of the Father",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "445": {
-      "name": "A - Burden of the Father",
+    "-445": {
+      "oldId": "445",
+      "name": "(A4) The Burden of the Father",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     // 3.05 Raids
-    "449": {
-      "name": "A - Fist of the Father (Savage)",
+    "-449": {
+      "oldId": "449",
+      "name": "(A1) The Fist of the Father (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "450": {
-      "name": "A - Cuff of the Father (Savage)",
+    "-450": {
+      "oldId": "450",
+      "name": "(A2) The Cuff of the Father (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "451": {
-      "name": "A - Arm of the Father (Savage)",
+    "-451": {
+      "oldId": "451",
+      "name": "(A3) The Arm of the Father (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "452": {
-      "name": "A - Burden of the Father (Savage)",
+    "-452": {
+      "oldId": "452",
+      "name": "(A4) The Burden of the Father (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -657,13 +756,15 @@
 
     // 3.1 As Goes Light So Goes Darkness
     // 3.1 Dungeons
-    "510": {
+    "40": {
+      "oldId": "510",
       "name": "Pharos Sirius (Hard)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "511": {
+    "41": {
+      "oldId": "511",
       "name": "Saint Mocianne's Arboretum",
       "tank": "1",
       "healer": "1",
@@ -671,7 +772,8 @@
     },
 
     // 3.1 Trials
-    "448": {
+    "91": {
+      "oldId": "448",
       "name": "The Minstrel's Ballad: Thordan's Reign",
       "tank": "2",
       "healer": "2",
@@ -679,7 +781,8 @@
     },
 
     // 3.1 Raids
-    "508": {
+    "-508": {
+      "oldId": "508",
       "name": "The Void Ark",
       "tank": "3",
       "healer": "6",
@@ -687,19 +790,22 @@
     },
 
     // 3.1 Party Contents
-    "512": {
+    "-512": {
+      "oldId": "512",
       "name": "The Diadem (Easy)",
       "tank": "1",
       "healer": "2",
       "dps": "5"
     },
-    "514": {
+    "-514": {
+      "oldId": "514",
       "name": "The Diadem",
       "tank": "1",
       "healer": "2",
       "dps": "5"
     },
-    "515": {
+    "-515": {
+      "oldId": "515",
       "name": "The Diadem (Hard)",
       "tank": "1",
       "healer": "2",
@@ -709,13 +815,15 @@
 
     // 3.2 The Gears of Chance
     // 3.2 Dungeons
-    "516": {
+    "141": {
+      "oldId": "516",
       "name": "The Antitower",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "519": {
+    "140": {
+      "oldId": "519",
       "name": "Lost City of Amdapor (Hard)",
       "tank": "1",
       "healer": "1",
@@ -723,13 +831,15 @@
     },
 
     // 3.2 Trials
-    "517": {
+    "134": {
+      "oldId": "517",
       "name": "Containment Bay S1T7",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "524": {
+    "135": {
+      "oldId": "524",
       "name": "Containment Bay S1T7 (Extreme)",
       "tank": "2",
       "healer": "2",
@@ -737,50 +847,58 @@
     },
 
     // 3.2 Raids
-    "520": {
-      "name": "A - Fist of the Son",
+    "-520": {
+      "oldId": "520",
+      "name": "(A5) The Fist of the Son",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "521": {
-      "name": "A - Cuff of the Son",
+    "-521": {
+      "oldId": "521",
+      "name": "(A6) The Cuff of the Son",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "522": {
-      "name": "A - Arm of the Son",
+    "-522": {
+      "oldId": "522",
+      "name": "(A7) The Arm of the Son",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "523": {
-      "name": "A - Burden of the Son",
+    "-523": {
+      "oldId": "523",
+      "name": "(A8) The  Burden of the Son",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "529": {
-      "name": "A - Fist of the Son (Savage)",
+    "-529": {
+      "oldId": "529",
+      "name": "(A5) The Fist of the Son (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "530": {
-      "name": "A - Cuff of the Son (Savage)",
+    "-530": {
+      "oldId": "530",
+      "name": "(A6) The Cuff of the Son (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "531": {
-      "name": "A - Arm of the Son (Savage)",
+    "-531": {
+      "oldId": "531",
+      "name": "(A7) The  Arm of the Son (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "532": {
-      "name": "A - Burden of the Son (Savage)",
+    "-532": {
+      "oldId": "532",
+      "name": "(A8) The Burden of the Son (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -789,13 +907,15 @@
 
     // 3.3 Revenge of the Horde
     // 3.3 Dungeons
-    "555": {
+    "171": {
+      "oldId": "555",
       "name": "Sohr Khai",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "557": {
+    "172": {
+      "oldId": "557",
       "name": "Hullbreaker Isle (Hard)",
       "tank": "1",
       "healer": "1",
@@ -803,13 +923,15 @@
     },
 
     // 3.3 Trials
-    "559": {
+    "169": {
+      "oldId": "559",
       "name": "The Final Steps of Faith",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "566": {
+    "170": {
+      "oldId": "566",
       "name": "The Minstrel's Ballad: Nidhogg's Rage",
       "tank": "2",
       "healer": "2",
@@ -817,7 +939,8 @@
     },
 
     // 3.3 Raids
-    "556": {
+    "-556": {
+      "oldId": "556",
       "name": "The Weeping City of Mhach",
       "tank": "3",
       "healer": "6",
@@ -825,7 +948,8 @@
     },
 
     // 3.3 Party Contents
-    "558": {
+    "-558": {
+      "oldId": "558",
       "name": "The Aquapolis",
       "tank": "0",
       "healer": "0",
@@ -835,13 +959,15 @@
 
     // 3.4 Soul Surrender
     // 3.4 Dungeons
-    "572": {
+    "182": {
+      "oldId": "572",
       "name": "Xelphatol",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "578": {
+    "196": {
+      "oldId": "578",
       "name": "The Great Gubal Library (Hard)",
       "tank": "1",
       "healer": "1",
@@ -849,13 +975,15 @@
     },
 
     // 3.4 Trials
-    "576": {
+    "183": {
+      "oldId": "576",
       "name": "Containment Bay P1T6",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "577": {
+    "184": {
+      "oldId": "577",
       "name": "Containment Bay P1T6 (Extreme)",
       "tank": "2",
       "healer": "2",
@@ -863,50 +991,58 @@
     },
 
     // 3.4 Raids
-    "580": {
-      "name": "A - Eyes of the Creator",
+    "-580": {
+      "oldId": "580",
+      "name": "(A9) The Eyes of the Creator",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "581": {
-      "name": "A - Breath of the Creator",
+    "-581": {
+      "oldId": "581",
+      "name": "(A10) The Breath of the Creator",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "582": {
-      "name": "A - Heart of the Creator",
+    "-582": {
+      "oldId": "582",
+      "name": "(A11) The Heart of the Creator",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "583": {
-      "name": "A - Soul of the Creator",
+    "-583": {
+      "oldId": "583",
+      "name": "(A12) The Soul of the Creator",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "584": {
-      "name": "A- Eyes of the Creator (Savage)",
+    "-584": {
+      "oldId": "584",
+      "name": "(A9) The Eyes of the Creator (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "585": {
-      "name": "A - Breath of the Creator (Savage)",
+    "-585": {
+      "oldId": "585",
+      "name": "(A10) The Breath of the Creator (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "586": {
-      "name": "A - Heart of the Creator (Savage)",
+    "-586": {
+      "oldId": "586",
+      "name": "(A11) The Heart of the Creator (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "587": {
-      "name": "A - Soul of the Creator (Savage)",
+    "-587": {
+      "oldId": "587",
+      "name": "(A12) The Soul of the Creator (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -915,13 +1051,15 @@
 
     // 3.5 The Far Edge of Fate
     // 3.5 Dungeons
-    "615": {
+    "219": {
+      "oldId": "615",
       "name": "Baelsar's Wall",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "617": {
+    "221": {
+      "oldId": "617",
       "name": "Sohm Al (Hard)",
       "tank": "1",
       "healer": "1",
@@ -929,13 +1067,15 @@
     },
 
     // 3.5 Trials
-    "637": {
+    "223": {
+      "oldId": "637",
       "name": "Containment Bay Z1T9",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "638": {
+    "224": {
+      "oldId": "638",
       "name": "Containment Bay Z1T9 (Extreme)",
       "tank": "2",
       "healer": "2",
@@ -943,7 +1083,8 @@
     },
 
     // 3.5 Raids
-    "627": {
+    "-627": {
+      "oldId": "627",
       "name": "Dun Scaith",
       "tank": "3",
       "healer": "6",
@@ -953,49 +1094,57 @@
 
     // 4.0 Stormblood
     // 4.0 Dungeons
-    "626": {
+    "-626": {
+      "oldId": "626",
       "name": "The Sirensong Sea",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "616": {
+    "-616": {
+      "oldId": "616",
       "name": "Shisui of the Violet Tides",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "623": {
+    "-623": {
+      "oldId": "623",
       "name": "Bardam's Mettle",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "660": {
+    "241": {
+      "oldId": "660",
       "name": "Doma Castle",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "661": {
+    "-661": {
+      "oldId": "661",
       "name": "Castrum Abania",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "689": {
+    "-689": {
+      "oldId": "689",
       "name": "Ala Mhigo",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "662": {
+    "-662": {
+      "oldId": "662",
       "name": "Kugane Castle",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "663": {
+    "-663": {
+      "oldId": "663",
       "name": "The Temple of the Fist",
       "tank": "1",
       "healer": "1",
@@ -1003,31 +1152,36 @@
     },
 
     // 4.0 Trials
-    "674": {
+    "-674": {
+      "oldId": "674",
       "name": "The Pool of Tribute",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "677": {
+    "-677": {
+      "oldId": "677",
       "name": "The Pool of Tribute (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "719": {
+    "-719": {
+      "oldId": "719",
       "name": "Emanation",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "720": {
+    "-720": {
+      "oldId": "720",
       "name": "Emanation (Extreme)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "679": {
+    "-679": {
+      "oldId": "679",
       "name": "The Royal Menagerie",
       "tank": "2",
       "healer": "2",
@@ -1035,25 +1189,29 @@
     },
 
     // 4.01 Raids
-    "691": {
+    "-691": {
+      "oldId": "691",
       "name": "Deltascape V1.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "692": {
+    "-692": {
+      "oldId": "692",
       "name": "Deltascape V2.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "693": {
+    "-693": {
+      "oldId": "693",
       "name": "Deltascape V3.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "694": {
+    "-694": {
+      "oldId": "694",
       "name": "Deltascape V4.0",
       "tank": "2",
       "healer": "2",
@@ -1061,25 +1219,29 @@
     },
 
     // 4.05 Raids
-    "695": {
+    "-695": {
+      "oldId": "695",
       "name": "Deltascape V1.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "696": {
+    "-696": {
+      "oldId": "696",
       "name": "Deltascape V2.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "697": {
+    "-697": {
+      "oldId": "697",
       "name": "Deltascape V3.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "698": {
+    "-698": {
+      "oldId": "698",
       "name": "Deltascape V4.0 (Savage)",
       "tank": "2",
       "healer": "2",
@@ -1087,7 +1249,8 @@
     },
 
     // 4.05 Party Contents
-    "712": {
+    "-712": {
+      "oldId": "712",
       "name": "The Lost Canals of Uznair",
       "tank": "0",
       "healer": "0",
@@ -1097,7 +1260,8 @@
 
     // 4.1 The Legend Returns
     // 4.1 Dungeon
-    "731": {
+    "-731": {
+      "oldId": "731",
       "name": "The Drowned City of Skalla",
       "tank": "1",
       "healer": "1",
@@ -1105,7 +1269,8 @@
     },
 
     // 4.1 Trials
-    "730": {
+    "-730": {
+      "oldId": "730",
       "name": "The Minstel's Ballad: Shinryu's Domain",
       "tank": "2",
       "healer": "2",
@@ -1113,7 +1278,8 @@
     },
 
     // 4.1 Raids
-    "734": {
+    "-734": {
+      "oldId": "734",
       "name": "The Royal City of Rabanastre",
       "tank": "3",
       "healer": "6",
@@ -1121,7 +1287,8 @@
     },
 
     // 4.1 Party Contents
-    "725": {
+    "-725": {
+      "oldId": "725",
       "name": "The Hidden Canals of Uznair",
       "tank": "0",
       "healer": "0",
@@ -1129,7 +1296,8 @@
     },
 
     // 4.11 Raids
-    "733": {
+    "-733": {
+      "oldId": "733",
       "name": "Unending Coil of Bahamut (Ultimate)",
       "tank": "2",
       "healer": "2",
@@ -1138,13 +1306,15 @@
 
     // 4.2 Rise of a New Sun
     // 4.2 Dungeon
-    "742": {
+    "284": {
+      "oldId": "742",
       "name": "Hells' Lid",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "743": {
+    "-743": {
+      "oldId": "743",
       "name": "the Fractal Continuum (Hard)",
       "tank": "1",
       "healer": "1",
@@ -1152,13 +1322,15 @@
     },
 
     // 4.2 Trials
-    "746": {
+    "-746": {
+      "oldId": "746",
       "name": "Jade Stoa",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "758": {
+    "-758": {
+      "oldId": "758",
       "name": "Jade Stoa (Extreme)",
       "tank": "2",
       "healer": "2",
@@ -1166,49 +1338,57 @@
     },
 
     // 4.2 Raids
-    "748": {
+    "-748": {
+      "oldId": "748",
       "name": "Sigmascape V1.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "749": {
+    "-749": {
+      "oldId": "749",
       "name": "Sigmascape V2.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "750": {
+    "-750": {
+      "oldId": "750",
       "name": "Sigmascape V3.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "751": {
+    "-751": {
+      "oldId": "751",
       "name": "Sigmascape V4.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "752": {
+    "-752": {
+      "oldId": "752",
       "name": "Sigmascape V1.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "753": {
+    "-753": {
+      "oldId": "753",
       "name": "Sigmascape V2.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "754": {
+    "-754": {
+      "oldId": "754",
       "name": "Sigmascape V3.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "755": {
+    "-755": {
+      "oldId": "755",
       "name": "Sigmascape V4.0 (Savage)",
       "tank": "2",
       "healer": "2",
@@ -1216,85 +1396,99 @@
     },
 
     // Guildhests
-    "190": {
+    "43": {
+      "oldId": "190",
       "name": "Under the Armor",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "191": {
+    "46": {
+      "oldId": "191",
       "name": "Pulling Poison Posies",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "192": {
+    "47": {
+      "oldId": "192",
       "name": "Stinging Back",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "214": {
+    "42": {
+      "oldId": "214",
       "name": "Basic Training: Enemy Parties",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "215": {
+    "44": {
+      "oldId": "215",
       "name": "Basic Training: Enemy Strongholds",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "216": {
+    "45": {
+      "oldId": "216",
       "name": "Hero on the Halfshell",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "219": {
+    "49": {
+      "oldId": "219",
       "name": "Flicking Sticks and Taking Names",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "220": {
+    "48": {
+      "oldId": "220",
       "name": "All's Well that Ends in the Well",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "221": {
+    "50": {
+      "oldId": "221",
       "name": "More than a Feeler",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "222": {
+    "51": {
+      "oldId": "222",
       "name": "Annoy the Void",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "223": {
+    "52": {
+      "oldId": "223",
       "name": "Shadow and Claw",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "298": {
+    "53": {
+      "oldId": "298",
       "name": "Long Live the Queen",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "299": {
+    "54": {
+      "oldId": "299",
       "name": "Ward Up",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "300": {
+    "55": {
+      "oldId": "300",
       "name": "Solemn Trinity",
       "tank": "2",
       "healer": "2",
@@ -1303,97 +1497,113 @@
 
 
     // Novice Training
-    "537": {
+    "-537": {
+      "oldId": "537",
       "name": "Avoid Area of Effect Attacks",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "538": {
+    "-538": {
+      "oldId": "538",
       "name": "Execute a Combo to Increase Enmity",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "539": {
+    "-539": {
+      "oldId": "539",
       "name": "Execute a Combo in Battle",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "540": {
+    "-540": {
+      "oldId": "540",
       "name": "Accrue Enmity from Multiple Targets",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "541": {
+    "-541": {
+      "oldId": "541",
       "name": "Engage Multiple Targets",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "542": {
+    "-542": {
+      "oldId": "542",
       "name": "Execute a Ranged Attack to Increase Enmity",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "543": {
+    "-543": {
+      "oldId": "543",
       "name": "Engage Enemy Reinforcements",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "544": {
+    "-544": {
+      "oldId": "544",
       "name": "Assist Allies in Defeating a Target",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "545": {
+    "-545": {
+      "oldId": "545",
       "name": "Defeat an Occupied Target",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "546": {
+    "-546": {
+      "oldId": "546",
       "name": "Avoid Engaged Targets",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "547": {
+    "-547": {
+      "oldId": "547",
       "name": "Engage Enemy Reinforcements",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "548": {
+    "-548": {
+      "oldId": "548",
       "name": "Interact with the Battlefield",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "549": {
+    "-549": {
+      "oldId": "549",
       "name": "Heal an Ally",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "550": {
+    "-550": {
+      "oldId": "550",
       "name": "Heal Multiple Allies",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "551": {
+    "-551": {
+      "oldId": "551",
       "name": "Avoid Engaged Targets",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "552": {
+    "-552": {
+      "oldId": "552",
       "name": "Final Exercise",
       "tank": "0",
       "healer": "0",
@@ -1402,93 +1612,108 @@
 
 
     // PvP
-    "729": {
+    "-729": {
+      "oldId": "729",
       "name": "Astragalos",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     // Frontline
-    "376": {
+    "-376": {
+      "oldId": "376",
       "name": "The Borderland Ruins (Secure)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "431": {
+    "-431": {
+      "oldId": "431",
       "name": "Seal Rock (Seize)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "554": {
+    "-554": {
+      "oldId": "554",
       "name": "The Fields of Glory (Shatter)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     // The Feast
-    "525": {
+    "-525": {
+      "oldId": "525",
       "name": "The Feast (4 on 4 - Training)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "527": {
+    "-527": {
+      "oldId": "527",
       "name": "The Feast (4 on 4 - Ranked)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "149": {
+    "-149": {
+      "oldId": "149",
       "name": "★The Feast (4 on 4 - Light Party)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "632": {
+    "-632": {
+      "oldId": "632",
       "name": "The Feast (4 on 4 - Training)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "644": {
+    "-644": {
+      "oldId": "644",
       "name": "The Feast (4 on 4 - Ranked)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "745": {
+    "-745": {
+      "oldId": "745",
       "name": "The Feast (Team Ranked)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "765": {
+    "-765": {
+      "oldId": "765",
       "name": "The Feast (Ranked)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "766": {
+    "-766": {
+      "oldId": "766",
       "name": "The Feast (Training)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "619": {
+    "-619": {
+      "oldId": "619",
       "name": "The Feast (Custom Match - Feasting Grounds)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "646": {
+    "-646": {
+      "oldId": "646",
       "name": "The Feast (Custom Match - Lichenweed)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "767": {
+    "-767": {
+      "oldId": "767",
       "name": "The Feast (Custom Match - Crystal Tower)",
       "tank": "0",
       "healer": "0",
@@ -1496,121 +1721,141 @@
     },
 
     // Deep Dungeons
-    "561": {
+    "-561": {
+      "oldId": "561",
       "name": "The Palace of the Dead B1~B10",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "562": {
+    "-562": {
+      "oldId": "562",
       "name": "The Palace of the Dead B11~B20",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "563": {
+    "-563": {
+      "oldId": "563",
       "name": "The Palace of the Dead B21~B30",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "564": {
+    "-564": {
+      "oldId": "564",
       "name": "The Palace of the Dead B31~B40",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "565": {
+    "-565": {
+      "oldId": "565",
       "name": "The Palace of the Dead B41~B50",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "593": {
+    "-593": {
+      "oldId": "593",
       "name": "The Palace of the Dead B51~B60",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "594": {
+    "-594": {
+      "oldId": "594",
       "name": "The Palace of the Dead B61~B70",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "595": {
+    "-595": {
+      "oldId": "595",
       "name": "The Palace of the Dead B71~B80",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "596": {
+    "-596": {
+      "oldId": "596",
       "name": "The Palace of the Dead B81~B90",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "597": {
+    "-597": {
+      "oldId": "597",
       "name": "The Palace of the Dead B91~B100",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "598": {
+    "-598": {
+      "oldId": "598",
       "name": "The Palace of the Dead B101~B110",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "599": {
+    "-599": {
+      "oldId": "599",
       "name": "The Palace of the Dead B111~B120",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "600": {
+    "-600": {
+      "oldId": "600",
       "name": "The Palace of the Dead B121~B130",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "601": {
+    "-601": {
+      "oldId": "601",
       "name": "The Palace of the Dead B131~B140",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "602": {
+    "-602": {
+      "oldId": "602",
       "name": "The Palace of the Dead B141~B150",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "603": {
+    "-603": {
+      "oldId": "603",
       "name": "The Palace of the Dead B151~B160",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "604": {
+    "-604": {
+      "oldId": "604",
       "name": "The Palace of the Dead B161~B170",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "605": {
+    "-605": {
+      "oldId": "605",
       "name": "The Palace of the Dead B171~B180",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "606": {
+    "-606": {
+      "oldId": "606",
       "name": "The Palace of the Dead B181~B190",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "607": {
+    "-607": {
+      "oldId": "607",
       "name": "The Palace of the Dead B191~B200",
       "tank": "0",
       "healer": "0",
@@ -1619,7 +1864,8 @@
 
 
     // Other things...
-    "579": {
+    "-579": {
+      "oldId": "579",
       "name": "Triple Triad",
       "tank": "0",
       "healer": "0",
@@ -1627,13 +1873,15 @@
     },
 
     // Event Instance
-    "571": {
+    "-571": {
+      "oldId": "571",
       "name": "Haunted Manor",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
-    "741": {
+    "-741": {
+      "oldId": "741",
       "name": "Valentione's Ceremony",
       "tank": "0",
       "healer": "0",
@@ -1656,34 +1904,6 @@
     "10": "The Feast (8 on 8) - Training",
     "13": "The Feast (4 on 4) - Ranked",
     "15": "Duty Roulette: Alliance Raids"
-  },
-
-  // Duty from Quests
-  "quests": {
-    "533": "A Spectacle for the Ages",
-    "560": "A Bloody Reunion",
-    "592": "One Life for One World",
-    "633": "The Carteneau Flats: Heliodrome",
-    "665": "It's Probably a Trap",
-    "705": "In Thal's Name",
-    "707": "With Heart and Steel",
-    "688": "Naadam",
-    "708": "Blood on the Deck",
-    "709": "The Face of True Evil",
-    "710": "Matsuba Mayhem",
-    "711": "The Battle on Bekko",
-    "717": "Curious Gorge Meets His Match",
-    "722": "Our Unsung Heroes",
-    "718": "The Heart of the Problem",
-    "713": "Darkwing Dragon",
-    "684": "The Resonant",
-    "706": "Raising the Sword",
-    "715": "The Orphans and the Broken Blade",
-    "716": "Our Compromise",
-    "714": "Blood Dragoon",
-    "723": "When Clans Collide",
-    "690": "Interdimensional Rift",
-    "403": "Return of the Bull"
   },
 
   // FATEs
