@@ -196,7 +196,7 @@ namespace DFAssist
                             var instances = new List<int>();
                             for (var i = 0; i < 5; i++)
                             {
-                                var code = BitConverter.ToUInt16(data, i * 2);
+                                var code = BitConverter.ToUInt16(data, 22 + i * 2);
                                 if (code == 0)
                                     break;
 
@@ -231,11 +231,11 @@ namespace DFAssist
                     else if (status == 4) // Matched
                     {
                         var roulette = data[20];
-                        var code = BitConverter.ToUInt16(data, 0); 
+                        var code = BitConverter.ToUInt16(data, 22); 
 
                         state = State.MATCHED;
                         
-                        Logger.Info("l-queue-matched", Data.GetInstance(code).Name);
+                        Logger.Info("l-queue-matched", code);
                         FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
                     }
                 }
