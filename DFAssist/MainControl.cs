@@ -627,7 +627,7 @@ namespace DFAssist
                     if (_isDutyAlertEnabled)
                     {
                         var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
-                        ToastWindowNotification(title, ">> " + GetInstanceName(args[1]));
+                        ToastWindowNotification(title, ">> [Code: " + args[1] + "]" + GetInstanceName(args[1]));
                     }
 
                     break;

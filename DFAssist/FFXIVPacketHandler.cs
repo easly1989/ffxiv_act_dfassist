@@ -287,7 +287,7 @@ namespace DFAssist
 
                     state = State.MATCHED;
 
-                    Logger.Success("l-queue-matched ", Data.GetInstance(code).Name);
+                    Logger.Success("l-queue-matched ", code);
                     FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
                 }
             }
