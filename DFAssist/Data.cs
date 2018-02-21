@@ -19,7 +19,7 @@ namespace DFAssist
 
         public static void Initialize(string language)
         {
-            var json = WebInteractions.DownloadString($@"D:\GIT\ffxiv_act_dfassist\data\{language}.json");
+            var json = WebInteractions.DownloadString($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data/{language}.json");
             Fill(json, language);
         }
 
