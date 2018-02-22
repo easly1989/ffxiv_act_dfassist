@@ -77,5 +77,6 @@
 
   "ui-alerts-display-text": "경고",
   "ui-alerts-fate-display-text": "돌발",
-  "ui-alerts-dutyfinder-display-text": "의무 파인더"
+  "ui-alerts-dutyfinder-display-text": "의무 파인더",
+  "ui-enable-test-environment": "테스트 환경 사용"
 }

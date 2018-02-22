@@ -8,12 +8,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Drawing;
 using System.EnterpriseServices.Internal;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -39,6 +37,7 @@ namespace DFAssist
         private bool _isTelegramEnabled;
         private bool _mainFormIsLoaded;
         private bool _isToastNotificationEnabled;
+        private bool _isTestEnvironmentEnabled;
         private string _checkedFates;
         private Timer _timer;
         private Label _label1;
@@ -52,7 +51,8 @@ namespace DFAssist
         private TextBox _telegramTokenTextBox;
         private CheckBox _telegramCheckBox;
         private CheckBox _dutyFinderAlertCheckBox;
-        private CheckBox _toadNotificationCheckBox;
+        private CheckBox _toastNotificationCheckBox;
+        private CheckBox _enableTestEnvironment;
         private ComboBox _languageComboBox;
         private GroupBox _groupBox1;
         private GroupBox _groupBox2;
@@ -63,7 +63,6 @@ namespace DFAssist
         private Button _button1;
 
         public TreeView TelegramFateTreeView;
-
         private static readonly string[] Dependencies = {
             "Microsoft.WindowsAPICodePack.dll",
             "Microsoft.WindowsAPICodePack.Shell.dll",
@@ -123,222 +122,238 @@ namespace DFAssist
         /// </summary>
         private void InitializeComponent()
         {
-            _label1 = new Label();
-            _languageComboBox = new ComboBox();
-            _groupBox1 = new GroupBox();
-            _telegramTokenTextBox = new TextBox();
-            _label3 = new Label();
-            _telegramChatIdTextBox = new TextBox();
-            _label2 = new Label();
-            _telegramCheckBox = new CheckBox();
-            _groupBox2 = new GroupBox();
-            _label4 = new Label();
-            TelegramFateTreeView = new TreeView();
-            _dutyFinderAlertCheckBox = new CheckBox();
-            _toadNotificationCheckBox = new CheckBox();
-            _groupBox3 = new GroupBox();
-            _enableLoggingCheckBox = new CheckBox();
-            _button1 = new Button();
-            _richTextBox1 = new RichTextBox();
-            _groupBox1.SuspendLayout();
-            _groupBox2.SuspendLayout();
-            _groupBox3.SuspendLayout();
-            SuspendLayout();
+            this._label1 = new System.Windows.Forms.Label();
+            this._languageComboBox = new System.Windows.Forms.ComboBox();
+            this._groupBox1 = new System.Windows.Forms.GroupBox();
+            this._telegramTokenTextBox = new System.Windows.Forms.TextBox();
+            this._label3 = new System.Windows.Forms.Label();
+            this._telegramChatIdTextBox = new System.Windows.Forms.TextBox();
+            this._label2 = new System.Windows.Forms.Label();
+            this._telegramCheckBox = new System.Windows.Forms.CheckBox();
+            this._groupBox2 = new System.Windows.Forms.GroupBox();
+            this._label4 = new System.Windows.Forms.Label();
+            this.TelegramFateTreeView = new System.Windows.Forms.TreeView();
+            this._dutyFinderAlertCheckBox = new System.Windows.Forms.CheckBox();
+            this._toastNotificationCheckBox = new System.Windows.Forms.CheckBox();
+            this._groupBox3 = new System.Windows.Forms.GroupBox();
+            this._enableLoggingCheckBox = new System.Windows.Forms.CheckBox();
+            this._button1 = new System.Windows.Forms.Button();
+            this._richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this._enableTestEnvironment = new System.Windows.Forms.CheckBox();
+            this._groupBox1.SuspendLayout();
+            this._groupBox2.SuspendLayout();
+            this._groupBox3.SuspendLayout();
+            this.SuspendLayout();
             // 
             // _label1
             // 
-            _label1.AutoSize = true;
-            _label1.Location = new Point(21, 17);
-            _label1.Name = "_label1";
-            _label1.Size = new Size(0, 13);
-            _label1.TabIndex = 7;
-            _label1.Text = @"Language";
+            this._label1.AutoSize = true;
+            this._label1.Location = new System.Drawing.Point(21, 17);
+            this._label1.Name = "_label1";
+            this._label1.Size = new System.Drawing.Size(55, 13);
+            this._label1.TabIndex = 7;
+            this._label1.Text = "Language";
             // 
             // _languageComboBox
             // 
-            _languageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _languageComboBox.FormattingEnabled = true;
-            _languageComboBox.Location = new Point(88, 14);
-            _languageComboBox.Name = "_languageComboBox";
-            _languageComboBox.Size = new Size(121, 21);
-            _languageComboBox.TabIndex = 6;
-            _languageComboBox.SelectedValueChanged += LanguageComboBox_SelectedValueChanged;
+            this._languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._languageComboBox.FormattingEnabled = true;
+            this._languageComboBox.Location = new System.Drawing.Point(88, 14);
+            this._languageComboBox.Name = "_languageComboBox";
+            this._languageComboBox.Size = new System.Drawing.Size(121, 21);
+            this._languageComboBox.TabIndex = 6;
+            this._languageComboBox.SelectedValueChanged += LanguageComboBox_SelectedValueChanged;
             // 
             // _groupBox1
             // 
-            _groupBox1.Controls.Add(_telegramTokenTextBox);
-            _groupBox1.Controls.Add(_label3);
-            _groupBox1.Controls.Add(_telegramChatIdTextBox);
-            _groupBox1.Controls.Add(_label2);
-            _groupBox1.Controls.Add(_telegramCheckBox);
-            _groupBox1.Location = new Point(23, 49);
-            _groupBox1.Name = "_groupBox1";
-            _groupBox1.Size = new Size(533, 51);
-            _groupBox1.TabIndex = 9;
-            _groupBox1.TabStop = false;
-            _groupBox1.Text = @"Enable Telegram Notifications";
+            this._groupBox1.Controls.Add(this._telegramTokenTextBox);
+            this._groupBox1.Controls.Add(this._label3);
+            this._groupBox1.Controls.Add(this._telegramChatIdTextBox);
+            this._groupBox1.Controls.Add(this._label2);
+            this._groupBox1.Controls.Add(this._telegramCheckBox);
+            this._groupBox1.Location = new System.Drawing.Point(23, 49);
+            this._groupBox1.Name = "_groupBox1";
+            this._groupBox1.Size = new System.Drawing.Size(533, 51);
+            this._groupBox1.TabIndex = 9;
+            this._groupBox1.TabStop = false;
+            this._groupBox1.Text = "Enable Telegram Notifications";
             // 
             // _telegramTokenTextBox
             // 
-            _telegramTokenTextBox.Location = new Point(232, 20);
-            _telegramTokenTextBox.Name = "_telegramTokenTextBox";
-            _telegramTokenTextBox.Size = new Size(291, 20);
-            _telegramTokenTextBox.TabIndex = 9;
+            this._telegramTokenTextBox.Location = new System.Drawing.Point(232, 20);
+            this._telegramTokenTextBox.Name = "_telegramTokenTextBox";
+            this._telegramTokenTextBox.Size = new System.Drawing.Size(291, 20);
+            this._telegramTokenTextBox.TabIndex = 9;
             // 
             // _label3
             // 
-            _label3.AutoSize = true;
-            _label3.Location = new Point(186, 23);
-            _label3.Name = "_label3";
-            _label3.Size = new Size(38, 13);
-            _label3.TabIndex = 8;
-            _label3.Text = @"Token";
+            this._label3.AutoSize = true;
+            this._label3.Location = new System.Drawing.Point(186, 23);
+            this._label3.Name = "_label3";
+            this._label3.Size = new System.Drawing.Size(38, 13);
+            this._label3.TabIndex = 8;
+            this._label3.Text = "Token";
             // 
             // _telegramChatIdTextBox
             // 
-            _telegramChatIdTextBox.Location = new Point(67, 20);
-            _telegramChatIdTextBox.Name = "_telegramChatIdTextBox";
-            _telegramChatIdTextBox.Size = new Size(100, 20);
-            _telegramChatIdTextBox.TabIndex = 7;
+            this._telegramChatIdTextBox.Location = new System.Drawing.Point(67, 20);
+            this._telegramChatIdTextBox.Name = "_telegramChatIdTextBox";
+            this._telegramChatIdTextBox.Size = new System.Drawing.Size(100, 20);
+            this._telegramChatIdTextBox.TabIndex = 7;
             // 
             // _label2
             // 
-            _label2.AutoSize = true;
-            _label2.Location = new Point(15, 23);
-            _label2.Name = "_label2";
-            _label2.Size = new Size(41, 13);
-            _label2.TabIndex = 6;
-            _label2.Text = @"Chat Id";
+            this._label2.AutoSize = true;
+            this._label2.Location = new System.Drawing.Point(15, 23);
+            this._label2.Name = "_label2";
+            this._label2.Size = new System.Drawing.Size(41, 13);
+            this._label2.TabIndex = 6;
+            this._label2.Text = "Chat Id";
             // 
             // _telegramCheckBox
             // 
-            _telegramCheckBox.AutoSize = true;
-            _telegramCheckBox.Location = new Point(180, 0);
-            _telegramCheckBox.Name = "_telegramCheckBox";
-            _telegramCheckBox.Size = new Size(15, 14);
-            _telegramCheckBox.TabIndex = 5;
-            _telegramCheckBox.UseVisualStyleBackColor = true;
-            _telegramCheckBox.CheckedChanged += CheckBoxTelegram_CheckedChanged;
+            this._telegramCheckBox.AutoSize = true;
+            this._telegramCheckBox.Location = new System.Drawing.Point(180, 0);
+            this._telegramCheckBox.Name = "_telegramCheckBox";
+            this._telegramCheckBox.Size = new System.Drawing.Size(15, 14);
+            this._telegramCheckBox.TabIndex = 5;
+            this._telegramCheckBox.UseVisualStyleBackColor = true;
+            this._telegramCheckBox.CheckedChanged += CheckBoxTelegram_CheckedChanged;
             // 
             // _groupBox2
             // 
-            _groupBox2.Controls.Add(_label4);
-            _groupBox2.Controls.Add(TelegramFateTreeView);
-            _groupBox2.Controls.Add(_dutyFinderAlertCheckBox);
-            _groupBox2.Location = new Point(23, 115);
-            _groupBox2.Name = "_groupBox2";
-            _groupBox2.Size = new Size(533, 457);
-            _groupBox2.TabIndex = 10;
-            _groupBox2.TabStop = false;
-            _groupBox2.Text = @"Alerts";
+            this._groupBox2.Controls.Add(this._label4);
+            this._groupBox2.Controls.Add(this.TelegramFateTreeView);
+            this._groupBox2.Controls.Add(this._dutyFinderAlertCheckBox);
+            this._groupBox2.Location = new System.Drawing.Point(23, 115);
+            this._groupBox2.Name = "_groupBox2";
+            this._groupBox2.Size = new System.Drawing.Size(533, 457);
+            this._groupBox2.TabIndex = 10;
+            this._groupBox2.TabStop = false;
+            this._groupBox2.Text = "Alerts";
             // 
             // _label4
             // 
-            _label4.AutoSize = true;
-            _label4.Location = new Point(15, 57);
-            _label4.Name = "_label4";
-            _label4.Size = new Size(43, 13);
-            _label4.TabIndex = 10;
-            _label4.Text = @"F.A.T.E";
+            this._label4.AutoSize = true;
+            this._label4.Location = new System.Drawing.Point(15, 57);
+            this._label4.Name = "_label4";
+            this._label4.Size = new System.Drawing.Size(43, 13);
+            this._label4.TabIndex = 10;
+            this._label4.Text = "F.A.T.E";
             // 
             // TelegramFateTreeView
             // 
-            TelegramFateTreeView.CheckBoxes = true;
-            TelegramFateTreeView.Location = new Point(15, 81);
-            TelegramFateTreeView.Name = "TelegramFateTreeView";
-            TelegramFateTreeView.Size = new Size(508, 370);
-            TelegramFateTreeView.TabIndex = 9;
-            TelegramFateTreeView.AfterCheck += FateTreeView_AfterCheck;
+            this.TelegramFateTreeView.CheckBoxes = true;
+            this.TelegramFateTreeView.Location = new System.Drawing.Point(15, 81);
+            this.TelegramFateTreeView.Name = "TelegramFateTreeView";
+            this.TelegramFateTreeView.Size = new System.Drawing.Size(508, 370);
+            this.TelegramFateTreeView.TabIndex = 9;
+            this.TelegramFateTreeView.AfterCheck += FateTreeView_AfterCheck;
             // 
             // _dutyFinderAlertCheckBox
             // 
-            _dutyFinderAlertCheckBox.AutoSize = true;
-            _dutyFinderAlertCheckBox.Checked = true;
-            _dutyFinderAlertCheckBox.CheckState = CheckState.Checked;
-            _dutyFinderAlertCheckBox.Location = new Point(15, 22);
-            _dutyFinderAlertCheckBox.Name = "_dutyFinderAlertCheckBox";
-            _dutyFinderAlertCheckBox.Size = new Size(80, 17);
-            _dutyFinderAlertCheckBox.TabIndex = 8;
-            _dutyFinderAlertCheckBox.Text = @"Duty Finder";
-            _dutyFinderAlertCheckBox.UseVisualStyleBackColor = true;
-            _dutyFinderAlertCheckBox.CheckedChanged += CheckBoxDutyFinder_CheckedChanged;
+            this._dutyFinderAlertCheckBox.AutoSize = true;
+            this._dutyFinderAlertCheckBox.Checked = true;
+            this._dutyFinderAlertCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this._dutyFinderAlertCheckBox.Location = new System.Drawing.Point(15, 22);
+            this._dutyFinderAlertCheckBox.Name = "_dutyFinderAlertCheckBox";
+            this._dutyFinderAlertCheckBox.Size = new System.Drawing.Size(80, 17);
+            this._dutyFinderAlertCheckBox.TabIndex = 8;
+            this._dutyFinderAlertCheckBox.Text = "Duty Finder";
+            this._dutyFinderAlertCheckBox.UseVisualStyleBackColor = true;
+            this._dutyFinderAlertCheckBox.CheckedChanged += CheckBoxDutyFinder_CheckedChanged;
             // 
-            // _toadNotificationCheckBox
+            // _toastNotificationCheckBox
             // 
-            _toadNotificationCheckBox.AutoSize = true;
-            _toadNotificationCheckBox.Location = new Point(255, 18);
-            _toadNotificationCheckBox.Name = "_toadNotificationCheckBox";
-            _toadNotificationCheckBox.Size = new Size(142, 17);
-            _toadNotificationCheckBox.TabIndex = 11;
-            _toadNotificationCheckBox.Text = @"Enable Toast Notifications";
-            _toadNotificationCheckBox.UseVisualStyleBackColor = true;
-            _toadNotificationCheckBox.CheckedChanged += ToastNotificationCheckBox_CheckedChanged;
+            this._toastNotificationCheckBox.AutoSize = true;
+            this._toastNotificationCheckBox.Location = new System.Drawing.Point(255, 18);
+            this._toastNotificationCheckBox.Name = "_toastNotificationCheckBox";
+            this._toastNotificationCheckBox.Size = new System.Drawing.Size(150, 17);
+            this._toastNotificationCheckBox.TabIndex = 11;
+            this._toastNotificationCheckBox.Text = "Enable Toast Notifications";
+            this._toastNotificationCheckBox.UseVisualStyleBackColor = true;
+            this._toastNotificationCheckBox.CheckedChanged += ToastNotificationCheckBox_CheckedChanged;
             // 
             // _groupBox3
             // 
-            _groupBox3.Controls.Add(_enableLoggingCheckBox);
-            _groupBox3.Controls.Add(_button1);
-            _groupBox3.Controls.Add(_richTextBox1);
-            _groupBox3.Location = new Point(563, 49);
-            _groupBox3.Name = "_groupBox3";
-            _groupBox3.Size = new Size(710, 523);
-            _groupBox3.TabIndex = 12;
-            _groupBox3.TabStop = false;
-            _groupBox3.Text = @"Logs";
+            this._groupBox3.Controls.Add(this._enableLoggingCheckBox);
+            this._groupBox3.Controls.Add(this._button1);
+            this._groupBox3.Controls.Add(this._richTextBox1);
+            this._groupBox3.Location = new System.Drawing.Point(563, 49);
+            this._groupBox3.Name = "_groupBox3";
+            this._groupBox3.Size = new System.Drawing.Size(710, 523);
+            this._groupBox3.TabIndex = 12;
+            this._groupBox3.TabStop = false;
+            this._groupBox3.Text = "Logs";
             // 
             // _enableLoggingCheckBox
             // 
-            _enableLoggingCheckBox.AutoSize = true;
-            _enableLoggingCheckBox.Checked = true;
-            _enableLoggingCheckBox.CheckState = CheckState.Checked;
-            _enableLoggingCheckBox.Location = new Point(7, 22);
-            _enableLoggingCheckBox.Name = "_enableLoggingCheckBox";
-            _enableLoggingCheckBox.Size = new Size(100, 17);
-            _enableLoggingCheckBox.TabIndex = 2;
-            _enableLoggingCheckBox.Text = @"Enable Logging";
-            _enableLoggingCheckBox.UseVisualStyleBackColor = true;
-            _enableLoggingCheckBox.CheckedChanged += EnableLoggingCheckBox_CheckedChanged;
+            this._enableLoggingCheckBox.AutoSize = true;
+            this._enableLoggingCheckBox.Checked = true;
+            this._enableLoggingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this._enableLoggingCheckBox.Location = new System.Drawing.Point(7, 22);
+            this._enableLoggingCheckBox.Name = "_enableLoggingCheckBox";
+            this._enableLoggingCheckBox.Size = new System.Drawing.Size(100, 17);
+            this._enableLoggingCheckBox.TabIndex = 2;
+            this._enableLoggingCheckBox.Text = "Enable Logging";
+            this._enableLoggingCheckBox.UseVisualStyleBackColor = true;
+            this._enableLoggingCheckBox.CheckedChanged += EnableLoggingCheckBox_CheckedChanged;
             // 
             // _button1
             // 
-            _button1.Location = new Point(580, 20);
-            _button1.Name = "_button1";
-            _button1.AutoSize = true;
-            _button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            _button1.TabIndex = 1;
-            _button1.Text = @"Clear Logs";
-            _button1.UseVisualStyleBackColor = true;
-            _button1.Click += ClearLogsButton_Click;
+            this._button1.AutoSize = true;
+            this._button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._button1.Location = new System.Drawing.Point(580, 20);
+            this._button1.Name = "_button1";
+            this._button1.Size = new System.Drawing.Size(67, 23);
+            this._button1.TabIndex = 1;
+            this._button1.Text = "Clear Logs";
+            this._button1.UseVisualStyleBackColor = true;
+            this._button1.Click += ClearLogsButton_Click;
             // 
             // _richTextBox1
             // 
-            _richTextBox1.Location = new Point(6, 52);
-            _richTextBox1.Name = "_richTextBox1";
-            _richTextBox1.ReadOnly = true;
-            _richTextBox1.Size = new Size(698, 465);
-            _richTextBox1.TabIndex = 0;
-            _richTextBox1.Text = "";
+            this._richTextBox1.Location = new System.Drawing.Point(6, 52);
+            this._richTextBox1.Name = "_richTextBox1";
+            this._richTextBox1.ReadOnly = true;
+            this._richTextBox1.Size = new System.Drawing.Size(698, 465);
+            this._richTextBox1.TabIndex = 0;
+            this._richTextBox1.Text = "";
+            // 
+            // _enableTestEnvironment
+            // 
+            this._enableTestEnvironment.AutoSize = true;
+            this._enableTestEnvironment.Location = new System.Drawing.Point(447, 17);
+            this._enableTestEnvironment.Name = "_enableTestEnvironment";
+            this._enableTestEnvironment.Size = new System.Drawing.Size(80, 17);
+            this._enableTestEnvironment.TabIndex = 13;
+            this._enableTestEnvironment.Text = "Enable Test Environment";
+            this._enableTestEnvironment.UseVisualStyleBackColor = true;
+            this._enableTestEnvironment.Checked = true; // will be false by default
+            this._enableTestEnvironment.CheckedChanged += EnableTestEnvironmentOnCheckedChanged;
             // 
             // MainControl
             // 
-            Controls.Add(_groupBox3);
-            Controls.Add(_toadNotificationCheckBox);
-            Controls.Add(_groupBox2);
-            Controls.Add(_groupBox1);
-            Controls.Add(_label1);
-            Controls.Add(_languageComboBox);
-            Name = "MainControl";
-            Size = new Size(1744, 592);
-            _groupBox1.ResumeLayout(false);
-            _groupBox1.PerformLayout();
-            _groupBox2.ResumeLayout(false);
-            _groupBox2.PerformLayout();
-            _groupBox3.ResumeLayout(false);
-            _groupBox3.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.Controls.Add(this._enableTestEnvironment);
+            this.Controls.Add(this._groupBox3);
+            this.Controls.Add(this._toastNotificationCheckBox);
+            this.Controls.Add(this._groupBox2);
+            this.Controls.Add(this._groupBox1);
+            this.Controls.Add(this._label1);
+            this.Controls.Add(this._languageComboBox);
+            this.Name = "MainControl";
+            this.Size = new System.Drawing.Size(1744, 592);
+            this._groupBox1.ResumeLayout(false);
+            this._groupBox1.PerformLayout();
+            this._groupBox2.ResumeLayout(false);
+            this._groupBox2.PerformLayout();
+            this._groupBox3.ResumeLayout(false);
+            this._groupBox3.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
+
         #endregion
 
         #region IActPluginV1 Implementations
@@ -580,10 +595,11 @@ namespace DFAssist
             _groupBox2.Text = Localization.GetText("ui-alerts-display-text");
             _label4.Text = Localization.GetText("ui-alerts-fate-display-text");
             _dutyFinderAlertCheckBox.Text = Localization.GetText("ui-alerts-dutyfinder-display-text");
-            _toadNotificationCheckBox.Text = Localization.GetText("ui-toast-notification-display-text");
+            _toastNotificationCheckBox.Text = Localization.GetText("ui-toast-notification-display-text");
             _groupBox3.Text = Localization.GetText("ui-log-display-text");
             _enableLoggingCheckBox.Text = Localization.GetText("ui-log-enable-display-text");
             _button1.Text = Localization.GetText("ui-log-clear-display-text");
+            _enableTestEnvironment.Text = Localization.GetText("ui-enable-test-environment");
         }
         #endregion
 
@@ -627,7 +643,8 @@ namespace DFAssist
                     if (_isDutyAlertEnabled)
                     {
                         var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
-                        ToastWindowNotification(title, ">> [Code: " + args[1] + "]" + GetInstanceName(args[1]));
+                        var testing = _isTestEnvironmentEnabled ? "[Code: " + args[1] + "] " : string.Empty;
+                        ToastWindowNotification(title, ">> " + testing + GetInstanceName(args[1]));
                     }
 
                     break;
@@ -682,6 +699,11 @@ namespace DFAssist
         #endregion
 
         #region Events
+        private void EnableTestEnvironmentOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            _isTestEnvironmentEnabled = _enableTestEnvironment.Checked;
+        }
+
         private void CheckBoxTelegram_CheckedChanged(object sender, EventArgs e)
         {
             _isTelegramEnabled = _telegramCheckBox.Checked;
@@ -817,9 +839,9 @@ namespace DFAssist
 
         private void ToastNotificationCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (_toadNotificationCheckBox.Checked && !_pluginInitializing)
+            if (_toastNotificationCheckBox.Checked && !_pluginInitializing)
                 ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
-            _isToastNotificationEnabled = _toadNotificationCheckBox.Checked;
+            _isToastNotificationEnabled = _toastNotificationCheckBox.Checked;
         }
 
         private void ClearLogsButton_Click(object sender, EventArgs e)
@@ -860,7 +882,7 @@ namespace DFAssist
         {
             // All the settings to deserialize
             _xmlSettingsSerializer.AddControlSetting(_languageComboBox.Name, _languageComboBox);
-            _xmlSettingsSerializer.AddControlSetting(_toadNotificationCheckBox.Name, _toadNotificationCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_toastNotificationCheckBox.Name, _toastNotificationCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_telegramCheckBox.Name, _telegramCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_telegramChatIdTextBox.Name, _telegramChatIdTextBox);
             _xmlSettingsSerializer.AddControlSetting(_telegramTokenTextBox.Name, _telegramTokenTextBox);
@@ -898,7 +920,7 @@ namespace DFAssist
             _telegramChatIdTextBox.Enabled = _isTelegramEnabled;
             _telegramTokenTextBox.Enabled = _isTelegramEnabled;
             _isDutyAlertEnabled = _dutyFinderAlertCheckBox.Checked;
-            _isToastNotificationEnabled = _toadNotificationCheckBox.Checked;
+            _isToastNotificationEnabled = _toastNotificationCheckBox.Checked;
             _selectedLanguage = (Language)_languageComboBox.SelectedItem;
         }
 

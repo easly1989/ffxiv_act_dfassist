@@ -77,5 +77,6 @@
 
   "ui-alerts-display-text": "Alerts",
   "ui-alerts-fate-display-text": "F.A.T.E.",
-  "ui-alerts-dutyfinder-display-text": "Duty Finder"
+  "ui-alerts-dutyfinder-display-text": "Duty Finder",
+  "ui-enable-test-environment": "Enable Test Environment" 
 }

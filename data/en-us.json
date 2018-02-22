@@ -1122,7 +1122,7 @@
       "healer": "1",
       "dps": "2"
     },
-    "-661": {
+    "242": {
       "oldId": "661",
       "name": "Castrum Abania",
       "tank": "1",
@@ -1313,7 +1313,7 @@
       "healer": "1",
       "dps": "2"
     },
-    "-743": {
+    "285": {
       "oldId": "743",
       "name": "the Fractal Continuum (Hard)",
       "tank": "1",
@@ -1366,28 +1366,28 @@
       "healer": "2",
       "dps": "4"
     },
-    "-752": {
+    "292": {
       "oldId": "752",
       "name": "Sigmascape V1.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "-753": {
+    "293": {
       "oldId": "753",
       "name": "Sigmascape V2.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "-754": {
+    "294": {
       "oldId": "754",
       "name": "Sigmascape V3.0 (Savage)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "-755": {
+    "295": {
       "oldId": "755",
       "name": "Sigmascape V4.0 (Savage)",
       "tank": "2",

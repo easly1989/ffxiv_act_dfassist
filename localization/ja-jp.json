@@ -77,5 +77,6 @@
 
   "ui-alerts-display-text": "アラート",
   "ui-alerts-fate-display-text": "F.A.T.E.",
-  "ui-alerts-dutyfinder-display-text": "デューティファインダー"
+  "ui-alerts-dutyfinder-display-text": "デューティファインダー",
+  "ui-enable-test-environment": "テスト環境を有効にする"
 }
