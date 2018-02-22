@@ -1094,14 +1094,14 @@
 
     // 4.0 Stormblood
     // 4.0 Dungeons
-    "-626": {
+    "238": {
       "oldId": "626",
       "name": "The Sirensong Sea",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
-    "-616": {
+    "235": {
       "oldId": "616",
       "name": "Shisui of the Violet Tides",
       "tank": "1",
