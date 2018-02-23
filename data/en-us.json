@@ -1338,28 +1338,28 @@
     },
 
     // 4.2 Raids
-    "-748": {
+    "286": {
       "oldId": "748",
       "name": "Sigmascape V1.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "-749": {
+    "287": {
       "oldId": "749",
       "name": "Sigmascape V2.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "-750": {
+    "288": {
       "oldId": "750",
       "name": "Sigmascape V3.0",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "-751": {
+    "289": {
       "oldId": "751",
       "name": "Sigmascape V4.0",
       "tank": "2",
