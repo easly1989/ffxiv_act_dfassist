@@ -6,9 +6,6 @@ TL;DR; A rework of the DFAssist, forked from **wanaff14/ACTFate**.
 ### Why another rework?!?
 While we wait for the official plugin to be updated, I'll simply refactor this one, to ensure a more reliable and scalable solution.
 
-## Known Issues
-- The ID of all the dungeons/instances seems to be correct while "Matching", but wrong when "Matched"
-
 ---
 
 ### If you like my work
