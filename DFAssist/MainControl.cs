@@ -329,7 +329,7 @@ namespace DFAssist
             this._enableTestEnvironment.TabIndex = 13;
             this._enableTestEnvironment.Text = "Enable Test Environment";
             this._enableTestEnvironment.UseVisualStyleBackColor = true;
-            this._enableTestEnvironment.Checked = true; // will be false by default
+            this._enableTestEnvironment.Checked = false;
             this._enableTestEnvironment.CheckedChanged += EnableTestEnvironmentOnCheckedChanged;
             // 
             // MainControl
