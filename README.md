@@ -4,7 +4,14 @@
 TL;DR; A rework of the DFAssist, forked from **wanaff14/ACTFate**.
 
 ### Why another rework?!?
-While we wait for the official plugin to be updated, I'll simply refactor this one, to ensure a more reliable and scalable solution.
+It seems like wanaff14 simply stopped the development, and using an external tool (like the one from devunt) seems a bit like an overkill...
+... We already use ACT for various things, so integrate this feature seems like a better option (:
+
+### To-do
+1. Remove unused things from the wanaff14 fork
+	- Telegram support
+	- Fate alert and datas (you may use Triggenometry for this)
+2. Inject toasts in game (to make it work even in full screen mode)
 
 ---
 
