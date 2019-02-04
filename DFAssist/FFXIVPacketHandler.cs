@@ -152,29 +152,6 @@ namespace DFAssist
                         FireEvent(pid, EventType.INSTANCE_EXIT, new int[] { code });
                     }
                 }
-                else if (opcode == 0x0143) // Fate in progress
-                {
-                    var type = data[0];
-
-                    if (type == 0x9B)
-                    {
-                        var code = BitConverter.ToUInt16(data, 4);
-                        var progress = data[8];
-                        FireEvent(pid, EventType.FATE_PROGRESS, new int[] { code, progress });
-                    }
-                    else if (type == 0x79) // Fate is over
-                    {
-                        var code = BitConverter.ToUInt16(data, 4);
-                        var status = BitConverter.ToUInt16(data, 28);
-                        FireEvent(pid, EventType.FATE_END, new int[] { code, status });
-                    }
-                    else if (type == 0x74) // Fate just started
-                    {
-                        var code = BitConverter.ToUInt16(data, 4);
-                        Logger.Info("l-fate-occured-info", Data.GetFate(code).Name);
-                        FireEvent(pid, EventType.FATE_BEGIN, new int[] { code });
-                    }
-                }
                 else if (opcode == 0x0078) // Duties
                 {
                     var status = data[0];

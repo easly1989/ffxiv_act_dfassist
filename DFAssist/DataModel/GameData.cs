@@ -7,6 +7,5 @@ namespace DFAssist.DataModel
         public decimal Version { get; set; }
         public Dictionary<int, Instance> Instances { get; set; }
         public Dictionary<int, Roulette> Roulettes { get; set; }
-        public Dictionary<int, Area> Areas { get; set; }
     }
 }

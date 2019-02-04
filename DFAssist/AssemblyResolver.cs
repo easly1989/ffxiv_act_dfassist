@@ -48,7 +48,7 @@ namespace DFAssist
                 return File.Exists(asmPath) ? Assembly.LoadFrom(asmPath) : null;
             }
 
-            var pluginDirectory = ActGlobals.oFormActMain?.PluginGetSelfData(this._plugin)?.pluginFile.DirectoryName;
+            var pluginDirectory = ActGlobals.oFormActMain?.PluginGetSelfData(_plugin)?.pluginFile.DirectoryName;
             if (!string.IsNullOrEmpty(pluginDirectory))
             {
                 if (Directories.All(x => x != pluginDirectory))
@@ -62,7 +62,7 @@ namespace DFAssist
                 }
             }
 
-            foreach (var directory in this.Directories)
+            foreach (var directory in Directories)
             {
                 var asm = TryLoadAssembly(directory, ".dll");
                 if (asm != null)

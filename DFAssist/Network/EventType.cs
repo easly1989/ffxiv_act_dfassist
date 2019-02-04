@@ -7,10 +7,6 @@
         INSTANCE_ENTER, // [0] = instance code
         INSTANCE_EXIT,  // [0] = instance code
 
-        FATE_BEGIN,     // [0] = fate code
-        FATE_PROGRESS,  // [0] = fate code, [1] = progress
-        FATE_END,       // [0] = fate code, [1] = status(?)
-
         // User requests matching
         MATCH_BEGIN,    // [0] = match type(0,1), [1] = roulette code or instance count, [...] = instance
 
