@@ -74,7 +74,7 @@ namespace DFAssist
         #region WinForm Required
         public MainControl()
         {
-            RegisterAssemblies();
+            AssemblyResolver.Instance.Initialize(this);
             InitializeComponent();
 
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
@@ -88,32 +88,6 @@ namespace DFAssist
 
                 _mainFormIsLoaded = true;
                 break;
-            }
-        }
-
-        /// <summary>
-        /// Registers all the external libraries, needed by the DFAssist to work
-        /// </summary>
-        private static void RegisterAssemblies()
-        {
-            var publish = new Publish();
-
-            var plugin = ActGlobals.oFormActMain.ActPlugins.FirstOrDefault(x => x.pluginFile.Name.Equals("DFAssist.dll"));
-            var folder = plugin?.pluginFile.DirectoryName;
-            if(folder == null)
-                return;
-
-            foreach (var dependency in Dependencies)
-            {
-                var dll = Path.Combine(folder, dependency);
-                try
-                {
-                    publish.GacInstall(dll);
-                }
-                catch (Exception)
-                {
-                    // try to continue anyway...
-                }
             }
         }
 
@@ -424,6 +398,8 @@ namespace DFAssist
 
         public void DeInitPlugin()
         {
+            AssemblyResolver.Free();
+
             _isPluginEnabled = false;
 
             SaveSettings();
