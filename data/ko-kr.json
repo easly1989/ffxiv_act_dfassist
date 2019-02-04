@@ -1,6 +1,6 @@
 {
   // 버전
-  "version": "20181008.6", 
+  "version": "20190202.1",
 
   // 임무
   "instances": {
@@ -1215,7 +1215,7 @@
       "dps": "4"
     },
 
-    // 4.3 달빛 아래의 꽃
+    // 4.3 월하의 꽃
     // 4.3 던전
     "536": {
       "name": "강엔 종묘",
@@ -1240,7 +1240,7 @@
 
     // 4.3 레이드
     "550": {
-      "name": "성탑 리도르아나",
+      "name": "대등대 리도르아나",
       "tank": "3",
       "healer": "6",
       "dps": "15"
@@ -1256,16 +1256,16 @@
 
     //4.36 토벌전
     "474": {
-      "name": "리오레우스 토벌전",
+      "name": "리오레우스 수렵전",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "475": {
-      "name": "극 리오레우스 토벌전",
-      "tank": "2",
-      "healer": "2",
-      "dps": "4"
+      "name": "극 리오레우스 수렵전",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
     },
 
 
@@ -1349,6 +1349,48 @@
       "dps": "4"
     },
 
+    // 4.45
+    // 真ヨウジンボウ討滅戦 일본판으로는 신 요우진보 토벌전이라는데
+    // 일단 게임 이스케이프에 자료가 없어서 탱딜힐 숫자 기본인 8명으로 맞춰둠
+    // 추후 정보가 생겨서 수정할 점이 생기면 수정할 것. 정식 번역 명칭 나오면 수정할 것.
+
+    "595": {
+      "name": "Kugane Ohashi",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+
+    // 4.5 영웅을 위한 진혼곡
+    // 4.5 던전
+    "611": {
+      "name": "김리트 다크",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+
+    // 4.5 토벌전
+    "637": {
+      "name": "청룡 토벌전",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "638": {
+      "name": "극 청룡 토벌전",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+
+    // 4.5 Raids
+    "636": {
+      "name": "오본느 수도원",
+      "tank": "3",
+      "healer": "6",
+      "dps": "15"
+    },
 
     // 길드 작전
     "43": {
@@ -1435,6 +1477,162 @@
       "healer": "2",
       "dps": "4"
     },
+
+
+    // 4.5 청마도사
+    "610": {
+      "name": "All's Well That Starts Well",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "612": {
+      "name": "Much Ado About Pudding",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "613": {
+      "name": "Waiting for Golem",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "614": {
+      "name": "Gentlemen Prefer Swords",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "615": {
+      "name": "The Threepenny Turtles",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "616": {
+      "name": "Eye Society",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "617": {
+      "name": "A Chorus Slime",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "618": {
+      "name": "Bomb-edy of Errors",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "619": {
+      "name": "To Kill a Mockingslime",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "620": {
+      "name": "A Little Knight Music",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "621": {
+      "name": "Some Like It Excruciatingly Hot",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "622": {
+      "name": "The Plant-om of the Opera",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "623": {
+      "name": "Beauty and a Beast",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "624": {
+      "name": "Blobs in the Woods",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "625": {
+      "name": "The Me Nobody Nodes",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "626": {
+      "name": "Sunset Bull-evard",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "627": {
+      "name": "The Sword of Music",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "628": {
+      "name": "Midsummer Night's Explosion",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "629": {
+      "name": "On a Clear Day You Can Smell Forever",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "630": {
+      "name": "Miss Typhon",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "631": {
+      "name": "Chimera on a Hot Tin Roof",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "632": {
+      "name": "Here Comes the Boom",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "633": {
+      "name": "Behemoths and Broomsticks",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "634": {
+      "name": "Amazing Technicolor Pit Fiends",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "635": {
+      "name": "Dirty Rotten Azulmagia",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+
+
+    // 4.5x 이후 청마도사
 
 
     // 초보자의 집
@@ -1818,17 +2016,24 @@
 
     // 에우레카
     "283": {
-      "name": "에우레카: 아네모스",
+      "name": "금단의 땅 에우레카 : 아네모스",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "581": {
-      "name": "에우레카: 파고스",
+      "name": "금단의 땅 에우레카 : 파고스",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
+    "598": {
+      "name": "금단의 땅 에우레카 : 파이로스",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+
 
     // 기타 이상한 것들...
     "437": {
@@ -1837,6 +2042,51 @@
       "healer": "0",
       "dps": "0"
     },
+    "640": {
+      "name": "Air Force One",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "641": {
+      "name": "Air Force One",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "642": {
+      "name": "Air Force One",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+
+    // 한섭에는 심의상 마작 안 나올 가능성이 크지만 일단 추가
+    "643": {
+      "name": "Novice Mahjong (Ranked)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "644": {
+      "name": "Advanced Mahjong (Ranked)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "645": {
+      "name": "Four-player Mahjong (Kuitan Enabled)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "650": {
+      "name": "Four-player Mahjong (Kuitan Disabled)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+
 
     //이벤트 인스턴스
     "181": {
@@ -1850,13 +2100,13 @@
   // 무작위 임무
   "roulettes": {
     "1": "무작위 임무: 레벨링",
-    "2": "무작위 임무: 레벨 50 던전",
+    "2": "무작위 임무: 레벨 50/60 던전",
     "3": "무작위 임무: 주요 퀘스트",
     "4": "무작위 임무: 길드 작전",
     "5": "무작위 임무: 숙련자",
     "6": "무작위 임무: 토벌전",
     "7": "무작위 임무: 전장",
-    "8": "무작위 임무: 레벨 60 던전",
+    "8": "무작위 임무: 레벨 70 던전",
     "9": "무작위 임무: 멘토",
     "10": "더 피스트 (8 대 8) - 친선 경기",
     "13": "더 피스트 (4 대 4) - 개인",
@@ -2196,6 +2446,7 @@
         "672": "신비한 마물 '골렘'",
         "673": "신비한 마물 '벽돌골렘'",
         "697": "별빛축제: 마법 눈사람",
+        "1325": "별빛축제 '숲의 도둑'",
         "707": "광란의 달걀 찾기",
         "196": "고대의 투신",
         "197": "고대의 투신",
@@ -2616,6 +2867,32 @@
         "1369": "Cairn Blight 451"
       }
     },
+
+    "997": {
+      "name": "에우레카 파이로스",
+      "fates": {
+        "1388": "Medias Res",
+        "1389": "High Voltage",
+        "1390": "On the Non-existent",
+        "1391": "Creepy Doll",
+        "1392": "Quiet, Please",
+        "1393": "Up and Batym",
+        "1394": "Rondo Aetolus",
+        "1395": "Scorchpion King",
+        "1396": "Burning Hunger",
+        "1397": "Dry Iris",
+        "1398": "Thirty Whacks",
+        "1399": "Put Up Your Dux",
+        "1400": "You Do Know Jack",
+        "1401": "Mister Bright-eyes",
+        "1402": "Haunter of the Dark",
+        "1403": "Heavens' Warg",
+        "1404": "Lost Epic",
+        "1407": "We're All Mad Here",
+        "1408": "Uncommon Nonsense"
+      }
+    },
+
     "612": {
       "name": "홍련의 해방자 및 이벤트",
       "fates": {
@@ -2640,6 +2917,13 @@
         "958": "다시 나타난 신발 훔치는 귀신",
         "959": "찰진 떡을 가지고 도망가라!",
         "960": "찰진 떡을 가지고 도망가라!",
+
+        //961 962가 Who Let the Hounds Out 로 변경되는 줄 알았는데.
+        //알고 보니 영어판만 페이트 이름이 다른 거였음.
+        //일본판은 똑같음. 한국판도 고대로인 걸 보면 잘못알았던듯함.
+
+        "961": "찰진 떡을 가지고 도망가라!",
+        "962": "찰진 떡을 가지고 도망가라!",
         "963": "방사성 샤드의 악영향",
         "964": "무모한 탐사",
         "965": "방사성 샤드의 악영향",
@@ -2993,12 +3277,6 @@
         "1322": "불꽃축제 '터무니없는 미끼'",
         "1323": "불꽃축제 '생선을 노리는 게 퇴치'",
         "1324": "불꽃축제 '늘여름의 대청소'",
-        "1325": "별빛축제 '숲의 도둑'",
-
-        //추후 961 962같은 경우는	찰진 떡을 가지고 도망가라! 에서 >  Who Let the Hounds Out 로 변경됨
-
-        "961": "찰진 떡을 가지고 도망가라!",
-        "962": "찰진 떡을 가지고 도망가라!",
         "1330": "세 가희의 길거리 공연",
         "1349": "세 가희의 길거리 공연",
         "1350": "세 가희의 길거리 공연",
