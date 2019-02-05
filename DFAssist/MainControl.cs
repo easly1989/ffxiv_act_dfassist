@@ -16,12 +16,15 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using Windows.UI.Notifications;
 using Advanced_Combat_Tracker;
 using DFAssist.DataModel;
+using DFAssist.DirectX;
 using DFAssist.Shell;
 
 namespace DFAssist
@@ -185,7 +188,7 @@ namespace DFAssist
             var enviroment = Path.GetDirectoryName(pluginData.pluginFile.ToString());
 
             // if any of the assembly cannot be loaded, then the plugin cannot be started
-            if(AssemblyResolver.LoadAssemblies(enviroment, _labelStatus))
+            if (!AssemblyResolver.LoadAssemblies(enviroment, _labelStatus))
                 return;
 
             if (_mainFormIsLoaded)
@@ -222,7 +225,7 @@ namespace DFAssist
             _languageComboBox.DisplayMember = "Name";
             _languageComboBox.ValueMember = "Code";
 
-            _labelStatus.Text = @"Starting...";
+            _labelStatus.Text = "Starting...";
 
             UpdateTranslations();
 
@@ -246,6 +249,7 @@ namespace DFAssist
 
             // show a test toast
             ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            new DirectXToastManager().Show("title", "message", _networks.Keys.FirstOrDefault());
 
             _pluginInitializing = false;
         }
@@ -303,27 +307,24 @@ namespace DFAssist
         #region Update Methods
         private void UpdateProcesses()
         {
-            var processes = new List<System.Diagnostics.Process>();
-            processes.AddRange(System.Diagnostics.Process.GetProcessesByName("ffxiv"));
-            processes.AddRange(System.Diagnostics.Process.GetProcessesByName("ffxiv_dx11"));
-
-            foreach (var process in processes)
+            var process = System.Diagnostics.Process.GetProcessesByName("notepad++").FirstOrDefault();
+            if(process == null)
+                return;
+            try
             {
-                try
-                {
-                    if (_networks.ContainsKey(process.Id))
-                        continue;
+                if (_networks.ContainsKey(process.Id))
+                    return;
 
-                    var pn = new ProcessNet(process, new Network());
-                    FFXIVPacketHandler.OnEventReceived += Network_onReceiveEvent;
-                    _networks.TryAdd(process.Id, pn);
-                    Logger.Success("l-process-set-success", process.Id);
-                }
-                catch (Exception e)
-                {
-                    Logger.Exception(e, "l-process-set-failed");
-                }
+                var pn = new ProcessNet(process, new Network());
+                FFXIVPacketHandler.OnEventReceived += Network_onReceiveEvent;
+                _networks.TryAdd(process.Id, pn);
+                Logger.Success("l-process-set-success", process.Id);
             }
+            catch (Exception e)
+            {
+                Logger.Exception(e, "l-process-set-failed");
+            }
+
 
             var toDelete = new List<int>();
             foreach (var entry in _networks)

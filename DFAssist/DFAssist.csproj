@@ -97,6 +97,7 @@
     <Compile Include="DataModel\Roulette.cs" />
     <Compile Include="DirectX\DirectXOverlay.cs" />
     <Compile Include="DirectX\DirectxOverlayPlugin.cs" />
+    <Compile Include="DirectX\DirectXToastManager.cs" />
     <Compile Include="DirectX\OverlaySettings.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="MainControl.cs">

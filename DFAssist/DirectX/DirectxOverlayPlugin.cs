@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using Overlay.NET.Common;
 using Overlay.NET.Directx;
@@ -10,17 +9,22 @@ namespace DFAssist.DirectX
     [RegisterPlugin("DirectXToastNotifier", "Carlo Ruggiero", "DirectXToastNotifier", "1.0", "A Toast notify for DFAssist that works with fullscreen game")]
     public class DirectxOverlayPlugin : DirectXOverlayPlugin
     {
+        private readonly string _title;
+        private readonly string _message;
+
         private readonly TickEngine _tickEngine = new TickEngine();
         public readonly ISettings<OverlaySettings> Settings = new SerializableSettings<OverlaySettings>();
-        private int _displayFps;
-        private int _font;
-        private int _hugeFont;
-        private int _i;
-        private int _interiorBrush;
         private int _redBrush;
-        private int _redOpacityBrush;
-        private float _rotation;
-        private Stopwatch _watch;
+        private int _whiteBrush;
+        private int _blackBrush;
+        private int _titleFont;
+        private int _messageFont;
+
+        public DirectxOverlayPlugin(string title, string message)
+        {
+            _title = title;
+            _message = message;
+        }
 
         public override void Initialize(IWindow targetWindow)
         {
@@ -45,19 +49,12 @@ namespace DFAssist.DirectX
             Settings.Load();
             
             OverlayWindow = new DirectXOverlayWindow(targetWindow.Handle, false);
-            _watch = Stopwatch.StartNew();
 
             _redBrush = OverlayWindow.Graphics.CreateBrush(0x7FFF0000);
-            _redOpacityBrush = OverlayWindow.Graphics.CreateBrush(Color.FromArgb(80, 255, 0, 0));
-            _interiorBrush = OverlayWindow.Graphics.CreateBrush(0x7FFFFF00);
-
-            _font = OverlayWindow.Graphics.CreateFont("Arial", 20);
-            _hugeFont = OverlayWindow.Graphics.CreateFont("Arial", 50, true);
-
-            _rotation = 0.0f;
-            _displayFps = 0;
-            _i = 0;
-            // Set up update interval and register events for the tick engine.
+            _whiteBrush = OverlayWindow.Graphics.CreateBrush(Color.White);
+            _blackBrush = OverlayWindow.Graphics.CreateBrush(Color.FromArgb(76, 0, 0, 0));
+            _titleFont = OverlayWindow.Graphics.CreateFont("Arial", 22, true);
+            _messageFont = OverlayWindow.Graphics.CreateFont("Arial", 18);
 
             _tickEngine.PreTick += OnPreTick;
             _tickEngine.Tick += OnTick;
@@ -79,7 +76,6 @@ namespace DFAssist.DirectX
             var targetWindowIsActivated = TargetWindow.IsActivated;
             if (!targetWindowIsActivated && OverlayWindow.IsVisible)
             {
-                _watch.Stop();
                 ClearScreen();
                 OverlayWindow.Hide();
             }
@@ -108,72 +104,12 @@ namespace DFAssist.DirectX
 
         protected void InternalRender()
         {
-            if (!_watch.IsRunning)
-            {
-                _watch.Start();
-            }
-
             OverlayWindow.Graphics.BeginScene();
             OverlayWindow.Graphics.ClearScene();
 
-            //first row
-            OverlayWindow.Graphics.DrawText("DrawBarH", _font, _redBrush, 50, 40);
-            OverlayWindow.Graphics.DrawBarH(50, 70, 20, 100, 80, 2, _redBrush, _interiorBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawBarV", _font, _redBrush, 200, 40);
-            OverlayWindow.Graphics.DrawBarV(200, 120, 100, 20, 80, 2, _redBrush, _interiorBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawBox2D", _font, _redBrush, 350, 40);
-            OverlayWindow.Graphics.DrawBox2D(350, 70, 50, 100, 2, _redBrush, _redOpacityBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawBox3D", _font, _redBrush, 500, 40);
-            OverlayWindow.Graphics.DrawBox3D(500, 80, 50, 100, 10, 2, _redBrush, _redOpacityBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawCircle3D", _font, _redBrush, 650, 40);
-            OverlayWindow.Graphics.DrawCircle(700, 120, 35, 2, _redBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawEdge", _font, _redBrush, 800, 40);
-            OverlayWindow.Graphics.DrawEdge(800, 70, 50, 100, 10, 2, _redBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawLine", _font, _redBrush, 950, 40);
-            OverlayWindow.Graphics.DrawLine(950, 70, 1000, 200, 2, _redBrush);
-
-            //second row
-            OverlayWindow.Graphics.DrawText("DrawPlus", _font, _redBrush, 50, 250);
-            OverlayWindow.Graphics.DrawPlus(70, 300, 15, 2, _redBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawRectangle", _font, _redBrush, 200, 250);
-            OverlayWindow.Graphics.DrawRectangle(200, 300, 50, 100, 2, _redBrush);
-
-            OverlayWindow.Graphics.DrawText("DrawRectangle3D", _font, _redBrush, 350, 250);
-            OverlayWindow.Graphics.DrawRectangle3D(350, 320, 50, 100, 10, 2, _redBrush);
-
-            OverlayWindow.Graphics.DrawText("FillCircle", _font, _redBrush, 800, 250);
-            OverlayWindow.Graphics.FillCircle(850, 350, 50, _redBrush);
-
-            OverlayWindow.Graphics.DrawText("FillRectangle", _font, _redBrush, 950, 250);
-            OverlayWindow.Graphics.FillRectangle(950, 300, 50, 100, _redBrush);
-
-            _rotation += 0.03f; //related to speed
-
-            if (_rotation > 50.0f) //size of the swastika
-            {
-                _rotation = -50.0f;
-            }
-
-            if (_watch.ElapsedMilliseconds > 1000)
-            {
-                _i = _displayFps;
-                _displayFps = 0;
-                _watch.Restart();
-            }
-
-            else
-            {
-                _displayFps++;
-            }
-
-            OverlayWindow.Graphics.DrawText("FPS: " + _i, _hugeFont, _redBrush, 400, 600, false);
+            OverlayWindow.Graphics.FillRectangle(950, 250, 150, 200, _blackBrush);
+            OverlayWindow.Graphics.DrawText(_title, _titleFont, _redBrush, 950, 250);
+            OverlayWindow.Graphics.DrawText(_message, _messageFont, _whiteBrush, 950, 300);
 
             OverlayWindow.Graphics.EndScene();
         }
@@ -184,7 +120,7 @@ namespace DFAssist.DirectX
             base.Dispose();
         }
 
-        private void ClearScreen()
+        public void ClearScreen()
         {
             OverlayWindow.Graphics.BeginScene();
             OverlayWindow.Graphics.ClearScene();
