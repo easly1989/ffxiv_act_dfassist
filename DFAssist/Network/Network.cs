@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Net;
@@ -34,10 +33,10 @@ namespace DFAssist
             _recvBuffer = new byte[0x20000];
 
             RcvallIplevel = new byte[] { 3, 0, 0, 0 };
-            _exePath = Process.GetCurrentProcess().MainModule.FileName;
+            _exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
         }
 
-        public void StartCapture(Process process)
+        public void StartCapture(System.Diagnostics.Process process)
         {
             _pid = process.Id;
             Task.Factory.StartNew(() =>
@@ -103,7 +102,7 @@ namespace DFAssist
             }
         }
 
-        public void UpdateGameConnections(Process process)
+        public void UpdateGameConnections(System.Diagnostics.Process process)
         {
             var update = _connections.Count < 2;
             var currentConnections = GetConnections(process);
@@ -226,7 +225,7 @@ namespace DFAssist
             }
         }
 
-        private IPEndPoint GetLobbyEndPoint(Process process)
+        private IPEndPoint GetLobbyEndPoint(System.Diagnostics.Process process)
         {
             IPEndPoint ipep = null;
             string lobbyHost = null;
@@ -274,7 +273,7 @@ namespace DFAssist
             return ipep;
         }
 
-        private static List<Connection> GetConnections(Process process)
+        private static List<Connection> GetConnections(System.Diagnostics.Process process)
         {
             var connections = new List<Connection>();
 

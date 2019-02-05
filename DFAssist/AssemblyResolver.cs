@@ -1,77 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reflection;
-using Advanced_Combat_Tracker;
+using System.Windows.Forms;
 
 namespace DFAssist
 {
-    public class AssemblyResolver :
-        IDisposable
+    /// <summary>
+    /// TODO: Refactor, remove hardcoded assembly loads
+    /// Gonna HardCode all the needed assemblies to avoid any kind of problems
+    /// Had to rewrite this code way too much
+    ///
+    /// As soon as I find a better way to resolve/load assemblies i'll do it,
+    /// for now i'm ok with this... ^^'
+    /// </summary>
+    public static class AssemblyResolver
     {
-        private static AssemblyResolver _instance;
-        public static AssemblyResolver Instance => _instance ?? (_instance = new AssemblyResolver());
-
-        private IActPluginV1 _plugin;
-        public List<string> Directories { get; } = new List<string>();
-
-        public void Initialize(IActPluginV1 plugin)
+        public static bool LoadAssemblies(string enviroment, Label labelStatus)
         {
-            _plugin = plugin;
+            if (!LoadAssembly("Microsoft.WindowsAPICodePack", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("Microsoft.WindowsAPICodePack.Shell", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("Microsoft.WindowsAPICodePack.ShellExtensions", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("Newtonsoft.Json", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("Overlay.NET", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("Process.NET", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("SharpDX.Direct2D1", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("SharpDX", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("SharpDX.DXGI", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("SharpDX.Mathematics", enviroment, labelStatus)) return false;
 
-            Directories.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Advanced Combat Tracker\Plugins"));
-
-            AppDomain.CurrentDomain.AssemblyResolve -= CustomAssemblyResolve;
-            AppDomain.CurrentDomain.AssemblyResolve += CustomAssemblyResolve;
+            return true;
         }
 
-        public static void Free()
+        private static bool LoadAssembly(string assemblyName, string enviroment, Label labelStatus)
         {
-            _instance?.Dispose();
-            _instance = null;
-        }
-
-        public void Dispose()
-        {
-            AppDomain.CurrentDomain.AssemblyResolve -= CustomAssemblyResolve;
-            _plugin = null;
-        }
-
-        private Assembly CustomAssemblyResolve(object sender, ResolveEventArgs e)
-        {
-            Assembly TryLoadAssembly(string directory, string extension)
+            var currentDll = Path.Combine(enviroment, assemblyName + ".dll");
+            if (File.Exists(currentDll))
             {
-                var asm = new AssemblyName(e.Name);
-
-                var asmPath = Path.Combine(directory, asm.Name + extension);
-                return File.Exists(asmPath) ? Assembly.LoadFrom(asmPath) : null;
+                Assembly.LoadFrom(currentDll);
+                return true;
             }
 
-            var pluginDirectory = ActGlobals.oFormActMain?.PluginGetSelfData(_plugin)?.pluginFile.DirectoryName;
-            if (!string.IsNullOrEmpty(pluginDirectory))
-            {
-                if (Directories.All(x => x != pluginDirectory))
-                {
-                    Directories.Add(pluginDirectory);
-                    Directories.Add(Path.Combine(pluginDirectory, "references"));
+            labelStatus.Text = $"Unable to find {currentDll}, the plugin cannot be starterd.";
+            return false;
 
-                    var architect = Environment.Is64BitProcess ? "x64" : "x86";
-                    Directories.Add(Path.Combine(pluginDirectory, $@"{architect}"));
-                    Directories.Add(Path.Combine(pluginDirectory, $@"references\{architect}"));
-                }
-            }
-
-            foreach (var directory in Directories)
-            {
-                var asm = TryLoadAssembly(directory, ".dll");
-                if (asm != null)
-                {
-                    return asm;
-                }
-            }
-
-            return null;
         }
     }
 }

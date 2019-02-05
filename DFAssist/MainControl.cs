@@ -1,11 +1,20 @@
 ﻿// reference:System.dll
 // reference:System.Core.dll
 // reference:System.Web.Extensions.dll
+// reference:Newtonsoft.Json.dll
+// reference:Overlay.NET.dll
+// reference:Process.NET.dll
+// reference:Microsoft.WindowsAPICodePack.dll
+// reference:Microsoft.WindowsAPICodePack.Shell.dll
+// reference:Microsoft.WindowsAPICodePack.ShellExtensions.dll
+// reference:SharpDX.Direct2D1.dll
+// reference:SharpDX.dll
+// reference:SharpDX.DXGI.dll
+// reference:SharpDX.Mathematics.dll
 
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -45,7 +54,6 @@ namespace DFAssist
         #region WinForm Required
         public MainControl()
         {
-            AssemblyResolver.Instance.Initialize(this);
             InitializeComponent();
 
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
@@ -164,9 +172,7 @@ namespace DFAssist
             this._groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
         #endregion
 
         #region IActPluginV1 Implementations
@@ -174,6 +180,13 @@ namespace DFAssist
         {
             _labelStatus = pluginStatusText;
             _labelTab = pluginScreenSpace;
+
+            var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
+            var enviroment = Path.GetDirectoryName(pluginData.pluginFile.ToString());
+
+            // if any of the assembly cannot be loaded, then the plugin cannot be started
+            if(AssemblyResolver.LoadAssemblies(enviroment, _labelStatus))
+                return;
 
             if (_mainFormIsLoaded)
                 OnInit();
@@ -239,8 +252,6 @@ namespace DFAssist
 
         public void DeInitPlugin()
         {
-            AssemblyResolver.Free();
-
             _isPluginEnabled = false;
 
             SaveSettings();
@@ -292,9 +303,9 @@ namespace DFAssist
         #region Update Methods
         private void UpdateProcesses()
         {
-            var processes = new List<Process>();
-            processes.AddRange(Process.GetProcessesByName("ffxiv"));
-            processes.AddRange(Process.GetProcessesByName("ffxiv_dx11"));
+            var processes = new List<System.Diagnostics.Process>();
+            processes.AddRange(System.Diagnostics.Process.GetProcessesByName("ffxiv"));
+            processes.AddRange(System.Diagnostics.Process.GetProcessesByName("ffxiv_dx11"));
 
             foreach (var process in processes)
             {

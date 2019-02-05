@@ -5,13 +5,13 @@ using Overlay.NET.Common;
 using Overlay.NET.Directx;
 using Process.NET.Windows;
 
-namespace DFAssist.DxOverlay
+namespace DFAssist.DirectX
 {
-    [RegisterPlugin("DirectXverlayDemo-1", "Jacob Kemple", "DirectXOverlayDemo", "0.0", "A basic demo of the DirectXoverlay.")]
+    [RegisterPlugin("DirectXToastNotifier", "Carlo Ruggiero", "DirectXToastNotifier", "1.0", "A Toast notify for DFAssist that works with fullscreen game")]
     public class DirectxOverlayPlugin : DirectXOverlayPlugin
     {
         private readonly TickEngine _tickEngine = new TickEngine();
-
+        public readonly ISettings<OverlaySettings> Settings = new SerializableSettings<OverlaySettings>();
         private int _displayFps;
         private int _font;
         private int _hugeFont;
@@ -21,8 +21,6 @@ namespace DFAssist.DxOverlay
         private int _redOpacityBrush;
         private float _rotation;
         private Stopwatch _watch;
-
-        public readonly ISettings<DirectXOverlaySettings> Settings = new SerializableSettings<DirectXOverlaySettings>();
 
         public override void Initialize(IWindow targetWindow)
         {
@@ -45,8 +43,7 @@ namespace DFAssist.DxOverlay
             // File is made from above info
             Settings.Save();
             Settings.Load();
-            Console.Title = "OverlayExample";
-
+            
             OverlayWindow = new DirectXOverlayWindow(targetWindow.Handle, false);
             _watch = Stopwatch.StartNew();
 
@@ -73,9 +70,7 @@ namespace DFAssist.DxOverlay
                 return;
             }
 
-            // must compile source of Overaly.NET to get the latest functionality.
-            // the Update method is not present in the nuget version of the package
-            //OverlayWindow.Update();
+            OverlayWindow.Update();
             InternalRender();
         }
 

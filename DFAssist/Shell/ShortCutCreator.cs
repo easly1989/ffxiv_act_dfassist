@@ -31,7 +31,7 @@ namespace DFAssist.Shell
         private static void InstallShortcut(string appId, string shortcutPath)
         {
             // Find the path to the current executable
-            var exePath = Process.GetCurrentProcess().MainModule.FileName;
+            var exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
 
             // ReSharper disable SuspiciousTypeConversion.Global
             if (!(new CShellLink() is IShellLinkW newShortcut))
