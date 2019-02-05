@@ -51,24 +51,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Overlay.NET">
-      <HintPath>..\libs\Overlay.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="Process.NET">
-      <HintPath>..\libs\Process.NET.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>..\libs\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct2D1">
-      <HintPath>..\libs\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DXGI">
-      <HintPath>..\libs\SharpDX.DXGI.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Mathematics">
-      <HintPath>..\libs\SharpDX.Mathematics.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <Private>True</Private>
@@ -95,10 +77,6 @@
     <Compile Include="DataModel\Instance.cs" />
     <Compile Include="DataModel\Language.cs" />
     <Compile Include="DataModel\Roulette.cs" />
-    <Compile Include="DirectX\DirectXOverlay.cs" />
-    <Compile Include="DirectX\DirectxOverlayPlugin.cs" />
-    <Compile Include="DirectX\DirectXToastManager.cs" />
-    <Compile Include="DirectX\OverlaySettings.cs" />
     <Compile Include="Localization.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>

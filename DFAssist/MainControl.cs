@@ -2,15 +2,9 @@
 // reference:System.Core.dll
 // reference:System.Web.Extensions.dll
 // reference:Newtonsoft.Json.dll
-// reference:Overlay.NET.dll
-// reference:Process.NET.dll
 // reference:Microsoft.WindowsAPICodePack.dll
 // reference:Microsoft.WindowsAPICodePack.Shell.dll
 // reference:Microsoft.WindowsAPICodePack.ShellExtensions.dll
-// reference:SharpDX.Direct2D1.dll
-// reference:SharpDX.dll
-// reference:SharpDX.DXGI.dll
-// reference:SharpDX.Mathematics.dll
 
 using System;
 using System.Collections.Concurrent;
@@ -18,13 +12,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using Windows.UI.Notifications;
 using Advanced_Combat_Tracker;
 using DFAssist.DataModel;
-using DFAssist.DirectX;
 using DFAssist.Shell;
 
 namespace DFAssist
@@ -249,7 +241,6 @@ namespace DFAssist
 
             // show a test toast
             ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
-            new DirectXToastManager().Show("title", "message", _networks.Keys.FirstOrDefault());
 
             _pluginInitializing = false;
         }
