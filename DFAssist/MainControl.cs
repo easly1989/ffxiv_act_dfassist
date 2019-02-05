@@ -298,7 +298,7 @@ namespace DFAssist
         #region Update Methods
         private void UpdateProcesses()
         {
-            var process = System.Diagnostics.Process.GetProcessesByName("notepad++").FirstOrDefault();
+            var process = System.Diagnostics.Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
             if(process == null)
                 return;
             try
