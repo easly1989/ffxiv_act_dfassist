@@ -20,12 +20,6 @@ namespace DFAssist
             if (!LoadAssembly("Microsoft.WindowsAPICodePack.Shell", enviroment, labelStatus)) return false;
             if (!LoadAssembly("Microsoft.WindowsAPICodePack.ShellExtensions", enviroment, labelStatus)) return false;
             if (!LoadAssembly("Newtonsoft.Json", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("Overlay.NET", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("Process.NET", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("SharpDX.Direct2D1", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("SharpDX", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("SharpDX.DXGI", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("SharpDX.Mathematics", enviroment, labelStatus)) return false;
 
             return true;
         }
