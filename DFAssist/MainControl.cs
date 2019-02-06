@@ -10,7 +10,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -172,11 +171,6 @@ namespace DFAssist
         }
         #endregion
 
-        public static void RenderLoop(Charm.RPM rpm, Charm.Renderer renderer, int width, int height)
-        {
-            renderer.DrawLine(0, 0, width, height, 5, Color.Magenta);
-        }
-
         #region IActPluginV1 Implementations
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
@@ -189,10 +183,6 @@ namespace DFAssist
             // if any of the assembly cannot be loaded, then the plugin cannot be started
             if (!AssemblyResolver.LoadAssemblies(enviroment, _labelStatus))
                 return;
-
-            // TODO: test if this code works on fullscreen
-            var charm = new Charm();
-            charm.CharmInit(RenderLoop, "ffxiv_dx11");
 
             if (_mainFormIsLoaded)
                 OnInit();
@@ -252,6 +242,7 @@ namespace DFAssist
 
             // show a test toast
             ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            OverlayHandler.ShowTest();
 
             _pluginInitializing = false;
         }

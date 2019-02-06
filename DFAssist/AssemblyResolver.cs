@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -20,6 +21,7 @@ namespace DFAssist
             if (!LoadAssembly("Microsoft.WindowsAPICodePack.Shell", enviroment, labelStatus)) return false;
             if (!LoadAssembly("Microsoft.WindowsAPICodePack.ShellExtensions", enviroment, labelStatus)) return false;
             if (!LoadAssembly("Newtonsoft.Json", enviroment, labelStatus)) return false;
+            if (!LoadAssembly("Charm", enviroment, labelStatus)) return false;
 
             return true;
         }
@@ -29,8 +31,16 @@ namespace DFAssist
             var currentDll = Path.Combine(enviroment, assemblyName + ".dll");
             if (File.Exists(currentDll))
             {
-                Assembly.LoadFrom(currentDll);
-                return true;
+                try
+                {
+                    Assembly.LoadFrom(currentDll);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    labelStatus.Text = $"Unable to load {assemblyName} library, it may needs to be 'Unblocked'.";
+                    return false;
+                }
             }
 
             labelStatus.Text = $"Unable to find {currentDll}, the plugin cannot be starterd.";
