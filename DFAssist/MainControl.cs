@@ -12,12 +12,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using Windows.UI.Notifications;
 using Advanced_Combat_Tracker;
 using DFAssist.DataModel;
 using DFAssist.Shell;
+using Timer = System.Windows.Forms.Timer;
 
 namespace DFAssist
 {
@@ -240,8 +242,9 @@ namespace DFAssist
             _timer.Enabled = true;
 
             // show a test toast
-            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
-            OverlayHandler.ShowTest();
+            //ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            var result = DllInjector.GetInstance.Inject("Advanced Combat Tracker", "InjectAssist.dll");
+            ToastWindowNotification(result.ToString(), "RESULT: " + result);
 
             _pluginInitializing = false;
         }
