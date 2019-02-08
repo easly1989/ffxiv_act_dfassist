@@ -21,7 +21,6 @@ namespace DFAssist
             if (!LoadAssembly("Microsoft.WindowsAPICodePack.Shell", enviroment, labelStatus)) return false;
             if (!LoadAssembly("Microsoft.WindowsAPICodePack.ShellExtensions", enviroment, labelStatus)) return false;
             if (!LoadAssembly("Newtonsoft.Json", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("Charm", enviroment, labelStatus)) return false;
 
             return true;
         }

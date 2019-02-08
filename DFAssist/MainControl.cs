@@ -5,7 +5,6 @@
 // reference:Microsoft.WindowsAPICodePack.dll
 // reference:Microsoft.WindowsAPICodePack.Shell.dll
 // reference:Microsoft.WindowsAPICodePack.ShellExtensions.dll
-// reference:Charm.dll
 
 using System;
 using System.Collections.Concurrent;
