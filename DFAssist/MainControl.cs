@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using Windows.UI.Notifications;
@@ -190,6 +191,34 @@ namespace DFAssist
                 ActGlobals.oFormActMain.Shown += ActMainFormOnShown;
         }
 
+        private void oFormActMain_UpdateCheckClicked()
+        {
+            var pluginId = -1; // waiting to have an id
+            try
+            {
+                var localDate = ActGlobals.oFormActMain.PluginGetSelfDateUtc(this);
+                var remoteDate = ActGlobals.oFormActMain.PluginGetRemoteDateUtc(pluginId);
+                if (localDate.AddHours(2) >= remoteDate) 
+                    return;
+
+                var result = MessageBox.Show(Localization.GetText("ui-update-available-message"), Localization.GetText("ui-update-available-title"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result != DialogResult.Yes) 
+                    return;
+
+                var updatedFile = ActGlobals.oFormActMain.PluginDownload(pluginId);
+                var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
+                pluginData.pluginFile.Delete();
+                updatedFile.MoveTo(pluginData.pluginFile.FullName);
+                ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, false);
+                Application.DoEvents();
+                ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, true);
+            }
+            catch (Exception ex)
+            {
+                ActGlobals.oFormActMain.WriteExceptionLog(ex, "Plugin Update Check");
+            }
+        }
+
         private void OnInit()
         {
             if (_pluginInitializing)
@@ -244,6 +273,10 @@ namespace DFAssist
             ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
 
             _pluginInitializing = false;
+
+            ActGlobals.oFormActMain.UpdateCheckClicked += oFormActMain_UpdateCheckClicked;
+            if (ActGlobals.oFormActMain.GetAutomaticUpdatesAllowed())
+                new Thread(oFormActMain_UpdateCheckClicked).Start();
         }
 
         public void DeInitPlugin()

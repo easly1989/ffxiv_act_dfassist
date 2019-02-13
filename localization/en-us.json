@@ -78,5 +78,8 @@
   "ui-alerts-display-text": "Alerts",
   "ui-alerts-fate-display-text": "F.A.T.E.",
   "ui-alerts-dutyfinder-display-text": "Duty Finder",
-  "ui-enable-test-environment": "Enable Test Environment" 
+  "ui-enable-test-environment": "Enable Test Environment",
+  
+  "ui-update-available-message": "There is an updated version of the DFAssist Plugin. Update it now?\n\n(If there is an update to ACT, you should click No and update ACT first.)",
+  "ui-update-available-title": "DFAssist Update Available!"
 }
