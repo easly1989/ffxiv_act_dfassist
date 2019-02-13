@@ -8,10 +8,8 @@ It seems like wanaff14 simply stopped the development, and using an external too
 ... We already use ACT for various things, so integrate this feature seems like a better option (:
 
 ### To-do
-1. Remove unused things from the wanaff14 fork
-	- Telegram support
-	- Fate alert and datas (you may use Triggenometry for this)
 2. Inject toasts in game (to make it work even in full screen mode)
+3. And/Or add TTS support?
 
 ---
 
