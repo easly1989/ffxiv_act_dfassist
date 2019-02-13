@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using Windows.UI.Notifications;
@@ -242,9 +241,7 @@ namespace DFAssist
             _timer.Enabled = true;
 
             // show a test toast
-            //ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
-            var result = DllInjector.GetInstance.Inject("Advanced Combat Tracker", "InjectAssist.dll");
-            ToastWindowNotification(result.ToString(), "RESULT: " + result);
+            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
 
             _pluginInitializing = false;
         }
