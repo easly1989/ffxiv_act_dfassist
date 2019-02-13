@@ -1,4 +1,4 @@
-# Duty Finder and F.A.T.E. Assist Plugin for ACT
+# Duty Finder Assist Plugin for ACT
 ### Based on https://github.com/devunt/DFAssist
 
 TL;DR; A rework of the DFAssist, forked from **wanaff14/ACTFate**.
