@@ -193,7 +193,7 @@ namespace DFAssist
 
         private void oFormActMain_UpdateCheckClicked()
         {
-            var pluginId = -1; // waiting to have an id
+            var pluginId = 71; // waiting to have an id
             try
             {
                 var localDate = ActGlobals.oFormActMain.PluginGetSelfDateUtc(this);
@@ -207,8 +207,9 @@ namespace DFAssist
 
                 var updatedFile = ActGlobals.oFormActMain.PluginDownload(pluginId);
                 var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
-                pluginData.pluginFile.Delete();
-                updatedFile.MoveTo(pluginData.pluginFile.FullName);
+                if (pluginData.pluginFile.Directory != null)
+                    ActGlobals.oFormActMain.UnZip(updatedFile.FullName, pluginData.pluginFile.Directory.FullName);
+
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, false);
                 Application.DoEvents();
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, true);

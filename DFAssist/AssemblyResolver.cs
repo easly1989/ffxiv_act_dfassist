@@ -35,7 +35,7 @@ namespace DFAssist
                     Assembly.LoadFrom(currentDll);
                     return true;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     labelStatus.Text = $"Unable to load {assemblyName} library, it may needs to be 'Unblocked'.";
                     return false;
