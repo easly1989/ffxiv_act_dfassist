@@ -5,34 +5,20 @@ using System.Windows.Forms;
 
 namespace DFAssist
 {
-    /// <summary>
-    /// TODO: Refactor, remove hardcoded assembly loads
-    /// Gonna HardCode all the needed assemblies to avoid any kind of problems
-    /// Had to rewrite this code way too much
-    ///
-    /// As soon as I find a better way to resolve/load assemblies i'll do it,
-    /// for now i'm ok with this... ^^'
-    /// </summary>
     public static class AssemblyResolver
     {
-        public static bool LoadAssemblies(string enviroment, Label labelStatus)
+        public static bool LoadAssembly(string assemblyName, string enviroment, Label labelStatus, out Assembly result)
         {
-            if (!LoadAssembly("Microsoft.WindowsAPICodePack", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("Microsoft.WindowsAPICodePack.Shell", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("Microsoft.WindowsAPICodePack.ShellExtensions", enviroment, labelStatus)) return false;
-            if (!LoadAssembly("Newtonsoft.Json", enviroment, labelStatus)) return false;
+            result = null;
 
-            return true;
-        }
-
-        private static bool LoadAssembly(string assemblyName, string enviroment, Label labelStatus)
-        {
-            var currentDll = Path.Combine(enviroment, assemblyName + ".dll");
+            var name = GetAssemblyName(assemblyName);
+            var currentDll = Path.Combine(enviroment, "libs", name + ".ref");
             if (File.Exists(currentDll))
             {
                 try
                 {
-                    Assembly.LoadFrom(currentDll);
+                    var dllBytes = File.ReadAllBytes(currentDll);
+                    result = AppDomain.CurrentDomain.Load(dllBytes);
                     return true;
                 }
                 catch (Exception)
@@ -44,7 +30,13 @@ namespace DFAssist
 
             labelStatus.Text = $"Unable to find {currentDll}, the plugin cannot be starterd.";
             return false;
+        }
 
+        private static string GetAssemblyName(string fullAssemblyName)
+        {
+            return fullAssemblyName.IndexOf(",", StringComparison.Ordinal) > -1 
+                ? fullAssemblyName.Substring(0, fullAssemblyName.IndexOf(",", StringComparison.Ordinal))
+                : fullAssemblyName;
         }
     }
 }

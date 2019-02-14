@@ -11,6 +11,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -53,6 +54,8 @@ namespace DFAssist
         {
             InitializeComponent();
 
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomainOnAssemblyResolve;
+
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
             _networks = new ConcurrentDictionary<int, ProcessNet>();
 
@@ -64,6 +67,18 @@ namespace DFAssist
                 _mainFormIsLoaded = true;
                 break;
             }
+        }
+
+        private Assembly CurrentDomainOnAssemblyResolve(object sender, ResolveEventArgs e)
+        {
+            var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
+            var enviroment = Path.GetDirectoryName(pluginData.pluginFile.ToString());
+
+            // if any of the assembly cannot be loaded, then the plugin cannot be started
+            if (!AssemblyResolver.LoadAssembly(e.Name, enviroment, _labelStatus, out var result))
+                throw new Exception("Assembly load failed.");
+
+            return result;
         }
 
         /// <summary>
@@ -178,22 +193,15 @@ namespace DFAssist
             _labelStatus = pluginStatusText;
             _labelTab = pluginScreenSpace;
 
-            var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
-            var enviroment = Path.GetDirectoryName(pluginData.pluginFile.ToString());
-
-            // if any of the assembly cannot be loaded, then the plugin cannot be started
-            if (!AssemblyResolver.LoadAssemblies(enviroment, _labelStatus))
-                return;
-
             if (_mainFormIsLoaded)
                 OnInit();
             else
                 ActGlobals.oFormActMain.Shown += ActMainFormOnShown;
         }
 
-        private void oFormActMain_UpdateCheckClicked()
+        private void FormActMain_UpdateCheckClicked()
         {
-            var pluginId = 71; // waiting to have an id
+            const int pluginId = 71;
             try
             {
                 var localDate = ActGlobals.oFormActMain.PluginGetSelfDateUtc(this);
@@ -208,7 +216,19 @@ namespace DFAssist
                 var updatedFile = ActGlobals.oFormActMain.PluginDownload(pluginId);
                 var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
                 if (pluginData.pluginFile.Directory != null)
+                {
+                    // clean the plugin directory
+                    foreach (var file in pluginData.pluginFile.Directory.GetFiles())
+                    {
+                        file.Delete(); 
+                    }
+                    foreach (var dir in pluginData.pluginFile.Directory.GetDirectories())
+                    {
+                        dir.Delete(true); 
+                    }
+                    // unzip the updated plugin
                     ActGlobals.oFormActMain.UnZip(updatedFile.FullName, pluginData.pluginFile.Directory.FullName);
+                }
 
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, false);
                 Application.DoEvents();
@@ -275,9 +295,9 @@ namespace DFAssist
 
             _pluginInitializing = false;
 
-            ActGlobals.oFormActMain.UpdateCheckClicked += oFormActMain_UpdateCheckClicked;
+            ActGlobals.oFormActMain.UpdateCheckClicked += FormActMain_UpdateCheckClicked;
             if (ActGlobals.oFormActMain.GetAutomaticUpdatesAllowed())
-                new Thread(oFormActMain_UpdateCheckClicked).Start();
+                new Thread(FormActMain_UpdateCheckClicked).Start();
         }
 
         public void DeInitPlugin()

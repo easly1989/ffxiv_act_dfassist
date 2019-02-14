@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist", "DFAssist\DFAssist.csproj", "{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{992679BB-39BD-4505-B886-AAC645B19CF0}"
+	ProjectSection(SolutionItems) = preProject
+		PostBuildStep.bat = PostBuildStep.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
