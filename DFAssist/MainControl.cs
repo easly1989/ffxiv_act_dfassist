@@ -216,19 +216,7 @@ namespace DFAssist
                 var updatedFile = ActGlobals.oFormActMain.PluginDownload(pluginId);
                 var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
                 if (pluginData.pluginFile.Directory != null)
-                {
-                    // clean the plugin directory
-                    foreach (var file in pluginData.pluginFile.Directory.GetFiles())
-                    {
-                        file.Delete(); 
-                    }
-                    foreach (var dir in pluginData.pluginFile.Directory.GetDirectories())
-                    {
-                        dir.Delete(true); 
-                    }
-                    // unzip the updated plugin
                     ActGlobals.oFormActMain.UnZip(updatedFile.FullName, pluginData.pluginFile.Directory.FullName);
-                }
 
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, false);
                 Application.DoEvents();

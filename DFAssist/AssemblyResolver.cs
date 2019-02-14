@@ -11,8 +11,24 @@ namespace DFAssist
         {
             result = null;
 
+            var currentDll = Path.Combine(enviroment, "libs");
             var name = GetAssemblyName(assemblyName);
-            var currentDll = Path.Combine(enviroment, "libs", name + ".ref");
+            if(name == "Newtonsoft.Json"
+                || name == "Microsoft.WindowsAPICodePack"
+                || name == "Microsoft.WindowsAPICodePack.Shell"
+                || name == "Microsoft.WindowsAPICodePack.ShellExtensions")
+            {
+                currentDll = Path.Combine(currentDll, name + ".ref");
+            }
+            else if(name == "Windows")
+            {
+                currentDll = Path.Combine(currentDll, name + ".winmd");
+            }
+            else
+            {
+                Assembly.Load(assemblyName);
+            }
+
             if (File.Exists(currentDll))
             {
                 try
