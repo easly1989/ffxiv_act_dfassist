@@ -26,7 +26,8 @@ namespace DFAssist
             }
             else
             {
-                Assembly.Load(assemblyName);
+                // all the other assemblies should be loaded automatically
+                return true;
             }
 
             if (File.Exists(currentDll))
