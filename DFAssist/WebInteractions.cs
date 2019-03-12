@@ -11,6 +11,7 @@ namespace DFAssist
             {
                 var webClient = new WebClient();
                 webClient.Headers.Add("user-agent", "avoid 403");
+                webClient.Encoding = System.Text.Encoding.UTF8;
                 var downloadString = webClient.DownloadString(url);
                 webClient.Dispose();
                 return downloadString;
