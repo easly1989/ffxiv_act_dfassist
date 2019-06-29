@@ -1,6 +1,6 @@
 {
   // Version
-  "version": "20190205.1",
+  "version": "20190628.2",
 
   // Duty
   "instances": {
@@ -1389,6 +1389,90 @@
       "dps": "15"
     },
 
+    // 5.0 Shadowbringers
+    // 5.0 Dungeons
+    "676": {
+      "name": "Holminster Switch",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "649": {
+      "name": "Dohn Mheg",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "651": {
+      "name": "the Qitana Ravel",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "656": {
+      "name": "Malikah's Well",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "659": {
+      "name": "Mt. Gulg",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "652": {
+      "name": "Amaurot",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "655": {
+      "name": "the Twinning",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "661": {
+      "name": "Akadaemia Anyder",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+
+    // 5.0 Trials
+    "657": {
+      "name": "the Dancing Plague",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "658": {
+      "name": "the Dancing Plague (Extreme)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "666": {
+      "name": "the Crown of the Immaculate",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "667": {
+      "name": "the Crown of the Immaculate (Extreme)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "687": {
+      "name": "the Dying Gasp",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    
+
     // Guildhests
     "43": {
       "name": "Under the Armor",
@@ -1821,6 +1905,12 @@
       "healer": "0",
       "dps": "0"
     },
+    "599": {
+      "name": "Hidden Gorge",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
 
 
     // Deep Dungeons
@@ -2027,10 +2117,52 @@
       "healer": "0",
       "dps": "0"
     },
+    "639": {
+      "name": "The Forbidden Land, Eureka Hydatos",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
 
     // Other things...
     "437": {
       "name": "Triple Triad",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "600": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "601": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "602": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "603": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "605": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "608": {
+      "name": "Leap of Faith",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2090,13 +2222,13 @@
   // Duty Roulette
   "roulettes": {
     "1": "Duty Roulette: Leveling",
-    "2": "Duty Roulette: Level 50/60 Dungeons",
+    "2": "Duty Roulette: Level 50/60/70 Dungeons",
     "3": "Duty Roulette: Main Scenario",
     "4": "Duty Roulette: Guildhests",
     "5": "Duty Roulette: Expert",
     "6": "Duty Roulette: Trials",
     "7": "Duty Roulette: Frontline",
-    "8": "Duty Roulette: Level 70 Dungeons",
+    "8": "Duty Roulette: Level 80 Dungeons",
     "9": "Duty Roulette: Mentor",
     "10": "The Feast (8 on 8) - Training",
     "13": "The Feast (4 on 4) - Ranked",

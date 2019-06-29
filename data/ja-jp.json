@@ -1,6 +1,6 @@
 {
   // Version
-  "version": "20190205.1",
+  "version": "20190628.2",
 
   // Duty
   "instances": {
@@ -1349,7 +1349,6 @@
     },
 
     // 4.45
-    // Read the KR Script.
 
     "595": {
       "name": "真ヨウジンボウ討滅戦",
@@ -1387,6 +1386,89 @@
       "tank": "3",
       "healer": "6",
       "dps": "15"
+    },
+
+    // 5.0 Shadowbringers
+    // 5.0 Dungeons
+    "676": {
+      "name": "殺戮郷村 ホルミンスター",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "649": {
+      "name": "水妖幻園 ドォーヌ・メグ",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "651": {
+      "name": "古跡探索 キタンナ神影洞",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "656": {
+      "name": "爽涼離宮 マリカの大井戸",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "659": {
+      "name": "偽造天界 グルグ火山",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "652": {
+      "name": "終末幻想 アーモロート",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "655": {
+      "name": "異界遺構 シルクス・ツイニング",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "661": {
+      "name": "創造機関 アナイダアカデミア",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+
+    // 5.0 Trials
+    "657": {
+      "name": "ティターニア討滅戦",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "658": {
+      "name": "極ティターニア討滅戦",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "666": {
+      "name": "イノセンス討滅戦",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "667": {
+      "name": "極イノセンス討滅戦",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "687": {
+      "name": "ハーデス討滅戦",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
     },
 
 
@@ -1479,151 +1561,151 @@
 
     // Blue Mage 4.5
     "610": {
-      "name": "All's Well That Starts Well",
+      "name": "デビューマッチ",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "612": {
-      "name": "Much Ado About Pudding",
+      "name": "プリン・アラモード",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "613": {
-      "name": "Waiting for Golem",
+      "name": "最初の岩壁「シパクナー」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "614": {
-      "name": "Gentlemen Prefer Swords",
+      "name": "怪力の鉄巨人「クレイオス」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "615": {
-      "name": "The Threepenny Turtles",
+      "name": "ギルガメブラザーズ",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "616": {
-      "name": "Eye Society",
+      "name": "ブラインド・フューリー",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "617": {
-      "name": "A Chorus Slime",
+      "name": "シアーハートアタック",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "618": {
-      "name": "Bomb-edy of Errors",
+      "name": "青い牙、赤い牙",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "619": {
-      "name": "To Kill a Mockingslime",
+      "name": "七色の甘味「ギモーヴ」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "620": {
-      "name": "A Little Knight Music",
+      "name": "首無し王者「クロムドゥーブ」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "621": {
-      "name": "Some Like It Excruciatingly Hot",
+      "name": "爆ボム・ファーストアタック",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "622": {
-      "name": "The Plant-om of the Opera",
+      "name": "寄生植物「ヒドノラ」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "623": {
-      "name": "Beauty and a Beast",
+      "name": "紅の死妖姫「カーミラ」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "624": {
-      "name": "Blobs in the Woods",
+      "name": "死なばもろともーッ！",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "625": {
-      "name": "The Me Nobody Nodes",
+      "name": "アラグの脅威「闘獣システム」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "626": {
-      "name": "Sunset Bull-evard",
+      "name": "豪腕の獣王「ティクバラン」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "627": {
-      "name": "The Sword of Music",
+      "name": "剛柔の鉄巨人「クレイオス改」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "628": {
-      "name": "Midsummer Night's Explosion",
+      "name": "爆破デスマッチ",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "629": {
-      "name": "On a Clear Day You Can Smell Forever",
+      "name": "魅惑の芳香「アロマティック・アムーシャ」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "630": {
-      "name": "Miss Typhon",
+      "name": "名コンビ「オルトロス＆テュポーン」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "631": {
-      "name": "Chimera on a Hot Tin Roof",
+      "name": "憤怒の合成獣「アペデマク」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "632": {
-      "name": "Here Comes the Boom",
+      "name": "爆発の対消滅「グランパボム」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "633": {
-      "name": "Behemoths and Broomsticks",
+      "name": "魔獣の皇太子「クロンプリンツ・ベヒーモス」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "634": {
-      "name": "Amazing Technicolor Pit Fiends",
+      "name": "異形の人形師「エペロギ」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "635": {
-      "name": "Dirty Rotten Azulmagia",
+      "name": "悪の青魔道士「アポカリョープス」",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -1819,6 +1901,12 @@
     },
     "277": {
       "name": "アストラガロス (機工戦)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "599": {
+      "name": "ヒドゥンゴージ（機工戦）",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2029,6 +2117,12 @@
       "healer": "0",
       "dps": "0"
     },
+    "639": {
+      "name": "禁断の地 エウレカ：ヒュダトス編",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
 
 
     // Other things...
@@ -2038,44 +2132,80 @@
       "healer": "0",
       "dps": "0"
     },
+    "600": {
+      "name": "挑戦！ ジャンピングアスレチック",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "601": {
+      "name": "挑戦！ ジャンピングアスレチック",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "602": {
+      "name": "挑戦！ ジャンピングアスレチック",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "603": {
+      "name": "挑戦！ ジャンピングアスレチック",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "605": {
+      "name": "挑戦！ ジャンピングアスレチック",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "608": {
+      "name": "挑戦！ ジャンピングアスレチック",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
     "643": {
-      "name": "Novice Mahjong (Ranked)",
+      "name": "ドマ式麻雀：一般卓（段位変動有り）",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "644": {
-      "name": "Advanced Mahjong (Ranked)",
+      "name": "ドマ式麻雀：有段卓（段位変動有り）",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "645": {
-      "name": "Four-player Mahjong (Kuitan Enabled)",
+      "name": "ドマ式麻雀：4人セット卓（クイタン有り）",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "650": {
-      "name": "Four-player Mahjong (Kuitan Disabled)",
+      "name": "ドマ式麻雀：4人セット卓（クイタン無し）",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "640": {
-      "name": "Air Force One",
+      "name": "出撃！ エアフォースパイロット",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "641": {
-      "name": "Air Force One",
+      "name": "出撃！ エアフォースパイロット",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "642": {
-      "name": "Air Force One",
+      "name": "出撃！ エアフォースパイロット",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2093,13 +2223,13 @@
   // Duty Roulette
   "roulettes": {
     "1": "コンテンツルーレット: レベリング",
-    "2": "コンテンツルーレット: レベル50・60ダンジョン",
+    "2": "コンテンツルーレット: レベル50・60・70ダンジョン",
     "3": "コンテンツルーレット: メインクエスト",
     "4": "コンテンツルーレット: ギルドオーダー",
     "5": "コンテンツルーレット: エキスパート",
     "6": "コンテンツルーレット: 討伐・討滅戦",
     "7": "コンテンツルーレット: フロントライン",
-    "8": "コンテンツルーレット: レベル70ダンジョン",
+    "8": "コンテンツルーレット: レベル80ダンジョン",
     "9": "コンテンツルーレット: メンター",
     "10": "ザ・フィースト (8対8 / カジュアルマッチ)",
     "13": "ザ・フィースト (4対4 / ランクマッチ)",

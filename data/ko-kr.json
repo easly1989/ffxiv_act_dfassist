@@ -1,6 +1,6 @@
 {
   // 버전
-  "version": "20190206.1",
+  "version": "20190628.1",
 
   // 임무
   "instances": {
@@ -1350,12 +1350,9 @@
     },
 
     // 4.45
-    // 真ヨウジンボウ討滅戦 일본판으로는 신 요우진보 토벌전이라는데
-    // 일단 게임 이스케이프에 자료가 없어서 탱딜힐 숫자 기본인 8명으로 맞춰둠
-    // 추후 정보가 생겨서 수정할 점이 생기면 수정할 것. 정식 번역 명칭 나오면 수정할 것.
 
     "595": {
-      "name": "Kugane Ohashi",
+      "name": "진 요우진보 토벌전",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -1364,7 +1361,7 @@
     // 4.5 영웅을 위한 진혼곡
     // 4.5 던전
     "611": {
-      "name": "김리트 다크",
+      "name": "김리트 황야",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -1384,13 +1381,91 @@
       "dps": "4"
     },
 
-    // 4.5 Raids
+    // 4.5 레이드
     "636": {
       "name": "오본느 수도원",
       "tank": "3",
       "healer": "6",
       "dps": "15"
     },
+
+    // 5.0 칠흑의 반역자
+    // 5.0 던전
+    "649": {
+      "name": "돈 메그",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "651": {
+      "name": "고적탐색 키타나 신영동",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "656": {
+      "name": "마리카의 우물",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "659": {
+      "name": "구르그 화산",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "652": {
+      "name": "아모로트",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "655": {
+      "name": "실크스 트위닝",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "661": {
+      "name": "어나이더 아카데미아",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+
+    // 5.0 토벌전
+    "657": {
+      "name": "티타니아 토벌전",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "658": {
+      "name": "극 티타니아 토벌전",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "666": {
+      "name": "이노센스 토벌전",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "667": {
+      "name": "극 이노센스 토벌전",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "687": {
+      "name": "하데스 토벌전",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+
 
     // 길드 작전
     "43": {
@@ -1481,151 +1556,151 @@
 
     // 4.5 청마도사
     "610": {
-      "name": "All's Well That Starts Well",
+      "name": "데뷔전",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "612": {
-      "name": "Much Ado About Pudding",
+      "name": "후식은 푸딩으로",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "613": {
-      "name": "Waiting for Golem",
+      "name": "최초의 암벽",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "614": {
-      "name": "Gentlemen Prefer Swords",
+      "name": "괴력의 철거인",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "615": {
-      "name": "The Threepenny Turtles",
+      "name": "길거북 형제",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "616": {
-      "name": "Eye Society",
+      "name": "눈먼 공포",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "617": {
-      "name": "A Chorus Slime",
+      "name": "슬라임 대소동",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "618": {
-      "name": "Bomb-edy of Errors",
+      "name": "푸른 이빨, 붉은 이빨",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "619": {
-      "name": "To Kill a Mockingslime",
+      "name": "무지개맛 푸딩",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "620": {
-      "name": "A Little Knight Music",
+      "name": "비뚤어진 어둠",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "621": {
-      "name": "Some Like It Excruciatingly Hot",
+      "name": "폭발하는 봄",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "622": {
-      "name": "The Plant-om of the Opera",
+      "name": "기생식물",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "623": {
-      "name": "Beauty and a Beast",
+      "name": "붉은 죽음의 요희",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "624": {
-      "name": "Blobs in the Woods",
+      "name": "죽어도 같이 죽어",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "625": {
-      "name": "The Me Nobody Nodes",
+      "name": "알라그의 위협",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "626": {
-      "name": "Sunset Bull-evard",
+      "name": "완력의 야수왕",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "627": {
-      "name": "The Sword of Music",
+      "name": "강유의 철거인",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "628": {
-      "name": "Midsummer Night's Explosion",
+      "name": "폭파 데스매치",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "629": {
-      "name": "On a Clear Day You Can Smell Forever",
+      "name": "매혹적인 향기",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "630": {
-      "name": "Miss Typhon",
+      "name": "명콤비",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "631": {
-      "name": "Chimera on a Hot Tin Roof",
+      "name": "분노한 합성수",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "632": {
-      "name": "Here Comes the Boom",
+      "name": "쌍소멸 폭발",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "633": {
-      "name": "Behemoths and Broomsticks",
+      "name": "마수의 황태자",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "634": {
-      "name": "Amazing Technicolor Pit Fiends",
+      "name": "기괴한 인형사",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "635": {
-      "name": "Dirty Rotten Azulmagia",
+      "name": "사악한 청마도사",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -1821,6 +1896,12 @@
     },
     "277": {
       "name": "아스트라갈로스(기공전)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "599": {
+      "name": "히든 고지",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2033,6 +2114,12 @@
       "healer": "0",
       "dps": "0"
     },
+    "639": {
+      "name": "금단의 땅 에우레카 : 히다토스",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
 
 
     // 기타 이상한 것들...
@@ -2042,46 +2129,82 @@
       "healer": "0",
       "dps": "0"
     },
+    "600": {
+      "name": "뛰어라! 점핑 운동회",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "601": {
+      "name": "뛰어라! 점핑 운동회",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "602": {
+      "name": "뛰어라! 점핑 운동회",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "603": {
+      "name": "뛰어라! 점핑 운동회",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "605": {
+      "name": "뛰어라! 점핑 운동회",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "608": {
+      "name": "뛰어라! 점핑 운동회",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
     "640": {
-      "name": "Air Force One",
+      "name": "출격! 에어포스 조종사",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "641": {
-      "name": "Air Force One",
+      "name": "출격! 에어포스 조종사",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "642": {
-      "name": "Air Force One",
+      "name": "출격! 에어포스 조종사",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
 
-    // 한섭에는 심의상 마작 안 나올 가능성이 크지만 일단 추가
+    // 작패유희
     "643": {
-      "name": "Novice Mahjong (Ranked)",
+      "name": "작패유희: 일반 탁자 (등급전)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "644": {
-      "name": "Advanced Mahjong (Ranked)",
+      "name": "작패유희: 유단자 탁자 (등급전)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "645": {
-      "name": "Four-player Mahjong (Kuitan Enabled)",
+      "name": "작패유희: 4인용 탁자 (부르기 단요구 있음)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "650": {
-      "name": "Four-player Mahjong (Kuitan Disabled)",
+      "name": "작패유희: 4인용 탁자 (부르기 단요구 없음)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2110,7 +2233,7 @@
     "9": "무작위 임무: 멘토",
     "10": "더 피스트 (8 대 8) - 친선 경기",
     "13": "더 피스트 (4 대 4) - 개인",
-    "15": "무작위 임무: 24인 레이드",
-    "17": "무작위 임무: 레이드"
+    "15": "무작위 임무: 연합 레이드",
+    "17": "무작위 임무: 일반 레이드"
   }
 }

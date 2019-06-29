@@ -1,6 +1,6 @@
 {
   // Version
-  "version": "20190205.1",
+  "version": "20190628.2",
 
   // Duty
   "instances": {
@@ -1390,6 +1390,89 @@
       "dps": "15"
     },
 
+    // 5.0 Shadowbringers
+    // 5.0 Dungeons
+    "676": {
+      "name": "Holminster",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "649": {
+      "name": "Dohn Mheg",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "651": {
+      "name": "L'Enchevêtrement des Qitari",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "656": {
+      "name": "le Puits de Malikah",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "659": {
+      "name": "le Mont Gulg",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "652": {
+      "name": "Amaurote",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "655": {
+      "name": "la Macle de Syrcus",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "661": {
+      "name": "Akadaemia Anydre",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+
+    // 5.0 Trials
+    "657": {
+      "name": "la Valse du Monarque",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "658": {
+      "name": "la Valse du Monarque (extrême)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "666": {
+      "name": "La Couronne de l'Immaculé",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "667": {
+      "name": "La Couronne de l'Immaculé (extrême)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "687": {
+      "name": "Le Râle de l'Agonie",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+
 
     // Guildhests
     "43": {
@@ -1480,151 +1563,151 @@
 
     // Blue Mage 4.5
     "610": {
-      "name": "All's Well That Starts Well",
+      "name": "Début du spectacle",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "612": {
-      "name": "Much Ado About Pudding",
+      "name": "Puddings à la mode",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "613": {
-      "name": "Waiting for Golem",
+      "name": "Zipacna, le premier obstacle",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "614": {
-      "name": "Gentlemen Prefer Swords",
+      "name": "Kreios, le destructeur d'acier",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "615": {
-      "name": "The Threepenny Turtles",
+      "name": "La fratrie des gilkhélones",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "616": {
-      "name": "Eye Society",
+      "name": "Vengeance aveugle",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "617": {
-      "name": "A Chorus Slime",
+      "name": "Pure attaque cardiaque",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "618": {
-      "name": "Bomb-edy of Errors",
+      "name": "Crocs bleus et crocs rouges",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "619": {
-      "name": "To Kill a Mockingslime",
+      "name": "Guimauve, le goût de l'arc-en-ciel",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "620": {
-      "name": "A Little Knight Music",
+      "name": "Crom Dubh, roi des idoles",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "621": {
-      "name": "Some Like It Excruciatingly Hot",
+      "name": "Les courtes mèches",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "622": {
-      "name": "The Plant-om of the Opera",
+      "name": "Hydnora, la plante parasite",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "623": {
-      "name": "Beauty and a Beast",
+      "name": "La mystérieuse Carmilla",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "624": {
-      "name": "Blobs in the Woods",
+      "name": "La mort n'a pas d'ami",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "625": {
-      "name": "The Me Nobody Nodes",
+      "name": "La sphère bestiale, une menace allagoise",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "626": {
-      "name": "Sunset Bull-evard",
+      "name": "Tikbalang, bras tout-puissant",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "627": {
-      "name": "The Sword of Music",
+      "name": "Kreios plie, mais ne rompt pas",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "628": {
-      "name": "Midsummer Night's Explosion",
+      "name": "Rencontre explosive",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "629": {
-      "name": "On a Clear Day You Can Smell Forever",
+      "name": "Miroir, mon beau miroir",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "630": {
-      "name": "Miss Typhon",
+      "name": "Duo de choc : Orthros et maître Typhon",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "631": {
-      "name": "Chimera on a Hot Tin Roof",
+      "name": "La chimèrique colère d'Apademak",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "632": {
-      "name": "Here Comes the Boom",
+      "name": "L'histoire détonante de Papi bombo",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "633": {
-      "name": "Behemoths and Broomsticks",
+      "name": "Kronprinz béhémoth, le prince héritier",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "634": {
-      "name": "Amazing Technicolor Pit Fiends",
+      "name": "Epilogi, l'étrange marionnettiste",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "635": {
-      "name": "Dirty Rotten Azulmagia",
+      "name": "L'abominable Azulmagia",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -1820,6 +1903,12 @@
     },
     "277": {
       "name": "Astragalos (machinerie)",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "599": {
+      "name": "Gorge dérobée (machinerie)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2030,6 +2119,12 @@
       "healer": "0",
       "dps": "0"
     },
+    "639": {
+      "name": "a terre interdite d'Eurêka: Hydatos",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
 
 
     // Other things...
@@ -2039,44 +2134,80 @@
       "healer": "0",
       "dps": "0"
     },
+    "600": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "601": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "602": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "603": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "605": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "608": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
     "643": {
-      "name": "Novice Mahjong (Ranked)",
+      "name": "Mahjong domien : tous rangs (classé)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "644": {
-      "name": "Advanced Mahjong (Ranked)",
+      "name": "Mahjong domien : dan seulement (classé)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "645": {
-      "name": "Four-player Mahjong (Kuitan Enabled)",
+      "name": "Mahjong domien : 4 joueurs (avec kuitan)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "650": {
-      "name": "Four-player Mahjong (Kuitan Disabled)",
+      "name": "Mahjong domien : 4 joueurs (sans kuitan)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "640": {
-      "name": "Air Force One",
+      "name": "As de l'air",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "641": {
-      "name": "Air Force One",
+      "name": "As de l'air",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "642": {
-      "name": "Air Force One",
+      "name": "As de l'air",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2095,13 +2226,13 @@
   // Duty Roulette
   "roulettes": {
     "1": "Mission aléatorie: gain de niveaux",
-    "2": "Mission aléatorie: donjons nv 50/60",
+    "2": "Mission aléatorie: donjons nv 50/60/70",
     "3": "Mission aléatorie: épopée",
     "4": "Mission aléatorie: opérations de guilde",
     "5": "Mission aléatorie: expert",
     "6": "Mission aléatorie: défis",
     "7": "Mission aléatorie: Front",
-    "8": "Mission aléatorie: donjons nv 70",
+    "8": "Mission aléatorie: donjons nv 80",
     "9": "Mission aléatorie: Mentor",
     "10": "The Feast (8x8/entraînement)",
     "13": "The Feast (4x4/classé)",
