@@ -299,8 +299,9 @@ namespace DFAssist
 
             _timer.Enabled = true;
 
-            // show a test toast
-            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            // shows a test toast
+            if(!_isTtsEnabled)
+                ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
 
             _pluginInitializing = false;
 
