@@ -1390,6 +1390,115 @@
       "dps": "15"
     },
 
+    // 5.0 Shadowbringers
+    // 5.0 Dungeons
+    "676": {
+      "name": "Holminster",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "649": {
+      "name": "Dohn Mheg",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "651": {
+      "name": "L'Enchevêtrement des Qitari",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "656": {
+      "name": "le Puits de Malikah",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "659": {
+      "name": "le Mont Gulg",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "652": {
+      "name": "Amaurote",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "655": {
+      "name": "la Macle de Syrcus",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+    "661": {
+      "name": "Akadaemia Anydre",
+      "tank": "1",
+      "healer": "1",
+      "dps": "2"
+    },
+
+    // 5.0 Trials
+    "657": {
+      "name": "la Valse du Monarque",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "658": {
+      "name": "la Valse du Monarque (extrême)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "666": {
+      "name": "La Couronne de l'Immaculé",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "667": {
+      "name": "La Couronne de l'Immaculé (extrême)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "687": {
+      "name": "Le Râle de l'Agonie",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+
+    // 5.01 Raids
+
+    "653": {
+      "name": "L'Éveil d'Éden - Résurrection",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "684": {
+      "name": "L'Éveil d'Éden - Déluge",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "682": {
+      "name": "L'Éveil d'Éden - Descente",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "689": {
+      "name": "L'Éveil d'Éden - Inhumation",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
 
     // Guildhests
     "43": {
