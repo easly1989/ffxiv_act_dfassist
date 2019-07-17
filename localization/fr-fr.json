@@ -79,7 +79,10 @@
   "ui-alerts-fate-display-text": "A.L.E.A.",
   "ui-alerts-dutyfinder-display-text": "Mission",
   "ui-enable-test-environment": "Activer l'environnement de test",
-  
+
   "ui-update-available-message": "Il existe une version mise à jour du plug-in DFAssist. Mettez-le à jour maintenant?\n\n(S'il y a une mise à jour vers ACT, vous devez cliquer sur Non et mettre à jour ACT en premier.)",
-  "ui-update-available-title": "Mise à jour de DFAssist disponible!"
+  "ui-update-available-title": "Mise à jour de DFAssist disponible!",
+
+  "ui-enable-tts": "Activer la synthèse vocale",
+  "ui-tts-dutyfound": "Le devoir est trouvé!"
 }

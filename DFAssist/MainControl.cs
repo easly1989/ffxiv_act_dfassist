@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -36,6 +37,7 @@ namespace DFAssist
 
         private bool _mainFormIsLoaded;
         private bool _isTestEnvironmentEnabled;
+        private bool _isTtsEnabled;
         private Timer _timer;
         private Label _label1;
         private Label _labelStatus;
@@ -47,8 +49,11 @@ namespace DFAssist
         private GroupBox _groupBox3;
         private RichTextBox _richTextBox1;
         private CheckBox _enableLoggingCheckBox;
+        private CheckBox _ttsCheckBox;
         private Button _button1;
-
+        
+        private SpeechSynthesizer _synth;
+        
         #region WinForm Required
         public MainControl()
         {
@@ -93,6 +98,7 @@ namespace DFAssist
             this._button1 = new System.Windows.Forms.Button();
             this._richTextBox1 = new System.Windows.Forms.RichTextBox();
             this._enableTestEnvironment = new System.Windows.Forms.CheckBox();
+            this._ttsCheckBox = new System.Windows.Forms.CheckBox();
             this._groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,8 +178,20 @@ namespace DFAssist
             this._enableTestEnvironment.UseVisualStyleBackColor = true;
             this._enableTestEnvironment.CheckStateChanged += new System.EventHandler(this.EnableTestEnvironmentOnCheckedChanged);
             // 
+            // ttsCheckBox
+            // 
+            this._ttsCheckBox.AutoSize = true;
+            this._ttsCheckBox.Location = new System.Drawing.Point(377, 17);
+            this._ttsCheckBox.Name = "_ttsCheckBox";
+            this._ttsCheckBox.Size = new System.Drawing.Size(139, 17);
+            this._ttsCheckBox.TabIndex = 14;
+            this._ttsCheckBox.Text = "Enable Text To Speech";
+            this._ttsCheckBox.UseVisualStyleBackColor = true;
+            this._ttsCheckBox.CheckStateChanged += new System.EventHandler(this.EnableTtsOnCheckedChanged);
+            // 
             // MainControl
             // 
+            this.Controls.Add(this._ttsCheckBox);
             this.Controls.Add(this._enableTestEnvironment);
             this.Controls.Add(this._groupBox3);
             this.Controls.Add(this._label1);
@@ -184,6 +202,7 @@ namespace DFAssist
             this._groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
 
@@ -234,6 +253,8 @@ namespace DFAssist
                 return;
 
             _pluginInitializing = true;
+
+            _synth = new SpeechSynthesizer();
 
             Logger.SetTextBox(_richTextBox1);
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
@@ -398,6 +419,7 @@ namespace DFAssist
             _enableLoggingCheckBox.Text = Localization.GetText("ui-log-enable-display-text");
             _button1.Text = Localization.GetText("ui-log-clear-display-text");
             _enableTestEnvironment.Text = Localization.GetText("ui-enable-test-environment");
+            _ttsCheckBox.Text = Localization.GetText("ui-enable-tts");
         }
         #endregion
 
@@ -423,7 +445,7 @@ namespace DFAssist
             }
         }
 
-        private static void ToastWindowNotification(string title, string message)
+        private void ToastWindowNotification(string title, string message)
         {
             try
             {
@@ -443,6 +465,12 @@ namespace DFAssist
 
                 var toast = new ToastNotification(toastXml);
                 ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
+
+                if (!_isTtsEnabled) return;
+
+                var dutyFound = Localization.GetText("ui-tts-dutyfound");
+                _synth.Speak(dutyFound); // duty found
+                _synth.Speak(message);
             }
             catch (Exception e)
             {
@@ -455,6 +483,13 @@ namespace DFAssist
         private void EnableTestEnvironmentOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _isTestEnvironmentEnabled = _enableTestEnvironment.Checked;
+        }
+
+        private void EnableTtsOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            _isTtsEnabled = _ttsCheckBox.Checked;
+            if(_isTtsEnabled)
+                ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
         }
 
         private void Network_onReceiveEvent(int pid, EventType eventType, int[] args)
@@ -566,6 +601,8 @@ namespace DFAssist
             // All the settings to deserialize
             _xmlSettingsSerializer.AddControlSetting(_languageComboBox.Name, _languageComboBox);
             _xmlSettingsSerializer.AddControlSetting(_enableLoggingCheckBox.Name, _enableLoggingCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_ttsCheckBox.Name, _ttsCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_enableTestEnvironment.Name, _enableTestEnvironment);
 
             if (File.Exists(_settingsFile))
             {

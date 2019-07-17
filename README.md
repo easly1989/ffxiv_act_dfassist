@@ -71,7 +71,7 @@ It should not be a problem building for x86, but (as of the latest news from Squ
 - [x] Handle Assembly resolve without locking dlls
 - [x] Handle test mode, enable users to see instances code
 - [ ] Inject toasts in game (to make it work even in full screen mode)
-- [ ] add TTS support
+- [x] add TTS support
 
 ---
 

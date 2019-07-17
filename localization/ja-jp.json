@@ -81,5 +81,8 @@
   "ui-enable-test-environment": "テスト環境を有効にする",
 
   "ui-update-available-message": "DFAssistプラグインの更新版があります。 今すぐ更新しますか\n\nACTが更新された場合は、[いいえ]をクリックしてからACTを更新してください。",
-  "ui-update-available-title": "DFAssistアップデート公開!"
+  "ui-update-available-title": "DFAssistアップデート公開!",
+
+  "ui-enable-tts": "テキスト読み上げを有効にする",
+  "ui-tts-dutyfound": "義務が見つかりました！"
 }
