@@ -21,6 +21,7 @@ using Windows.UI.Notifications;
 using Advanced_Combat_Tracker;
 using DFAssist.DataModel;
 using DFAssist.Shell;
+using Microsoft.Win32;
 using Timer = System.Windows.Forms.Timer;
 
 namespace DFAssist
@@ -51,7 +52,7 @@ namespace DFAssist
         private CheckBox _enableLoggingCheckBox;
         private CheckBox _ttsCheckBox;
         private Button _button1;
-        
+        private CheckBox _persistToasts;
         private SpeechSynthesizer _synth;
         
         #region WinForm Required
@@ -99,6 +100,7 @@ namespace DFAssist
             this._richTextBox1 = new System.Windows.Forms.RichTextBox();
             this._enableTestEnvironment = new System.Windows.Forms.CheckBox();
             this._ttsCheckBox = new System.Windows.Forms.CheckBox();
+            this._persistToasts = new System.Windows.Forms.CheckBox();
             this._groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -178,7 +180,7 @@ namespace DFAssist
             this._enableTestEnvironment.UseVisualStyleBackColor = true;
             this._enableTestEnvironment.CheckStateChanged += new System.EventHandler(this.EnableTestEnvironmentOnCheckedChanged);
             // 
-            // ttsCheckBox
+            // _ttsCheckBox
             // 
             this._ttsCheckBox.AutoSize = true;
             this._ttsCheckBox.Location = new System.Drawing.Point(377, 17);
@@ -189,8 +191,20 @@ namespace DFAssist
             this._ttsCheckBox.UseVisualStyleBackColor = true;
             this._ttsCheckBox.CheckStateChanged += new System.EventHandler(this.EnableTtsOnCheckedChanged);
             // 
+            // _persistToasts
+            // 
+            this._persistToasts.AutoSize = true;
+            this._persistToasts.Location = new System.Drawing.Point(523, 17);
+            this._persistToasts.Name = "_persistToasts";
+            this._persistToasts.Size = new System.Drawing.Size(137, 17);
+            this._persistToasts.TabIndex = 15;
+            this._persistToasts.Text = "Make Toasts Persistent";
+            this._persistToasts.UseVisualStyleBackColor = true;
+            this._persistToasts.CheckStateChanged += new System.EventHandler(this.PersistToastsOnCheckedChanged);
+            // 
             // MainControl
             // 
+            this.Controls.Add(this._persistToasts);
             this.Controls.Add(this._ttsCheckBox);
             this.Controls.Add(this._enableTestEnvironment);
             this.Controls.Add(this._groupBox3);
@@ -204,6 +218,13 @@ namespace DFAssist
             this.PerformLayout();
 
         }
+
+        private void PersistToastsOnCheckedChanged(object sender, EventArgs e)
+        {
+            var registryKey = $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{AppId}";
+            Registry.SetValue(registryKey, "ShowInActionCenter", _persistToasts.Checked ? 1 : 0, RegistryValueKind.DWord);
+        }
+
         #endregion
 
         #region IActPluginV1 Implementations
@@ -421,6 +442,7 @@ namespace DFAssist
             _button1.Text = Localization.GetText("ui-log-clear-display-text");
             _enableTestEnvironment.Text = Localization.GetText("ui-enable-test-environment");
             _ttsCheckBox.Text = Localization.GetText("ui-enable-tts");
+            _persistToasts.Text = Localization.GetText("ui-persist-toasts");
         }
         #endregion
 
@@ -603,6 +625,7 @@ namespace DFAssist
             _xmlSettingsSerializer.AddControlSetting(_languageComboBox.Name, _languageComboBox);
             _xmlSettingsSerializer.AddControlSetting(_enableLoggingCheckBox.Name, _enableLoggingCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_ttsCheckBox.Name, _ttsCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_persistToasts.Name, _persistToasts);
             _xmlSettingsSerializer.AddControlSetting(_enableTestEnvironment.Name, _enableTestEnvironment);
 
             if (File.Exists(_settingsFile))

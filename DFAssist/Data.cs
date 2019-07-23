@@ -56,11 +56,8 @@ namespace DFAssist
             }
         }
 
-        public static Instance GetInstance(int code, bool oldId = false)
+        public static Instance GetInstance(int code)
         {
-            if (oldId)
-                return Instances.Values.FirstOrDefault(x => x.OldId == code);
-
             return Instances.TryGetValue(code, out var instance) ? instance : new Instance { Name = Localization.GetText("l-unknown-instance", code) };
         }
 
