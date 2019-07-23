@@ -67,6 +67,9 @@
   "ui-toast-notification-test-title": "Si tu vois ça...",
   "ui-toast-notification-test-message": "... Toasts fonctionne!",
 
+  "ui-tts-notification-test-title": "Si tu entends ça...",
+  "ui-tts-notification-test-message": "... tts fonctionne!",
+
   "ui-log-display-text": "Journaux",
   "ui-log-enable-display-text": "Activer la journalisation",
   "ui-log-clear-display-text": "Effacer les journaux",

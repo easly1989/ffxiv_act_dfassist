@@ -321,8 +321,7 @@ namespace DFAssist
             _timer.Enabled = true;
 
             // shows a test toast
-            if(!_isTtsEnabled)
-                ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
 
             _pluginInitializing = false;
 
@@ -463,7 +462,7 @@ namespace DFAssist
                     var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
                     var testing = _isTestEnvironmentEnabled ? "[Code: " + args[1] + "] " : string.Empty;
                     ToastWindowNotification(title, ">> " + testing + GetInstanceName(args[1]));
-
+                    TtsNotification(GetInstanceName(args[1]));
                     break;
             }
         }
@@ -474,8 +473,7 @@ namespace DFAssist
             {
                 // Get a toast XML template
                 var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
-
-
+                
                 var stringElements = toastXml.GetElementsByTagName("text");
                 if (stringElements.Length < 2)
                 {
@@ -488,12 +486,6 @@ namespace DFAssist
 
                 var toast = new ToastNotification(toastXml);
                 ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
-
-                if (!_isTtsEnabled) return;
-
-                var dutyFound = Localization.GetText("ui-tts-dutyfound");
-                _synth.Speak(dutyFound); // duty found
-                _synth.Speak(message);
             }
             catch (Exception e)
             {
@@ -511,8 +503,17 @@ namespace DFAssist
         private void EnableTtsOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _isTtsEnabled = _ttsCheckBox.Checked;
-            if(_isTtsEnabled)
-                ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            TtsNotification(Localization.GetText("ui-tts-notification-test-message"), Localization.GetText("ui-tts-notification-test-title"));
+        }
+
+        private void TtsNotification(string message, string title = "ui-tts-dutyfound")
+        {
+            if(!_isTtsEnabled)
+                return;
+
+            var dutyFound = Localization.GetText(title);
+            _synth.Speak(dutyFound); // duty found
+            _synth.Speak(message);
         }
 
         private void Network_onReceiveEvent(int pid, EventType eventType, int[] args)

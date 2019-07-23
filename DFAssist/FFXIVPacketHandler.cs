@@ -10,8 +10,6 @@ namespace DFAssist
     public static class FFXIVPacketHandler
     // ReSharper restore InconsistentNaming
     {
-        private static int _lastMember;
-
         public delegate void EventHandler(int pid, EventType eventType, int[] args);
         public static event EventHandler OnEventReceived;
 
@@ -226,36 +224,7 @@ namespace DFAssist
                 }
                 else if (opcode == 0x0079) // Status during matching
                 {
-                    var code = BitConverter.ToUInt16(data, 0);
-                    var status = data[4];
-                    var tank = data[5];
-                    var dps = data[6];
-                    var healer = data[7];
-                    var instance = Data.GetInstance(code); // Matching still uses the old ID 
-
-                    if (status == 1)
-                    {
-                        var member = tank * 10000 + dps * 100 + healer;
-
-                        if (state == State.MATCHED && _lastMember != member)
-                        {
-                            // someone else canceled the duty
-                            state = State.QUEUED;
-                        }
-                        else if (state == State.IDLE)
-                        {
-                            state = State.QUEUED;
-                        }
-
-                        _lastMember = member;
-                    }
-                    else if (status == 2)
-                    {
-                        return;
-                    }
-
-                    Logger.Info("l-queue-updated", instance.Name, status, tank, instance.Tank, healer, instance.Healer, dps, instance.Dps);
-                    FireEvent(pid, EventType.MATCH_PROGRESS, new int[] { code, status, tank, healer, dps });
+                    // used on standalone version to check matching in progress
                 }
                 else if (opcode == 0x0080)
                 {
