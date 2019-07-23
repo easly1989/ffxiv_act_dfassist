@@ -9,7 +9,7 @@ A simple plugin to scout the next dungoeon/trial/raid (instance to be generic) y
 If you find any bug or have any idea to share and optimize the plugin fill free to contact me or open an Issue (:
 
 ## TTS Support!
-As of version 1.4.1, Text to Speech as been added, and can be enabled from the plugin puge inside ACT!
+As of version 1.4.1, Text to Speech has been added, and can be enabled from the plugin page inside ACT!
 
 ## Automatic ACT Updates!
 Starting from version 1.3.11 DFAssist supports AutoUpdating directly from within ACT
