@@ -84,5 +84,6 @@
   "ui-update-available-title": "DFAssist Update Available!",
 
   "ui-enable-tts": "Enable Text To Speech",
-  "ui-tts-dutyfound": "Duty Found!"
+  "ui-tts-dutyfound": "Duty Found!",
+  "ui-persist-toasts": "Make Toasts Persistent"
 }

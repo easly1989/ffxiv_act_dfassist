@@ -84,5 +84,6 @@
   "ui-update-available-title": "DFAssist 업데이트 사용 가능!",
 
   "ui-enable-tts": "텍스트 음성 변환 사용",
-  "ui-tts-dutyfound": "의무가 발견되었습니다!"
+  "ui-tts-dutyfound": "의무가 발견되었습니다!",
+  "ui-persist-toasts": "토스트를 지속적으로 만드십시오."
 }

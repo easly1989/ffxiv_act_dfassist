@@ -84,5 +84,6 @@
   "ui-update-available-title": "Mise à jour de DFAssist disponible!",
 
   "ui-enable-tts": "Activer la synthèse vocale",
-  "ui-tts-dutyfound": "Le devoir est trouvé!"
+  "ui-tts-dutyfound": "Le devoir est trouvé!",
+  "ui-persist-toasts": "Rendre les toasts persistants"
 }

@@ -84,5 +84,6 @@
   "ui-update-available-title": "DFAssistアップデート公開!",
 
   "ui-enable-tts": "テキスト読み上げを有効にする",
-  "ui-tts-dutyfound": "義務が見つかりました！"
+  "ui-tts-dutyfound": "義務が見つかりました！",
+  "ui-persist-toasts": "乾杯を持続させる"
 }
