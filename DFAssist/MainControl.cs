@@ -266,6 +266,7 @@ namespace DFAssist
             _button1.TabIndex = 0;
             _button1.Text = "Clear Logs";
             _button1.UseVisualStyleBackColor = true;
+            _button1.Click += ClearLogsButton_Click;
             // 
             // _richTextBox1
             //
@@ -477,6 +478,8 @@ namespace DFAssist
             _synth = new SpeechSynthesizer();
 
             Logger.SetTextBox(_richTextBox1);
+            Logger.Info($"DFAssist - v{Assembly.GetExecutingAssembly().GetName().Version}");
+
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
 
             var defaultLanguage = new Language { Name = "English", Code = "en-us" };
