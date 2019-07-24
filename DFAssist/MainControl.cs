@@ -10,6 +10,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -48,14 +49,21 @@ namespace DFAssist
         private CheckBox _enableTestEnvironment;
         private ComboBox _languageComboBox;
         private SettingsSerializer _xmlSettingsSerializer;
-        private GroupBox _groupBox3;
-        private RichTextBox _richTextBox1;
-        private CheckBox _enableLoggingCheckBox;
         private CheckBox _ttsCheckBox;
-        private Button _button1;
         private CheckBox _persistToasts;
         private CheckBox _enableLegacyToast;
         private CheckBox _disableToasts;
+        private TabControl _appTabControl;
+        private TabPage _mainTabPage;
+        private TabPage _settingsPage;
+        private GroupBox _ttsSettings;
+        private GroupBox _toastSettings;
+        private GroupBox _generalSettings;
+        private TableLayoutPanel _mainTableLayout;
+        private Button _button1;
+        private RichTextBox _richTextBox1;
+        private Label _appTitle;
+        private LinkLabel _copyrightLink;
         private SpeechSynthesizer _synth;
 
         #region WinForm Required
@@ -97,22 +105,35 @@ namespace DFAssist
         {
             this._label1 = new System.Windows.Forms.Label();
             this._languageComboBox = new System.Windows.Forms.ComboBox();
-            this._groupBox3 = new System.Windows.Forms.GroupBox();
-            this._enableLoggingCheckBox = new System.Windows.Forms.CheckBox();
-            this._button1 = new System.Windows.Forms.Button();
-            this._richTextBox1 = new System.Windows.Forms.RichTextBox();
             this._enableTestEnvironment = new System.Windows.Forms.CheckBox();
             this._ttsCheckBox = new System.Windows.Forms.CheckBox();
             this._persistToasts = new System.Windows.Forms.CheckBox();
             this._enableLegacyToast = new System.Windows.Forms.CheckBox();
             this._disableToasts = new System.Windows.Forms.CheckBox();
-            this._groupBox3.SuspendLayout();
+            this._appTabControl = new System.Windows.Forms.TabControl();
+            this._mainTabPage = new System.Windows.Forms.TabPage();
+            this._mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this._button1 = new System.Windows.Forms.Button();
+            this._richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this._appTitle = new System.Windows.Forms.Label();
+            this._copyrightLink = new System.Windows.Forms.LinkLabel();
+            this._settingsPage = new System.Windows.Forms.TabPage();
+            this._ttsSettings = new System.Windows.Forms.GroupBox();
+            this._toastSettings = new System.Windows.Forms.GroupBox();
+            this._generalSettings = new System.Windows.Forms.GroupBox();
+            this._appTabControl.SuspendLayout();
+            this._mainTabPage.SuspendLayout();
+            this._mainTableLayout.SuspendLayout();
+            this._settingsPage.SuspendLayout();
+            this._ttsSettings.SuspendLayout();
+            this._toastSettings.SuspendLayout();
+            this._generalSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // _label1
             // 
             this._label1.AutoSize = true;
-            this._label1.Location = new System.Drawing.Point(21, 17);
+            this._label1.Location = new System.Drawing.Point(3, 23);
             this._label1.Name = "_label1";
             this._label1.Size = new System.Drawing.Size(55, 13);
             this._label1.TabIndex = 7;
@@ -122,62 +143,16 @@ namespace DFAssist
             // 
             this._languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._languageComboBox.FormattingEnabled = true;
-            this._languageComboBox.Location = new System.Drawing.Point(88, 14);
+            this._languageComboBox.Location = new System.Drawing.Point(70, 20);
             this._languageComboBox.Name = "_languageComboBox";
             this._languageComboBox.Size = new System.Drawing.Size(121, 21);
             this._languageComboBox.TabIndex = 6;
             this._languageComboBox.SelectedValueChanged += new System.EventHandler(this.LanguageComboBox_SelectedValueChanged);
             // 
-            // _groupBox3
-            // 
-            this._groupBox3.Controls.Add(this._enableLoggingCheckBox);
-            this._groupBox3.Controls.Add(this._button1);
-            this._groupBox3.Controls.Add(this._richTextBox1);
-            this._groupBox3.Location = new System.Drawing.Point(24, 64);
-            this._groupBox3.Name = "_groupBox3";
-            this._groupBox3.Size = new System.Drawing.Size(710, 511);
-            this._groupBox3.TabIndex = 12;
-            this._groupBox3.TabStop = false;
-            this._groupBox3.Text = "Logs";
-            // 
-            // _enableLoggingCheckBox
-            // 
-            this._enableLoggingCheckBox.AutoSize = true;
-            this._enableLoggingCheckBox.Checked = true;
-            this._enableLoggingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this._enableLoggingCheckBox.Location = new System.Drawing.Point(7, 22);
-            this._enableLoggingCheckBox.Name = "_enableLoggingCheckBox";
-            this._enableLoggingCheckBox.Size = new System.Drawing.Size(100, 17);
-            this._enableLoggingCheckBox.TabIndex = 2;
-            this._enableLoggingCheckBox.Text = "Enable Logging";
-            this._enableLoggingCheckBox.UseVisualStyleBackColor = true;
-            this._enableLoggingCheckBox.CheckStateChanged += new System.EventHandler(this.EnableLoggingCheckBox_CheckedChanged);
-            // 
-            // _button1
-            // 
-            this._button1.AutoSize = true;
-            this._button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this._button1.Location = new System.Drawing.Point(201, 16);
-            this._button1.Name = "_button1";
-            this._button1.Size = new System.Drawing.Size(67, 23);
-            this._button1.TabIndex = 1;
-            this._button1.Text = "Clear Logs";
-            this._button1.UseVisualStyleBackColor = true;
-            this._button1.Click += new System.EventHandler(this.ClearLogsButton_Click);
-            // 
-            // _richTextBox1
-            // 
-            this._richTextBox1.Location = new System.Drawing.Point(6, 52);
-            this._richTextBox1.Name = "_richTextBox1";
-            this._richTextBox1.ReadOnly = true;
-            this._richTextBox1.Size = new System.Drawing.Size(698, 465);
-            this._richTextBox1.TabIndex = 0;
-            this._richTextBox1.Text = "";
-            // 
             // _enableTestEnvironment
             // 
             this._enableTestEnvironment.AutoSize = true;
-            this._enableTestEnvironment.Location = new System.Drawing.Point(225, 16);
+            this._enableTestEnvironment.Location = new System.Drawing.Point(6, 47);
             this._enableTestEnvironment.Name = "_enableTestEnvironment";
             this._enableTestEnvironment.Size = new System.Drawing.Size(145, 17);
             this._enableTestEnvironment.TabIndex = 13;
@@ -188,7 +163,7 @@ namespace DFAssist
             // _ttsCheckBox
             // 
             this._ttsCheckBox.AutoSize = true;
-            this._ttsCheckBox.Location = new System.Drawing.Point(377, 17);
+            this._ttsCheckBox.Location = new System.Drawing.Point(6, 22);
             this._ttsCheckBox.Name = "_ttsCheckBox";
             this._ttsCheckBox.Size = new System.Drawing.Size(139, 17);
             this._ttsCheckBox.TabIndex = 14;
@@ -199,7 +174,7 @@ namespace DFAssist
             // _persistToasts
             // 
             this._persistToasts.AutoSize = true;
-            this._persistToasts.Location = new System.Drawing.Point(523, 17);
+            this._persistToasts.Location = new System.Drawing.Point(6, 45);
             this._persistToasts.Name = "_persistToasts";
             this._persistToasts.Size = new System.Drawing.Size(137, 17);
             this._persistToasts.TabIndex = 15;
@@ -210,7 +185,7 @@ namespace DFAssist
             // _enableLegacyToast
             // 
             this._enableLegacyToast.AutoSize = true;
-            this._enableLegacyToast.Location = new System.Drawing.Point(523, 41);
+            this._enableLegacyToast.Location = new System.Drawing.Point(6, 68);
             this._enableLegacyToast.Name = "_enableLegacyToast";
             this._enableLegacyToast.Size = new System.Drawing.Size(132, 17);
             this._enableLegacyToast.TabIndex = 16;
@@ -221,7 +196,7 @@ namespace DFAssist
             // _disableToasts
             // 
             this._disableToasts.AutoSize = true;
-            this._disableToasts.Location = new System.Drawing.Point(377, 41);
+            this._disableToasts.Location = new System.Drawing.Point(6, 22);
             this._disableToasts.Name = "_disableToasts";
             this._disableToasts.Size = new System.Drawing.Size(96, 17);
             this._disableToasts.TabIndex = 17;
@@ -229,22 +204,190 @@ namespace DFAssist
             this._disableToasts.UseVisualStyleBackColor = true;
             this._disableToasts.CheckStateChanged += new System.EventHandler(this.DisableToastsOnCheckedChanged);
             // 
+            // _appTabControl
+            // 
+            this._appTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._appTabControl.Controls.Add(this._mainTabPage);
+            this._appTabControl.Controls.Add(this._settingsPage);
+            this._appTabControl.Location = new System.Drawing.Point(4, 4);
+            this._appTabControl.Name = "_appTabControl";
+            this._appTabControl.SelectedIndex = 0;
+            this._appTabControl.Size = new System.Drawing.Size(1233, 825);
+            this._appTabControl.TabIndex = 18;
+            // 
+            // _mainTabPage
+            // 
+            this._mainTabPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._mainTabPage.Controls.Add(this._mainTableLayout);
+            this._mainTabPage.Location = new System.Drawing.Point(4, 22);
+            this._mainTabPage.Name = "_mainTabPage";
+            this._mainTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this._mainTabPage.Size = new System.Drawing.Size(1225, 799);
+            this._mainTabPage.TabIndex = 0;
+            this._mainTabPage.Text = "Main";
+            this._mainTabPage.ToolTipText = "Shows main info and logs";
+            this._mainTabPage.UseVisualStyleBackColor = true;
+            // 
+            // _mainTableLayout
+            // 
+            this._mainTableLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._mainTableLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._mainTableLayout.ColumnCount = 3;
+            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this._mainTableLayout.Controls.Add(this._button1, 2, 0);
+            this._mainTableLayout.Controls.Add(this._richTextBox1, 0, 1);
+            this._mainTableLayout.Controls.Add(this._appTitle, 0, 0);
+            this._mainTableLayout.Controls.Add(this._copyrightLink, 1, 0);
+            this._mainTableLayout.Location = new System.Drawing.Point(0, 3);
+            this._mainTableLayout.Name = "_mainTableLayout";
+            this._mainTableLayout.RowCount = 2;
+            this._mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.728362F));
+            this._mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.27164F));
+            this._mainTableLayout.Size = new System.Drawing.Size(1219, 790);
+            this._mainTableLayout.TabIndex = 1;
+            // 
+            // _button1
+            // 
+            this._button1.AutoSize = true;
+            this._button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._button1.Location = new System.Drawing.Point(1149, 3);
+            this._button1.Name = "_button1";
+            this._button1.Size = new System.Drawing.Size(67, 23);
+            this._button1.TabIndex = 1;
+            this._button1.Text = "Clear Logs";
+            this._button1.UseVisualStyleBackColor = true;
+            // 
+            // _richTextBox1
+            // 
+            this._richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._richTextBox1.AutoSize = true;
+            this._mainTableLayout.SetColumnSpan(this._richTextBox1, 3);
+            this._richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._richTextBox1.Location = new System.Drawing.Point(3, 32);
+            this._richTextBox1.Name = "_richTextBox1";
+            this._richTextBox1.ReadOnly = true;
+            this._richTextBox1.Size = new System.Drawing.Size(1213, 755);
+            this._richTextBox1.TabIndex = 0;
+            this._richTextBox1.Text = "";
+            // 
+            // _appTitle
+            // 
+            this._appTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this._appTitle.AutoSize = true;
+            this._appTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._appTitle.Location = new System.Drawing.Point(3, 0);
+            this._appTitle.Name = "_appTitle";
+            this._appTitle.Size = new System.Drawing.Size(97, 29);
+            this._appTitle.TabIndex = 2;
+            this._appTitle.Text = "DFAssist ~";
+            this._appTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // _copyrightLink
+            // 
+            this._copyrightLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this._copyrightLink.AutoSize = true;
+            this._copyrightLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._copyrightLink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this._copyrightLink.Location = new System.Drawing.Point(106, 0);
+            this._copyrightLink.Name = "_copyrightLink";
+            this._copyrightLink.Size = new System.Drawing.Size(107, 29);
+            this._copyrightLink.TabIndex = 3;
+            this._copyrightLink.TabStop = true;
+            this._copyrightLink.Text = "© easly1989";
+            this._copyrightLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // _settingsPage
+            // 
+            this._settingsPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._settingsPage.Controls.Add(this._ttsSettings);
+            this._settingsPage.Controls.Add(this._toastSettings);
+            this._settingsPage.Controls.Add(this._generalSettings);
+            this._settingsPage.Location = new System.Drawing.Point(4, 22);
+            this._settingsPage.Name = "_settingsPage";
+            this._settingsPage.Padding = new System.Windows.Forms.Padding(3);
+            this._settingsPage.Size = new System.Drawing.Size(1225, 799);
+            this._settingsPage.TabIndex = 1;
+            this._settingsPage.Text = "Settings";
+            this._settingsPage.ToolTipText = "Change Settings for DFAssist";
+            this._settingsPage.UseVisualStyleBackColor = true;
+            // 
+            // _ttsSettings
+            // 
+            this._ttsSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._ttsSettings.AutoSize = true;
+            this._ttsSettings.Controls.Add(this._ttsCheckBox);
+            this._ttsSettings.Location = new System.Drawing.Point(4, 227);
+            this._ttsSettings.Name = "_ttsSettings";
+            this._ttsSettings.Size = new System.Drawing.Size(1215, 100);
+            this._ttsSettings.TabIndex = 2;
+            this._ttsSettings.TabStop = false;
+            this._ttsSettings.Text = "Text To Speech Settings";
+            // 
+            // _toastSettings
+            // 
+            this._toastSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._toastSettings.AutoSize = true;
+            this._toastSettings.Controls.Add(this._disableToasts);
+            this._toastSettings.Controls.Add(this._enableLegacyToast);
+            this._toastSettings.Controls.Add(this._persistToasts);
+            this._toastSettings.Location = new System.Drawing.Point(4, 117);
+            this._toastSettings.Name = "_toastSettings";
+            this._toastSettings.Size = new System.Drawing.Size(1215, 104);
+            this._toastSettings.TabIndex = 1;
+            this._toastSettings.TabStop = false;
+            this._toastSettings.Text = "Toasts Settings";
+            // 
+            // _generalSettings
+            // 
+            this._generalSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._generalSettings.AutoSize = true;
+            this._generalSettings.Controls.Add(this._label1);
+            this._generalSettings.Controls.Add(this._languageComboBox);
+            this._generalSettings.Controls.Add(this._enableTestEnvironment);
+            this._generalSettings.Location = new System.Drawing.Point(4, 7);
+            this._generalSettings.Name = "_generalSettings";
+            this._generalSettings.Size = new System.Drawing.Size(1215, 104);
+            this._generalSettings.TabIndex = 0;
+            this._generalSettings.TabStop = false;
+            this._generalSettings.Text = "General Settings";
+            // 
             // MainControl
             // 
-            this.Controls.Add(this._disableToasts);
-            this.Controls.Add(this._enableLegacyToast);
-            this.Controls.Add(this._persistToasts);
-            this.Controls.Add(this._ttsCheckBox);
-            this.Controls.Add(this._enableTestEnvironment);
-            this.Controls.Add(this._groupBox3);
-            this.Controls.Add(this._label1);
-            this.Controls.Add(this._languageComboBox);
+            this.Controls.Add(this._appTabControl);
             this.Name = "MainControl";
-            this.Size = new System.Drawing.Size(1744, 592);
-            this._groupBox3.ResumeLayout(false);
-            this._groupBox3.PerformLayout();
+            this.Size = new System.Drawing.Size(1240, 829);
+            this._appTabControl.ResumeLayout(false);
+            this._mainTabPage.ResumeLayout(false);
+            this._mainTableLayout.ResumeLayout(false);
+            this._mainTableLayout.PerformLayout();
+            this._settingsPage.ResumeLayout(false);
+            this._settingsPage.PerformLayout();
+            this._ttsSettings.ResumeLayout(false);
+            this._ttsSettings.PerformLayout();
+            this._toastSettings.ResumeLayout(false);
+            this._toastSettings.PerformLayout();
+            this._generalSettings.ResumeLayout(false);
+            this._generalSettings.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -480,8 +623,6 @@ namespace DFAssist
         private void UpdateTranslations()
         {
             _label1.Text = Localization.GetText("ui-language-display-text");
-            _groupBox3.Text = Localization.GetText("ui-log-display-text");
-            _enableLoggingCheckBox.Text = Localization.GetText("ui-log-enable-display-text");
             _button1.Text = Localization.GetText("ui-log-clear-display-text");
             _enableTestEnvironment.Text = Localization.GetText("ui-enable-test-environment");
             _ttsCheckBox.Text = Localization.GetText("ui-enable-tts");
@@ -707,20 +848,6 @@ namespace DFAssist
             OnInit();
         }
 
-        private void EnableLoggingCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!_enableLoggingCheckBox.Checked)
-            {
-                Logger.SetTextBox(null);
-                _button1.Enabled = false;
-            }
-            else
-            {
-                Logger.SetTextBox(_richTextBox1);
-                _button1.Enabled = true;
-            }
-        }
-
         private void LanguageComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadData();
@@ -734,7 +861,6 @@ namespace DFAssist
             // All the settings to deserialize
             _xmlSettingsSerializer.AddControlSetting(_disableToasts.Name, _disableToasts);
             _xmlSettingsSerializer.AddControlSetting(_languageComboBox.Name, _languageComboBox);
-            _xmlSettingsSerializer.AddControlSetting(_enableLoggingCheckBox.Name, _enableLoggingCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_ttsCheckBox.Name, _ttsCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_persistToasts.Name, _persistToasts);
             _xmlSettingsSerializer.AddControlSetting(_enableTestEnvironment.Name, _enableTestEnvironment);

@@ -70,8 +70,6 @@
   "ui-tts-notification-test-title": "이거 들으면...",
   "ui-tts-notification-test-message": "... 작품은!",
 
-  "ui-log-display-text": "로그",
-  "ui-log-enable-display-text": "로깅을 사용하도록 설정",
   "ui-log-clear-display-text": "로그 지우기",
 
   "ui-telegram-display-text": "전보 알림 사용",

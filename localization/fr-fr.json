@@ -70,8 +70,6 @@
   "ui-tts-notification-test-title": "Si tu entends ça...",
   "ui-tts-notification-test-message": "... tts fonctionne!",
 
-  "ui-log-display-text": "Journaux",
-  "ui-log-enable-display-text": "Activer la journalisation",
   "ui-log-clear-display-text": "Effacer les journaux",
 
   "ui-telegram-display-text": "Activer les notifications de Telegram",

@@ -70,8 +70,6 @@
   "ui-tts-notification-test-title": "これを聞いたら...",
   "ui-tts-notification-test-message": "... TTSは動作します!",
 
-  "ui-log-display-text": "ログ",
-  "ui-log-enable-display-text": "ロギングを有効にします",
   "ui-log-clear-display-text": "ログをクリアします",
 
   "ui-telegram-display-text": "テレグラム通知を有効にする",

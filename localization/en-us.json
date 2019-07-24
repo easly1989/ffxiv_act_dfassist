@@ -70,8 +70,6 @@
   "ui-tts-notification-test-title": "If you hear this...",
   "ui-tts-notification-test-message": "... tts works!",
 
-  "ui-log-display-text": "Logs",
-  "ui-log-enable-display-text": "Enable Logging",
   "ui-log-clear-display-text": "Clear Logs",
 
   "ui-telegram-display-text": "Enable Telegram Notifications",
