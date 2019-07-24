@@ -50,10 +50,10 @@
   "l-analyze-error": "A: Error while handling Message",
 
   "l-queue-started-general": "Q: Matching started [{0}]",
-  "l-queue-started-roulette": "Q: Duty Roulette Matching Started [{0}]",
+  "l-queue-started-roulette": "Q: Duty Roulette Matching Started [{0}] - {1}",
   "l-queue-stopped": "Q: Matching Stopped",
   "l-queue-entered": "Q: Entered Instance Area",
-  "l-queue-matched": "Q: Matched [{0}]",
+  "l-queue-matched": "Q: Matched [{0}] - {1}",
   "l-queue-updated": "Q: Matching State Updated [{0}, {1}, {2}/{3}, {4}/{5}, {6}/{7}]",
 
   "l-fate-occured-info": "F: {0} FATE spawned!",
@@ -88,5 +88,8 @@
 
   "ui-enable-tts": "Enable Text To Speech",
   "ui-tts-dutyfound": "Duty Found!",
-  "ui-persist-toasts": "Make Toasts Persistent"
+  "ui-persist-toasts": "Make Toasts Persistent",
+
+  "ui-enable-legacy-toasts": "Enable Legacy Toasts",
+  "ui-disable-toasts": "Disable Toasts"
 }

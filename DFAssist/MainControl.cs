@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -53,8 +54,10 @@ namespace DFAssist
         private CheckBox _ttsCheckBox;
         private Button _button1;
         private CheckBox _persistToasts;
+        private CheckBox _enableLegacyToast;
+        private CheckBox _disableToasts;
         private SpeechSynthesizer _synth;
-        
+
         #region WinForm Required
         public MainControl()
         {
@@ -101,6 +104,8 @@ namespace DFAssist
             this._enableTestEnvironment = new System.Windows.Forms.CheckBox();
             this._ttsCheckBox = new System.Windows.Forms.CheckBox();
             this._persistToasts = new System.Windows.Forms.CheckBox();
+            this._enableLegacyToast = new System.Windows.Forms.CheckBox();
+            this._disableToasts = new System.Windows.Forms.CheckBox();
             this._groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,9 +133,9 @@ namespace DFAssist
             this._groupBox3.Controls.Add(this._enableLoggingCheckBox);
             this._groupBox3.Controls.Add(this._button1);
             this._groupBox3.Controls.Add(this._richTextBox1);
-            this._groupBox3.Location = new System.Drawing.Point(24, 52);
+            this._groupBox3.Location = new System.Drawing.Point(24, 64);
             this._groupBox3.Name = "_groupBox3";
-            this._groupBox3.Size = new System.Drawing.Size(710, 523);
+            this._groupBox3.Size = new System.Drawing.Size(710, 511);
             this._groupBox3.TabIndex = 12;
             this._groupBox3.TabStop = false;
             this._groupBox3.Text = "Logs";
@@ -202,8 +207,32 @@ namespace DFAssist
             this._persistToasts.UseVisualStyleBackColor = true;
             this._persistToasts.CheckStateChanged += new System.EventHandler(this.PersistToastsOnCheckedChanged);
             // 
+            // _enableLegacyToast
+            // 
+            this._enableLegacyToast.AutoSize = true;
+            this._enableLegacyToast.Location = new System.Drawing.Point(523, 41);
+            this._enableLegacyToast.Name = "_enableLegacyToast";
+            this._enableLegacyToast.Size = new System.Drawing.Size(132, 17);
+            this._enableLegacyToast.TabIndex = 16;
+            this._enableLegacyToast.Text = "Enable Legacy Toasts";
+            this._enableLegacyToast.UseVisualStyleBackColor = true;
+            this._enableLegacyToast.CheckStateChanged += new System.EventHandler(this.EnableLegacyToastsOnCheckedChanged);
+            // 
+            // _disableToasts
+            // 
+            this._disableToasts.AutoSize = true;
+            this._disableToasts.Location = new System.Drawing.Point(377, 41);
+            this._disableToasts.Name = "_disableToasts";
+            this._disableToasts.Size = new System.Drawing.Size(96, 17);
+            this._disableToasts.TabIndex = 17;
+            this._disableToasts.Text = "Disable Toasts";
+            this._disableToasts.UseVisualStyleBackColor = true;
+            this._disableToasts.CheckStateChanged += new System.EventHandler(this.DisableToastsOnCheckedChanged);
+            // 
             // MainControl
             // 
+            this.Controls.Add(this._disableToasts);
+            this.Controls.Add(this._enableLegacyToast);
             this.Controls.Add(this._persistToasts);
             this.Controls.Add(this._ttsCheckBox);
             this.Controls.Add(this._enableTestEnvironment);
@@ -219,8 +248,23 @@ namespace DFAssist
 
         }
 
+        private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
+        {
+            _enableLegacyToast.Enabled = !_disableToasts.Checked;
+            _persistToasts.Enabled = _enableLegacyToast.Enabled && !_enableLegacyToast.Checked;
+        }
+
+        private void EnableLegacyToastsOnCheckedChanged(object sender, EventArgs e)
+        {
+            _persistToasts.Enabled = !_enableLegacyToast.Checked;
+            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+        }
+
         private void PersistToastsOnCheckedChanged(object sender, EventArgs e)
         {
+            if(_enableLegacyToast.Checked)
+                return;
+
             var registryKey = $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{AppId}";
             Registry.SetValue(registryKey, "ShowInActionCenter", _persistToasts.Checked ? 1 : 0, RegistryValueKind.DWord);
         }
@@ -246,11 +290,11 @@ namespace DFAssist
             {
                 var localDate = ActGlobals.oFormActMain.PluginGetSelfDateUtc(this);
                 var remoteDate = ActGlobals.oFormActMain.PluginGetRemoteDateUtc(pluginId);
-                if (localDate.AddHours(2) >= remoteDate) 
+                if (localDate.AddHours(2) >= remoteDate)
                     return;
 
                 var result = MessageBox.Show(Localization.GetText("ui-update-available-message"), Localization.GetText("ui-update-available-title"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result != DialogResult.Yes) 
+                if (result != DialogResult.Yes)
                     return;
 
                 var updatedFile = ActGlobals.oFormActMain.PluginDownload(pluginId);
@@ -384,7 +428,7 @@ namespace DFAssist
         private void UpdateProcesses()
         {
             var process = System.Diagnostics.Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
-            if(process == null)
+            if (process == null)
                 return;
             try
             {
@@ -442,6 +486,8 @@ namespace DFAssist
             _enableTestEnvironment.Text = Localization.GetText("ui-enable-test-environment");
             _ttsCheckBox.Text = Localization.GetText("ui-enable-tts");
             _persistToasts.Text = Localization.GetText("ui-persist-toasts");
+            _enableLegacyToast.Text = Localization.GetText("ui-enable-legacy-toasts");
+            _disableToasts.Text = Localization.GetText("ui-disable-toasts");
         }
         #endregion
 
@@ -467,34 +513,97 @@ namespace DFAssist
             }
         }
 
+        private LegacyToast _lastToast;
         private void ToastWindowNotification(string title, string message)
         {
-            try
+            if(_disableToasts.Checked)
+                return;
+
+            if (_enableLegacyToast.Checked)
             {
-                // Get a toast XML template
-                var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
-                
-                var stringElements = toastXml.GetElementsByTagName("text");
-                if (stringElements.Length < 2)
+                try
                 {
-                    Logger.Error("l-toast-notification-error");
-                    return;
+                    _lastToast?.Close();
+                    LegacyToastDispose();
+                    Application.ThreadException += LegacyToastOnGuiUnhandedException;
+                    AppDomain.CurrentDomain.UnhandledException += LegacyToastOnUnhandledException;
+                    var toast = new LegacyToast(title, message, _networks) { Text = title };
+                    _lastToast = toast;
+                    _lastToast.Closing += LastToastOnClosing;
+                    _lastToast.Show();
+                    NativeMethods.ShowWindow(_lastToast.Handle, 9);
+                    NativeMethods.SetForegroundWindow(_lastToast.Handle);
+                    _lastToast.Activate();
+                }
+                catch (Exception ex)
+                {
+                    LegacyToastHandleUnhandledException(ex);
+                    _lastToast?.Close();
+                    LegacyToastDispose();
+                }
+            }
+            else
+            {
+                try
+                {
+                    // Get a toast XML template
+                    var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
+
+                    var stringElements = toastXml.GetElementsByTagName("text");
+                    if (stringElements.Length < 2)
+                    {
+                        Logger.Error("l-toast-notification-error");
+                        return;
+                    }
+
+                    stringElements[0].AppendChild(toastXml.CreateTextNode(title));
+                    stringElements[1].AppendChild(toastXml.CreateTextNode(message));
+
+                    var toast = new ToastNotification(toastXml);
+                    ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
+                }
+                catch (Exception e)
+                {
+                    Logger.Exception(e, "l-toast-notification-error");
                 }
 
-                stringElements[0].AppendChild(toastXml.CreateTextNode(title));
-                stringElements[1].AppendChild(toastXml.CreateTextNode(message));
+            }
+        }
 
-                var toast = new ToastNotification(toastXml);
-                ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
-            }
-            catch (Exception e)
-            {
-                Logger.Exception(e, "l-toast-notification-error");
-            }
+        private void LegacyToastDispose()
+        {
+            Application.ThreadException -= LegacyToastOnGuiUnhandedException;
+            AppDomain.CurrentDomain.UnhandledException -= LegacyToastOnUnhandledException;
+            if (_lastToast == null || _lastToast.IsDisposed)
+                return;
+            _lastToast.Closing -= LastToastOnClosing;
+            _lastToast.Dispose();
         }
         #endregion
 
         #region Events
+        private void LastToastOnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            LegacyToastDispose();
+        }
+
+        private static void LegacyToastOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            LegacyToastHandleUnhandledException(e.ExceptionObject as Exception);
+        }
+
+        private static void LegacyToastOnGuiUnhandedException(object sender, ThreadExceptionEventArgs e)
+        {
+            LegacyToastHandleUnhandledException(e.Exception);
+        }
+
+        private static void LegacyToastHandleUnhandledException(Exception e)
+        {
+            if (e == null)
+                return;
+            Logger.Exception(e, "l-toast-notification-error");
+        }
+
         private void EnableTestEnvironmentOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _isTestEnvironmentEnabled = _enableTestEnvironment.Checked;
@@ -508,7 +617,7 @@ namespace DFAssist
 
         private void TtsNotification(string message, string title = "ui-tts-dutyfound")
         {
-            if(!_isTtsEnabled)
+            if (!_isTtsEnabled)
                 return;
 
             var dutyFound = Localization.GetText(title);
@@ -623,11 +732,13 @@ namespace DFAssist
         private void LoadSettings()
         {
             // All the settings to deserialize
+            _xmlSettingsSerializer.AddControlSetting(_disableToasts.Name, _disableToasts);
             _xmlSettingsSerializer.AddControlSetting(_languageComboBox.Name, _languageComboBox);
             _xmlSettingsSerializer.AddControlSetting(_enableLoggingCheckBox.Name, _enableLoggingCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_ttsCheckBox.Name, _ttsCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_persistToasts.Name, _persistToasts);
             _xmlSettingsSerializer.AddControlSetting(_enableTestEnvironment.Name, _enableTestEnvironment);
+            _xmlSettingsSerializer.AddControlSetting(_enableLegacyToast.Name, _enableLegacyToast);
 
             if (File.Exists(_settingsFile))
             {

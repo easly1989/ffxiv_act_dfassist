@@ -163,7 +163,7 @@ namespace DFAssist
 
                         if (rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
                         {
-                            Logger.Info("l-queue-started-roulette", Data.GetRoulette(rouletteCode));
+                            Logger.Info("l-queue-started-roulette", Data.GetRoulette(rouletteCode).Name);
                             FireEvent(pid, EventType.MATCH_BEGIN, new[] { (int)MatchType.ROULETTE, rouletteCode });
                         }
                         else // Specific Duty (Dungeon/Trial/Raid)
@@ -210,7 +210,7 @@ namespace DFAssist
 
                         state = State.MATCHED;
                         
-                        Logger.Info("l-queue-matched", code);
+                        Logger.Info("l-queue-matched", code, Data.GetInstance(code).Name);
                         FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
                     }
                 }
@@ -233,7 +233,7 @@ namespace DFAssist
 
                     state = State.MATCHED;
 
-                    Logger.Success("l-queue-matched ", code);
+                    Logger.Success("l-queue-matched ", code, Data.GetInstance(code).Name);
                     FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
                 }
             }

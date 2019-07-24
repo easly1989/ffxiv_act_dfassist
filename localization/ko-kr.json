@@ -50,10 +50,10 @@
   "l-analyze-error": "A: 메시지 처리중 에러 발생함",
 
   "l-queue-started-general": "Q: 매칭 시작됨 [{0}]",
-  "l-queue-started-roulette": "Q: 무작위 임무 매칭 시작됨 [{0}]",
+  "l-queue-started-roulette": "Q: 무작위 임무 매칭 시작됨 [{0}] - {1}",
   "l-queue-stopped": "Q: 매칭 중지됨",
   "l-queue-entered": "Q: 임무 입장함",
-  "l-queue-matched": "Q: 매칭됨 [{0}]",
+  "l-queue-matched": "Q: 매칭됨 [{0}] - {1}",
   "l-queue-updated": "Q: 매칭 상태 업데이트됨 [{0}, {1}, {2}/{3}, {4}/{5}, {6}/{7}]",
 
   "l-fate-occured-info": "F: {0} 돌발 발생!",
@@ -88,5 +88,8 @@
 
   "ui-enable-tts": "텍스트 음성 변환 사용",
   "ui-tts-dutyfound": "의무가 발견되었습니다!",
-  "ui-persist-toasts": "토스트를 지속적으로 만드십시오."
+  "ui-persist-toasts": "토스트를 지속적으로 만드십시오.",
+
+  "ui-enable-legacy-toasts": "레거시 토스트 사용",
+  "ui-disable-toasts": "토스트 끄기"
 }

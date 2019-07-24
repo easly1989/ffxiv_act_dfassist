@@ -76,6 +76,7 @@
     <Reference Include="System.Core">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Management" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Drawing" />
@@ -93,6 +94,10 @@
     <Compile Include="DataModel\Instance.cs" />
     <Compile Include="DataModel\Language.cs" />
     <Compile Include="DataModel\Roulette.cs" />
+    <Compile Include="FormAnimator.cs" />
+    <Compile Include="LegacyToast.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Localization.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>

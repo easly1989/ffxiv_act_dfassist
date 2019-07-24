@@ -50,10 +50,10 @@
   "l-analyze-error": "A: Erreur de traitement du message",
 
   "l-queue-started-general": "Q: Attente pour la mission [{0}]",
-  "l-queue-started-roulette": "Q: Attente pour la mission aléatoire [{0}]",
+  "l-queue-started-roulette": "Q: Attente pour la mission aléatoire [{0}] - {1}",
   "l-queue-stopped": "Q: Attente interrompue",
   "l-queue-entered": "Q: Entrée dans la zone instanciée",
-  "l-queue-matched": "Q: Attente terminée [{0}]",
+  "l-queue-matched": "Q: Attente terminée [{0}] - {1}",
   "l-queue-updated": "Q: Mise à jour de la file d'attente [{0}, {1}, {2}/{3}, {4}/{5}, {6}/{7}]",
 
   "l-fate-occured-info": "F: {0} ALEA en cours!",
@@ -88,5 +88,8 @@
 
   "ui-enable-tts": "Activer la synthèse vocale",
   "ui-tts-dutyfound": "Le devoir est trouvé!",
-  "ui-persist-toasts": "Rendre les toasts persistants"
+  "ui-persist-toasts": "Rendre les toasts persistants",
+
+  "ui-enable-legacy-toasts": "Activer les toasts hérités",
+  "ui-disable-toasts": "Désactiver les Toasts"
 }
