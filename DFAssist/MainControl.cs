@@ -10,6 +10,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -31,42 +32,60 @@ namespace DFAssist
     public class MainControl : UserControl, IActPluginV1
     {
         private const string AppId = "Advanced Combat Tracker";
-
-        private readonly string _settingsFile;
         private readonly ConcurrentDictionary<int, ProcessNet> _networks;
 
-        private bool _isPluginEnabled;
-        private bool _pluginInitializing;
+        private readonly string _settingsFile;
+        private TabControl _appTabControl;
+        private Label _appTitle;
+        private Button _button1;
+        private LinkLabel _copyrightLink;
+        private CheckBox _disableToasts;
+        private CheckBox _enableLegacyToast;
+        private CheckBox _enableTestEnvironment;
+        private GroupBox _generalSettings;
 
-        private bool _mainFormIsLoaded;
+        private bool _isPluginEnabled;
         private bool _isTestEnvironmentEnabled;
         private bool _isTtsEnabled;
-        private Timer _timer;
         private Label _label1;
         private Label _labelStatus;
         private TabPage _labelTab;
-        private Language _selectedLanguage;
-        private CheckBox _enableTestEnvironment;
         private ComboBox _languageComboBox;
-        private SettingsSerializer _xmlSettingsSerializer;
-        private CheckBox _ttsCheckBox;
-        private CheckBox _persistToasts;
-        private CheckBox _enableLegacyToast;
-        private CheckBox _disableToasts;
-        private TabControl _appTabControl;
-        private TabPage _mainTabPage;
-        private TabPage _settingsPage;
-        private GroupBox _ttsSettings;
-        private GroupBox _toastSettings;
-        private GroupBox _generalSettings;
+
+        private bool _mainFormIsLoaded;
         private TableLayoutPanel _mainTableLayout;
-        private Button _button1;
+        private TabPage _mainTabPage;
+        private CheckBox _persistToasts;
+        private bool _pluginInitializing;
         private RichTextBox _richTextBox1;
-        private Label _appTitle;
-        private LinkLabel _copyrightLink;
+        private Language _selectedLanguage;
+        private TabPage _settingsPage;
+        private TableLayoutPanel _settingsTableLayout;
         private SpeechSynthesizer _synth;
+        private GroupBox _testSettings;
+        private Timer _timer;
+        private GroupBox _toastSettings;
+        private CheckBox _ttsCheckBox;
+        private GroupBox _ttsSettings;
+        private SettingsSerializer _xmlSettingsSerializer;
+
+        #region Load Methods
+
+        private void LoadData(Language defaultLanguage = null)
+        {
+            var newLanguage = defaultLanguage ?? (Language)_languageComboBox.SelectedItem;
+            if (_selectedLanguage != null && newLanguage.Code.Equals(_selectedLanguage.Code))
+                return;
+
+            _selectedLanguage = newLanguage;
+            Localization.Initialize(_selectedLanguage.Code);
+            Data.Initialize(_selectedLanguage.Code);
+        }
+
+        #endregion
 
         #region WinForm Required
+
         public MainControl()
         {
             InitializeComponent();
@@ -98,297 +117,284 @@ namespace DFAssist
             return result;
         }
 
-        /// <summary>
-        /// This is autmatically generated from the designer
-        /// </summary>
         private void InitializeComponent()
         {
-            this._label1 = new System.Windows.Forms.Label();
-            this._languageComboBox = new System.Windows.Forms.ComboBox();
-            this._enableTestEnvironment = new System.Windows.Forms.CheckBox();
-            this._ttsCheckBox = new System.Windows.Forms.CheckBox();
-            this._persistToasts = new System.Windows.Forms.CheckBox();
-            this._enableLegacyToast = new System.Windows.Forms.CheckBox();
-            this._disableToasts = new System.Windows.Forms.CheckBox();
-            this._appTabControl = new System.Windows.Forms.TabControl();
-            this._mainTabPage = new System.Windows.Forms.TabPage();
-            this._mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this._button1 = new System.Windows.Forms.Button();
-            this._richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this._appTitle = new System.Windows.Forms.Label();
-            this._copyrightLink = new System.Windows.Forms.LinkLabel();
-            this._settingsPage = new System.Windows.Forms.TabPage();
-            this._ttsSettings = new System.Windows.Forms.GroupBox();
-            this._toastSettings = new System.Windows.Forms.GroupBox();
-            this._generalSettings = new System.Windows.Forms.GroupBox();
-            this._appTabControl.SuspendLayout();
-            this._mainTabPage.SuspendLayout();
-            this._mainTableLayout.SuspendLayout();
-            this._settingsPage.SuspendLayout();
-            this._ttsSettings.SuspendLayout();
-            this._toastSettings.SuspendLayout();
-            this._generalSettings.SuspendLayout();
-            this.SuspendLayout();
+            _label1 = new Label();
+            _languageComboBox = new ComboBox();
+            _enableTestEnvironment = new CheckBox();
+            _ttsCheckBox = new CheckBox();
+            _persistToasts = new CheckBox();
+            _enableLegacyToast = new CheckBox();
+            _disableToasts = new CheckBox();
+            _appTabControl = new TabControl();
+            _mainTabPage = new TabPage();
+            _mainTableLayout = new TableLayoutPanel();
+            _button1 = new Button();
+            _richTextBox1 = new RichTextBox();
+            _appTitle = new Label();
+            _copyrightLink = new LinkLabel();
+            _settingsPage = new TabPage();
+            _settingsTableLayout = new TableLayoutPanel();
+            _ttsSettings = new GroupBox();
+            _toastSettings = new GroupBox();
+            _generalSettings = new GroupBox();
+            _testSettings = new GroupBox();
+            _appTabControl.SuspendLayout();
+            _mainTabPage.SuspendLayout();
+            _mainTableLayout.SuspendLayout();
+            _settingsPage.SuspendLayout();
+            _settingsTableLayout.SuspendLayout();
+            _ttsSettings.SuspendLayout();
+            _toastSettings.SuspendLayout();
+            _generalSettings.SuspendLayout();
+            _testSettings.SuspendLayout();
+            SuspendLayout();
             // 
             // _label1
             // 
-            this._label1.AutoSize = true;
-            this._label1.Location = new System.Drawing.Point(3, 23);
-            this._label1.Name = "_label1";
-            this._label1.Size = new System.Drawing.Size(55, 13);
-            this._label1.TabIndex = 7;
-            this._label1.Text = "Language";
+            _label1.AutoSize = true;
+            _label1.Location = new Point(3, 23);
+            _label1.Name = "_label1";
+            _label1.TabStop = false;
+            _label1.Text = "Language";
             // 
             // _languageComboBox
             // 
-            this._languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this._languageComboBox.FormattingEnabled = true;
-            this._languageComboBox.Location = new System.Drawing.Point(70, 20);
-            this._languageComboBox.Name = "_languageComboBox";
-            this._languageComboBox.Size = new System.Drawing.Size(121, 21);
-            this._languageComboBox.TabIndex = 6;
-            this._languageComboBox.SelectedValueChanged += new System.EventHandler(this.LanguageComboBox_SelectedValueChanged);
-            // 
-            // _enableTestEnvironment
-            // 
-            this._enableTestEnvironment.AutoSize = true;
-            this._enableTestEnvironment.Location = new System.Drawing.Point(6, 47);
-            this._enableTestEnvironment.Name = "_enableTestEnvironment";
-            this._enableTestEnvironment.Size = new System.Drawing.Size(145, 17);
-            this._enableTestEnvironment.TabIndex = 13;
-            this._enableTestEnvironment.Text = "Enable Test Environment";
-            this._enableTestEnvironment.UseVisualStyleBackColor = true;
-            this._enableTestEnvironment.CheckStateChanged += new System.EventHandler(this.EnableTestEnvironmentOnCheckedChanged);
-            // 
-            // _ttsCheckBox
-            // 
-            this._ttsCheckBox.AutoSize = true;
-            this._ttsCheckBox.Location = new System.Drawing.Point(6, 22);
-            this._ttsCheckBox.Name = "_ttsCheckBox";
-            this._ttsCheckBox.Size = new System.Drawing.Size(139, 17);
-            this._ttsCheckBox.TabIndex = 14;
-            this._ttsCheckBox.Text = "Enable Text To Speech";
-            this._ttsCheckBox.UseVisualStyleBackColor = true;
-            this._ttsCheckBox.CheckStateChanged += new System.EventHandler(this.EnableTtsOnCheckedChanged);
-            // 
-            // _persistToasts
-            // 
-            this._persistToasts.AutoSize = true;
-            this._persistToasts.Location = new System.Drawing.Point(6, 45);
-            this._persistToasts.Name = "_persistToasts";
-            this._persistToasts.Size = new System.Drawing.Size(137, 17);
-            this._persistToasts.TabIndex = 15;
-            this._persistToasts.Text = "Make Toasts Persistent";
-            this._persistToasts.UseVisualStyleBackColor = true;
-            this._persistToasts.CheckStateChanged += new System.EventHandler(this.PersistToastsOnCheckedChanged);
-            // 
-            // _enableLegacyToast
-            // 
-            this._enableLegacyToast.AutoSize = true;
-            this._enableLegacyToast.Location = new System.Drawing.Point(6, 68);
-            this._enableLegacyToast.Name = "_enableLegacyToast";
-            this._enableLegacyToast.Size = new System.Drawing.Size(132, 17);
-            this._enableLegacyToast.TabIndex = 16;
-            this._enableLegacyToast.Text = "Enable Legacy Toasts";
-            this._enableLegacyToast.UseVisualStyleBackColor = true;
-            this._enableLegacyToast.CheckStateChanged += new System.EventHandler(this.EnableLegacyToastsOnCheckedChanged);
+            _languageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            _languageComboBox.FormattingEnabled = true;
+            _languageComboBox.Location = new Point(70, 20);
+            _languageComboBox.Name = "_languageComboBox";
+            _languageComboBox.Size = new Size(130, 25);
+            _languageComboBox.TabIndex = 0;
+            _languageComboBox.SelectedValueChanged += LanguageComboBox_SelectedValueChanged;
             // 
             // _disableToasts
             // 
-            this._disableToasts.AutoSize = true;
-            this._disableToasts.Location = new System.Drawing.Point(6, 22);
-            this._disableToasts.Name = "_disableToasts";
-            this._disableToasts.Size = new System.Drawing.Size(96, 17);
-            this._disableToasts.TabIndex = 17;
-            this._disableToasts.Text = "Disable Toasts";
-            this._disableToasts.UseVisualStyleBackColor = true;
-            this._disableToasts.CheckStateChanged += new System.EventHandler(this.DisableToastsOnCheckedChanged);
+            _disableToasts.AutoSize = true;
+            _disableToasts.Location = new Point(6, 22);
+            _disableToasts.Name = "_disableToasts";
+            _disableToasts.TabIndex = 1;
+            _disableToasts.Text = "Disable Toasts";
+            _disableToasts.UseVisualStyleBackColor = true;
+            _disableToasts.CheckStateChanged += DisableToastsOnCheckedChanged;
+            // 
+            // _persistToasts
+            // 
+            _persistToasts.AutoSize = true;
+            _persistToasts.Location = new Point(6, 45);
+            _persistToasts.Name = "_persistToasts";
+            _persistToasts.TabIndex = 2;
+            _persistToasts.Text = "Make Toasts Persistent";
+            _persistToasts.UseVisualStyleBackColor = true;
+            _persistToasts.CheckStateChanged += PersistToastsOnCheckedChanged;
+            // 
+            // _enableLegacyToast
+            // 
+            _enableLegacyToast.AutoSize = true;
+            _enableLegacyToast.Location = new Point(6, 68);
+            _enableLegacyToast.Name = "_enableLegacyToast";
+            _enableLegacyToast.TabIndex = 3;
+            _enableLegacyToast.Text = "Enable Legacy Toasts";
+            _enableLegacyToast.UseVisualStyleBackColor = true;
+            _enableLegacyToast.CheckStateChanged += EnableLegacyToastsOnCheckedChanged;
+            // 
+            // _ttsCheckBox
+            // 
+            _ttsCheckBox.AutoSize = true;
+            _ttsCheckBox.Location = new Point(6, 22);
+            _ttsCheckBox.Name = "_ttsCheckBox";
+            _ttsCheckBox.TabIndex = 4;
+            _ttsCheckBox.Text = "Enable Text To Speech";
+            _ttsCheckBox.UseVisualStyleBackColor = true;
+            _ttsCheckBox.CheckStateChanged += EnableTtsOnCheckedChanged;
+            // 
+            // _enableTestEnvironment
+            // 
+            _enableTestEnvironment.AutoSize = true;
+            _enableTestEnvironment.Location = new Point(6, 20);
+            _enableTestEnvironment.Name = "_enableTestEnvironment";
+            _enableTestEnvironment.TabIndex = 5;
+            _enableTestEnvironment.Text = "Enable Test Environment";
+            _enableTestEnvironment.UseVisualStyleBackColor = true;
+            _enableTestEnvironment.CheckStateChanged += EnableTestEnvironmentOnCheckedChanged;
             // 
             // _appTabControl
-            // 
-            this._appTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._appTabControl.Controls.Add(this._mainTabPage);
-            this._appTabControl.Controls.Add(this._settingsPage);
-            this._appTabControl.Location = new System.Drawing.Point(4, 4);
-            this._appTabControl.Name = "_appTabControl";
-            this._appTabControl.SelectedIndex = 0;
-            this._appTabControl.Size = new System.Drawing.Size(1233, 825);
-            this._appTabControl.TabIndex = 18;
+            //
+            _appTabControl.Dock = DockStyle.Fill;
+            _appTabControl.Controls.Add(_mainTabPage);
+            _appTabControl.Controls.Add(_settingsPage);
+            _appTabControl.Location = new Point(4, 4);
+            _appTabControl.Name = "_appTabControl";
+            _appTabControl.SelectedIndex = 0;
+            _appTabControl.TabStop = false;
             // 
             // _mainTabPage
             // 
-            this._mainTabPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._mainTabPage.Controls.Add(this._mainTableLayout);
-            this._mainTabPage.Location = new System.Drawing.Point(4, 22);
-            this._mainTabPage.Name = "_mainTabPage";
-            this._mainTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this._mainTabPage.Size = new System.Drawing.Size(1225, 799);
-            this._mainTabPage.TabIndex = 0;
-            this._mainTabPage.Text = "Main";
-            this._mainTabPage.ToolTipText = "Shows main info and logs";
-            this._mainTabPage.UseVisualStyleBackColor = true;
+            _mainTabPage.Dock = DockStyle.Fill;
+            _mainTabPage.Controls.Add(_mainTableLayout);
+            _mainTabPage.Location = new Point(4, 22);
+            _mainTabPage.Name = "_mainTabPage";
+            _mainTabPage.Padding = new Padding(3);
+            _mainTabPage.TabStop = false;
+            _mainTabPage.Text = "Main";
+            _mainTabPage.ToolTipText = "Shows main info and logs";
+            _mainTabPage.UseVisualStyleBackColor = true;
             // 
             // _mainTableLayout
             // 
-            this._mainTableLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._mainTableLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this._mainTableLayout.ColumnCount = 3;
-            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this._mainTableLayout.Controls.Add(this._button1, 2, 0);
-            this._mainTableLayout.Controls.Add(this._richTextBox1, 0, 1);
-            this._mainTableLayout.Controls.Add(this._appTitle, 0, 0);
-            this._mainTableLayout.Controls.Add(this._copyrightLink, 1, 0);
-            this._mainTableLayout.Location = new System.Drawing.Point(0, 3);
-            this._mainTableLayout.Name = "_mainTableLayout";
-            this._mainTableLayout.RowCount = 2;
-            this._mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.728362F));
-            this._mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.27164F));
-            this._mainTableLayout.Size = new System.Drawing.Size(1219, 790);
-            this._mainTableLayout.TabIndex = 1;
+            _mainTableLayout.Dock = DockStyle.Fill;
+            _mainTableLayout.ColumnCount = 3;
+            _mainTableLayout.ColumnStyles.Add(new ColumnStyle());
+            _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            _mainTableLayout.ColumnStyles.Add(new ColumnStyle());
+            _mainTableLayout.Controls.Add(_button1, 2, 0);
+            _mainTableLayout.Controls.Add(_richTextBox1, 0, 1);
+            _mainTableLayout.Controls.Add(_appTitle, 0, 0);
+            _mainTableLayout.Controls.Add(_copyrightLink, 1, 0);
+            _mainTableLayout.Location = new Point(0, 3);
+            _mainTableLayout.Name = "_mainTableLayout";
+            _mainTableLayout.RowCount = 2;
+            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 3.728362F));
+            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 96.27164F));
+            _mainTableLayout.TabStop = false;
             // 
             // _button1
             // 
-            this._button1.AutoSize = true;
-            this._button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this._button1.Location = new System.Drawing.Point(1149, 3);
-            this._button1.Name = "_button1";
-            this._button1.Size = new System.Drawing.Size(67, 23);
-            this._button1.TabIndex = 1;
-            this._button1.Text = "Clear Logs";
-            this._button1.UseVisualStyleBackColor = true;
+            _appTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            _button1.Name = "_button1";
+            _button1.MinimumSize = new Size(100, 25);
+            _button1.TabIndex = 0;
+            _button1.Text = "Clear Logs";
+            _button1.UseVisualStyleBackColor = true;
             // 
             // _richTextBox1
-            // 
-            this._richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._richTextBox1.AutoSize = true;
-            this._mainTableLayout.SetColumnSpan(this._richTextBox1, 3);
-            this._richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._richTextBox1.Location = new System.Drawing.Point(3, 32);
-            this._richTextBox1.Name = "_richTextBox1";
-            this._richTextBox1.ReadOnly = true;
-            this._richTextBox1.Size = new System.Drawing.Size(1213, 755);
-            this._richTextBox1.TabIndex = 0;
-            this._richTextBox1.Text = "";
+            //
+            _richTextBox1.Dock = DockStyle.Fill;
+            _richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            _mainTableLayout.SetColumnSpan(_richTextBox1, 3);
+            _richTextBox1.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            _richTextBox1.Location = new Point(3, 32);
+            _richTextBox1.Name = "_richTextBox1";
+            _richTextBox1.ReadOnly = true;
+            _richTextBox1.TabIndex = 1;
+            _richTextBox1.Text = "";
             // 
             // _appTitle
             // 
-            this._appTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this._appTitle.AutoSize = true;
-            this._appTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._appTitle.Location = new System.Drawing.Point(3, 0);
-            this._appTitle.Name = "_appTitle";
-            this._appTitle.Size = new System.Drawing.Size(97, 29);
-            this._appTitle.TabIndex = 2;
-            this._appTitle.Text = "DFAssist ~";
-            this._appTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            _appTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            _appTitle.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            _appTitle.Location = new Point(3, 0);
+            _appTitle.Name = "_appTitle";
+            _appTitle.Size = new Size(97, 29);
+            _appTitle.TabStop = false;
+            _appTitle.Text = "DFAssist ~";
+            _appTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // _copyrightLink
             // 
-            this._copyrightLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this._copyrightLink.AutoSize = true;
-            this._copyrightLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._copyrightLink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this._copyrightLink.Location = new System.Drawing.Point(106, 0);
-            this._copyrightLink.Name = "_copyrightLink";
-            this._copyrightLink.Size = new System.Drawing.Size(107, 29);
-            this._copyrightLink.TabIndex = 3;
-            this._copyrightLink.TabStop = true;
-            this._copyrightLink.Text = "© easly1989";
-            this._copyrightLink.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            _copyrightLink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
+            _copyrightLink.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            _copyrightLink.LinkBehavior = LinkBehavior.HoverUnderline;
+            _copyrightLink.Location = new Point(106, 0);
+            _copyrightLink.Name = "_copyrightLink";
+            _copyrightLink.Size = new Size(107, 29);
+            _copyrightLink.TabIndex = 2;
+            _copyrightLink.TabStop = true;
+            _copyrightLink.Text = "© easly1989";
+            _copyrightLink.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // _settingsPage
             // 
-            this._settingsPage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._settingsPage.Controls.Add(this._ttsSettings);
-            this._settingsPage.Controls.Add(this._toastSettings);
-            this._settingsPage.Controls.Add(this._generalSettings);
-            this._settingsPage.Location = new System.Drawing.Point(4, 22);
-            this._settingsPage.Name = "_settingsPage";
-            this._settingsPage.Padding = new System.Windows.Forms.Padding(3);
-            this._settingsPage.Size = new System.Drawing.Size(1225, 799);
-            this._settingsPage.TabIndex = 1;
-            this._settingsPage.Text = "Settings";
-            this._settingsPage.ToolTipText = "Change Settings for DFAssist";
-            this._settingsPage.UseVisualStyleBackColor = true;
+            _settingsPage.Dock = DockStyle.Fill;
+            _settingsPage.Controls.Add(_settingsTableLayout);
+            _settingsPage.Location = new Point(4, 22);
+            _settingsPage.Name = "_settingsPage";
+            _settingsPage.Padding = new Padding(3);
+            _settingsPage.TabStop = false;
+            _settingsPage.Text = "Settings";
+            _settingsPage.ToolTipText = "Change Settings for DFAssist";
+            _settingsPage.UseVisualStyleBackColor = true;
             // 
-            // _ttsSettings
+            // _settingsTableLayout
             // 
-            this._ttsSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._ttsSettings.AutoSize = true;
-            this._ttsSettings.Controls.Add(this._ttsCheckBox);
-            this._ttsSettings.Location = new System.Drawing.Point(4, 227);
-            this._ttsSettings.Name = "_ttsSettings";
-            this._ttsSettings.Size = new System.Drawing.Size(1215, 100);
-            this._ttsSettings.TabIndex = 2;
-            this._ttsSettings.TabStop = false;
-            this._ttsSettings.Text = "Text To Speech Settings";
-            // 
-            // _toastSettings
-            // 
-            this._toastSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._toastSettings.AutoSize = true;
-            this._toastSettings.Controls.Add(this._disableToasts);
-            this._toastSettings.Controls.Add(this._enableLegacyToast);
-            this._toastSettings.Controls.Add(this._persistToasts);
-            this._toastSettings.Location = new System.Drawing.Point(4, 117);
-            this._toastSettings.Name = "_toastSettings";
-            this._toastSettings.Size = new System.Drawing.Size(1215, 104);
-            this._toastSettings.TabIndex = 1;
-            this._toastSettings.TabStop = false;
-            this._toastSettings.Text = "Toasts Settings";
+            _settingsTableLayout.Dock = DockStyle.Fill;
+            _settingsTableLayout.ColumnCount = 1;
+            _settingsTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            _settingsTableLayout.Controls.Add(_generalSettings, 0, 0);
+            _settingsTableLayout.Controls.Add(_toastSettings, 0, 1);
+            _settingsTableLayout.Controls.Add(_ttsSettings, 0, 2);
+            _settingsTableLayout.Controls.Add(_testSettings, 0, 3);
+            _settingsTableLayout.Location = new Point(0, 3);
+            _settingsTableLayout.Name = "_settingsTableLayout";
+            _settingsTableLayout.RowCount = 5;
+            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            _settingsTableLayout.TabStop = false;
             // 
             // _generalSettings
             // 
-            this._generalSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._generalSettings.AutoSize = true;
-            this._generalSettings.Controls.Add(this._label1);
-            this._generalSettings.Controls.Add(this._languageComboBox);
-            this._generalSettings.Controls.Add(this._enableTestEnvironment);
-            this._generalSettings.Location = new System.Drawing.Point(4, 7);
-            this._generalSettings.Name = "_generalSettings";
-            this._generalSettings.Size = new System.Drawing.Size(1215, 104);
-            this._generalSettings.TabIndex = 0;
-            this._generalSettings.TabStop = false;
-            this._generalSettings.Text = "General Settings";
+            Dock = DockStyle.Top;
+            _generalSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            _generalSettings.Controls.Add(_label1);
+            _generalSettings.Controls.Add(_languageComboBox);
+            _generalSettings.Name = "_generalSettings";
+            _generalSettings.TabStop = false;
+            _generalSettings.Text = "General Settings";
+            // 
+            // _toastSettings
+            // 
+            Dock = DockStyle.Top;
+            _toastSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            _toastSettings.Controls.Add(_disableToasts);
+            _toastSettings.Controls.Add(_enableLegacyToast);
+            _toastSettings.Controls.Add(_persistToasts);
+            _toastSettings.Name = "_toastSettings";
+            _toastSettings.TabStop = false;
+            _toastSettings.Text = "Toasts Settings";
+            // 
+            // _ttsSettings
+            // 
+            Dock = DockStyle.Top;
+            _ttsSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            _ttsSettings.Controls.Add(_ttsCheckBox);
+            _ttsSettings.Name = "_ttsSettings";
+            _ttsSettings.TabStop = false;
+            _ttsSettings.Text = "Text To Speech Settings";
+            // 
+            // _testSettings
+            // 
+            Dock = DockStyle.Top;
+            _testSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            _testSettings.Controls.Add(_enableTestEnvironment);
+            _testSettings.Name = "_testSettings";
+            _testSettings.TabStop = false;
+            _testSettings.Text = "Test Settings";
             // 
             // MainControl
             // 
-            this.Controls.Add(this._appTabControl);
-            this.Name = "MainControl";
-            this.Size = new System.Drawing.Size(1240, 829);
-            this._appTabControl.ResumeLayout(false);
-            this._mainTabPage.ResumeLayout(false);
-            this._mainTableLayout.ResumeLayout(false);
-            this._mainTableLayout.PerformLayout();
-            this._settingsPage.ResumeLayout(false);
-            this._settingsPage.PerformLayout();
-            this._ttsSettings.ResumeLayout(false);
-            this._ttsSettings.PerformLayout();
-            this._toastSettings.ResumeLayout(false);
-            this._toastSettings.PerformLayout();
-            this._generalSettings.ResumeLayout(false);
-            this._generalSettings.PerformLayout();
-            this.ResumeLayout(false);
-
+            Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            Controls.Add(_appTabControl);
+            Name = "MainControl";
+            _appTabControl.ResumeLayout(false);
+            _mainTabPage.ResumeLayout(false);
+            _mainTableLayout.ResumeLayout(false);
+            _mainTableLayout.PerformLayout();
+            _settingsPage.ResumeLayout(false);
+            _settingsPage.PerformLayout();
+            _settingsTableLayout.ResumeLayout(false);
+            _settingsTableLayout.PerformLayout();
+            _ttsSettings.ResumeLayout(false);
+            _ttsSettings.PerformLayout();
+            _toastSettings.ResumeLayout(false);
+            _toastSettings.PerformLayout();
+            _generalSettings.ResumeLayout(false);
+            _generalSettings.PerformLayout();
+            _testSettings.ResumeLayout(false);
+            _testSettings.PerformLayout();
+            ResumeLayout(false);
         }
 
         private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
@@ -400,21 +406,25 @@ namespace DFAssist
         private void EnableLegacyToastsOnCheckedChanged(object sender, EventArgs e)
         {
             _persistToasts.Enabled = !_enableLegacyToast.Checked;
-            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"),
+                Localization.GetText("ui-toast-notification-test-message"));
         }
 
         private void PersistToastsOnCheckedChanged(object sender, EventArgs e)
         {
-            if(_enableLegacyToast.Checked)
+            if (_enableLegacyToast.Checked)
                 return;
 
-            var registryKey = $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{AppId}";
-            Registry.SetValue(registryKey, "ShowInActionCenter", _persistToasts.Checked ? 1 : 0, RegistryValueKind.DWord);
+            var registryKey =
+                $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{AppId}";
+            Registry.SetValue(registryKey, "ShowInActionCenter", _persistToasts.Checked ? 1 : 0,
+                RegistryValueKind.DWord);
         }
 
         #endregion
 
         #region IActPluginV1 Implementations
+
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
             _labelStatus = pluginStatusText;
@@ -436,7 +446,9 @@ namespace DFAssist
                 if (localDate.AddHours(2) >= remoteDate)
                     return;
 
-                var result = MessageBox.Show(Localization.GetText("ui-update-available-message"), Localization.GetText("ui-update-available-title"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var result = MessageBox.Show(Localization.GetText("ui-update-available-message"),
+                    Localization.GetText("ui-update-available-title"), MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
                 if (result != DialogResult.Yes)
                     return;
 
@@ -508,7 +520,8 @@ namespace DFAssist
             _timer.Enabled = true;
 
             // shows a test toast
-            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"),
+                Localization.GetText("ui-toast-notification-test-message"));
 
             _pluginInitializing = false;
 
@@ -531,18 +544,17 @@ namespace DFAssist
                 _labelStatus = null;
             }
 
-            foreach (var entry in _networks)
-            {
-                entry.Value.Network.StopCapture();
-            }
+            foreach (var entry in _networks) entry.Value.Network.StopCapture();
 
             _timer.Enabled = false;
 
             Logger.SetTextBox(null);
         }
+
         #endregion
 
         #region Getters
+
         private static string GetInstanceName(int code)
         {
             return Data.GetInstance(code).Name;
@@ -552,25 +564,14 @@ namespace DFAssist
         {
             return Data.GetRoulette(code).Name;
         }
-        #endregion
 
-        #region Load Methods
-        private void LoadData(Language defaultLanguage = null)
-        {
-            var newLanguage = defaultLanguage ?? (Language)_languageComboBox.SelectedItem;
-            if (_selectedLanguage != null && newLanguage.Code.Equals(_selectedLanguage.Code))
-                return;
-
-            _selectedLanguage = newLanguage;
-            Localization.Initialize(_selectedLanguage.Code);
-            Data.Initialize(_selectedLanguage.Code);
-        }
         #endregion
 
         #region Update Methods
+
         private void UpdateProcesses()
         {
-            var process = System.Diagnostics.Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
+            var process = Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
             if (process == null)
                 return;
             try
@@ -591,7 +592,6 @@ namespace DFAssist
 
             var toDelete = new List<int>();
             foreach (var entry in _networks)
-            {
                 if (entry.Value.Process.HasExited)
                 {
                     entry.Value.Network.StopCapture();
@@ -604,10 +604,8 @@ namespace DFAssist
                     else
                         entry.Value.Network.StartCapture(entry.Value.Process);
                 }
-            }
 
             foreach (var t in toDelete)
-            {
                 try
                 {
                     _networks.TryRemove(t, out _);
@@ -617,7 +615,6 @@ namespace DFAssist
                 {
                     Logger.Exception(e, "l-process-remove-failed");
                 }
-            }
         }
 
         private void UpdateTranslations()
@@ -630,12 +627,15 @@ namespace DFAssist
             _enableLegacyToast.Text = Localization.GetText("ui-enable-legacy-toasts");
             _disableToasts.Text = Localization.GetText("ui-disable-toasts");
         }
+
         #endregion
 
         #region Post Method
+
         private static void SendToAct(string text)
         {
-            ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now, "00|" + DateTime.Now.ToString("O") + "|0048|F|" + text);
+            ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now,
+                "00|" + DateTime.Now.ToString("O") + "|0048|F|" + text);
         }
 
         private void PostToToastWindowsNotificationIfNeeded(string server, EventType eventType, int[] args)
@@ -655,13 +655,13 @@ namespace DFAssist
         }
 
         private LegacyToast _lastToast;
+
         private void ToastWindowNotification(string title, string message)
         {
-            if(_disableToasts.Checked)
+            if (_disableToasts.Checked)
                 return;
 
             if (_enableLegacyToast.Checked)
-            {
                 try
                 {
                     _lastToast?.Close();
@@ -682,9 +682,7 @@ namespace DFAssist
                     _lastToast?.Close();
                     LegacyToastDispose();
                 }
-            }
             else
-            {
                 try
                 {
                     // Get a toast XML template
@@ -707,8 +705,6 @@ namespace DFAssist
                 {
                     Logger.Exception(e, "l-toast-notification-error");
                 }
-
-            }
         }
 
         private void LegacyToastDispose()
@@ -720,9 +716,11 @@ namespace DFAssist
             _lastToast.Closing -= LastToastOnClosing;
             _lastToast.Dispose();
         }
+
         #endregion
 
         #region Events
+
         private void LastToastOnClosing(object sender, CancelEventArgs cancelEventArgs)
         {
             LegacyToastDispose();
@@ -753,7 +751,8 @@ namespace DFAssist
         private void EnableTtsOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _isTtsEnabled = _ttsCheckBox.Checked;
-            TtsNotification(Localization.GetText("ui-tts-notification-test-message"), Localization.GetText("ui-tts-notification-test-title"));
+            TtsNotification(Localization.GetText("ui-tts-notification-test-message"),
+                Localization.GetText("ui-tts-notification-test-title"));
         }
 
         private void TtsNotification(string message, string title = "ui-tts-dutyfound")
@@ -853,9 +852,11 @@ namespace DFAssist
             LoadData();
             UpdateTranslations();
         }
+
         #endregion
 
         #region Settings
+
         private void LoadSettings()
         {
             // All the settings to deserialize
@@ -867,8 +868,8 @@ namespace DFAssist
             _xmlSettingsSerializer.AddControlSetting(_enableLegacyToast.Name, _enableLegacyToast);
 
             if (File.Exists(_settingsFile))
-            {
-                using (var fileStream = new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var fileStream =
+                    new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 using (var xmlTextReader = new XmlTextReader(fileStream))
                 {
                     try
@@ -881,7 +882,6 @@ namespace DFAssist
                             if (xmlTextReader.LocalName == "SettingsSerializer")
                                 _xmlSettingsSerializer.ImportFromXml(xmlTextReader);
                         }
-
                     }
                     catch (Exception ex)
                     {
@@ -890,7 +890,6 @@ namespace DFAssist
 
                     xmlTextReader.Close();
                 }
-            }
 
             _selectedLanguage = (Language)_languageComboBox.SelectedItem;
         }
@@ -899,8 +898,10 @@ namespace DFAssist
         {
             try
             {
-                using (var fileStream = new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                using (var xmlTextWriter = new XmlTextWriter(fileStream, Encoding.UTF8) { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' })
+                using (var fileStream =
+                    new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                using (var xmlTextWriter = new XmlTextWriter(fileStream, Encoding.UTF8)
+                { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' })
                 {
                     xmlTextWriter.WriteStartDocument(true);
                     xmlTextWriter.WriteStartElement("Config"); // <Config>
@@ -917,8 +918,8 @@ namespace DFAssist
             {
                 Logger.Exception(ex, "l-settings-save-error");
             }
-
         }
+
         #endregion
     }
 }
