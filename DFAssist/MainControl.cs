@@ -32,9 +32,11 @@ namespace DFAssist
     public class MainControl : UserControl, IActPluginV1
     {
         private const string AppId = "Advanced Combat Tracker";
+        
         private readonly ConcurrentDictionary<int, ProcessNet> _networks;
-
         private readonly string _settingsFile;
+        private readonly SpeechSynthesizer _synth;
+
         private TabControl _appTabControl;
         private Label _appTitle;
         private Button _button1;
@@ -51,7 +53,6 @@ namespace DFAssist
         private Label _labelStatus;
         private TabPage _labelTab;
         private ComboBox _languageComboBox;
-
         private bool _mainFormIsLoaded;
         private TableLayoutPanel _mainTableLayout;
         private TabPage _mainTabPage;
@@ -61,7 +62,6 @@ namespace DFAssist
         private Language _selectedLanguage;
         private TabPage _settingsPage;
         private TableLayoutPanel _settingsTableLayout;
-        private SpeechSynthesizer _synth;
         private GroupBox _testSettings;
         private Timer _timer;
         private GroupBox _toastSettings;
@@ -89,6 +89,13 @@ namespace DFAssist
         public MainControl()
         {
             InitializeComponent();
+
+            _synth = new SpeechSynthesizer();
+
+            Logger.SetTextBox(_richTextBox1);
+            Logger.Debug("----------------------------------------------------------------");
+            Logger.Debug(" > Plugin Init");
+            Logger.Debug($" > Plugin Version: {Assembly.GetExecutingAssembly().GetName().Version}");
 
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomainOnAssemblyResolve;
 
@@ -254,8 +261,8 @@ namespace DFAssist
             _mainTableLayout.Location = new Point(0, 3);
             _mainTableLayout.Name = "_mainTableLayout";
             _mainTableLayout.RowCount = 2;
-            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 3.728362F));
-            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 96.27164F));
+            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             _mainTableLayout.TabStop = false;
             // 
             // _button1
@@ -318,7 +325,8 @@ namespace DFAssist
             // 
             // _settingsTableLayout
             // 
-            _settingsTableLayout.Dock = DockStyle.Fill;
+            //_settingsTableLayout.Dock = DockStyle.Fill;
+            _settingsTableLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             _settingsTableLayout.ColumnCount = 1;
             _settingsTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             _settingsTableLayout.Controls.Add(_generalSettings, 0, 0);
@@ -367,7 +375,7 @@ namespace DFAssist
             // 
             // _testSettings
             // 
-            Dock = DockStyle.Top;
+           Dock = DockStyle.Top;
             _testSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             _testSettings.Controls.Add(_enableTestEnvironment);
             _testSettings.Name = "_testSettings";
@@ -376,7 +384,7 @@ namespace DFAssist
             // 
             // MainControl
             // 
-            Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            Dock = DockStyle.Fill;
             Controls.Add(_appTabControl);
             Name = "MainControl";
             _appTabControl.ResumeLayout(false);
@@ -474,11 +482,6 @@ namespace DFAssist
                 return;
 
             _pluginInitializing = true;
-
-            _synth = new SpeechSynthesizer();
-
-            Logger.SetTextBox(_richTextBox1);
-            Logger.Info($"DFAssist - v{Assembly.GetExecutingAssembly().GetName().Version}");
 
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
 
