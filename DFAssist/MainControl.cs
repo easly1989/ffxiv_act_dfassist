@@ -68,6 +68,7 @@ namespace DFAssist
         private CheckBox _ttsCheckBox;
         private GroupBox _ttsSettings;
         private SettingsSerializer _xmlSettingsSerializer;
+        private Panel _settingsPanel;
 
         #region Load Methods
 
@@ -141,6 +142,7 @@ namespace DFAssist
             _appTitle = new Label();
             _copyrightLink = new LinkLabel();
             _settingsPage = new TabPage();
+            _settingsPanel = new Panel();
             _settingsTableLayout = new TableLayoutPanel();
             _ttsSettings = new GroupBox();
             _toastSettings = new GroupBox();
@@ -150,6 +152,7 @@ namespace DFAssist
             _mainTabPage.SuspendLayout();
             _mainTableLayout.SuspendLayout();
             _settingsPage.SuspendLayout();
+            _settingsPanel.SuspendLayout();
             _settingsTableLayout.SuspendLayout();
             _ttsSettings.SuspendLayout();
             _toastSettings.SuspendLayout();
@@ -314,7 +317,7 @@ namespace DFAssist
             // _settingsPage
             // 
             _settingsPage.Dock = DockStyle.Fill;
-            _settingsPage.Controls.Add(_settingsTableLayout);
+            _settingsPage.Controls.Add(_settingsPanel);
             _settingsPage.Location = new Point(4, 22);
             _settingsPage.Name = "_settingsPage";
             _settingsPage.Padding = new Padding(3);
@@ -323,10 +326,21 @@ namespace DFAssist
             _settingsPage.ToolTipText = "Change Settings for DFAssist";
             _settingsPage.UseVisualStyleBackColor = true;
             // 
+            // _settingsPanel
+            //
+            _settingsPanel.Dock = DockStyle.Fill;
+            _settingsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            _settingsPanel.Controls.Add(_settingsTableLayout);
+            _settingsPanel.Name = "_settingsPanel";
+            _settingsPanel.TabStop = false;
+            _settingsPanel.AutoScroll= true;
+            // 
             // _settingsTableLayout
             // 
-            //_settingsTableLayout.Dock = DockStyle.Fill;
-            _settingsTableLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            _settingsTableLayout.Dock = DockStyle.Fill;
+            _settingsTableLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            _settingsTableLayout.AutoSize = true;
+            _settingsTableLayout.AutoSizeMode = AutoSizeMode.GrowOnly;
             _settingsTableLayout.ColumnCount = 1;
             _settingsTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             _settingsTableLayout.Controls.Add(_generalSettings, 0, 0);
@@ -375,7 +389,7 @@ namespace DFAssist
             // 
             // _testSettings
             // 
-           Dock = DockStyle.Top;
+            Dock = DockStyle.Top;
             _testSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             _testSettings.Controls.Add(_enableTestEnvironment);
             _testSettings.Name = "_testSettings";
@@ -393,6 +407,8 @@ namespace DFAssist
             _mainTableLayout.PerformLayout();
             _settingsPage.ResumeLayout(false);
             _settingsPage.PerformLayout();
+            _settingsPanel.ResumeLayout(false);
+            _settingsPanel.PerformLayout();
             _settingsTableLayout.ResumeLayout(false);
             _settingsTableLayout.PerformLayout();
             _ttsSettings.ResumeLayout(false);
