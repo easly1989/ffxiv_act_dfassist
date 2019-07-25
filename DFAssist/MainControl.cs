@@ -656,8 +656,7 @@ namespace DFAssist
 
         private static void SendToAct(string text)
         {
-            ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now,
-                "00|" + DateTime.Now.ToString("O") + "|0048|F|" + text);
+            ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now, "00|" + DateTime.Now.ToString("O") + "|0048|F|" + text);
         }
 
         private void PostToToastWindowsNotificationIfNeeded(string server, EventType eventType, int[] args)
@@ -795,46 +794,6 @@ namespace DFAssist
 
             switch (eventType)
             {
-                case EventType.INSTANCE_ENTER:
-                case EventType.INSTANCE_EXIT:
-                    if (args.Length > 0)
-                    {
-                        text += GetInstanceName(args[0]) + "|";
-                        pos++;
-                    }
-
-                    break;
-                case EventType.MATCH_BEGIN:
-                    text += (MatchType)args[0] + "|";
-                    pos++;
-                    switch ((MatchType)args[0])
-                    {
-                        case MatchType.ROULETTE:
-                            text += GetRouletteName(args[1]) + "|";
-                            pos++;
-                            break;
-                        case MatchType.SELECTIVE:
-                            text += args[1] + "|";
-                            pos++;
-                            var p = pos;
-                            for (var i = p; i < args.Length; i++)
-                            {
-                                text += GetInstanceName(args[i]) + "|";
-                                pos++;
-                            }
-
-                            break;
-                    }
-
-                    break;
-                case EventType.MATCH_END:
-                    text += (MatchEndType)args[0] + "|";
-                    pos++;
-                    break;
-                case EventType.MATCH_PROGRESS:
-                    text += GetInstanceName(args[0]) + "|";
-                    pos++;
-                    break;
                 case EventType.MATCH_ALERT:
                     text += GetRouletteName(args[0]) + "|";
                     pos++;
@@ -843,7 +802,8 @@ namespace DFAssist
                     break;
             }
 
-            for (var i = pos; i < args.Length; i++) text += args[i] + "|";
+            for (var i = pos; i < args.Length; i++) 
+                text += args[i] + "|";
 
             SendToAct(text);
 

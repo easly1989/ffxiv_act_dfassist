@@ -10,6 +10,10 @@ namespace DFAssist
     public static class FFXIVPacketHandler
     // ReSharper restore InconsistentNaming
     {
+        private static bool _netCompatibility;
+        private static int _lastMember;
+        private static byte _rouletteCode; 
+
         public delegate void EventHandler(int pid, EventType eventType, int[] args);
         public static event EventHandler OnEventReceived;
 
@@ -132,6 +136,18 @@ namespace DFAssist
                 }
 
                 var opcode = BitConverter.ToUInt16(message, 18);
+
+#if !DEBUG
+                if (opcode != 0x0078 &&
+                    opcode != 0x0079 &&
+                    opcode != 0x0080 &&
+                    opcode != 0x006C &&
+                    opcode != 0x006F &&
+                    opcode != 0x0121 &&
+                    opcode != 0x0143 &&
+                    opcode != 0x022F)
+                    return;
+#endif
                 var data = message.Skip(32).ToArray();
 
                 if (opcode == 0x022F) // Entering/Leaving an instance
@@ -157,14 +173,14 @@ namespace DFAssist
 
                     if (status == 0) // Apply for Duties
                     {
+                        _netCompatibility = false;
                         state = State.QUEUED;
 
-                        var rouletteCode = data[20];
+                        _rouletteCode = data[20];
 
-                        if (rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
+                        if (_rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
                         {
-                            Logger.Info("l-queue-started-roulette", Data.GetRoulette(rouletteCode).Name);
-                            FireEvent(pid, EventType.MATCH_BEGIN, new[] { (int)MatchType.ROULETTE, rouletteCode });
+                            Logger.Info("l-queue-started-roulette", Data.GetRoulette(_rouletteCode).Name);
                         }
                         else // Specific Duty (Dungeon/Trial/Raid)
                         {
@@ -181,37 +197,28 @@ namespace DFAssist
                             if (!instances.Any())
                                 return;
 
-                            var args = new List<int> { (int)MatchType.SELECTIVE, instances.Count };
-                            foreach (var item in instances)
-                            {
-                                args.Add(item);
-                            }
-
                             Logger.Info("l-queue-started-general", string.Join(", ", instances.Select(x => Data.GetInstance(x).Name).ToArray()));
-                            FireEvent(pid, EventType.MATCH_BEGIN, args.ToArray());
                         }
                     }
                     else if (status == 3) // Cancel
                     {
                         state = reason == 8 ? State.QUEUED : State.IDLE;
-                        Logger.Info("l-queue-stopped");
-                        FireEvent(pid, EventType.MATCH_END, new[] { (int)MatchEndType.CANCELLED });
+                        Logger.Error("l-queue-stopped");
                     }
                     else if (status == 6) // Entered
                     {
                         state = State.IDLE;
                         Logger.Info("l-queue-entered");
-                        FireEvent(pid, EventType.MATCH_END, new[] { (int)MatchEndType.ENTER_INSTANCE });
                     }
                     else if (status == 4) // Matched
                     {
                         var roulette = data[20];
-                        var code = BitConverter.ToUInt16(data, 22); 
+                        var code = BitConverter.ToUInt16(data, 22);
 
                         state = State.MATCHED;
-                        
-                        Logger.Info("l-queue-matched", code, Data.GetInstance(code).Name);
                         FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
+
+                        Logger.Success("l-queue-matched", code, Data.GetInstance(code).Name);
                     }
                 }
                 else if (opcode == 0x006F)
@@ -224,7 +231,71 @@ namespace DFAssist
                 }
                 else if (opcode == 0x0079) // Status during matching
                 {
-                    // used on standalone version to check matching in progress
+                    var code = BitConverter.ToUInt16(data, 0);
+                    byte status;
+                    byte tank;
+                    byte dps;
+                    byte healer;
+                    var member = 0;
+                    var instance = Data.GetInstance(code);
+
+                    if (_netCompatibility)
+                    {
+                        status = data[8];
+                        tank = data[9];
+                        dps = data[10];
+                        healer = data[11];
+                    }
+                    else
+                    {
+                        status = data[4];
+                        tank = data[5];
+                        dps = data[6];
+                        healer = data[7];
+                    }
+
+                    if (status == 0 && tank == 0 && healer == 0 && dps == 0) // v4.5~ compatibility (data location changed, original location sends "0")
+                    {
+                        _netCompatibility = true;
+                        status = data[8];
+                        tank = data[9];
+                        dps = data[10];
+                        healer = data[11];
+                    }
+
+                    if (status == 1)
+                    {
+                        member = tank * 10000 + dps * 100 + healer;
+
+                        if (state == State.MATCHED && _lastMember != member)
+                        {
+                            // We get here when the queue is stopped by someone else (?)
+                            state = State.QUEUED;
+                        }
+                        else if (state == State.IDLE)
+                        {
+                            // Plugin started with duty finder in progress
+                            state = State.QUEUED;
+                        }
+                        else if (state == State.QUEUED)
+                        {
+                            // in queue
+                        }
+
+                        _lastMember = member;
+                    }
+                    else if (status == 2)
+                    {
+                        // Info sul numero di partecipanti al duty
+                        return;
+                    }
+                    else if (status == 4)
+                    {
+                        // Duty Accepted status
+                    }
+
+                    var memberinfo = $"{tank}/{instance.Tank}, {healer}/{instance.Healer}, {dps}/{instance.Dps} | {member}";
+                    Logger.Info("l-queue-updated", instance.Name, status, memberinfo);
                 }
                 else if (opcode == 0x0080)
                 {
@@ -232,9 +303,9 @@ namespace DFAssist
                     var code = BitConverter.ToUInt16(data, 4);
 
                     state = State.MATCHED;
+                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
 
                     Logger.Success("l-queue-matched ", code, Data.GetInstance(code).Name);
-                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
                 }
             }
             catch (Exception ex)
