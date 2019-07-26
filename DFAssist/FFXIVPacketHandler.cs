@@ -286,7 +286,7 @@ namespace DFAssist
                     }
                     else if (status == 2)
                     {
-                        // Info sul numero di partecipanti al duty
+                        // info about player partecipating in the duty (?)
                         return;
                     }
                     else if (status == 4)
