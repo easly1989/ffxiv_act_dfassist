@@ -211,7 +211,7 @@ namespace DFAssist
                 var networkApp = GetInstance<INetFwAuthorizedApplication>("HNetCfg.FwAuthorizedApplication");
 
                 networkApp.Enabled = true;
-                networkApp.Name = "FFXIV_FATE";
+                networkApp.Name = "FFXIV_DFAssist";
                 networkApp.ProcessImageFileName = _exePath;
                 networkApp.Scope = NET_FW_SCOPE_.NET_FW_SCOPE_ALL;
 
