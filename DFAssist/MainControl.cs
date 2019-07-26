@@ -1,12 +1,4 @@
-﻿// reference:System.dll
-// reference:System.Core.dll
-// reference:System.Web.Extensions.dll
-// reference:Newtonsoft.Json.dll
-// reference:Microsoft.WindowsAPICodePack.dll
-// reference:Microsoft.WindowsAPICodePack.Shell.dll
-// reference:Microsoft.WindowsAPICodePack.ShellExtensions.dll
-
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -93,11 +85,6 @@ namespace DFAssist
 
             _synth = new SpeechSynthesizer();
 
-            Logger.SetTextBox(_richTextBox1);
-            Logger.Debug("----------------------------------------------------------------");
-            Logger.Debug(" > Plugin Init");
-            Logger.Debug($" > Plugin Version: {Assembly.GetExecutingAssembly().GetName().Version}");
-
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomainOnAssemblyResolve;
 
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
@@ -115,11 +102,8 @@ namespace DFAssist
 
         private Assembly CurrentDomainOnAssemblyResolve(object sender, ResolveEventArgs e)
         {
-            var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
-            var enviroment = Path.GetDirectoryName(pluginData.pluginFile.ToString());
-
             // if any of the assembly cannot be loaded, then the plugin cannot be started
-            if (!AssemblyResolver.LoadAssembly(e.Name, enviroment, _labelStatus, out var result))
+            if (!AssemblyResolver.LoadAssembly(e, _labelStatus, out var result))
                 throw new Exception("Assembly load failed.");
 
             return result;
@@ -254,9 +238,9 @@ namespace DFAssist
             // 
             _mainTableLayout.Dock = DockStyle.Fill;
             _mainTableLayout.ColumnCount = 3;
-            _mainTableLayout.ColumnStyles.Add(new ColumnStyle());
+            _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            _mainTableLayout.ColumnStyles.Add(new ColumnStyle());
+            _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             _mainTableLayout.Controls.Add(_button1, 2, 0);
             _mainTableLayout.Controls.Add(_richTextBox1, 0, 1);
             _mainTableLayout.Controls.Add(_appTitle, 0, 0);
@@ -270,13 +254,14 @@ namespace DFAssist
             // 
             // _button1
             // 
-            _appTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            _button1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             _button1.Name = "_button1";
             _button1.MinimumSize = new Size(100, 25);
             _button1.TabIndex = 0;
             _button1.Text = "Clear Logs";
             _button1.UseVisualStyleBackColor = true;
             _button1.Click += ClearLogsButton_Click;
+            _button1.AutoSize = true;
             // 
             // _richTextBox1
             //
@@ -292,14 +277,14 @@ namespace DFAssist
             // 
             // _appTitle
             // 
-            _appTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            _appTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
             _appTitle.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             _appTitle.Location = new Point(3, 0);
             _appTitle.Name = "_appTitle";
-            _appTitle.Size = new Size(97, 29);
             _appTitle.TabStop = false;
             _appTitle.Text = "DFAssist ~";
-            _appTitle.TextAlign = ContentAlignment.MiddleCenter;
+            _appTitle.TextAlign = ContentAlignment.MiddleLeft;
+            _appTitle.AutoSize = true;
             // 
             // _copyrightLink
             // 
@@ -308,11 +293,11 @@ namespace DFAssist
             _copyrightLink.LinkBehavior = LinkBehavior.HoverUnderline;
             _copyrightLink.Location = new Point(106, 0);
             _copyrightLink.Name = "_copyrightLink";
-            _copyrightLink.Size = new Size(107, 29);
             _copyrightLink.TabIndex = 2;
             _copyrightLink.TabStop = true;
             _copyrightLink.Text = "© easly1989";
-            _copyrightLink.TextAlign = ContentAlignment.MiddleCenter;
+            _copyrightLink.TextAlign = ContentAlignment.MiddleLeft;
+            _copyrightLink.AutoSize = true;
             // 
             // _settingsPage
             // 
@@ -431,19 +416,36 @@ namespace DFAssist
         private void EnableLegacyToastsOnCheckedChanged(object sender, EventArgs e)
         {
             _persistToasts.Enabled = !_enableLegacyToast.Checked;
-            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"),
-                Localization.GetText("ui-toast-notification-test-message"));
+            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
         }
 
         private void PersistToastsOnCheckedChanged(object sender, EventArgs e)
         {
-            if (_enableLegacyToast.Checked)
-                return;
-
-            var registryKey =
-                $@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{AppId}";
-            Registry.SetValue(registryKey, "ShowInActionCenter", _persistToasts.Checked ? 1 : 0,
-                RegistryValueKind.DWord);
+            // todo: show a message and log when "false"
+            // as it may be necessary to reboot the PC to make the change effective!
+            try
+            {
+                var keyName = $@"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{AppId}";
+                using (var key = Registry.CurrentUser.OpenSubKey(keyName, true))
+                {
+                    if(_persistToasts.Checked)
+                    {
+                        if(key == null)
+                            Registry.SetValue($@"HKEY_CURRENT_USER\{keyName}", "ShowInActionCenter", 1, RegistryValueKind.DWord);
+                        else
+                            key.SetValue("ShowInActionCenter", 1, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        key?.DeleteValue("ShowInActionCenter");
+                    }
+                }
+            }
+            catch(Exception)
+            {
+                // unable to remove or add the key to registry!
+                // todo: log
+            }
         }
 
         #endregion
@@ -498,9 +500,17 @@ namespace DFAssist
                 return;
 
             _pluginInitializing = true;
-
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
 
+            var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
+            var enviroment = Path.GetDirectoryName(pluginData.pluginFile.ToString());
+            AssemblyResolver.Initialize(enviroment);
+
+            Logger.SetTextBox(_richTextBox1);
+            Logger.Debug("----------------------------------------------------------------");
+            Logger.Debug(" > Plugin Init");
+            Logger.Debug($" > Plugin Version: {Assembly.GetExecutingAssembly().GetName().Version}");
+            
             var defaultLanguage = new Language { Name = "English", Code = "en-us" };
             LoadData(defaultLanguage);
 
@@ -542,8 +552,7 @@ namespace DFAssist
             _timer.Enabled = true;
 
             // shows a test toast
-            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"),
-                Localization.GetText("ui-toast-notification-test-message"));
+            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
 
             _pluginInitializing = false;
 
@@ -641,6 +650,7 @@ namespace DFAssist
 
         private void UpdateTranslations()
         {
+            SuspendLayout();
             _label1.Text = Localization.GetText("ui-language-display-text");
             _button1.Text = Localization.GetText("ui-log-clear-display-text");
             _enableTestEnvironment.Text = Localization.GetText("ui-enable-test-environment");
@@ -648,6 +658,15 @@ namespace DFAssist
             _persistToasts.Text = Localization.GetText("ui-persist-toasts");
             _enableLegacyToast.Text = Localization.GetText("ui-enable-legacy-toasts");
             _disableToasts.Text = Localization.GetText("ui-disable-toasts");
+
+            _appTitle.Text = $"{Localization.GetText("app-name")} v{Assembly.GetExecutingAssembly().GetName().Version} | ";
+            _generalSettings.Text = Localization.GetText("ui-general-settings-group");
+            _toastSettings.Text = Localization.GetText("ui-toast-settings-group");
+            _ttsSettings.Text = Localization.GetText("ui-tts-settings-group");
+            _testSettings.Text = Localization.GetText("ui-test-settings-group");
+
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

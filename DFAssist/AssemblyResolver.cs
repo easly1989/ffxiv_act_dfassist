@@ -1,28 +1,67 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using Advanced_Combat_Tracker;
 
 namespace DFAssist
 {
     public static class AssemblyResolver
     {
-        public static bool LoadAssembly(string assemblyName, string enviroment, Label labelStatus, out Assembly result)
+        private static bool _initialized;
+        private static string _librariesPath;
+        private static Dictionary<string, bool> _assemblies;
+
+        static AssemblyResolver()
+        {
+            _assemblies = new Dictionary<string, bool>();
+        }
+
+        /// <summary>
+        /// must be called before LoadAssembly!
+        /// </summary>
+        /// <param name="enviroment"></param>
+        public static void Initialize(string enviroment)
+        {
+            if(_initialized)
+                return;
+
+            _initialized = true;
+            _librariesPath = Path.Combine(enviroment, "libs");
+
+            try
+            {
+                foreach (var file in Directory.GetFiles(_librariesPath))
+                {
+                    var key = Path.GetFileNameWithoutExtension(file);
+                    if(_assemblies.ContainsKey(key))
+                        continue;
+
+                    _assemblies.Add(key, false);
+                }
+            }
+            catch (Exception)
+            {
+                // no dll loaded..
+                Debug.WriteLine("Unable to load any DLL from libs..., the plugin cannot start!");
+            }
+        }
+
+        public static bool LoadAssembly(ResolveEventArgs args, Label labelStatus, out Assembly result)
         {
             result = null;
 
-            var currentDll = Path.Combine(enviroment, "libs");
-            var name = GetAssemblyName(assemblyName);
-            if(name == "Newtonsoft.Json"
-                || name == "Microsoft.WindowsAPICodePack"
-                || name == "Microsoft.WindowsAPICodePack.Shell"
-                || name == "Microsoft.WindowsAPICodePack.ShellExtensions")
+            if(!_initialized || GetAssemblyName(args.RequestingAssembly.FullName) != nameof(DFAssist))
+                return true; // avoid throwing, maybe it will be initialized later... who knows? >_<
+
+            string currentDll;
+            var name = GetAssemblyName(args.Name);
+            if(_assemblies.TryGetValue(name, out _))
             {
-                currentDll = Path.Combine(currentDll, name + ".ref");
-            }
-            else if(name == "Windows")
-            {
-                currentDll = Path.Combine(currentDll, name + ".winmd");
+                currentDll = Path.Combine(_librariesPath, name + ".dll");
             }
             else
             {
@@ -36,11 +75,12 @@ namespace DFAssist
                 {
                     var dllBytes = File.ReadAllBytes(currentDll);
                     result = AppDomain.CurrentDomain.Load(dllBytes);
+                    _assemblies[name] = true;
                     return true;
                 }
                 catch (Exception)
                 {
-                    labelStatus.Text = $"Unable to load {assemblyName} library, it may needs to be 'Unblocked'.";
+                    labelStatus.Text = $"Unable to load {args.Name} library, it may needs to be 'Unblocked'.";
                     return false;
                 }
             }

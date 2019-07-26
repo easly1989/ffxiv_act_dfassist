@@ -91,5 +91,10 @@
   "ui-persist-toasts": "토스트를 지속적으로 만드십시오.",
 
   "ui-enable-legacy-toasts": "레거시 토스트 사용",
-  "ui-disable-toasts": "토스트 끄기"
+  "ui-disable-toasts": "토스트 끄기",
+
+  "ui-general-settings-group": "일반 설정",
+  "ui-toast-settings-group": "토스트 설정",
+  "ui-tts-settings-group": "텍스트 음성 변환 설정",
+  "ui-test-settings-group": "테스트 설정"
 }

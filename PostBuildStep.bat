@@ -8,9 +8,9 @@ echo %pdb%
 echo "Creating folders if necessary..."
 if not exist %libs% mkdir %libs%
 if not exist %pdb% mkdir %pdb%
-echo "Moving all ref files..."
-move /Y %from%*.ref %libs%
-move /Y %from%*.winmd %libs%
+echo "Moving all dll files..."
+move /Y %from%*.dll %libs%
+move /Y %libs%\DFAssist.dll %from%DFAssist.dll
 echo "Moving pdb files..."
 move /Y %from%*.pdb %pdb%
 echo "Deleteing all xml files..."

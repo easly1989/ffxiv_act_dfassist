@@ -91,5 +91,10 @@
   "ui-persist-toasts": "Make Toasts Persistent",
 
   "ui-enable-legacy-toasts": "Enable Legacy Toasts",
-  "ui-disable-toasts": "Disable Toasts"
+  "ui-disable-toasts": "Disable Toasts",
+
+  "ui-general-settings-group": "General Settings",
+  "ui-toast-settings-group": "Toasts Settings",
+  "ui-tts-settings-group": "Text To Speech Settings",
+  "ui-test-settings-group": "Test Settings"
 }

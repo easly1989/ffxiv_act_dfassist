@@ -91,5 +91,10 @@
   "ui-persist-toasts": "乾杯を持続させる",
 
   "ui-enable-legacy-toasts": "レガシートーストを有効にする",
-  "ui-disable-toasts": "トーストを無効にする"
+  "ui-disable-toasts": "トーストを無効にする",
+
+  "ui-general-settings-group": "一般設定",
+  "ui-toast-settings-group": "トースト設定",
+  "ui-tts-settings-group": "テキスト読み上げ設定",
+  "ui-test-settings-group": "テスト設定"
 }
