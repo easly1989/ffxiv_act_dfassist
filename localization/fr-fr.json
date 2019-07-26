@@ -96,5 +96,8 @@
   "ui-general-settings-group": "Paramètres généraux",
   "ui-toast-settings-group": "Paramètres de toasts",
   "ui-tts-settings-group": "Paramètres de synthèse vocale",
-  "ui-test-settings-group": "Paramètres de test"
+  "ui-test-settings-group": "Paramètres de test",
+
+  "ui-persistent-toast-warning-title": "Avertissement de toasts persistants!",
+  "ui-persistent-toast-warning-message": "Après avoir apporté des modifications au registre, il peut être nécessaire de redémarrer le PC pour que les modifications soient prises en compte!"
 }

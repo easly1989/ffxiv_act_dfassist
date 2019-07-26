@@ -96,5 +96,8 @@
   "ui-general-settings-group": "General Settings",
   "ui-toast-settings-group": "Toasts Settings",
   "ui-tts-settings-group": "Text To Speech Settings",
-  "ui-test-settings-group": "Test Settings"
+  "ui-test-settings-group": "Test Settings",
+
+  "ui-persistent-toast-warning-title": "Persistent Toasts Warning!",
+  "ui-persistent-toast-warning-message": "After making changes to the registry\nIt may be necessary to reboot the PC for the changes to take place!"
 }

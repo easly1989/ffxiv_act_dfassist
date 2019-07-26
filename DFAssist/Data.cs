@@ -17,8 +17,10 @@ namespace DFAssist
         
         public static void Initialize(string language)
         {
+            Logger.Debug("Initializing Data...");
             var json = WebInteractions.DownloadString($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/data/{language}.json");
             Fill(json, language);
+            Logger.Debug(Initialized && Instances.Any() && Roulettes.Any() ? $"Data {Version} Initialized!" : "Unable to initialize Data!");
         }
 
         private static void Fill(string json, string language)
@@ -38,16 +40,14 @@ namespace DFAssist
                     Version = version;
 
                     if (Initialized)
-                    {
-                        Logger.Info( "l-data-updated", Version);
-                    }
+                        Logger.Debug(Localization.GetText("l-data-updated", Version));
 
                     Initialized = true;
                     CurrentLanguage = language;
                 }
                 else
                 {
-                    Logger.Info("l-data-is-latest", Version);
+                    Logger.Debug(Localization.GetText("l-data-is-latest", Version));
                 }
             }
             catch (Exception ex)

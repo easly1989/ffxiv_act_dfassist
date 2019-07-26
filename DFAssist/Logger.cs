@@ -10,7 +10,7 @@ namespace DFAssist
     public static class Logger
     {
         private static readonly Regex EscapePattern = new Regex(@"\{(.+?)\}");
-
+        
         private static RichTextBox _richTextBox;
 
         public static void SetTextBox(RichTextBox box)
@@ -67,12 +67,12 @@ namespace DFAssist
             var message = ex.Message;
 
             message = Escape(message);
-            Error($"{format}: {message}", args);
+            Write(Color.Red, $"{format}: {message}", args);
         }
 
         public static void Debug(object format, params object[] args)
         {
-            Write(Color.Gray, format, args);
+            Write(Color.Gray, $" > {format}", args);
         }
 
         public static void Buffer(byte[] buffer)

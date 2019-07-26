@@ -22,20 +22,19 @@ namespace DFAssist.Shell
         {
             var shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\" + appName + ".lnk";
             if (File.Exists(shortcutPath))
-                return false;
+                return true;
 
-            InstallShortcut(appId, shortcutPath);
-            return true;
+            return InstallShortcut(appId, shortcutPath);
         }
 
-        private static void InstallShortcut(string appId, string shortcutPath)
+        private static bool InstallShortcut(string appId, string shortcutPath)
         {
             // Find the path to the current executable
             var exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
 
             // ReSharper disable SuspiciousTypeConversion.Global
             if (!(new CShellLink() is IShellLinkW newShortcut))
-                return;
+                return false;
             // ReSharper restore SuspiciousTypeConversion.Global
 
             // Create a shortcut to the exe
@@ -61,6 +60,8 @@ namespace DFAssist.Shell
             if (newShortcut is IPersistFile newShortcutSave)
                 VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
             // ReSharper restore SuspiciousTypeConversion.Global
+
+            return true;
         }
 
         private static void VerifySucceeded(UInt32 hresult)

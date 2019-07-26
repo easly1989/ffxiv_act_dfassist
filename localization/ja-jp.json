@@ -96,5 +96,8 @@
   "ui-general-settings-group": "一般設定",
   "ui-toast-settings-group": "トースト設定",
   "ui-tts-settings-group": "テキスト読み上げ設定",
-  "ui-test-settings-group": "テスト設定"
+  "ui-test-settings-group": "テスト設定",
+
+  "ui-persistent-toast-warning-title": "しつこいトーストの警告!",
+  "ui-persistent-toast-warning-message": "レジストリに変更を加えた後\n変更を有効にするためにPCを再起動する必要があるかもしれません!"
 }

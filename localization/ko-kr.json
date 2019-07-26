@@ -96,5 +96,8 @@
   "ui-general-settings-group": "일반 설정",
   "ui-toast-settings-group": "토스트 설정",
   "ui-tts-settings-group": "텍스트 음성 변환 설정",
-  "ui-test-settings-group": "테스트 설정"
+  "ui-test-settings-group": "테스트 설정",
+
+  "ui-persistent-toast-warning-title": "영구 토스트 경고!",
+  "ui-persistent-toast-warning-message": "레지스트리를 변경 한 후 \n 변경 사항을 적용하려면 PC를 재부팅해야 할 수도 있습니다.!"
 }
