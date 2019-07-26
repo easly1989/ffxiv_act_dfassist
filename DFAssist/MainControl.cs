@@ -642,9 +642,9 @@ namespace DFAssist
                 Logger.Exception(e, "l-process-set-failed");
             }
 
-
             var toDelete = new List<int>();
             foreach (var entry in _networks)
+            {
                 if (entry.Value.Process.HasExited)
                 {
                     entry.Value.Network.StopCapture();
@@ -655,10 +655,15 @@ namespace DFAssist
                     if (entry.Value.Network.IsRunning)
                         entry.Value.Network.UpdateGameConnections(entry.Value.Process);
                     else
-                        entry.Value.Network.StartCapture(entry.Value.Process);
+                    {
+                        if(!entry.Value.Network.StartCapture(entry.Value.Process))
+                            toDelete.Add(entry.Key);
+                    }
                 }
+            }
 
             foreach (var t in toDelete)
+            {
                 try
                 {
                     _networks.TryRemove(t, out _);
@@ -668,6 +673,7 @@ namespace DFAssist
                 {
                     Logger.Exception(e, "l-process-remove-failed");
                 }
+            }
         }
 
         private void UpdateTranslations()

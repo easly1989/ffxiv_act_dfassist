@@ -36,50 +36,49 @@ namespace DFAssist
             _exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
         }
 
-        public void StartCapture(System.Diagnostics.Process process)
+        public bool StartCapture(System.Diagnostics.Process process)
         {
             _pid = process.Id;
-            Task.Factory.StartNew(() =>
+            try
             {
-                try
+                Logger.Info("l-network-starting");
+
+                if (IsRunning)
                 {
-                    Logger.Info("l-network-starting");
-
-                    if (IsRunning)
-                    {
-                        Logger.Error("l-network-error-already-started");
-                        return;
-                    }
-
-                    UpdateGameConnections(process);
-
-                    if (_connections.Count < 2)
-                    {
-                        Logger.Error("l-network-error-no-connection");
-                        return;
-                    }
-
-                    var localAddress = _connections[0].LocalEndPoint.Address;
-
-                    RegisterToFirewall();
-
-                    _socket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
-                    _socket.Bind(new IPEndPoint(localAddress, 0));
-                    _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
-                    _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AcceptConnection, true);
-                    _socket.IOControl(IOControlCode.ReceiveAll, RcvallIplevel, null);
-                    _socket.ReceiveBufferSize = _recvBuffer.Length * 4;
-
-                    _socket.BeginReceive(_recvBuffer, 0, _recvBuffer.Length, 0, OnReceive, null);
-                    IsRunning = true;
-
-                    Logger.Success("l-network-started");
+                    Logger.Error("l-network-error-already-started");
+                    return false;
                 }
-                catch (Exception ex)
+
+                UpdateGameConnections(process);
+
+                if (_connections.Count < 2)
                 {
-                    Logger.Exception(ex, "l-network-error-starting");
+                    Logger.Error("l-network-error-no-connection");
+                    return false;
                 }
-            });
+
+                var localAddress = _connections[0].LocalEndPoint.Address;
+
+                RegisterToFirewall();
+
+                _socket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
+                _socket.Bind(new IPEndPoint(localAddress, 0));
+                _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
+                _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AcceptConnection, true);
+                _socket.IOControl(IOControlCode.ReceiveAll, RcvallIplevel, null);
+                _socket.ReceiveBufferSize = _recvBuffer.Length * 4;
+
+                _socket.BeginReceive(_recvBuffer, 0, _recvBuffer.Length, 0, OnReceive, null);
+                IsRunning = true;
+
+                Logger.Success("l-network-started");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex, "l-network-error-starting");
+                return false;
+            }
         }
 
         public void StopCapture()
