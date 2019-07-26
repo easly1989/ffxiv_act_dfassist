@@ -547,6 +547,8 @@ namespace DFAssist
             _languageComboBox.ValueMember = "Code";
             _languageComboBox.SelectedValueChanged += LanguageComboBox_SelectedValueChanged;
 
+            UpdateTranslations();
+
             _labelStatus.Text = "Starting...";
 
             _labelStatus.Text = Localization.GetText("l-plugin-started");
