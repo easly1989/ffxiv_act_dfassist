@@ -66,7 +66,7 @@ namespace DFAssist
         private void LoadData(Language defaultLanguage = null)
         {
             var newLanguage = defaultLanguage ?? (Language)_languageComboBox.SelectedItem;
-            if (_selectedLanguage != null && newLanguage.Code.Equals(_selectedLanguage.Code))
+            if(_selectedLanguage != null && newLanguage.Code.Equals(_selectedLanguage.Code))
                 return;
 
             _selectedLanguage = newLanguage;
@@ -89,9 +89,9 @@ namespace DFAssist
             _settingsFile = Path.Combine(ActGlobals.oFormActMain.AppDataFolder.FullName, "Config", "DFAssist.config.xml");
             _networks = new ConcurrentDictionary<int, ProcessNet>();
 
-            foreach (Form formLoaded in Application.OpenForms)
+            foreach(Form formLoaded in Application.OpenForms)
             {
-                if (formLoaded != ActGlobals.oFormActMain)
+                if(formLoaded != ActGlobals.oFormActMain)
                     continue;
 
                 _mainFormIsLoaded = true;
@@ -102,7 +102,7 @@ namespace DFAssist
         private Assembly CurrentDomainOnAssemblyResolve(object sender, ResolveEventArgs e)
         {
             // if any of the assembly cannot be loaded, then the plugin cannot be started
-            if (!AssemblyResolver.LoadAssembly(e, _labelStatus, out var result))
+            if(!AssemblyResolver.LoadAssembly(e, _labelStatus, out var result))
                 throw new Exception("Assembly load failed.");
 
             return result;
@@ -425,11 +425,11 @@ namespace DFAssist
                 Logger.Debug($"[PersistentToasts] Desired Value: {_persistToasts.Checked}!");
 
                 var keyName = $@"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{AppId}";
-                using (var key = Registry.CurrentUser.OpenSubKey(keyName, true))
+                using(var key = Registry.CurrentUser.OpenSubKey(keyName, true))
                 {
-                    if (_persistToasts.Checked)
+                    if(_persistToasts.Checked)
                     {
-                        if (key == null)
+                        if(key == null)
                         {
                             Logger.Debug("[PersistentToasts] Key not found in the registry, Adding a new one!");
                             Registry.SetValue($@"HKEY_CURRENT_USER\{keyName}", "ShowInActionCenter", 1, RegistryValueKind.DWord);
@@ -442,7 +442,7 @@ namespace DFAssist
                     }
                     else
                     {
-                        if (key == null)
+                        if(key == null)
                         {
                             Logger.Debug("[PersistentToasts] Key not found in the registry, nothing to do!");
                             return;
@@ -455,7 +455,7 @@ namespace DFAssist
                     MessageBox.Show(Localization.GetText("ui-persistent-toast-warning-message"), Localization.GetText("ui-persistent-toast-warning-title"), MessageBoxButtons.OK);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "Unable to remove/add the registry key to make Toasts persistent!");
             }
@@ -470,7 +470,7 @@ namespace DFAssist
             _labelStatus = pluginStatusText;
             _labelTab = pluginScreenSpace;
 
-            if (_mainFormIsLoaded)
+            if(_mainFormIsLoaded)
                 OnInit();
             else
                 ActGlobals.oFormActMain.Shown += ActMainFormOnShown;
@@ -483,25 +483,25 @@ namespace DFAssist
             {
                 var localDate = ActGlobals.oFormActMain.PluginGetSelfDateUtc(this);
                 var remoteDate = ActGlobals.oFormActMain.PluginGetRemoteDateUtc(pluginId);
-                if (localDate.AddHours(2) >= remoteDate)
+                if(localDate.AddHours(2) >= remoteDate)
                     return;
 
                 var result = MessageBox.Show(Localization.GetText("ui-update-available-message"),
                     Localization.GetText("ui-update-available-title"), MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
-                if (result != DialogResult.Yes)
+                if(result != DialogResult.Yes)
                     return;
 
                 var updatedFile = ActGlobals.oFormActMain.PluginDownload(pluginId);
                 var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
-                if (pluginData.pluginFile.Directory != null)
+                if(pluginData.pluginFile.Directory != null)
                     ActGlobals.oFormActMain.UnZip(updatedFile.FullName, pluginData.pluginFile.Directory.FullName);
 
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, false);
                 Application.DoEvents();
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, true);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ActGlobals.oFormActMain.WriteExceptionLog(ex, "Plugin Update Check");
             }
@@ -509,7 +509,7 @@ namespace DFAssist
 
         private void OnInit()
         {
-            if (_pluginInitializing)
+            if(_pluginInitializing)
                 return;
 
             _pluginInitializing = true;
@@ -563,7 +563,7 @@ namespace DFAssist
 
             UpdateProcesses();
 
-            if (_timer == null)
+            if(_timer == null)
             {
                 _timer = new Timer { Interval = 30000 };
                 _timer.Tick += Timer_Tick;
@@ -577,7 +577,7 @@ namespace DFAssist
             _pluginInitializing = false;
 
             ActGlobals.oFormActMain.UpdateCheckClicked += FormActMain_UpdateCheckClicked;
-            if (ActGlobals.oFormActMain.GetAutomaticUpdatesAllowed())
+            if(ActGlobals.oFormActMain.GetAutomaticUpdatesAllowed())
                 new Thread(FormActMain_UpdateCheckClicked).Start();
 
             Logger.Debug("----------------------------------------------------------------");
@@ -591,13 +591,14 @@ namespace DFAssist
 
             _labelTab = null;
 
-            if (_labelStatus != null)
+            if(_labelStatus != null)
             {
                 _labelStatus.Text = Localization.GetText("l-plugin-stopped");
                 _labelStatus = null;
             }
 
-            foreach (var entry in _networks) entry.Value.Network.StopCapture();
+            foreach(var entry in _networks)
+                entry.Value.Network.StopCapture();
 
             _timer.Enabled = false;
 
@@ -625,34 +626,34 @@ namespace DFAssist
         private void UpdateProcesses()
         {
             var process = Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
-            if (process == null)
+            if(process == null)
                 return;
             try
             {
-                if (_networks.ContainsKey(process.Id))
-                    return;
-
-                var pn = new ProcessNet(process, new Network());
-                FFXIVPacketHandler.OnEventReceived += Network_onReceiveEvent;
-                _networks.TryAdd(process.Id, pn);
-                Logger.Success("l-process-set-success", process.Id);
+                if(!_networks.ContainsKey(process.Id))
+                {
+                    var pn = new ProcessNet(process, new Network());
+                    FFXIVPacketHandler.OnEventReceived += Network_onReceiveEvent;
+                    _networks.TryAdd(process.Id, pn);
+                    Logger.Success("l-process-set-success", process.Id);
+                }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Logger.Exception(e, "l-process-set-failed");
             }
 
             var toDelete = new List<int>();
-            foreach (var entry in _networks)
+            foreach(var entry in _networks)
             {
-                if (entry.Value.Process.HasExited)
+                if(entry.Value.Process.HasExited)
                 {
                     entry.Value.Network.StopCapture();
                     toDelete.Add(entry.Key);
                 }
                 else
                 {
-                    if (entry.Value.Network.IsRunning)
+                    if(entry.Value.Network.IsRunning)
                         entry.Value.Network.UpdateGameConnections(entry.Value.Process);
                     else
                     {
@@ -662,14 +663,14 @@ namespace DFAssist
                 }
             }
 
-            foreach (var t in toDelete)
+            foreach(var t in toDelete)
             {
                 try
                 {
                     _networks.TryRemove(t, out _);
                     FFXIVPacketHandler.OnEventReceived -= Network_onReceiveEvent;
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
                     Logger.Exception(e, "l-process-remove-failed");
                 }
@@ -710,10 +711,11 @@ namespace DFAssist
 
         private void PostToToastWindowsNotificationIfNeeded(string server, EventType eventType, int[] args)
         {
-            if (eventType != EventType.MATCH_ALERT) return;
+            if(eventType != EventType.MATCH_ALERT)
+                return;
 
             var head = _networks.Count <= 1 ? "" : "[" + server + "] ";
-            switch (eventType)
+            switch(eventType)
             {
                 case EventType.MATCH_ALERT:
                     var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
@@ -727,13 +729,13 @@ namespace DFAssist
         private void ToastWindowNotification(string title, string message)
         {
             Logger.Debug("Request Showing Taost received...");
-            if (_disableToasts.Checked)
+            if(_disableToasts.Checked)
             {
                 Logger.Debug("... Toasts are disabled!");
                 return;
             }
 
-            if (_enableLegacyToast.Checked)
+            if(_enableLegacyToast.Checked)
             {
                 Logger.Debug("... Legacy Toasts Enabled...");
                 try
@@ -753,7 +755,7 @@ namespace DFAssist
                     NativeMethods.SetForegroundWindow(_lastToast.Handle);
                     _lastToast.Activate();
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     Logger.Debug("Error handling/creating Legacy Toast!");
                     LegacyToastHandleUnhandledException(ex);
@@ -769,7 +771,7 @@ namespace DFAssist
                     var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
 
                     var stringElements = toastXml.GetElementsByTagName("text");
-                    if (stringElements.Length < 2)
+                    if(stringElements.Length < 2)
                     {
                         Logger.Error("l-toast-notification-error");
                         return;
@@ -783,7 +785,7 @@ namespace DFAssist
                     ToastNotificationManager.CreateToastNotifier(AppId).Show(toast);
                     Logger.Debug("... Toast Showing...");
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
                     Logger.Exception(e, "l-toast-notification-error");
                 }
@@ -794,7 +796,7 @@ namespace DFAssist
         {
             Application.ThreadException -= LegacyToastOnGuiUnhandedException;
             AppDomain.CurrentDomain.UnhandledException -= LegacyToastOnUnhandledException;
-            if (_lastToast == null || _lastToast.IsDisposed)
+            if(_lastToast == null || _lastToast.IsDisposed)
                 return;
             _lastToast.Closing -= LastToastOnClosing;
             _lastToast.Dispose();
@@ -821,7 +823,7 @@ namespace DFAssist
 
         private static void LegacyToastHandleUnhandledException(Exception e)
         {
-            if (e == null)
+            if(e == null)
                 return;
             Logger.Exception(e, "l-toast-notification-error");
         }
@@ -834,7 +836,7 @@ namespace DFAssist
 
         private void TtsNotification(string message, string title = "ui-tts-dutyfound")
         {
-            if (!_ttsCheckBox.Checked)
+            if(!_ttsCheckBox.Checked)
                 return;
 
             var dutyFound = Localization.GetText(title);
@@ -848,7 +850,7 @@ namespace DFAssist
             var text = pid + "|" + server + "|" + eventType + "|";
             var pos = 0;
 
-            switch (eventType)
+            switch(eventType)
             {
                 case EventType.MATCH_ALERT:
                     text += GetRouletteName(args[0]) + "|";
@@ -858,7 +860,7 @@ namespace DFAssist
                     break;
             }
 
-            for (var i = pos; i < args.Length; i++)
+            for(var i = pos; i < args.Length; i++)
                 text += args[i] + "|";
 
             SendToAct(text);
@@ -868,7 +870,7 @@ namespace DFAssist
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (!_isPluginEnabled)
+            if(!_isPluginEnabled)
                 return;
 
             UpdateProcesses();
@@ -906,22 +908,22 @@ namespace DFAssist
             _xmlSettingsSerializer.AddControlSetting(_enableTestEnvironment.Name, _enableTestEnvironment);
             _xmlSettingsSerializer.AddControlSetting(_enableLegacyToast.Name, _enableLegacyToast);
 
-            if (File.Exists(_settingsFile))
-                using (var fileStream = new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                using (var xmlTextReader = new XmlTextReader(fileStream))
+            if(File.Exists(_settingsFile))
+                using(var fileStream = new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using(var xmlTextReader = new XmlTextReader(fileStream))
                 {
                     try
                     {
-                        while (xmlTextReader.Read())
+                        while(xmlTextReader.Read())
                         {
-                            if (xmlTextReader.NodeType != XmlNodeType.Element)
+                            if(xmlTextReader.NodeType != XmlNodeType.Element)
                                 continue;
 
-                            if (xmlTextReader.LocalName == "SettingsSerializer")
+                            if(xmlTextReader.LocalName == "SettingsSerializer")
                                 _xmlSettingsSerializer.ImportFromXml(xmlTextReader);
                         }
                     }
-                    catch (Exception ex)
+                    catch(Exception ex)
                     {
                         _labelStatus.Text = Localization.GetText("l-settings-load-error", ex.Message);
                     }
@@ -944,8 +946,8 @@ namespace DFAssist
             try
             {
                 Logger.Debug("Saving Settings...");
-                using (var fileStream = new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                using (var xmlTextWriter = new XmlTextWriter(fileStream, Encoding.UTF8) { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' })
+                using(var fileStream = new FileStream(_settingsFile, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                using(var xmlTextWriter = new XmlTextWriter(fileStream, Encoding.UTF8) { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' })
                 {
                     xmlTextWriter.WriteStartDocument(true);
                     xmlTextWriter.WriteStartElement("Config"); // <Config>
@@ -960,7 +962,7 @@ namespace DFAssist
                     Logger.Debug("Settings Saved!");
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "l-settings-save-error");
             }
