@@ -526,7 +526,7 @@ namespace DFAssist
             {
                 _pluginInitializing = false;
                 ActGlobals.oFormActMain.PluginGetSelfData(this).cbEnabled.Checked = false;
-                _labelStatus.Text = Localization.GetText("l-ffxiv-plugin-must-be-installed");
+                _labelStatus.Text = "FFXIV_ACT_Plugin must be installed BEFORE DFAssist!";
                 return;
             }
             else
@@ -536,7 +536,7 @@ namespace DFAssist
                 {
                     _pluginInitializing = false;
                     ActGlobals.oFormActMain.PluginGetSelfData(this).cbEnabled.Checked = false;
-                    _labelStatus.Text = Localization.GetText("l-ffxiv-plugin-must-be-enabled");
+                    _labelStatus.Text = "FFXIV_ACT_Plugin must be enabled";
                     return;
                 }
             }

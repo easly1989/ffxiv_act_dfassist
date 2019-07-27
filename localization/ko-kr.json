@@ -1,8 +1,5 @@
 ﻿{
   "app-name": "임무 찾기 도우미",
-
-  "l-ffxiv-plugin-must-be-installed": "FFXIV_ACT_Plugin은 DFAssist 전에 설치해야합니다!",
-  "l-ffxiv-plugin-must-be-enabled": "FFXIV_ACT_Plugin을 활성화해야합니다",
    
   "l-plugin-started": "플러그인 시작됨!",
   "l-plugin-stopped": "플러그인이 중지되었습니다",
