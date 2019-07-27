@@ -75,10 +75,7 @@ namespace DFAssist
                                     var read = messages.Read(buffer, 0, 4);
                                     if (read < 4)
                                     {
-                                        // the message we are reading is not something we need...
-                                        // as it is not a blocking error, i'm commenting it.
-                                        // todo: better understand this code and why it keeps pushing out this error when the duty starts!
-                                        //Logger.Error("l-analyze-error-length", read, i, messageCount);
+                                        Logger.Error("l-analyze-error-length", read, i, messageCount);
                                         break;
                                     }
                                     var messageLength = BitConverter.ToInt32(buffer, 0);

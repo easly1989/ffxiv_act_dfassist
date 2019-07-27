@@ -54,7 +54,7 @@
   "l-queue-stopped": "Q: 매칭 중지됨",
   "l-queue-entered": "Q: 임무 입장함",
   "l-queue-matched": "Q: 매칭됨 [{0}] - {1}",
-  "l-queue-updated": "Q: 매칭 상태 업데이트됨 [{0}, {1}, {2}/{3}, {4}/{5}, {6}/{7}]",
+  "l-queue-updated": "Q: 매칭 상태 업데이트됨 [{0}, {1}]",
 
   "l-fate-occured-info": "F: {0} 돌발 발생!",
 
