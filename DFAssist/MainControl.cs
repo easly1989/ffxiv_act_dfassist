@@ -507,12 +507,40 @@ namespace DFAssist
             }
         }
 
+        private ActPluginData _ffxivPlugin;
         private void OnInit()
         {
             if(_pluginInitializing)
                 return;
 
             _pluginInitializing = true;
+
+            if(_ffxivPlugin != null)
+                _ffxivPlugin.cbEnabled.CheckedChanged -= FFXIVParsingPlugin_IsEnabledChanged;
+
+            // Before anything else, if the FFXIV Parsing Plugin is not already initialized
+            // than this plugin cannot start
+            var plugins = ActGlobals.oFormActMain.ActPlugins;
+            _ffxivPlugin = plugins.FirstOrDefault(x => x.lblPluginTitle.Text == "FFXIV_ACT_Plugin.dll");
+            if(_ffxivPlugin == null)
+            {
+                _pluginInitializing = false;
+                ActGlobals.oFormActMain.PluginGetSelfData(this).cbEnabled.Checked = false;
+                _labelStatus.Text = Localization.GetText("l-ffxiv-plugin-must-be-installed");
+                return;
+            }
+            else
+            {
+                _ffxivPlugin.cbEnabled.CheckedChanged += FFXIVParsingPlugin_IsEnabledChanged;
+                if(!_ffxivPlugin.cbEnabled.Checked)
+                {
+                    _pluginInitializing = false;
+                    ActGlobals.oFormActMain.PluginGetSelfData(this).cbEnabled.Checked = false;
+                    _labelStatus.Text = Localization.GetText("l-ffxiv-plugin-must-be-enabled");
+                    return;
+                }
+            }
+
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
 
             var pluginData = ActGlobals.oFormActMain.PluginGetSelfData(this);
@@ -583,9 +611,24 @@ namespace DFAssist
             Logger.Debug("----------------------------------------------------------------");
         }
 
+        private void FFXIVParsingPlugin_IsEnabledChanged(object sender, EventArgs e)
+        {
+            if(!_ffxivPlugin.cbEnabled.Checked)
+            {
+                ActGlobals.oFormActMain.PluginGetSelfData(this).cbEnabled.Checked = false;
+                DeInitPlugin();
+            }
+        }
+
         public void DeInitPlugin()
         {
+            if(!_isPluginEnabled)
+                return;
+
             _isPluginEnabled = false;
+
+            if(_ffxivPlugin != null)
+                _ffxivPlugin.cbEnabled.CheckedChanged -= FFXIVParsingPlugin_IsEnabledChanged;
 
             SaveSettings();
 
