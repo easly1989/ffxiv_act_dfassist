@@ -180,7 +180,7 @@ namespace DFAssist
 
                         if (_rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
                         {
-                            Logger.Info("l-queue-started-roulette", Data.GetRoulette(_rouletteCode).Name);
+                            Logger.Info("l-queue-started-roulette", _rouletteCode, Data.GetRoulette(_rouletteCode).Name);
                         }
                         else // Specific Duty (Dungeon/Trial/Raid)
                         {
@@ -295,7 +295,7 @@ namespace DFAssist
                     }
 
                     var memberinfo = $"{tank}/{instance.Tank}, {healer}/{instance.Healer}, {dps}/{instance.Dps} | {member}";
-                    Logger.Info("l-queue-updated", instance.Name, status, memberinfo);
+                    Logger.Info("l-queue-updated", instance.Name, memberinfo);
                 }
                 else if (opcode == 0x0080)
                 {
