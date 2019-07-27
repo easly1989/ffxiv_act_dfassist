@@ -1,6 +1,9 @@
 ﻿{
   "app-name": "Duty Assist",
 
+  "l-ffxiv-plugin-must-be-installed": "FFXIV_ACT_Plugin must be installed BEFORE DFAssist!",
+  "l-ffxiv-plugin-must-be-enabled": "FFXIV_ACT_Plugin must be enabled",
+   
   "l-plugin-started": "Plugin Started!",
   "l-plugin-stopped": "Plugin Stopped!",
 
