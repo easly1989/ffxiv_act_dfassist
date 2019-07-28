@@ -44,6 +44,7 @@ namespace DFAssist
         private Label _labelStatus;
         private TabPage _labelTab;
         private ComboBox _languageComboBox;
+        private TextBox _languageValue;
         private bool _mainFormIsLoaded;
         private TableLayoutPanel _mainTableLayout;
         private TabPage _mainTabPage;
@@ -70,8 +71,11 @@ namespace DFAssist
                 return;
 
             _selectedLanguage = newLanguage;
+            _languageValue.Text = _selectedLanguage.Name;
             Localization.Initialize(_selectedLanguage.Code);
             Data.Initialize(_selectedLanguage.Code);
+
+            UpdateTranslations();
         }
 
         #endregion
@@ -111,6 +115,7 @@ namespace DFAssist
         private void InitializeComponent()
         {
             _label1 = new Label();
+            _languageValue = new TextBox();
             _languageComboBox = new ComboBox();
             _enableTestEnvironment = new CheckBox();
             _ttsCheckBox = new CheckBox();
@@ -150,6 +155,12 @@ namespace DFAssist
             _label1.Name = "_label1";
             _label1.TabStop = false;
             _label1.Text = "Language";
+            //
+            // _languageValue
+            //
+            _languageValue.Visible = false;
+            _languageValue.Name = "_languageValue";
+            _languageValue.TabStop = false;
             // 
             // _languageComboBox
             // 
@@ -573,9 +584,7 @@ namespace DFAssist
             };
             _languageComboBox.DisplayMember = "Name";
             _languageComboBox.ValueMember = "Code";
-            _languageComboBox.SelectedValueChanged += LanguageComboBox_SelectedValueChanged;
-
-            UpdateTranslations();
+            
 
             _labelStatus.Text = "Starting...";
 
@@ -588,8 +597,10 @@ namespace DFAssist
             _xmlSettingsSerializer = new SettingsSerializer(this);
 
             LoadSettings();
-
+            LoadData();
             UpdateProcesses();
+
+            _languageComboBox.SelectedValueChanged += LanguageComboBox_SelectedValueChanged;
 
             if(_timer == null)
             {
@@ -723,7 +734,7 @@ namespace DFAssist
         private void UpdateTranslations()
         {
             Logger.Debug("Updating Localization for UI...");
-            SuspendLayout();
+
             _label1.Text = Localization.GetText("ui-language-display-text");
             _button1.Text = Localization.GetText("ui-log-clear-display-text");
             _enableTestEnvironment.Text = Localization.GetText("ui-enable-test-environment");
@@ -731,15 +742,12 @@ namespace DFAssist
             _persistToasts.Text = Localization.GetText("ui-persist-toasts");
             _enableLegacyToast.Text = Localization.GetText("ui-enable-legacy-toasts");
             _disableToasts.Text = Localization.GetText("ui-disable-toasts");
-
             _appTitle.Text = $"{Localization.GetText("app-name")} v{Assembly.GetExecutingAssembly().GetName().Version} | ";
             _generalSettings.Text = Localization.GetText("ui-general-settings-group");
             _toastSettings.Text = Localization.GetText("ui-toast-settings-group");
             _ttsSettings.Text = Localization.GetText("ui-tts-settings-group");
             _testSettings.Text = Localization.GetText("ui-test-settings-group");
 
-            ResumeLayout(false);
-            PerformLayout();
             Logger.Debug("Localization for UI Updated!");
         }
 
@@ -945,7 +953,7 @@ namespace DFAssist
             Logger.Debug("Settings Loading...");
             // All the settings to deserialize
             _xmlSettingsSerializer.AddControlSetting(_disableToasts.Name, _disableToasts);
-            _xmlSettingsSerializer.AddControlSetting(_languageComboBox.Name, _languageComboBox);
+            _xmlSettingsSerializer.AddControlSetting(_languageValue.Name, _languageValue);
             _xmlSettingsSerializer.AddControlSetting(_ttsCheckBox.Name, _ttsCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_persistToasts.Name, _persistToasts);
             _xmlSettingsSerializer.AddControlSetting(_enableTestEnvironment.Name, _enableTestEnvironment);
@@ -974,8 +982,15 @@ namespace DFAssist
                     xmlTextReader.Close();
                 }
 
-            _selectedLanguage = (Language)_languageComboBox.SelectedItem;
-            Logger.Debug($"Language: {_selectedLanguage.Name}");
+            foreach(var language in _languageComboBox.Items.OfType<Language>())
+            {
+                if(language.Name.Equals(_languageValue.Text))
+                {
+                    _languageComboBox.SelectedItem = language;
+                }
+            }
+
+            Logger.Debug($"Language: {_languageValue.Text}");
             Logger.Debug($"Disable Toasts: {_disableToasts.Checked}");
             Logger.Debug($"Make Toasts Persistent: {_persistToasts.Checked}");
             Logger.Debug($"Enable Legacy Toasts: {_enableLegacyToast.Checked}");
