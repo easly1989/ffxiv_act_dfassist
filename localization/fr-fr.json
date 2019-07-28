@@ -39,6 +39,7 @@
   "l-network-error-receiving-packet": "N: Erreur lors de la réception de paquets",
   "l-network-error-filtering-packet": "N: Erreur lors du filtrage des paquets",
   "l-network-error-finding-lobby": "N: Erreur à la réception des paquets d'instance",
+  "l-network-error-loopback-found": "N: Connexion en boucle trouvée ... Ignoré!",
   "l-network-detected-connection-closing": "N: Déconnecté des serveurs de jeu",
   "l-network-detected-connection": "N: Connection aux serveurs de jeu détectée: {0}",
 

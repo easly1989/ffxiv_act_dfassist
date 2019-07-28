@@ -39,6 +39,7 @@
   "l-network-error-receiving-packet": "N: Error while Receiving Packet",
   "l-network-error-filtering-packet": "N: Error while Packet Filtering",
   "l-network-error-finding-lobby": "N: Error while receeving lobby server information",
+  "l-network-error-loopback-found": "N: Loopback connection found... Ignored!",
   "l-network-detected-connection-closing": "N: Detected Game Server Disconnection",
   "l-network-detected-connection": "N: Detected Game Server Connection: {0}",
 

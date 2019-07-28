@@ -39,6 +39,7 @@
   "l-network-error-receiving-packet": "N: パケット受信中にエラーが発生しました",
   "l-network-error-filtering-packet": "N: パケットフィルタ中にエラーが発生しました",
   "l-network-error-finding-lobby": "N: ロビーサーバーの情報を取得中にエラーが発生しました",
+  "l-network-error-loopback-found": "N: ループバック接続が見つかりました...無視されます!",
   "l-network-detected-connection-closing": "N: ゲームサーバーとの切断を検知しました",
   "l-network-detected-connection": "N: ゲームサーバーとの接続を検知しました: {0}",
 

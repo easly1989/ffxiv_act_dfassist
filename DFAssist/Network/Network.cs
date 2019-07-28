@@ -299,6 +299,13 @@ namespace DFAssist
                             var local = new IPEndPoint(row.localAddr, (ushort)IPAddress.NetworkToHostOrder((short)row.localPort));
                             var remote = new IPEndPoint(row.remoteAddr, (ushort)IPAddress.NetworkToHostOrder((short)row.remotePort));
 
+                            // at this point we'll drop all connection starting and ending locally (loopbacks)
+                            if(local.Address.ToString() == "127.0.0.1" && remote.Address.ToString() == ("127.0.0.1"))
+                            {
+                                Logger.Info("l-network-error-loopback-found");
+                                continue;
+                            }
+
                             connections.Add(new Connection() { LocalEndPoint = local, RemoteEndPoint = remote });
                         }
 

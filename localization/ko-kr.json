@@ -1,6 +1,6 @@
 ﻿{
   "app-name": "임무 찾기 도우미",
-   
+
   "l-plugin-started": "플러그인 시작됨!",
   "l-plugin-stopped": "플러그인이 중지되었습니다",
 
@@ -39,6 +39,7 @@
   "l-network-error-receiving-packet": "N: 패킷을 받는 중 에러 발생",
   "l-network-error-filtering-packet": "N: 패킷 필터링 중 에러 발생",
   "l-network-error-finding-lobby": "N: 로비 서버 정보를 받아오는 중 에러 발생함",
+  "l-network-error-loopback-found": "N: 루프백 연결이 발견되었습니다 ... 무시되었습니다!",
   "l-network-detected-connection-closing": "N: 게임서버와의 연결 종료 감지됨",
   "l-network-detected-connection": "N: 게임서버 연결 감지: {0}",
 

@@ -54,7 +54,7 @@ namespace DFAssist
         {
             result = null;
 
-            if(!_initialized || GetAssemblyName(args.RequestingAssembly.FullName) != nameof(DFAssist))
+            if(!_initialized || args.RequestingAssembly == null || GetAssemblyName(args.RequestingAssembly.FullName) != nameof(DFAssist))
                 return true; // avoid throwing, maybe it will be initialized later... who knows? >_<
 
             string currentDll;
