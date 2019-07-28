@@ -43,7 +43,7 @@ namespace DFAssist
             {
                 Logger.Info("l-network-starting");
 
-                if (IsRunning)
+                if(IsRunning)
                 {
                     Logger.Error("l-network-error-already-started");
                     return false;
@@ -51,14 +51,22 @@ namespace DFAssist
 
                 UpdateGameConnections(process);
 
-                if (_connections.Count < 2)
+                if(_connections.Count < 2)
                 {
                     Logger.Error("l-network-error-no-connection");
                     return false;
                 }
 
-                var localAddress = _connections[0].LocalEndPoint.Address;
+                var localConnection = _connections.FirstOrDefault(x => x.LocalEndPoint.Address.ToString() != "127.0.0.1");
+                if(localConnection == null)
+                {
+                    Logger.Error("l-network-error-no-connection");
+                    return false;
+                }
 
+                var localAddress = localConnection.LocalEndPoint.Address;
+                Logger.Success($"LocalEndPoint Found: {localAddress}");
+                
                 RegisterToFirewall();
 
                 _socket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
@@ -74,7 +82,7 @@ namespace DFAssist
                 Logger.Success("l-network-started");
                 return true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "l-network-error-starting");
                 return false;
@@ -85,7 +93,7 @@ namespace DFAssist
         {
             try
             {
-                if (!IsRunning)
+                if(!IsRunning)
                 {
                     Logger.Error("l-network-error-already-stopped");
                     return;
@@ -95,7 +103,7 @@ namespace DFAssist
                 _connections.Clear();
                 Logger.Info("l-network-stopping");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "l-network-error-stopping");
             }
@@ -106,9 +114,9 @@ namespace DFAssist
             var update = _connections.Count < 2;
             var currentConnections = GetConnections(process);
 
-            foreach (var connection in _connections)
+            foreach(var connection in _connections)
             {
-                if (currentConnections.Contains(connection))
+                if(currentConnections.Contains(connection))
                     continue;
 
                 // Connection was lost, a new update is requested
@@ -117,13 +125,13 @@ namespace DFAssist
                 break;
             }
 
-            if (!update)
+            if(!update)
                 return;
 
             var lobbyEndPoint = GetLobbyEndPoint(process);
             _connections = currentConnections.Where(x => !x.RemoteEndPoint.Equals(lobbyEndPoint)).ToList();
 
-            foreach (var connection in _connections)
+            foreach(var connection in _connections)
             {
                 Logger.Info("l-network-detected-connection", connection);
             }
@@ -139,13 +147,13 @@ namespace DFAssist
 
                 FilterAndProcessPacket(buffer);
             }
-            catch (Exception ex) when (ex is ObjectDisposedException || ex is NullReferenceException)
+            catch(Exception ex) when(ex is ObjectDisposedException || ex is NullReferenceException)
             {
                 IsRunning = false;
                 _socket = null;
                 Logger.Success("l-network-stopped");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "l-network-error-receiving-packet");
             }
@@ -156,14 +164,14 @@ namespace DFAssist
             try
             {
                 var ipPacket = new IpPacket(buffer);
-                if (!ipPacket.IsValid || ipPacket.Protocol != ProtocolType.Tcp)
+                if(!ipPacket.IsValid || ipPacket.Protocol != ProtocolType.Tcp)
                     return;
 
                 var tcpPacket = new TcpPacket(ipPacket.Data);
-                if (!tcpPacket.IsValid)
+                if(!tcpPacket.IsValid)
                     return;
 
-                if (!tcpPacket.Flags.HasFlag(TcpFlags.ACK | TcpFlags.PSH))
+                if(!tcpPacket.Flags.HasFlag(TcpFlags.ACK | TcpFlags.PSH))
                     return;
 
                 var sourceEndPoint = new IPEndPoint(ipPacket.SourceIpAddress, tcpPacket.SourcePort);
@@ -171,18 +179,18 @@ namespace DFAssist
                 var connection = new Connection { LocalEndPoint = sourceEndPoint, RemoteEndPoint = destinationEndPoint };
                 var reverseConnection = new Connection { LocalEndPoint = destinationEndPoint, RemoteEndPoint = sourceEndPoint };
 
-                if (!(_connections.Contains(connection) || _connections.Contains(reverseConnection)))
+                if(!(_connections.Contains(connection) || _connections.Contains(reverseConnection)))
                     return;
 
-                if (!_connections.Contains(reverseConnection))
+                if(!_connections.Contains(reverseConnection))
                     return;
 
-                lock (_lockAnalyse)
+                lock(_lockAnalyse)
                 {
                     FFXIVPacketHandler.Analyze(_pid, tcpPacket.Payload, ref _state);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "l-network-error-filtering-packet");
             }
@@ -196,15 +204,15 @@ namespace DFAssist
                 var netAuthApps = netFwMgr.LocalPolicy.CurrentProfile.AuthorizedApplications;
 
                 var exists = false;
-                foreach (var netAuthAppObject in netAuthApps)
+                foreach(var netAuthAppObject in netAuthApps)
                 {
-                    if (netAuthAppObject is INetFwAuthorizedApplication netAuthApp && netAuthApp.ProcessImageFileName == _exePath && netAuthApp.Enabled)
+                    if(netAuthAppObject is INetFwAuthorizedApplication netAuthApp && netAuthApp.ProcessImageFileName == _exePath && netAuthApp.Enabled)
                     {
                         exists = true;
                     }
                 }
 
-                if (exists)
+                if(exists)
                     return;
 
                 var networkApp = GetInstance<INetFwAuthorizedApplication>("HNetCfg.FwAuthorizedApplication");
@@ -218,7 +226,7 @@ namespace DFAssist
 
                 Logger.Success("l-firewall-registered");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "l-firewall-error");
             }
@@ -232,20 +240,20 @@ namespace DFAssist
 
             try
             {
-                using (var managementObjectSearcher = new ManagementObjectSearcher("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process.Id))
+                using(var managementObjectSearcher = new ManagementObjectSearcher("SELECT CommandLine FROM Win32_Process WHERE ProcessId = " + process.Id))
                 {
-                    foreach (var managementBaseObject in managementObjectSearcher.Get())
+                    foreach(var managementBaseObject in managementObjectSearcher.Get())
                     {
                         var commandline = managementBaseObject["CommandLine"].ToString();
                         var args = commandline.Split(' ');
 
-                        foreach (var arg in args)
+                        foreach(var arg in args)
                         {
                             var splitted = arg.Split('=');
-                            if (splitted.Length != 2)
+                            if(splitted.Length != 2)
                                 continue;
 
-                            switch (splitted[0])
+                            switch(splitted[0])
                             {
                                 case "DEV.LobbyHost01":
                                     lobbyHost = splitted[1];
@@ -258,13 +266,13 @@ namespace DFAssist
                     }
                 }
 
-                if (lobbyHost != null && lobbyPort > 0)
+                if(lobbyHost != null && lobbyPort > 0)
                 {
                     var address = Dns.GetHostAddresses(lobbyHost)[0];
                     ipep = new IPEndPoint(address, lobbyPort);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Logger.Exception(ex, "l-network-error-finding-lobby");
             }
@@ -279,32 +287,25 @@ namespace DFAssist
             var tcpTable = IntPtr.Zero;
             var tcpTableLength = 0;
 
-            if (NativeMethods.GetExtendedTcpTable(tcpTable, ref tcpTableLength, false, AddressFamily.InterNetwork, TcpTableOwnerPidConnections, 0) == 0)
+            if(NativeMethods.GetExtendedTcpTable(tcpTable, ref tcpTableLength, false, AddressFamily.InterNetwork, TcpTableOwnerPidConnections, 0) == 0)
                 return connections;
 
             try
             {
                 tcpTable = Marshal.AllocHGlobal(tcpTableLength);
-                if (NativeMethods.GetExtendedTcpTable(tcpTable, ref tcpTableLength, false, AddressFamily.InterNetwork, TcpTableOwnerPidConnections, 0) == 0)
+                if(NativeMethods.GetExtendedTcpTable(tcpTable, ref tcpTableLength, false, AddressFamily.InterNetwork, TcpTableOwnerPidConnections, 0) == 0)
                 {
                     var table = (TcpTable)Marshal.PtrToStructure(tcpTable, typeof(TcpTable));
                     var rowPointer = new IntPtr(tcpTable.ToInt64() + Marshal.SizeOf(typeof(uint)));
 
-                    for (var i = 0; i < table.length; i++)
+                    for(var i = 0; i < table.length; i++)
                     {
                         var row = (TcpRow)Marshal.PtrToStructure(rowPointer, typeof(TcpRow));
 
-                        if (row.owningPid == process.Id)
+                        if(row.owningPid == process.Id)
                         {
                             var local = new IPEndPoint(row.localAddr, (ushort)IPAddress.NetworkToHostOrder((short)row.localPort));
                             var remote = new IPEndPoint(row.remoteAddr, (ushort)IPAddress.NetworkToHostOrder((short)row.remotePort));
-
-                            // at this point we'll drop all connection starting and ending locally (loopbacks)
-                            if(local.Address.ToString() == "127.0.0.1" && remote.Address.ToString() == ("127.0.0.1"))
-                            {
-                                Logger.Info("l-network-error-loopback-found");
-                                continue;
-                            }
 
                             connections.Add(new Connection() { LocalEndPoint = local, RemoteEndPoint = remote });
                         }
@@ -315,7 +316,7 @@ namespace DFAssist
             }
             finally
             {
-                if (tcpTable != IntPtr.Zero)
+                if(tcpTable != IntPtr.Zero)
                 {
                     Marshal.FreeHGlobal(tcpTable);
                 }
