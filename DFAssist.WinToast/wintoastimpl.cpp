@@ -56,7 +56,7 @@ private:
 };
 
 // -------------------------- Exported methods 
-DLLEXPORT void CreateToast(const wchar_t* appName,
+DLLEXPORT void CreateToast_Text01(const wchar_t* appName,
 	const wchar_t* appUserModelID,
 	const wchar_t* toastMessage,
 	ToastEventCallback eventCallback,
@@ -74,6 +74,137 @@ DLLEXPORT void CreateToast(const wchar_t* appName,
 		nullptr,
 		nullptr,
 		nullptr,
+		attribution,
+		static_cast<WinToastTemplate::Duration>(duration),
+		static_cast<WinToastTemplate::AudioSystemFile>(audioFile),
+		static_cast<WinToastTemplate::AudioOption>(audioOption));
+}
+
+DLLEXPORT void CreateToast_Text02(const wchar_t* appName,
+	const wchar_t* appUserModelID,
+	const wchar_t* toastTitle,
+	const wchar_t* toastMessage,
+	ToastEventCallback eventCallback,
+	const wchar_t* attribution,
+	bool wrapFirstLine,
+	int duration,
+	int audioFile, 
+	int audioOption)
+{
+	CreateToast(
+		appName, 
+		appUserModelID, 
+		wrapFirstLine ? WinToastTemplate::WinToastTemplateType::Text02 : WinToastTemplate::WinToastTemplateType::Text03,
+		eventCallback,
+		toastTitle,
+		toastMessage,
+		nullptr,
+		nullptr,
+		attribution,
+		static_cast<WinToastTemplate::Duration>(duration),
+		static_cast<WinToastTemplate::AudioSystemFile>(audioFile),
+		static_cast<WinToastTemplate::AudioOption>(audioOption));
+}
+
+DLLEXPORT void CreateToast_Text03(const wchar_t* appName,
+	const wchar_t* appUserModelID,
+	const wchar_t* toastTitle,
+	const wchar_t* toastMessage,
+	const wchar_t* toastAdditionalMessage,
+	ToastEventCallback eventCallback,
+	const wchar_t* attribution,
+	int duration,
+	int audioFile, 
+	int audioOption)
+{
+	CreateToast(
+		appName, 
+		appUserModelID, 
+		WinToastTemplate::WinToastTemplateType::Text04,
+		eventCallback,
+		toastTitle,
+		toastMessage,
+		toastAdditionalMessage,
+		nullptr,
+		attribution,
+		static_cast<WinToastTemplate::Duration>(duration),
+		static_cast<WinToastTemplate::AudioSystemFile>(audioFile),
+		static_cast<WinToastTemplate::AudioOption>(audioOption));
+}
+
+DLLEXPORT void CreateToast_ImageAndText01(const wchar_t* appName,
+	const wchar_t* appUserModelID,
+	const wchar_t* toastMessage,
+	const wchar_t* toastImagePath,
+	ToastEventCallback eventCallback,
+	const wchar_t* attribution,
+	int duration,
+	int audioFile, 
+	int audioOption)
+{
+	CreateToast(
+		appName, 
+		appUserModelID, 
+		WinToastTemplate::WinToastTemplateType::ImageAndText01,
+		eventCallback,
+		toastMessage,
+		nullptr,
+		nullptr,
+		toastImagePath,
+		attribution,
+		static_cast<WinToastTemplate::Duration>(duration),
+		static_cast<WinToastTemplate::AudioSystemFile>(audioFile),
+		static_cast<WinToastTemplate::AudioOption>(audioOption));
+}
+
+DLLEXPORT void CreateToast_ImageAndText02(const wchar_t* appName,
+	const wchar_t* appUserModelID,
+	const wchar_t* toastTitle,
+	const wchar_t* toastMessage,
+	const wchar_t* toastImagePath,
+	ToastEventCallback eventCallback,
+	const wchar_t* attribution,
+	bool wrapFirstLine,
+	int duration,
+	int audioFile, 
+	int audioOption)
+{
+	CreateToast(
+		appName, 
+		appUserModelID, 
+		wrapFirstLine ? WinToastTemplate::WinToastTemplateType::ImageAndText02 : WinToastTemplate::WinToastTemplateType::ImageAndText03,
+		eventCallback,
+		toastTitle,
+		toastMessage,
+		nullptr,
+		toastImagePath,
+		attribution,
+		static_cast<WinToastTemplate::Duration>(duration),
+		static_cast<WinToastTemplate::AudioSystemFile>(audioFile),
+		static_cast<WinToastTemplate::AudioOption>(audioOption));
+}
+
+DLLEXPORT void CreateToast_ImageAndText03(const wchar_t* appName,
+	const wchar_t* appUserModelID,
+	const wchar_t* toastTitle,
+	const wchar_t* toastMessage,
+	const wchar_t* toastAdditionalMessage,
+	const wchar_t* toastImagePath,
+	ToastEventCallback eventCallback,
+	const wchar_t* attribution,
+	int duration,
+	int audioFile, 
+	int audioOption)
+{
+	CreateToast(
+		appName, 
+		appUserModelID, 
+		WinToastTemplate::WinToastTemplateType::ImageAndText04,
+		eventCallback,
+		toastTitle,
+		toastMessage,
+		toastAdditionalMessage,
+		toastImagePath,
 		attribution,
 		static_cast<WinToastTemplate::Duration>(duration),
 		static_cast<WinToastTemplate::AudioSystemFile>(audioFile),
@@ -100,17 +231,10 @@ void CreateToast(const wchar_t* appName,
 		eventCallback(SystemNotSupported);
 	}
 
-	// todo Handle actions
-	//std::vector<std::wstring> actions;
-
 	WinToast::instance()->setAppName(appName);
 	WinToast::instance()->setAppUserModelId(appUserModelID);
 
 	if (createShortcut) {
-		/*if (imagePath || text || actions.size() > 0 || expiration) {
-			std::wcerr << L"--only-create-shortcut does not accept images/text/actions/expiration" << std::endl;
-			return InitializationFailure;
-		}*/
 		const auto shortcutResult = WinToast::instance()->createShortcut();
 		if (shortcutResult < 0)
 			eventCallback(InitializationFailure);
@@ -140,8 +264,6 @@ void CreateToast(const wchar_t* appName,
 	if (toastImagePath)
 		templ.setImagePath(toastImagePath);
 
-	//for (auto const &action : actions)
-	//	templ.addAction(action);
 	if (expiration > 0)
 		templ.setExpiration(expiration);
 
