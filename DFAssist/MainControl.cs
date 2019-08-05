@@ -7,11 +7,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Speech.Synthesis;
 using System.Text;
 using System.Threading;
-using System.Windows;
 using System.Windows.Forms;
 using System.Xml;
 using Advanced_Combat_Tracker;
@@ -33,6 +31,29 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace DFAssist
 {
+    // ReSharper disable InconsistentNaming
+    /// <summary>
+    /// This class is needed because of the way ACT initializes the plugin
+    /// To avoid that ACT loads the referenced DLL before the plugin initialization (and thus
+    /// before the AssemblyResolve event subscription) we need to move the code await from the
+    /// IActPluginV1 implementation.
+    ///
+    /// As suggested by EQEditu, this class may become static
+    /// </summary>
+    public class DFAssistPlugin
+    {
+        public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeInitPlugin()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    // ReSharper restore InconsistentNaming
+
     public class MainControl : UserControl, IActPluginV1
     {
         private const string AppId = "Advanced Combat Tracker";
