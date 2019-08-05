@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using Advanced_Combat_Tracker;
 
 namespace DFAssist
 {
@@ -13,11 +11,11 @@ namespace DFAssist
     {
         private static bool _initialized;
         private static string _librariesPath;
-        private static Dictionary<string, bool> _assemblies;
+        private static readonly Dictionary<string, bool> Assemblies;
 
         static AssemblyResolver()
         {
-            _assemblies = new Dictionary<string, bool>();
+            Assemblies = new Dictionary<string, bool>();
         }
 
         /// <summary>
@@ -37,10 +35,10 @@ namespace DFAssist
                 foreach (var file in Directory.GetFiles(_librariesPath))
                 {
                     var key = Path.GetFileNameWithoutExtension(file);
-                    if(_assemblies.ContainsKey(key))
+                    if(Assemblies.ContainsKey(key))
                         continue;
 
-                    _assemblies.Add(key, false);
+                    Assemblies.Add(key, false);
                 }
             }
             catch (Exception)
@@ -59,7 +57,7 @@ namespace DFAssist
 
             string currentDll;
             var name = GetAssemblyName(args.Name);
-            if(_assemblies.TryGetValue(name, out _))
+            if(Assemblies.TryGetValue(name, out _))
             {
                 currentDll = Path.Combine(_librariesPath, name + ".dll");
             }
@@ -75,7 +73,7 @@ namespace DFAssist
                 {
                     var dllBytes = File.ReadAllBytes(currentDll);
                     result = AppDomain.CurrentDomain.Load(dllBytes);
-                    _assemblies[name] = true;
+                    Assemblies[name] = true;
                     return true;
                 }
                 catch (Exception)

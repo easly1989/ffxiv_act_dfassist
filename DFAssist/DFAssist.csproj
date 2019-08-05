@@ -69,44 +69,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyResolver.cs" />
-    <Compile Include="Data.cs" />
-    <Compile Include="DataModel\GameData.cs" />
-    <Compile Include="DataModel\Instance.cs" />
-    <Compile Include="DataModel\Language.cs" />
-    <Compile Include="DataModel\Roulette.cs" />
-    <Compile Include="FormAnimator.cs" />
-    <Compile Include="LegacyToast.cs">
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="LegacyToasts\FormAnimator.cs" />
+    <Compile Include="LegacyToasts\LegacyToast.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Localization.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FFXIVPacketHandler.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="Network\Connection.cs" />
-    <Compile Include="Network\EventType.cs" />
-    <Compile Include="Network\IpPacket.cs" />
-    <Compile Include="Network\MatchEndType.cs" />
-    <Compile Include="Network\MatchType.cs" />
-    <Compile Include="Network\Network.cs" />
-    <Compile Include="Network\State.cs" />
-    <Compile Include="Network\TcpFlags.cs" />
-    <Compile Include="Network\TcpPacket.cs" />
-    <Compile Include="Network\TcpRow.cs" />
-    <Compile Include="Network\TcpTable.cs" />
-    <Compile Include="DllInjector.cs" />
-    <Compile Include="ProcessNet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shell\IPersistFile.cs" />
-    <Compile Include="Shell\IPropertyStore.cs" />
-    <Compile Include="Shell\IShellLinkW.cs" />
-    <Compile Include="Shell\CShellLink.cs" />
-    <Compile Include="Shell\ShellIidGuid.cs" />
-    <Compile Include="Shell\ShortCutCreator.cs" />
-    <Compile Include="Shell\STGM.cs" />
-    <Compile Include="WebInteractions.cs" />
     <EmbeddedResource Include="MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +101,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\data\en-us.json" />
+    <None Include="Resources\data\fr-fr.json" />
+    <None Include="Resources\data\ja-jp.json" />
+    <None Include="Resources\data\ko-kr.json" />
+    <None Include="Resources\localization\en-us.json" />
+    <None Include="Resources\localization\fr-fr.json" />
+    <None Include="Resources\localization\ja-jp.json" />
+    <None Include="Resources\localization\ko-kr.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -145,30 +125,36 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.Contracts">
-      <Version>10.0.17134.1000-preview</Version>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
     </PackageReference>
-    <PackageReference Include="System.Runtime.WindowsRuntime">
-      <Version>4.6.0-preview4.19212.13</Version>
+    <PackageReference Include="Splat">
+      <Version>8.1.1</Version>
     </PackageReference>
-    <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml">
-      <Version>4.6.0-preview4.19212.13</Version>
-    </PackageReference>
-    <PackageReference Include="WindowsAPICodePack-Core">
-      <Version>1.1.2</Version>
-    </PackageReference>
-    <PackageReference Include="WindowsAPICodePack-Shell">
-      <Version>1.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="WindowsAPICodePack-ShellExtensions">
-      <Version>1.1.1</Version>
-    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DFAssist.Contracts\DFAssist.Contracts.csproj">
+      <Project>{fd838217-aeda-4c6a-a5d8-1e6b2d6f7f2c}</Project>
+      <Name>DFAssist.Contracts</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DFAssist.Core\DFAssist.Core.csproj">
+      <Project>{67ce05fe-a32c-4149-9884-7ddc065690f9}</Project>
+      <Name>DFAssist.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\images\dungeon.png" />
+    <None Include="Resources\images\guildhest.png" />
+    <None Include="Resources\images\pvp.png" />
+    <None Include="Resources\images\raid.png" />
+    <None Include="Resources\images\roulette.png" />
+    <None Include="Resources\images\trial.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>call $(SolutionDir)PostBuildStep.bat $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>call $(SolutionDir)PostBuildStep.bat $(TargetDir) $(ProjectDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

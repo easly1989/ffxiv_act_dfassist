@@ -4,35 +4,59 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
+using Splat;
 
 namespace DFAssist
 {
-    public static class Logger
+    public class Logger : ILogger
     {
-        private static readonly Regex EscapePattern = new Regex(@"\{(.+?)\}");
-        
-        private static RichTextBox _richTextBox;
+        public LogLevel Level { get; set; }
 
-        public static void SetTextBox(RichTextBox box)
+        private static readonly Regex EscapePattern = new Regex(@"\{(.+?)\}");
+        private RichTextBox _richTextBox;
+
+        public Logger()
+        {
+            Level = LogLevel.Debug;
+        }
+
+        public void SetLoggingLevel(LogLevel level)
+        {
+            Level = level;
+        }
+
+        public void SetTextBox(RichTextBox box)
         {
             _richTextBox = box;
         }
 
-        private static void Write(Color color, object format, params object[] args)
+        private void Write(LogLevel level, object format)
         {
             if (_richTextBox == null || _richTextBox.IsDisposed)
                 return;
 
-            var formatted = format ?? "(null)";
-            try
-            {
-                formatted = string.Format(formatted.ToString(), args);
-            }
-            catch (FormatException)
-            {
-                // do nothing
-            }
+            if(level < Level)
+                return;
 
+            Color color;
+            switch (level)
+            {
+                case LogLevel.Info:
+                    color = Color.Green;
+                    break;
+                case LogLevel.Warn:
+                    color = Color.OrangeRed;
+                    break;
+                case LogLevel.Error:
+                case LogLevel.Fatal:
+                    color = Color.Red;
+                    break;
+                case LogLevel.Debug:
+                default:
+                    color = Color.Gray;
+                    break;
+            }
+            var formatted = format ?? "(null)";
             var datetime = DateTime.Now.ToString("HH:mm:ss");
             var message = $"[{datetime}] {formatted}{Environment.NewLine}";
 
@@ -46,67 +70,30 @@ namespace DFAssist
             }));
         }
 
-        public static void Success(string key, params object[] args)
-        {
-            Write(Color.Green, Localization.GetText(key, args));
-        }
-
-        public static void Info(string key, params object[] args)
-        {
-            Write(Color.Black, Localization.GetText(key, args));
-        }
-
-        public static void Error(string key, params object[] args)
-        {
-            Write(Color.Red, Localization.GetText(key, args));
-        }
-
-        public static void Exception(Exception ex, string key, params object[] args)
-        {
-            var format = Localization.GetText(key);
-            var message = ex.Message;
-
-            message = Escape(message);
-            Write(Color.Red, $"{format}: {message}", args);
-        }
-
-        public static void Debug(object format, params object[] args)
-        {
-            Write(Color.Gray, $" > {format}", args);
-        }
-
-        public static void Buffer(byte[] buffer)
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine();
-
-            for (var i = 0; i < buffer.Length; i++)
-            {
-                if (i != 0)
-                {
-                    if (i % 16 == 0)
-                    {
-                        stringBuilder.AppendLine();
-                    }
-                    else if (i % 8 == 0)
-                    {
-                        stringBuilder.Append(' ', 2);
-                    }
-                    else
-                    {
-                        stringBuilder.Append(' ');
-                    }
-                }
-
-                stringBuilder.Append(buffer[i].ToString("X2"));
-            }
-
-            Debug(stringBuilder.ToString());
-        }
-
         private static string Escape(string line)
         {
             return EscapePattern.Replace(line, "{{$1}}");
+        }
+
+        public void Write(string message, LogLevel logLevel)
+        {
+            Write(logLevel, message);
+        }
+
+        public void Write(Exception exception, string message, LogLevel logLevel)
+        {
+            var exceptionMessage = Escape(exception.Message);
+            Write(logLevel, $"{message}: {exceptionMessage}");
+        }
+
+        public void Write(string message, Type type, LogLevel logLevel)
+        {
+            Write(message, logLevel);
+        }
+
+        public void Write(Exception exception, string message, Type type, LogLevel logLevel)
+        {
+            Write(exception, message, logLevel);
         }
     }
 }
