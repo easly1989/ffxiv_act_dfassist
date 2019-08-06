@@ -32,8 +32,7 @@ namespace DFAssist
         private ILocalizationRepository _localizationRepository;
         private MainControl _mainControl;
         private ActPluginData _pluginData;
-        private SpeechSynthesizer _synth;
-
+        
         private bool _pluginInitializing;
         
         public bool IsPluginEnabled { get; private set; }
@@ -70,7 +69,6 @@ namespace DFAssist
 
             InitializePluginVariables(plugin);
             
-            _synth = new SpeechSynthesizer();
             _logger = Current.GetService<IActLogger>();
             _localizationRepository = Current.GetService<ILocalizationRepository>();
             
@@ -162,7 +160,7 @@ namespace DFAssist
 
         private void DisposeOwnedObjects()
         {
-            _synth?.Dispose();
+            TTSHelper.Instance.Dispose();
             DFAssistRepositoriesHelper.Instance.Dispose();
             DFAssistUIInteractionHelper.Instance.Dispose();
             FFXIVNetworkProcessHelper.Instance.Dispose();
@@ -173,7 +171,6 @@ namespace DFAssist
 
         private void SetNullOwnedObjects()
         {
-            _synth = null;
             _logger = null;
             _pluginData = null;
             _localizationRepository = null;

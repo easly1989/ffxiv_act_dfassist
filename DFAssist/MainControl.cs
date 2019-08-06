@@ -487,15 +487,5 @@ namespace DFAssist
             
             _logger.Write(e, "UI: Unable to show legacy toast notification", LogLevel.Error);
         }
-
-        private void TtsNotification(string message, string title = "ui-dutyfound")
-        {
-            if(!TtsCheckBox.Checked)
-                return;
-
-            var dutyFound = _localizationRepository.GetText(title);
-            _synth.Speak(dutyFound);
-            _synth.Speak(message);
-        }
     }
 }

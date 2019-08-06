@@ -113,8 +113,7 @@ namespace DFAssist.Helpers
         private void EnableTtsOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _logger.Write($"UI: [TTS] Desired Value: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
-            // todo: call tts helper for test
-            TtsNotification(_localizationRepository.GetText("ui-tts-notification-test-message"), _localizationRepository.GetText("ui-tts-notification-test-title"));
+            TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-message"), _localizationRepository.GetText("ui-tts-notification-test-title"));
         }
 
         private void ClearLogsButton_Click(object sender, EventArgs e)
