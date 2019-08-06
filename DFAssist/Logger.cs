@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
@@ -8,9 +7,9 @@ using Splat;
 
 namespace DFAssist
 {
-    public class Logger : ILogger
+    public class Logger : IActLogger
     {
-        public LogLevel Level { get; set; }
+        public LogLevel Level { get; private set; }
 
         private static readonly Regex EscapePattern = new Regex(@"\{(.+?)\}");
         private RichTextBox _richTextBox;

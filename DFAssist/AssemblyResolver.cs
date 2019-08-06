@@ -1,95 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
+using Advanced_Combat_Tracker;
 
 namespace DFAssist
 {
-    public static class AssemblyResolver
+    public class AssemblyResolver
     {
-        private static bool _initialized;
-        private static string _librariesPath;
-        private static readonly Dictionary<string, bool> Assemblies;
+        private static AssemblyResolver _instance;
+        public static AssemblyResolver Instance => _instance ?? (_instance = new AssemblyResolver());
 
-        static AssemblyResolver()
+        private bool _attached;
+        private string _librariesPath;
+        private ActPluginData _pluginData;
+
+        public bool Attach(IActPluginV1 plugin)
         {
-            Assemblies = new Dictionary<string, bool>();
-        }
-
-        /// <summary>
-        /// must be called before LoadAssembly!
-        /// </summary>
-        /// <param name="enviroment"></param>
-        public static void Initialize(string enviroment)
-        {
-            if(_initialized)
-                return;
-
-            _initialized = true;
-            _librariesPath = Path.Combine(enviroment, "libs");
+            if(_attached)
+                return true;
 
             try
             {
-                foreach (var file in Directory.GetFiles(_librariesPath))
-                {
-                    var key = Path.GetFileNameWithoutExtension(file);
-                    if(Assemblies.ContainsKey(key))
-                        continue;
+                _pluginData = ActGlobals.oFormActMain.PluginGetSelfData(plugin);
+                var enviroment = Path.GetDirectoryName(_pluginData.pluginFile.ToString());
+                if(string.IsNullOrWhiteSpace(enviroment))
+                    return  false;
+            
+                _librariesPath = Path.Combine(enviroment, "libs");
+                if(!Directory.Exists(_librariesPath))
+                    return false;
 
-                    Assemblies.Add(key, false);
-                }
+                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             }
             catch (Exception)
             {
-                // no dll loaded..
-                Debug.WriteLine("Unable to load any DLL from libs..., the plugin cannot start!");
+                Debug.WriteLine("There was an error when attaching to AssemblyResolve!");
+                throw;
             }
+
+            _attached = true;
+            return true;
         }
 
-        public static bool LoadAssembly(ResolveEventArgs args, Label labelStatus, out Assembly result)
+        public void Detach()
         {
-            result = null;
+            if(!_attached)
+                return;
 
-            if(!_initialized || args.RequestingAssembly == null || GetAssemblyName(args.RequestingAssembly.FullName) != nameof(DFAssist))
-                return true; // avoid throwing, maybe it will be initialized later... who knows? >_<
+            _attached = false;
 
-            string currentDll;
-            var name = GetAssemblyName(args.Name);
-            if(Assemblies.TryGetValue(name, out _))
-            {
-                currentDll = Path.Combine(_librariesPath, name + ".dll");
-            }
-            else
-            {
-                // all the other assemblies should be loaded automatically
-                return true;
-            }
+            AppDomain.CurrentDomain.AssemblyResolve -= CurrentDomain_AssemblyResolve;
+            _librariesPath = null;
+        }
 
-            if (File.Exists(currentDll))
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            if(args.Name.Contains(".resources")
+                || args.RequestingAssembly == null 
+                || GetAssemblyName(args.RequestingAssembly.FullName) != nameof(DFAssist))
+                return null;
+
+            var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.FullName == args.Name);
+            if(assembly != null)
+                return assembly;
+
+            var filename = GetAssemblyName(args.Name) + ".dll".ToLower();
+            var asmFile = Path.Combine(_librariesPath, filename);
+
+            if (File.Exists(asmFile))
             {
-                try
+                try 
                 {
-                    var dllBytes = File.ReadAllBytes(currentDll);
-                    result = AppDomain.CurrentDomain.Load(dllBytes);
-                    Assemblies[name] = true;
-                    return true;
+                    return Assembly.LoadFrom(asmFile);
                 }
-                catch (Exception)
+                catch(Exception) 
                 {
-                    labelStatus.Text = $"Unable to load {args.Name} library, it may needs to be 'Unblocked'.";
-                    return false;
+                    _pluginData.lblPluginStatus.Text = $"Unable to load {args.Name} library, it may needs to be 'Unblocked'.";
+                    return null;
                 }
             }
 
-            labelStatus.Text = $"Unable to find {currentDll}, the plugin cannot be starterd.";
-            return false;
+            _pluginData.lblPluginStatus.Text = $"Unable to find {asmFile}, the plugin cannot be starterd.";
+            return null;
         }
 
         private static string GetAssemblyName(string fullAssemblyName)
         {
-            return fullAssemblyName.IndexOf(",", StringComparison.Ordinal) > -1 
+            return fullAssemblyName.IndexOf(",", StringComparison.Ordinal) > -1
                 ? fullAssemblyName.Substring(0, fullAssemblyName.IndexOf(",", StringComparison.Ordinal))
                 : fullAssemblyName;
         }
