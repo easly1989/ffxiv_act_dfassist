@@ -345,6 +345,7 @@ namespace DFAssist
 
         public void DeInitPlugin()
         {
+            AssemblyResolver.Instance.Detach();
             DFAssistPlugin.Instance.DeInitPlugin();
         }
     }

@@ -63,8 +63,7 @@ namespace DFAssist.Helpers
             _logger.Write($"UI: [LegacyToasts] Desired Value: {_mainControl.EnableLegacyToast.Checked}", LogLevel.Debug);
             _mainControl.PersistToasts.Enabled = !_mainControl.EnableLegacyToast.Checked;
 
-            // call toast helper
-            ToastWindowNotification(_localizationRepository.GetText("ui-toast-notification-test-title"), _localizationRepository.GetText("ui-toast-notification-test-message"));
+            ToastHelper.Instance.SendNotification(_localizationRepository.GetText("ui-toast-notification-test-title"), _localizationRepository.GetText("ui-toast-notification-test-message"));
         }
 
         [Obsolete("Should be handled directly by WinToast")]

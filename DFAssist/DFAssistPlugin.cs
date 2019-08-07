@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Speech.Synthesis;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts;
@@ -11,7 +10,6 @@ using DFAssist.Core.Network;
 using DFAssist.Core.Repositories;
 using DFAssist.Helpers;
 using Splat;
-using static Splat.Locator;
 
 namespace DFAssist
 {
@@ -41,10 +39,10 @@ namespace DFAssist
 
         public DFAssistPlugin()
         {
-            CurrentMutable.RegisterConstant(new Logger(), typeof(IActLogger));
-            CurrentMutable.RegisterConstant(new LocalizationRepository(), typeof(ILocalizationRepository));
-            CurrentMutable.RegisterConstant(new DataRepository(), typeof(IDataRepository));
-            CurrentMutable.RegisterConstant(new FFXIVPacketHandler(), typeof(IPacketHandler));
+            Locator.CurrentMutable.RegisterConstant(new Logger(), typeof(IActLogger));
+            Locator.CurrentMutable.RegisterConstant(new LocalizationRepository(), typeof(ILocalizationRepository));
+            Locator.CurrentMutable.RegisterConstant(new DataRepository(), typeof(IDataRepository));
+            Locator.CurrentMutable.RegisterConstant(new FFXIVPacketHandler(), typeof(IPacketHandler));
         }
 
         public void InitPlugin(IActPluginV1 plugin)
@@ -71,9 +69,9 @@ namespace DFAssist
 
             InitializePluginVariables(plugin);
             
-            _logger = Current.GetService<IActLogger>();
-            _localizationRepository = Current.GetService<ILocalizationRepository>();
-            _dataRepository = Current.GetService<IDataRepository>();
+            _logger = Locator.Current.GetService<IActLogger>();
+            _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
+            _dataRepository = Locator.Current.GetService<IDataRepository>();
 
             _logger.SetTextBox(_mainControl.LoggingRichTextBox);
             _logger.Write("Plugin Init", LogLevel.Debug);
@@ -125,6 +123,7 @@ namespace DFAssist
 
             DisposeOwnedObjects();
             SetNullOwnedObjects();
+            CleanLocatorMutable();
         }
 
         public void OnNetworkEventReceived(EventType eventType, int[] args)
@@ -143,16 +142,16 @@ namespace DFAssist
 
         private void InitializePluginVariables(IActPluginV1 plugin)
         {
-            if(!CurrentMutable.HasRegistration(typeof(MainControl)))
+            if(!Locator.CurrentMutable.HasRegistration(typeof(MainControl)))
             {
                 _mainControl = plugin as MainControl;
-                CurrentMutable.Register(() => _mainControl);
+                Locator.CurrentMutable.Register(() => _mainControl);
             }
 
-            if(!CurrentMutable.HasRegistration(typeof(ActPluginData)))
+            if(!Locator.CurrentMutable.HasRegistration(typeof(ActPluginData)))
             {
                 _pluginData = ActGlobals.oFormActMain.PluginGetSelfData(plugin);
-                CurrentMutable.Register(() => _pluginData);
+                Locator.CurrentMutable.Register(() => _pluginData);
             }
         }
         
@@ -193,6 +192,16 @@ namespace DFAssist
             _pluginData = null;
             _localizationRepository = null;
             _instance = null;
+        }
+
+        private void CleanLocatorMutable()
+        {
+            Locator.CurrentMutable.UnregisterAll(typeof(IActLogger));
+            Locator.CurrentMutable.UnregisterAll(typeof(ILocalizationRepository));
+            Locator.CurrentMutable.UnregisterAll(typeof(IDataRepository));
+            Locator.CurrentMutable.UnregisterAll(typeof(IPacketHandler));
+            Locator.CurrentMutable.UnregisterAll(typeof(MainControl));
+            Locator.CurrentMutable.UnregisterAll(typeof(ActPluginData));
         }
     }
     // ReSharper restore InconsistentNaming
