@@ -72,16 +72,13 @@
     <Compile Include="DFAssistPlugin.cs" />
     <Compile Include="Helpers\ACTPluginSettingsHelper.cs" />
     <Compile Include="Helpers\ACTPluginUpdateHelper.cs" />
+    <Compile Include="Helpers\ToastHelper.cs" />
     <Compile Include="Helpers\TTSHelper.cs" />
     <Compile Include="Helpers\DFAssistUIInteractionHelper.cs" />
     <Compile Include="Helpers\DFAssistRepositoriesHelper.cs" />
     <Compile Include="Helpers\FFXIVNetworkProcessHelper.cs" />
     <Compile Include="Helpers\FFXIVPluginHelper.cs" />
     <Compile Include="IActLogger.cs" />
-    <Compile Include="LegacyToasts\FormAnimator.cs" />
-    <Compile Include="LegacyToasts\LegacyToast.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>

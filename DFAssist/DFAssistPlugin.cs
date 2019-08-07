@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts;
 using DFAssist.Contracts.DataModel;
+using DFAssist.Contracts.Duty;
 using DFAssist.Contracts.Repositories;
 using DFAssist.Core.Network;
 using DFAssist.Core.Repositories;
@@ -30,6 +31,7 @@ namespace DFAssist
 
         private IActLogger _logger;
         private ILocalizationRepository _localizationRepository;
+        private IDataRepository _dataRepository;
         private MainControl _mainControl;
         private ActPluginData _pluginData;
         
@@ -71,7 +73,8 @@ namespace DFAssist
             
             _logger = Current.GetService<IActLogger>();
             _localizationRepository = Current.GetService<ILocalizationRepository>();
-            
+            _dataRepository = Current.GetService<IDataRepository>();
+
             _logger.SetTextBox(_mainControl.LoggingRichTextBox);
             _logger.Write("Plugin Init", LogLevel.Debug);
             _logger.Write($"Plugin Version: {Assembly.GetExecutingAssembly().GetName().Version}", LogLevel.Debug);
@@ -108,21 +111,6 @@ namespace DFAssist
             _pluginInitializing = false;
         }
 
-        private void InitializePluginVariables(IActPluginV1 plugin)
-        {
-            if(!CurrentMutable.HasRegistration(typeof(MainControl)))
-            {
-                _mainControl = plugin as MainControl;
-                CurrentMutable.Register(() => _mainControl);
-            }
-
-            if(!CurrentMutable.HasRegistration(typeof(ActPluginData)))
-            {
-                _pluginData = ActGlobals.oFormActMain.PluginGetSelfData(plugin);
-                CurrentMutable.Register(() => _pluginData);
-            }
-        }
-
         public void DeInitPlugin()
         {
             if (!IsPluginEnabled)
@@ -139,6 +127,35 @@ namespace DFAssist
             SetNullOwnedObjects();
         }
 
+        public void OnNetworkEventReceived(EventType eventType, int[] args)
+        {
+            if(eventType != EventType.MATCH_ALERT)
+                return;
+
+            var isRoulette = args[0] != 0;
+            var title = isRoulette ? _dataRepository.GetRoulette(args[0]).Name : _localizationRepository.GetText("ui-dutyfound");
+            var testing = _mainControl.EnableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
+            var instanceName = _dataRepository.GetInstance(args[1]).Name;
+
+            ToastHelper.Instance.SendNotification(title, instanceName, testing, isRoulette);
+            TTSHelper.Instance.SendNotification(instanceName);
+        }
+
+        private void InitializePluginVariables(IActPluginV1 plugin)
+        {
+            if(!CurrentMutable.HasRegistration(typeof(MainControl)))
+            {
+                _mainControl = plugin as MainControl;
+                CurrentMutable.Register(() => _mainControl);
+            }
+
+            if(!CurrentMutable.HasRegistration(typeof(ActPluginData)))
+            {
+                _pluginData = ActGlobals.oFormActMain.PluginGetSelfData(plugin);
+                CurrentMutable.Register(() => _pluginData);
+            }
+        }
+        
         private bool EnsureActMainFormIsLoaded()
         {
             foreach (Form formLoaded in Application.OpenForms)
@@ -160,6 +177,7 @@ namespace DFAssist
 
         private void DisposeOwnedObjects()
         {
+            ToastHelper.Instance.Dispose();
             TTSHelper.Instance.Dispose();
             DFAssistRepositoriesHelper.Instance.Dispose();
             DFAssistUIInteractionHelper.Instance.Dispose();

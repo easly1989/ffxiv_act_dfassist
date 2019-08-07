@@ -113,6 +113,46 @@ namespace DFAssist.Helpers
 
             switch (eventType)
             {
+                case EventType.INSTANCE_ENTER:
+                case EventType.INSTANCE_EXIT:
+                    if (args.Length > 0)
+                    {
+                        text += _dataRepository.GetInstance(args[0]).Name + "|";
+                        pos++;
+                    }
+
+                    break;
+                case EventType.MATCH_BEGIN:
+                    text += (MatchType)args[0] + "|";
+                    pos++;
+                    switch ((MatchType)args[0])
+                    {
+                        case MatchType.ROULETTE:
+                            text += _dataRepository.GetRoulette(args[0]).Name + "|";
+                            pos++;
+                            break;
+                        case MatchType.SELECTIVE:
+                            text += args[1] + "|";
+                            pos++;
+                            var p = pos;
+                            for (var i = p; i < args.Length; i++)
+                            {
+                                text += _dataRepository.GetInstance(args[1]).Name + "|";
+                                pos++;
+                            }
+
+                            break;
+                    }
+
+                    break;
+                case EventType.MATCH_END:
+                    text += (MatchEndType)args[0] + "|";
+                    pos++;
+                    break;
+                case EventType.MATCH_PROGRESS:
+                    text += _dataRepository.GetInstance(args[0]).Name + "|";
+                    pos++;
+                    break;
                 case EventType.MATCH_ALERT:
                     text += _dataRepository.GetRoulette(args[0]).Name + "|";
                     pos++;
@@ -128,7 +168,7 @@ namespace DFAssist.Helpers
 
             ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now, "00|" + DateTime.Now.ToString("O") + "|0048|F|" + text);
             // TODO: add toast helper
-            PostToToastWindowsNotificationIfNeeded(eventType, args);
+            DFAssistPlugin.Instance.OnNetworkEventReceived(eventType, args);
         }
 
         public void Dispose()

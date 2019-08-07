@@ -27,7 +27,7 @@ namespace DFAssist.Helpers
         public void Subscribe()
         {
             if(_subscribed)
-                return;;
+                return;
 
             _subscribed = true;
             _mainControl.DisableToasts.CheckStateChanged += DisableToastsOnCheckedChanged;
@@ -67,6 +67,7 @@ namespace DFAssist.Helpers
             ToastWindowNotification(_localizationRepository.GetText("ui-toast-notification-test-title"), _localizationRepository.GetText("ui-toast-notification-test-message"));
         }
 
+        [Obsolete("Should be handled directly by WinToast")]
         private void PersistToastsOnCheckedChanged(object sender, EventArgs e)
         {
             try
