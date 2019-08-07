@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts.Repositories;
 using DFAssist.Core.Toast;
@@ -14,15 +15,24 @@ namespace DFAssist.Helpers
         private IActLogger _logger;
         private ILocalizationRepository _localizationRepository;
         private MainControl _mainControl;
+        private ActPluginData _pluginData;
+        private WinToastWrapper.ToastEventCallback _toastEventCallback;
 
         public ToastHelper()
         {
             _logger = Locator.Current.GetService<IActLogger>();
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _mainControl = Locator.Current.GetService<MainControl>();
+            _pluginData = Locator.Current.GetService<ActPluginData>();
+
+            _toastEventCallback = delegate (int code)
+            {
+                // todo: handle the various codes
+                _logger.Write($"This is the Code: {code}", LogLevel.Info);
+            };
         }
 
-        public void SendNotification(string title, string message, string testing = "", bool isRoulette = false)
+        public void SendNotification(string title, string message, string testing = "")
         {
             _logger.Write("UI: Request Showing Taost received...", LogLevel.Debug);
             if (_mainControl.DisableToasts.Checked)
@@ -35,12 +45,7 @@ namespace DFAssist.Helpers
             try
             {
                 _logger.Write("UI: Creating new Toast...", LogLevel.Debug);
-                var toastImagePath = isRoulette ? "images/roulette.png" : "images/dungeon.png";//todo handle instance type from data
                 var attribution = _localizationRepository.GetText("app-name");
-                void ToastCallback(int code)
-                {
-                    //todo handle all the return types and log it
-                }
 
                 if (string.IsNullOrWhiteSpace(testing))
                 {
@@ -49,10 +54,10 @@ namespace DFAssist.Helpers
                         DFAssistPlugin.AppId,
                         title,
                         message,
-                        toastImagePath,
-                        ToastCallback,
+                        _toastEventCallback,
                         attribution,
-                        true);
+                        true,
+                        Duration.Long);
                 }
                 else
                 {
@@ -62,11 +67,10 @@ namespace DFAssist.Helpers
                         title,
                         message,
                         $"Code [{testing}]",
-                        toastImagePath,
-                        ToastCallback,
-                        attribution);
+                        _toastEventCallback,
+                        attribution,
+                        Duration.Long);
                 }
-                _logger.Write("UI: Show Toast Requested...", LogLevel.Debug);
             }
             catch (Exception e)
             {
@@ -76,6 +80,8 @@ namespace DFAssist.Helpers
 
         public void Dispose()
         {
+            _toastEventCallback = null;
+            _pluginData = null;
             _localizationRepository = null;
             _mainControl = null;
             _logger = null;

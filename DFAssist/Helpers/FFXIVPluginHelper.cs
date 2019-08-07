@@ -53,7 +53,7 @@ namespace DFAssist.Helpers
         public void Dispose()
         {
             if (_ffxivPluginData != null)
-                _ffxivPluginData.cbEnabled.CheckedChanged += FFXIVParsingPlugin_IsEnabledChanged;
+                _ffxivPluginData.cbEnabled.CheckedChanged -= FFXIVParsingPlugin_IsEnabledChanged;
 
             _ffxivPluginData = null;
             _instance = null;

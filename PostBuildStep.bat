@@ -21,6 +21,7 @@ if not exist %loc% mkdir %loc%
 if not exist %img% mkdir %img%
 echo "Moving all dll files..."
 move /Y %from%*.dll %libs%
+move /Y %from%DFAssist.Plugin.dll.config %libs%
 echo "Moving pdb files..."
 move /Y %from%*.pdb %pdb%
 echo "Deleteing all unused files..."

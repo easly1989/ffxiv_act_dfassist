@@ -20,7 +20,7 @@ namespace DFAssist.Core.Repositories
         {
             Initialized = false;
             Version = default(decimal);
-            CurrentLanguage = "en-us";
+            CurrentLanguage = string.Empty;
 
             Logger = Locator.Current.GetService<ILogger>();
             WebUpdate();

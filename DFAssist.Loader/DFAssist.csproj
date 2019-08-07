@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD838217-AEDA-4C6A-A5D8-1E6B2D6F7F2C}</ProjectGuid>
+    <ProjectGuid>{67D5CCFB-C77F-4A77-A37D-ECCE57279150}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DFAssist.Contracts</RootNamespace>
-    <AssemblyName>DFAssist.Contracts</AssemblyName>
+    <RootNamespace>DFAssist.Loader</RootNamespace>
+    <AssemblyName>DFAssist</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,35 +21,39 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Advanced Combat Tracker">
+      <HintPath>..\..\ffxiv_actor\ActorConsole\bin\Debug\ACT\Advanced Combat Tracker.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModel\GameData.cs" />
-    <Compile Include="DataModel\Instance.cs" />
-    <Compile Include="DataModel\Language.cs" />
-    <Compile Include="DataModel\Roulette.cs" />
-    <Compile Include="Duty\EventType.cs" />
-    <Compile Include="Duty\MatchEndType.cs" />
-    <Compile Include="Duty\MatchType.cs" />
-    <Compile Include="Duty\MatchingState.cs" />
-    <Compile Include="IPacketHandler.cs" />
+    <Compile Include="AssemblyResolver.cs" />
+    <Compile Include="DFAssistActPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IDataRepository.cs" />
-    <Compile Include="Repositories\ILocalizationRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DFAssist\DFAssist.Plugin.csproj">
+      <Project>{1d6ba59a-fb85-4ed2-90e1-deb79fd5affc}</Project>
+      <Name>DFAssist.Plugin</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>call $(SolutionDir)PostBuildStep.bat $(TargetDir) $(SolutionDir)$(ProjectName)\</PostBuildEvent>
+  </PropertyGroup>
 </Project>

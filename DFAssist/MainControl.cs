@@ -7,7 +7,7 @@ using Size = System.Drawing.Size;
 
 namespace DFAssist
 {
-    public class MainControl : UserControl, IActPluginV1
+    public class MainControl : UserControl
     {
         private LinkLabel _copyrightLink;
         private TableLayoutPanel _mainTableLayout;
@@ -34,8 +34,12 @@ namespace DFAssist
         public ComboBox LanguageComboBox;
         public RichTextBox LoggingRichTextBox;
 
-        public MainControl()
+        public IActPluginV1 Plugin;
+
+        public MainControl(IActPluginV1 plugin)
         {
+            Plugin = plugin;
+
             InitializeComponent();
         }
 
@@ -339,13 +343,11 @@ namespace DFAssist
 
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
-            AssemblyResolver.Instance.Attach(this);
             DFAssistPlugin.Instance.InitPlugin(this);
         }
 
         public void DeInitPlugin()
         {
-            AssemblyResolver.Instance.Detach();
             DFAssistPlugin.Instance.DeInitPlugin();
         }
     }

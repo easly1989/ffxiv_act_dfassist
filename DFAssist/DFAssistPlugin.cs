@@ -32,9 +32,9 @@ namespace DFAssist
         private IDataRepository _dataRepository;
         private MainControl _mainControl;
         private ActPluginData _pluginData;
-        
+
         private bool _pluginInitializing;
-        
+
         public bool IsPluginEnabled { get; private set; }
 
         public DFAssistPlugin()
@@ -45,7 +45,7 @@ namespace DFAssist
             Locator.CurrentMutable.RegisterConstant(new FFXIVPacketHandler(), typeof(IPacketHandler));
         }
 
-        public void InitPlugin(IActPluginV1 plugin)
+        public void InitPlugin(MainControl mainControl)
         {
             if (_pluginInitializing)
                 return;
@@ -59,16 +59,14 @@ namespace DFAssist
                      return;
 
                  _pluginData.cbEnabled.Checked = false;
-                 // todo: check if the next call is really needed
-                 //_pluginData.pluginObj.DeInitPlugin();))
              }))
                 return;
 
             _pluginInitializing = true;
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
 
-            InitializePluginVariables(plugin);
-            
+            InitializePluginVariables(mainControl);
+
             _logger = Locator.Current.GetService<IActLogger>();
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _dataRepository = Locator.Current.GetService<IDataRepository>();
@@ -123,38 +121,30 @@ namespace DFAssist
 
             DisposeOwnedObjects();
             SetNullOwnedObjects();
-            CleanLocatorMutable();
         }
 
         public void OnNetworkEventReceived(EventType eventType, int[] args)
         {
-            if(eventType != EventType.MATCH_ALERT)
+            if (eventType != EventType.MATCH_ALERT)
                 return;
 
-            var isRoulette = args[0] != 0;
-            var title = isRoulette ? _dataRepository.GetRoulette(args[0]).Name : _localizationRepository.GetText("ui-dutyfound");
+            var title = args[0] != 0 ? _dataRepository.GetRoulette(args[0]).Name : _localizationRepository.GetText("ui-dutyfound");
             var testing = _mainControl.EnableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
             var instanceName = _dataRepository.GetInstance(args[1]).Name;
 
-            ToastHelper.Instance.SendNotification(title, instanceName, testing, isRoulette);
+            ToastHelper.Instance.SendNotification(title, instanceName, testing);
             TTSHelper.Instance.SendNotification(instanceName);
         }
 
-        private void InitializePluginVariables(IActPluginV1 plugin)
+        private void InitializePluginVariables(MainControl mainControl)
         {
-            if(!Locator.CurrentMutable.HasRegistration(typeof(MainControl)))
-            {
-                _mainControl = plugin as MainControl;
-                Locator.CurrentMutable.Register(() => _mainControl);
-            }
+            _mainControl = mainControl;
+            _pluginData = ActGlobals.oFormActMain.PluginGetSelfData(mainControl.Plugin);
 
-            if(!Locator.CurrentMutable.HasRegistration(typeof(ActPluginData)))
-            {
-                _pluginData = ActGlobals.oFormActMain.PluginGetSelfData(plugin);
-                Locator.CurrentMutable.Register(() => _pluginData);
-            }
+            Locator.CurrentMutable.Register(() => _mainControl);
+            Locator.CurrentMutable.Register(() => _pluginData);
         }
-        
+
         private bool EnsureActMainFormIsLoaded()
         {
             foreach (Form formLoaded in Application.OpenForms)
@@ -189,19 +179,10 @@ namespace DFAssist
         private void SetNullOwnedObjects()
         {
             _logger = null;
+            _mainControl = null;
             _pluginData = null;
             _localizationRepository = null;
             _instance = null;
-        }
-
-        private void CleanLocatorMutable()
-        {
-            Locator.CurrentMutable.UnregisterAll(typeof(IActLogger));
-            Locator.CurrentMutable.UnregisterAll(typeof(ILocalizationRepository));
-            Locator.CurrentMutable.UnregisterAll(typeof(IDataRepository));
-            Locator.CurrentMutable.UnregisterAll(typeof(IPacketHandler));
-            Locator.CurrentMutable.UnregisterAll(typeof(MainControl));
-            Locator.CurrentMutable.UnregisterAll(typeof(ActPluginData));
         }
     }
     // ReSharper restore InconsistentNaming

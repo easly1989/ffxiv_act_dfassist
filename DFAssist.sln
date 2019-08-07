@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist", "DFAssist\DFAssist.csproj", "{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist.Plugin", "DFAssist\DFAssist.Plugin.csproj", "{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E20D32F4-26E0-4B7A-B2FE-590FA4867E61} = {E20D32F4-26E0-4B7A-B2FE-590FA4867E61}
 	EndProjectSection
@@ -18,6 +18,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DFAssist.WinToast", "DFAssist.WinToast\DFAssist.WinToast.vcxproj", "{E20D32F4-26E0-4B7A-B2FE-590FA4867E61}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist.Contracts", "DFAssist.Contracts\DFAssist.Contracts.csproj", "{FD838217-AEDA-4C6A-A5D8-1E6B2D6F7F2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist", "DFAssist.Loader\DFAssist.csproj", "{67D5CCFB-C77F-4A77-A37D-ECCE57279150}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,18 @@ Global
 		{FD838217-AEDA-4C6A-A5D8-1E6B2D6F7F2C}.Release|x64.Build.0 = Release|Any CPU
 		{FD838217-AEDA-4C6A-A5D8-1E6B2D6F7F2C}.Release|x86.ActiveCfg = Release|Any CPU
 		{FD838217-AEDA-4C6A-A5D8-1E6B2D6F7F2C}.Release|x86.Build.0 = Release|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Debug|x64.Build.0 = Debug|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Debug|x86.Build.0 = Debug|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|x64.ActiveCfg = Release|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|x64.Build.0 = Release|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|x86.ActiveCfg = Release|Any CPU
+		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
