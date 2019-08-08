@@ -11,6 +11,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{992679BB-39BD-4505-B886-AAC645B19CF0}"
 	ProjectSection(SolutionItems) = preProject
 		PostBuildStep.bat = PostBuildStep.bat
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist.Core", "DFAssist.Core\DFAssist.Core.csproj", "{67CE05FE-A32C-4149-9884-7DDC065690F9}"

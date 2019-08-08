@@ -151,8 +151,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="version.h" />
     <ClInclude Include="wintoastimpl.h" />
     <ClInclude Include="wintoastlib.h" />
   </ItemGroup>
@@ -166,6 +168,9 @@
     </ClCompile>
     <ClCompile Include="wintoastimpl.cpp" />
     <ClCompile Include="wintoastlib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DFAssist.WinToast.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
