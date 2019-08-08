@@ -44,6 +44,7 @@ namespace DFAssist.Helpers
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableActToast.Name, _mainControl.EnableActToast);
 
             if (File.Exists(_settingsFile))
+            {
                 using (var fileStream = new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 using (var xmlTextReader = new XmlTextReader(fileStream))
                 {
@@ -54,8 +55,14 @@ namespace DFAssist.Helpers
                             if (xmlTextReader.NodeType != XmlNodeType.Element)
                                 continue;
 
-                            if (xmlTextReader.LocalName == "SettingsSerializer")
-                                _xmlSettingsSerializer.ImportFromXml(xmlTextReader);
+                            if (xmlTextReader.LocalName != "SettingsSerializer") 
+                                continue;
+
+                            if (_xmlSettingsSerializer.ImportFromXml(xmlTextReader) == 0) 
+                                break;
+
+                            InternalCreateDefaultConfiguration();
+                            break;
                         }
                     }
                     catch (Exception)
@@ -65,13 +72,17 @@ namespace DFAssist.Helpers
 
                     xmlTextReader.Close();
                 }
+            }
+            else
+                InternalCreateDefaultConfiguration();
 
             foreach (var language in _mainControl.LanguageComboBox.Items.OfType<Language>())
             {
-                if (language.Name.Equals(_mainControl.LanguageValue.Text))
-                {
-                    _mainControl.LanguageComboBox.SelectedItem = language;
-                }
+                if (!language.Name.Equals(_mainControl.LanguageValue.Text)) 
+                    continue;
+
+                _mainControl.LanguageComboBox.SelectedItem = language;
+                break;
             }
 
             _logger.Write($"Language: {_mainControl.LanguageValue.Text}", LogLevel.Debug);
@@ -81,6 +92,13 @@ namespace DFAssist.Helpers
             _logger.Write($"Enable Text To Speech: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Test Environment: {_mainControl.EnableTestEnvironment.Checked}", LogLevel.Debug);
             _logger.Write("Settings Loaded!", LogLevel.Debug);
+        }
+
+        private void InternalCreateDefaultConfiguration()
+        {
+            _mainControl.PersistToasts.Checked = true;
+            _mainControl.LanguageValue.Text = "English";
+            SaveSettings();
         }
 
         public void SaveSettings()

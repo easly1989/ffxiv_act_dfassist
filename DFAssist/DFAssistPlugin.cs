@@ -39,7 +39,9 @@ namespace DFAssist
 
         public DFAssistPlugin()
         {
-            Locator.CurrentMutable.RegisterConstant(new Logger(), typeof(IActLogger));
+            _logger = new Logger();
+            Locator.CurrentMutable.RegisterConstant(_logger, typeof(ILogger));
+            Locator.CurrentMutable.RegisterConstant(_logger, typeof(IActLogger));
             Locator.CurrentMutable.RegisterConstant(new LocalizationRepository(), typeof(ILocalizationRepository));
             Locator.CurrentMutable.RegisterConstant(new DataRepository(), typeof(IDataRepository));
             Locator.CurrentMutable.RegisterConstant(new FFXIVPacketHandler(), typeof(IPacketHandler));
@@ -67,7 +69,6 @@ namespace DFAssist
 
             InitializePluginVariables(mainControl);
 
-            _logger = Locator.Current.GetService<IActLogger>();
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _dataRepository = Locator.Current.GetService<IDataRepository>();
 

@@ -48,9 +48,6 @@ namespace DFAssist.Core.Repositories
             }
 
             InternalUpdate(result, language);
-            Initialized = true;
-            CurrentLanguage = language;
-            Logger.Write($"Data updated for {language}", LogLevel.Info);
             Logger.Write(_instances.Any() && _roulettes.Any() ? $"Data {Version} Initialized!" : "Unable to initialize Data!", LogLevel.Debug);
         }
 
@@ -77,20 +74,18 @@ namespace DFAssist.Core.Repositories
                     _roulettes = data.Roulettes;
                     Version = version;
 
-                    if (Initialized)
-                        Logger.Write($"l-data-updated {version}", LogLevel.Debug);
-
                     Initialized = true;
                     CurrentLanguage = language;
+                    Logger.Write($"UI: Data updated to v{version} for {language}", LogLevel.Info);
                 }
                 else
                 {
-                    Logger.Write($"l-data-is-latest {version}", LogLevel.Debug);
+                    Logger.Write("UI: Data already updated!", LogLevel.Info);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Write(ex, "l-data-error", LogLevel.Error);
+                Logger.Write(ex, "UI: An Error occurrend while updating data...", LogLevel.Error);
             }
         }
     }

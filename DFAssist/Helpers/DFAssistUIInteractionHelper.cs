@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using DFAssist.Contracts.Repositories;
 using Microsoft.Win32;
 using Splat;
