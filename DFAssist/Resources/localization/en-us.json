@@ -1,6 +1,4 @@
 ﻿{
-  "app-name": "Duty Assist",
-
   "l-plugin-started": "Plugin Started!",
   "l-plugin-stopped": "Plugin Stopped!",
 
@@ -91,7 +89,9 @@
   "ui-tts-dutyfound": "Duty Found!",
   "ui-persist-toasts": "Make Toasts Persistent",
 
-  "ui-enable-legacy-toasts": "Enable Legacy Toasts",
+  "ui-enable-act-toasts": "Enable ACT Toasts",
+  "ui-close-act-toast": "Close Toast",
+
   "ui-disable-toasts": "Disable Toasts",
 
   "ui-general-settings-group": "General Settings",

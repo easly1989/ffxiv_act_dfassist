@@ -32,7 +32,7 @@ namespace DFAssist.Helpers
             _subscribed = true;
             _mainControl.DisableToasts.CheckStateChanged += DisableToastsOnCheckedChanged;
             _mainControl.PersistToasts.CheckStateChanged += PersistToastsOnCheckedChanged;
-            _mainControl.EnableLegacyToast.CheckStateChanged += EnableLegacyToastsOnCheckedChanged;
+            _mainControl.EnableActToast.CheckStateChanged += EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged += EnableTtsOnCheckedChanged;
             _mainControl.ClearLogButton.Click += ClearLogsButton_Click;
 
@@ -46,7 +46,7 @@ namespace DFAssist.Helpers
             _subscribed = false;
             _mainControl.DisableToasts.CheckStateChanged -= DisableToastsOnCheckedChanged;
             _mainControl.PersistToasts.CheckStateChanged -= PersistToastsOnCheckedChanged;
-            _mainControl.EnableLegacyToast.CheckStateChanged -= EnableLegacyToastsOnCheckedChanged;
+            _mainControl.EnableActToast.CheckStateChanged -= EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged -= EnableTtsOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
         }
@@ -54,14 +54,14 @@ namespace DFAssist.Helpers
                 private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
         {
             _logger.Write($"UI: [DisableToasts] Desired Value: {_mainControl.DisableToasts.Checked}", LogLevel.Debug);
-            _mainControl.EnableLegacyToast.Enabled = !_mainControl.DisableToasts.Checked;
-            _mainControl.PersistToasts.Enabled = _mainControl.EnableLegacyToast.Enabled && !_mainControl.EnableLegacyToast.Checked;
+            _mainControl.EnableActToast.Enabled = !_mainControl.DisableToasts.Checked;
+            _mainControl.PersistToasts.Enabled = _mainControl.EnableActToast.Enabled && !_mainControl.EnableActToast.Checked;
         }
 
-        private void EnableLegacyToastsOnCheckedChanged(object sender, EventArgs e)
+        private void EnableActToastsOnCheckedChanged(object sender, EventArgs e)
         {
-            _logger.Write($"UI: [LegacyToasts] Desired Value: {_mainControl.EnableLegacyToast.Checked}", LogLevel.Debug);
-            _mainControl.PersistToasts.Enabled = !_mainControl.EnableLegacyToast.Checked;
+            _logger.Write($"UI: [LegacyToasts] Desired Value: {_mainControl.EnableActToast.Checked}", LogLevel.Debug);
+            _mainControl.PersistToasts.Enabled = !_mainControl.EnableActToast.Checked;
 
             ToastHelper.Instance.SendNotification(_localizationRepository.GetText("ui-toast-notification-test-title"), _localizationRepository.GetText("ui-toast-notification-test-message"));
         }
@@ -100,8 +100,6 @@ namespace DFAssist.Helpers
                         _logger.Write($"UI: [PersistentToasts] Key found in the registry, Removing value!", LogLevel.Debug);
                         key.DeleteValue("ShowInActionCenter");
                     }
-
-                    MessageBox.Show(_localizationRepository.GetText("ui-persistent-toast-warning-message"), _localizationRepository.GetText("ui-persistent-toast-warning-title"), MessageBoxButtons.OK);
                 }
             }
             catch(Exception ex)

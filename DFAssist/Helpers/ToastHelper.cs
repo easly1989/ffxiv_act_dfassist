@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts.Repositories;
 using DFAssist.Core.Toast;
@@ -41,40 +44,58 @@ namespace DFAssist.Helpers
                 return;
             }
 
-            _logger.Write("UI: Using Windows Toasts", LogLevel.Debug);
-            try
+            if (_mainControl.EnableActToast.Checked)
             {
-                _logger.Write("UI: Creating new Toast...", LogLevel.Debug);
-                var attribution = _localizationRepository.GetText("app-name");
-
-                if (string.IsNullOrWhiteSpace(testing))
+                _logger.Write("UI: Using ACT Toasts", LogLevel.Debug);
+                var traySlider = new TraySlider
                 {
-                    WinToastWrapper.CreateToast(
-                        DFAssistPlugin.AppId,
-                        DFAssistPlugin.AppId,
-                        title,
-                        message,
-                        _toastEventCallback,
-                        attribution,
-                        true,
-                        Duration.Long);
-                }
-                else
-                {
-                    WinToastWrapper.CreateToast(
-                        DFAssistPlugin.AppId,
-                        DFAssistPlugin.AppId,
-                        title,
-                        message,
-                        $"Code [{testing}]",
-                        _toastEventCallback,
-                        attribution,
-                        Duration.Long);
-                }
+                    Font = new Font(FontFamily.GenericSerif, 16, FontStyle.Bold),
+                    ShowDurationMs = 30000
+                };
+                traySlider.ButtonSE.Visible = false;
+                traySlider.ButtonNE.Visible = false;
+                traySlider.ButtonNW.Visible = false;
+                traySlider.ButtonSW.Visible = true;
+                traySlider.ButtonSW.Text = _localizationRepository.GetText("ui-close-act-toast");
+                traySlider.ShowTraySlider($"{title}\n{message}\n{testing}");
             }
-            catch (Exception e)
+            else
             {
-                _logger.Write(e, "UI: Unable to show toast notification", LogLevel.Error);
+                _logger.Write("UI: Using Windows Toasts", LogLevel.Debug);
+                try
+                {
+                    _logger.Write("UI: Creating new Toast...", LogLevel.Debug);
+                    var attribution = nameof(DFAssist);
+
+                    if (string.IsNullOrWhiteSpace(testing))
+                    {
+                        WinToastWrapper.CreateToast(
+                            DFAssistPlugin.AppId,
+                            DFAssistPlugin.AppId,
+                            title,
+                            message,
+                            _toastEventCallback,
+                            attribution,
+                            true,
+                            Duration.Long);
+                    }
+                    else
+                    {
+                        WinToastWrapper.CreateToast(
+                            DFAssistPlugin.AppId,
+                            DFAssistPlugin.AppId,
+                            title,
+                            message,
+                            $"Code [{testing}]",
+                            _toastEventCallback,
+                            attribution,
+                            Duration.Long);
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.Write(e, "UI: Unable to show toast notification", LogLevel.Error);
+                }
             }
         }
 

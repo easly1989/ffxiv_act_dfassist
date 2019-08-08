@@ -55,9 +55,9 @@ namespace DFAssist.Helpers
             _mainControl.EnableTestEnvironment.Text = _localizationRepository.GetText("ui-enable-test-environment");
             _mainControl.TtsCheckBox.Text = _localizationRepository.GetText("ui-enable-tts");
             _mainControl.PersistToasts.Text = _localizationRepository.GetText("ui-persist-toasts");
-            _mainControl.EnableLegacyToast.Text = _localizationRepository.GetText("ui-enable-legacy-toasts");
+            _mainControl.EnableActToast.Text = _localizationRepository.GetText("ui-enable-act-toasts");
             _mainControl.DisableToasts.Text = _localizationRepository.GetText("ui-disable-toasts");
-            _mainControl.AppTitle.Text = $"{_localizationRepository.GetText("app-name")} v{Assembly.GetExecutingAssembly().GetName().Version} | ";
+            _mainControl.AppTitle.Text = $"{nameof(DFAssist)} v{Assembly.GetExecutingAssembly().GetName().Version} | ";
             _mainControl.GeneralSettings.Text = _localizationRepository.GetText("ui-general-settings-group");
             _mainControl.ToastSettings.Text = _localizationRepository.GetText("ui-toast-settings-group");
             _mainControl.TtsSettings.Text = _localizationRepository.GetText("ui-tts-settings-group");

@@ -1,6 +1,4 @@
 ﻿{
-  "app-name": "임무 찾기 도우미",
-
   "l-plugin-started": "플러그인 시작됨!",
   "l-plugin-stopped": "플러그인이 중지되었습니다",
 
@@ -91,7 +89,9 @@
   "ui-tts-dutyfound": "의무가 발견되었습니다!",
   "ui-persist-toasts": "토스트를 지속적으로 만드십시오.",
 
-  "ui-enable-legacy-toasts": "레거시 토스트 사용",
+  "ui-enable-act-toasts": "ACT 토스트 사용",
+  "ui-close-act-toast": "가까운 토스트",
+
   "ui-disable-toasts": "토스트 끄기",
 
   "ui-general-settings-group": "일반 설정",

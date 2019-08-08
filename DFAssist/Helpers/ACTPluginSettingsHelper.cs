@@ -41,7 +41,7 @@ namespace DFAssist.Helpers
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsCheckBox.Name, _mainControl.TtsCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PersistToasts.Name, _mainControl.PersistToasts);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableTestEnvironment.Name, _mainControl.EnableTestEnvironment);
-            _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableLegacyToast.Name, _mainControl.EnableLegacyToast);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableActToast.Name, _mainControl.EnableActToast);
 
             if (File.Exists(_settingsFile))
                 using (var fileStream = new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -77,7 +77,7 @@ namespace DFAssist.Helpers
             _logger.Write($"Language: {_mainControl.LanguageValue.Text}", LogLevel.Debug);
             _logger.Write($"Disable Toasts: {_mainControl.DisableToasts.Checked}", LogLevel.Debug);
             _logger.Write($"Make Toasts Persistent: {_mainControl.PersistToasts.Checked}", LogLevel.Debug);
-            _logger.Write($"Enable Legacy Toasts: {_mainControl.EnableLegacyToast.Checked}", LogLevel.Debug);
+            _logger.Write($"Enable Legacy Toasts: {_mainControl.EnableActToast.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Text To Speech: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Test Environment: {_mainControl.EnableTestEnvironment.Checked}", LogLevel.Debug);
             _logger.Write("Settings Loaded!", LogLevel.Debug);

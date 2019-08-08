@@ -1,6 +1,4 @@
 {
-  "app-name": "Notificateur Mission",
-
   "l-plugin-started": "Plugin démarré!",
   "l-plugin-stopped": "Plugin arrêté!",
 
@@ -91,7 +89,9 @@
   "ui-tts-dutyfound": "Le devoir est trouvé!",
   "ui-persist-toasts": "Rendre les toasts persistants",
 
-  "ui-enable-legacy-toasts": "Activer les toasts hérités",
+  "ui-enable-act-toasts": "Activer les toasts de ACT",
+  "ui-close-act-toast": "Toast proche",
+
   "ui-disable-toasts": "Désactiver les Toasts",
 
   "ui-general-settings-group": "Paramètres généraux",

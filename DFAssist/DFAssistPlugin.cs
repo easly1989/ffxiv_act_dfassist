@@ -93,7 +93,7 @@ namespace DFAssist
 
             _pluginData.lblPluginStatus.Text = "Starting...";
             _pluginData.lblPluginStatus.Text = _localizationRepository.GetText("l-plugin-started");
-            _pluginData.tpPluginSpace.Text = _localizationRepository.GetText("app-name");
+            _pluginData.tpPluginSpace.Text = nameof(DFAssist);
 
             _logger.Write("Plugin Started!", LogLevel.Debug);
 

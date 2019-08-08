@@ -29,7 +29,7 @@ namespace DFAssist
         public CheckBox PersistToasts;
         public TextBox LanguageValue;
         public CheckBox DisableToasts;
-        public CheckBox EnableLegacyToast;
+        public CheckBox EnableActToast;
         public CheckBox EnableTestEnvironment;
         public ComboBox LanguageComboBox;
         public RichTextBox LoggingRichTextBox;
@@ -51,7 +51,7 @@ namespace DFAssist
             EnableTestEnvironment = new CheckBox();
             TtsCheckBox = new CheckBox();
             PersistToasts = new CheckBox();
-            EnableLegacyToast = new CheckBox();
+            EnableActToast = new CheckBox();
             DisableToasts = new CheckBox();
             _appTabControl = new TabControl();
             _mainTabPage = new TabPage();
@@ -122,12 +122,12 @@ namespace DFAssist
             // 
             // _enableLegacyToast
             // 
-            EnableLegacyToast.AutoSize = true;
-            EnableLegacyToast.Location = new Point(6, 68);
-            EnableLegacyToast.Name = "EnableLegacyToast";
-            EnableLegacyToast.TabIndex = 3;
-            EnableLegacyToast.Text = "Enable Legacy Toasts";
-            EnableLegacyToast.UseVisualStyleBackColor = true;
+            EnableActToast.AutoSize = true;
+            EnableActToast.Location = new Point(6, 68);
+            EnableActToast.Name = "EnableActToast";
+            EnableActToast.TabIndex = 3;
+            EnableActToast.Text = "Enable Legacy Toasts";
+            EnableActToast.UseVisualStyleBackColor = true;
             // 
             // _ttsCheckBox
             // 
@@ -291,7 +291,7 @@ namespace DFAssist
             Dock = DockStyle.Top;
             ToastSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             ToastSettings.Controls.Add(DisableToasts);
-            ToastSettings.Controls.Add(EnableLegacyToast);
+            ToastSettings.Controls.Add(EnableActToast);
             ToastSettings.Controls.Add(PersistToasts);
             ToastSettings.Name = "ToastSettings";
             ToastSettings.TabStop = false;
