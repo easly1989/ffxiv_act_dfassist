@@ -66,7 +66,6 @@ namespace DFAssist.Helpers
             ToastHelper.Instance.SendNotification(_localizationRepository.GetText("ui-toast-notification-test-title"), _localizationRepository.GetText("ui-toast-notification-test-message"));
         }
 
-        [Obsolete("Should be handled directly by WinToast")]
         private void PersistToastsOnCheckedChanged(object sender, EventArgs e)
         {
             try
