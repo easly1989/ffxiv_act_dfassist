@@ -106,10 +106,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\data\de-de.json" />
     <None Include="Resources\data\en-us.json" />
     <None Include="Resources\data\fr-fr.json" />
     <None Include="Resources\data\ja-jp.json" />
     <None Include="Resources\data\ko-kr.json" />
+    <None Include="Resources\localization\de-de.json" />
     <None Include="Resources\localization\en-us.json" />
     <None Include="Resources\localization\fr-fr.json" />
     <None Include="Resources\localization\ja-jp.json" />

@@ -1,85 +1,18 @@
 ﻿{
-  "l-plugin-started": "플러그인 시작됨!",
-  "l-plugin-stopped": "플러그인이 중지되었습니다",
-
-  "l-settings-load-error": "설정로드 오류: {0}.",
-  "l-settings-save-error": "설정 저장 중 오류 발생.",
-
-  "l-assembly-load-error": "어셈블리를로드 할 수 없습니다 {0}.",
-
-  "l-unknown-instance": "알 수 없는 임무 ({0})",
-  "l-unknown-roulette": "알 수 없는 무작위 임무 ({0})",
-  "l-unknown-area": "알 수 없는 지역 ({0})",
-  "l-unknown-fate": "알 수 없는 돌발 ({0})",
-
-  "l-process-set-success": "P: 파이널판타지14 프로세스가 선택되었습니다: {0}",
-  "l-process-set-failed": "P: 파이널판타지14 프로세스 설정에 실패했습니다.",
-  "l-process-remove-failed": "P: FFXIV 프로세스를 제거하지 못했습니다.",
-
-  "l-toast-notification-error": "T: 토스트 알림을 표시 할 수 없습니다.",
-
-  "l-data-updated": "D: 임무 데이터가 {0} 버전으로 갱신되었습니다.",
-  "l-data-is-latest": "D: 최신 임무 데이터(버전 {0})를 이용중입니다.",
-  "l-data-error": "D: 임무 데이터를 처리하던 중 문제 발생",
-
-  "l-packet-error-ip": "P: IP 패킷 파싱 에러",
-  "l-packet-error-tcp": "P: TCP 패킷 파싱 에러",
-
-  "l-network-started": "N: 네트워킹 시작됨",
-  "l-network-starting": "N: 네트워킹 시작중...",
-  "l-network-stopped": "N: 네트워킹 중지됨",
-  "l-network-stopping": "N: 네트워킹 중지 요청중...",
-  "l-network-error-starting": "N: 시작하지 못함",
-  "l-network-error-stopping": "N: 중지하지 못함",
-  "l-network-error-already-started": "N: 이미 시작되어 있음",
-  "l-network-error-already-stopped": "N: 이미 중지되어 있음",
-  "l-network-error-no-connection": "N: 게임서버 연결을 찾지 못함",
-  "l-network-error-receiving-packet": "N: 패킷을 받는 중 에러 발생",
-  "l-network-error-filtering-packet": "N: 패킷 필터링 중 에러 발생",
-  "l-network-error-finding-lobby": "N: 로비 서버 정보를 받아오는 중 에러 발생함",
-  "l-network-error-loopback-found": "N: 루프백 연결이 발견되었습니다 ... 무시되었습니다!",
-  "l-network-detected-connection-closing": "N: 게임서버와의 연결 종료 감지됨",
-  "l-network-detected-connection": "N: 게임서버 연결 감지: {0}",
-
-  "l-firewall-registered": "FW: 추가됨",
-  "l-firewall-error": "FW: 추가중 에러 발생",
-
-  "l-analyze-error-length": "A: 메시지 분석중 길이 에러 발생함: {0}, {1}/{2}",
-  "l-analyze-error-general": "A: 메시지 분석중 에러 발생함",
-  "l-analyze-error": "A: 메시지 처리중 에러 발생함",
-
-  "l-queue-started-general": "Q: 매칭 시작됨 [{0}]",
-  "l-queue-started-roulette": "Q: 무작위 임무 매칭 시작됨 [{0}] - {1}",
-  "l-queue-stopped": "Q: 매칭 중지됨",
-  "l-queue-entered": "Q: 임무 입장함",
-  "l-queue-matched": "Q: 매칭됨 [{0}] - {1}",
-  "l-queue-updated": "Q: 매칭 상태 업데이트됨 [{0}, {1}]",
-
-  "l-fate-occured-info": "F: {0} 돌발 발생!",
-
-  "l-field-instance-entered": "I: 인스턴스 필드 입장함 [{0}]",
-  "l-field-instance-left": "I: 인스턴스 필드 퇴장함",
-
   "ui-language-display-text": "언어",
 
-  "ui-toast-notification-display-text": "토스트 알림 사용",
   "ui-toast-notification-test-title": "이걸 보면...",
   "ui-toast-notification-test-message": "... 토스트가 작동합니다!",
 
   "ui-tts-notification-test-title": "이거 들으면...",
   "ui-tts-notification-test-message": "... 작품은!",
 
-  "ui-log-display-text": "로그",
-  "ui-log-enable-display-text": "로깅을 사용하도록 설정",
   "ui-log-clear-display-text": "로그 지우기",
 
   "ui-telegram-display-text": "전보 알림 사용",
   "ui-telegram-token-display-text": "토큰",
   "ui-telegram-chatid-display-text": "채팅 ID",
 
-  "ui-alerts-display-text": "경고",
-  "ui-alerts-fate-display-text": "돌발",
-  "ui-alerts-dutyfinder-display-text": "의무 파인더",
   "ui-enable-test-environment": "테스트 환경 사용",
 
   "ui-update-available-message": "DFAssist Plugin의 업데이트 된 버전이 있습니다. 지금 업데이트 하시겠습니까?\n\n(ACT에 대한 업데이트가있는 경우, 아니요를 클릭하고 먼저 ACT를 업데이트해야합니다.)",
@@ -87,6 +20,7 @@
 
   "ui-enable-tts": "텍스트 음성 변환 사용",
   "ui-tts-dutyfound": "의무가 발견되었습니다!",
+ 
   "ui-persist-toasts": "토스트를 지속적으로 만드십시오.",
 
   "ui-enable-act-toasts": "ACT 토스트 사용",
@@ -97,8 +31,5 @@
   "ui-general-settings-group": "일반 설정",
   "ui-toast-settings-group": "토스트 설정",
   "ui-tts-settings-group": "텍스트 음성 변환 설정",
-  "ui-test-settings-group": "테스트 설정",
-
-  "ui-persistent-toast-warning-title": "영구 토스트 경고!",
-  "ui-persistent-toast-warning-message": "레지스트리를 변경 한 후 \n 변경 사항을 적용하려면 PC를 재부팅해야 할 수도 있습니다.!"
+  "ui-test-settings-group": "테스트 설정"
 }

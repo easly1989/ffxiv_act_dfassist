@@ -81,7 +81,8 @@ namespace DFAssist
                 new Language { Name = "English", Code = "en-us" },
                 new Language { Name = "한국어", Code = "ko-kr" },
                 new Language { Name = "日本語", Code = "ja-jp" },
-                new Language { Name = "Français", Code = "fr-fr" }
+                new Language { Name = "Français", Code = "fr-fr" },
+                new Language { Name = "Deutsch", Code = "de-de" },
             };
             _mainControl.LanguageComboBox.DisplayMember = "Name";
             _mainControl.LanguageComboBox.ValueMember = "Code";
@@ -93,7 +94,7 @@ namespace DFAssist
             DFAssistUIInteractionHelper.Instance.Subscribe();
 
             _pluginData.lblPluginStatus.Text = "Starting...";
-            _pluginData.lblPluginStatus.Text = _localizationRepository.GetText("l-plugin-started");
+            _pluginData.lblPluginStatus.Text = "Plugin Started!";
             _pluginData.tpPluginSpace.Text = nameof(DFAssist);
 
             _logger.Write("Plugin Started!", LogLevel.Debug);
@@ -129,7 +130,7 @@ namespace DFAssist
             if (eventType != EventType.MATCH_ALERT)
                 return;
 
-            var title = args[0] != 0 ? _dataRepository.GetRoulette(args[0]).Name : _localizationRepository.GetText("ui-dutyfound");
+            var title = args[0] != 0 ? _dataRepository.GetRoulette(args[0]).Name : _localizationRepository.GetText("ui-tts-dutyfound");
             var testing = _mainControl.EnableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
             var instanceName = _dataRepository.GetInstance(args[1]).Name;
 

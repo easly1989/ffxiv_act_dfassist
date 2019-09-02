@@ -72,7 +72,7 @@ namespace DFAssist.Core.Repositories
             }
             catch (Exception e)
             {
-                Logger.Write(e, "l-data-error", LogLevel.Error);
+                Logger.Write(e, $"An error occured while processing DFAssist Data, method: {nameof(DownloadString)}", LogLevel.Error);
             }
 
             return string.Empty;
@@ -92,7 +92,7 @@ namespace DFAssist.Core.Repositories
             }
             catch (Exception e)
             {
-                Logger.Write(e, "l-data-error", LogLevel.Error);
+                Logger.Write(e, $"An error occured while processing DFAssist Data, method: {nameof(SaveToFile)}", LogLevel.Error);
             }
 
             return false;
@@ -112,7 +112,7 @@ namespace DFAssist.Core.Repositories
             }
             catch (Exception e)
             {
-                Logger.Write(e, "l-data-error", LogLevel.Error);
+                Logger.Write(e, $"An error occured while processing DFAssist Data, method: {nameof(ReadFromFile)}", LogLevel.Error);
             }
 
             return string.Empty;

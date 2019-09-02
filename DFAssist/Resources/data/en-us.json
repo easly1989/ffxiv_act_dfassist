@@ -1,6 +1,6 @@
-{
+﻿{
   // Version
-  "version": "20190628.2",
+  "version": "20190730.1",
 
   // Duty
   "instances": {
@@ -1349,8 +1349,6 @@
     },
 
     // 4.45
-    // Read the KR Script.
-
     "595": {
       "name": "Kugane Ohashi",
       "tank": "2",
@@ -1451,7 +1449,45 @@
       "name": "the Dancing Plague (Extreme)",
       "tank": "2",
       "healer": "2",
-      "dps": "4"
+      "dps": "4",
+      "macro": "/p H1   (水 Water)    H2
+      /p MT
+      /p 　D1
+      D2 /p
+      ST /p
+      D3 D4
+      /p ------
+      2連頭割り 2
+      Split ------
+      /p 西
+      West: MT-H1-D1-D3
+      /p 東
+      East: ST-H2-D2-D4
+      /p 時計回りの回転
+      Clockwise Rotation
+      /p ----------
+      連鎖 1
+      Chain 1
+      ---------- /p
+      北西
+      N/W: Tank
+      Healer |
+      南東
+      S/E: DPS
+      /p --
+      Tether
+      テザー: 9時受
+      (①西 West)】--
+      /p ST->D1->D2->D3->-D4->H1
+      /p ----------
+      連鎖 2
+      Chain 2
+      ---------- /p
+      北
+      North: Tank
+      Healer |
+      南
+      South: DPS"
     },
     "666": {
       "name": "the Crown of the Immaculate",
@@ -1473,6 +1509,7 @@
     },
 
     // 5.01 Raids
+
     "653": {
       "name": "Eden's Gate: Resurrection",
       "tank": "2",
@@ -1497,6 +1534,34 @@
       "healer": "2",
       "dps": "4"
     },
+
+    // 5.05 Raids Savage
+
+    "654": {
+      "name": "Eden's Gate: Resurrection (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "685": {
+      "name": "Eden's Gate: Descent (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "683": {
+      "name": "Eden's Gate: Inundation (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+    "690": {
+      "name": "Eden's Gate: Sepulture (Savage)",
+      "tank": "2",
+      "healer": "2",
+      "dps": "4"
+    },
+
 
     // Guildhests
     "43": {
@@ -1735,9 +1800,6 @@
       "healer": "0",
       "dps": "0"
     },
-
-
-    // Blue Mage 4.5x
 
 
     // Novice Training
@@ -2180,7 +2242,25 @@
       "healer": "0",
       "dps": "0"
     },
+    "604": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
     "605": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "606": {
+      "name": "Leap of Faith",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "607": {
       "name": "Leap of Faith",
       "tank": "0",
       "healer": "0",
@@ -2258,6 +2338,6 @@
     "10": "The Feast (8 on 8) - Training",
     "13": "The Feast (4 on 4) - Ranked",
     "15": "Duty Roulette: Alliance Raids",
-    "17": "Duty Roulette: Raids"
+    "17": "Duty Roulette: Normal Raids"
   }
 }

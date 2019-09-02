@@ -1,85 +1,18 @@
 ﻿{
-  "l-plugin-started": "Plugin Started!",
-  "l-plugin-stopped": "Plugin Stopped!",
-
-  "l-settings-load-error": "Error loading settings: {0}.",
-  "l-settings-save-error": "Error saving settings.",
-
-  "l-assembly-load-error": "Unable to load {0} assembly.",
-
-  "l-unknown-instance": "Unknown Duty ({0})",
-  "l-unknown-roulette": "Unknown Roulette ({0})",
-  "l-unknown-area": "Unknown Area ({0})",
-  "l-unknown-fate": "Unknown FATE ({0})",
-
-  "l-process-set-success": "P: FFXIV Process Selected: {0}",
-  "l-process-set-failed": "P: Failed to set FFXIV Process.",
-  "l-process-remove-failed": "P: Failed to remove FFXIV Process.",
-
-  "l-toast-notification-error": "T: Unable to show toast notification.",
-
-  "l-data-updated": "D: D/F Data updated to Version {0}.",
-  "l-data-is-latest": "D: Using Latest D/F Data (Version {0}).",
-  "l-data-error": "D: Error occured while processing D/F Data",
-
-  "l-packet-error-ip": "P: IP Packet Parsing Error",
-  "l-packet-error-tcp": "P: TCP Packet Parsing Error",
-
-  "l-network-started": "N: Started Reading Network Packet",
-  "l-network-starting": "N: Starting Network Reading...",
-  "l-network-stopped": "N: Stopped Reading Network",
-  "l-network-stopping": "N: Requesting for Stop Network Reading...",
-  "l-network-error-starting": "N: Failed to Start",
-  "l-network-error-stopping": "N: Failed to Stop",
-  "l-network-error-already-started": "N: Already Started",
-  "l-network-error-already-stopped": "N: Already Stopped",
-  "l-network-error-no-connection": "N: Could not find Game Server Connection",
-  "l-network-error-receiving-packet": "N: Error while Receiving Packet",
-  "l-network-error-filtering-packet": "N: Error while Packet Filtering",
-  "l-network-error-finding-lobby": "N: Error while receeving lobby server information",
-  "l-network-error-loopback-found": "N: Loopback connection found... Ignored!",
-  "l-network-detected-connection-closing": "N: Detected Game Server Disconnection",
-  "l-network-detected-connection": "N: Detected Game Server Connection: {0}",
-
-  "l-firewall-registered": "FW: Registered",
-  "l-firewall-error": "FW: Error while registering",
-
-  "l-analyze-error-length": "A: Length Error while analyzing Message: {0}, {1}/{2}",
-  "l-analyze-error-general": "A: Error while analyzing Message",
-  "l-analyze-error": "A: Error while handling Message",
-
-  "l-queue-started-general": "Q: Matching started [{0}]",
-  "l-queue-started-roulette": "Q: Duty Roulette Matching Started [{0}] - {1}",
-  "l-queue-stopped": "Q: Matching Stopped",
-  "l-queue-entered": "Q: Entered Instance Area",
-  "l-queue-matched": "Q: Matched [{0}] - {1}",
-  "l-queue-updated": "Q: Matching State Updated [{0}, {1}]",
-
-  "l-fate-occured-info": "F: {0} FATE spawned!",
-
-  "l-field-instance-entered": "I: Entered Instance Area [{0}]",
-  "l-field-instance-left": "I: Left Instance Area",
-
   "ui-language-display-text": "Language",
 
-  "ui-toast-notification-display-text": "Enable Toast Notifications",
   "ui-toast-notification-test-title": "If you see this...",
   "ui-toast-notification-test-message": "... Toasts works!",
 
   "ui-tts-notification-test-title": "If you hear this...",
-  "ui-tts-notification-test-message": "... tts works!",
-
-  "ui-log-display-text": "Logs",
-  "ui-log-enable-display-text": "Enable Logging",
+  "ui-tts-notification-test-message": "... Text to speech works!",
+  
   "ui-log-clear-display-text": "Clear Logs",
 
   "ui-telegram-display-text": "Enable Telegram Notifications",
   "ui-telegram-token-display-text": "Token",
   "ui-telegram-chatid-display-text": "Chat Id",
 
-  "ui-alerts-display-text": "Alerts",
-  "ui-alerts-fate-display-text": "F.A.T.E.",
-  "ui-alerts-dutyfinder-display-text": "Duty Finder",
   "ui-enable-test-environment": "Enable Test Environment",
 
   "ui-update-available-message": "There is an updated version of the DFAssist Plugin. Update it now?\n\n(If there is an update to ACT, you should click No and update ACT first.)",
@@ -87,6 +20,7 @@
 
   "ui-enable-tts": "Enable Text To Speech",
   "ui-tts-dutyfound": "Duty Found!",
+
   "ui-persist-toasts": "Make Toasts Persistent",
 
   "ui-enable-act-toasts": "Enable ACT Toasts",
@@ -97,8 +31,5 @@
   "ui-general-settings-group": "General Settings",
   "ui-toast-settings-group": "Toasts Settings",
   "ui-tts-settings-group": "Text To Speech Settings",
-  "ui-test-settings-group": "Test Settings",
-
-  "ui-persistent-toast-warning-title": "Persistent Toasts Warning!",
-  "ui-persistent-toast-warning-message": "After making changes to the registry\nIt may be necessary to reboot the PC for the changes to take place!"
+  "ui-test-settings-group": "Test Settings"
 }

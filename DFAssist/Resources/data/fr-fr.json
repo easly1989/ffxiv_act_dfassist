@@ -1,6 +1,6 @@
 {
   // Version
-  "version": "20190628.2",
+  "version": "20190730.1",
 
   // Duty
   "instances": {
@@ -1452,7 +1452,45 @@
       "name": "la Valse du Monarque (extrême)",
       "tank": "2",
       "healer": "2",
-      "dps": "4"
+      "dps": "4",
+      "macro": "\"/p H1   (水 Water)    H2",
+      "/p" "MT",
+      "/p" "　D1",
+      "D2" "/p",
+      "ST" "/p",
+      "D3" "D4",
+      "/p" "------",
+      "2連頭割り" 2,
+      "Split" "------",
+      "/p" "西",
+      "West": "MT-H1-D1-D3",
+      "/p" "東",
+      "East": "ST-H2-D2-D4",
+      "/p" "時計回りの回転",
+      "Clockwise" "Rotation",
+      "/p" "----------",
+      "連鎖" 1,
+      "Chain" 1,
+      "----------" "/p",
+      "北西": null,
+      "N/W": "Tank",
+      "Healer" "|",
+      "南東": null,
+      "S/E": "DPS",
+      "/p" "--",
+      "Tether": null,
+      "テザー": "9時受",
+      "(①西" "West)】--",
+      "/p" "ST->D1->D2->D3->-D4->H1",
+      "/p" "----------",
+      "連鎖" 2,
+      "Chain" 2,
+      "----------" "/p",
+      "北": null,
+      "North": "Tank",
+      "Healer" "|",
+      "南": null,
+      "South": "DPS\""
     },
     "666": {
       "name": "La Couronne de l'Immaculé",
@@ -1482,13 +1520,13 @@
       "dps": "4"
     },
     "684": {
-      "name": "L'Éveil d'Éden - Déluge",
+      "name": "L'Éveil d'Éden - Descente",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "682": {
-      "name": "L'Éveil d'Éden - Descente",
+      "name": "L'Éveil d'Éden - Déluge",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -1500,33 +1538,28 @@
       "dps": "4"
     },
 
-    // 5.0 Trials
-    "657": {
-      "name": "la Valse du Monarque",
+    // 5.05 Raids Savage
+
+    "654": {
+      "name": "L'Éveil d'Éden - Résurrection (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "658": {
-      "name": "la Valse du Monarque (extrême)",
+    "685": {
+      "name": "L'Éveil d'Éden - Descente (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "666": {
-      "name": "La Couronne de l'Immaculé",
+    "683": {
+      "name": "L'Éveil d'Éden - Déluge (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
-    "667": {
-      "name": "La Couronne de l'Immaculé (extrême)",
-      "tank": "2",
-      "healer": "2",
-      "dps": "4"
-    },
-    "687": {
-      "name": "Le Râle de l'Agonie",
+    "690": {
+      "name": "L'Éveil d'Éden - Inhumation (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -1771,9 +1804,6 @@
       "healer": "0",
       "dps": "0"
     },
-
-
-    // Blue Mage 4.5x
 
 
     // Novice Training
@@ -2217,7 +2247,25 @@
       "healer": "0",
       "dps": "0"
     },
+    "604": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
     "605": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "606": {
+      "name": "Haute voltige",
+      "tank": "0",
+      "healer": "0",
+      "dps": "0"
+    },
+    "607": {
       "name": "Haute voltige",
       "tank": "0",
       "healer": "0",

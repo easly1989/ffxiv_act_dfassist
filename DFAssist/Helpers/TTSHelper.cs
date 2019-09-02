@@ -23,7 +23,7 @@ namespace DFAssist.Helpers
             _synth = new SpeechSynthesizer();
         }
 
-        public void SendNotification(string message, string title = "ui-dutyfound")
+        public void SendNotification(string message, string title = "ui-tts-dutyfound")
         {
             if(!_mainControl.TtsCheckBox.Checked)
                 return;

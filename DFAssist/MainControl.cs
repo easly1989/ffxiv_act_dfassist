@@ -126,7 +126,7 @@ namespace DFAssist
             EnableActToast.Location = new Point(6, 68);
             EnableActToast.Name = "EnableActToast";
             EnableActToast.TabIndex = 3;
-            EnableActToast.Text = "Enable Legacy Toasts";
+            EnableActToast.Text = "Enable ACT Toasts";
             EnableActToast.UseVisualStyleBackColor = true;
             // 
             // _ttsCheckBox

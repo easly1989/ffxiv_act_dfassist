@@ -1,0 +1,35 @@
+﻿{
+  "ui-language-display-text": "Sprache",
+
+  "ui-toast-notification-test-title": "Wenn du das siehst ...",
+  "ui-toast-notification-test-message": "... Toast funktioniert!",
+
+  "ui-tts-notification-test-title": "Wenn du das hörst ...",
+  "ui-tts-notification-test-message": "... Text to Speech funktioniert!",
+
+  "ui-log-clear-display-text": "Protokolle löschen",
+
+  "ui-telegram-display-text": "Telegrammbenachrichtigungen aktivieren",
+  "UI-Telegramm-Token-Display-Text": "Token",
+  "ui-telegram-chatid-display-text": "Chat-ID",
+
+  "ui-enable-test-environment": "Testumgebung aktivieren",
+
+  "ui-update-available-message": "Es ist eine aktualisierte Version des DFAssist-Plugins vorhanden. Jetzt aktualisieren? \\ n \\ n (Wenn ein Update für ACT vorhanden ist, müssen Sie zuerst auf Nein klicken und ACT aktualisieren.)",
+  "ui-update-available-title": "DFAssist Update verfügbar!",
+
+  "ui-enable-tts": "Text für Sprache aktivieren",
+  "ui-tts-dutyfound": "Pflicht gefunden!",
+
+  "ui-persist-toasts": "Toast dauerhaft machen",
+
+  "ui-enable-act-toasts": "ACT-Toasts aktivieren",
+  "ui-close-act-toast": "Toast schließen",
+
+  "ui-disable-toasts": "Toasts deaktivieren",
+
+  "ui-general-settings-group": "Allgemeine Einstellungen",
+  "ui-toast-settings-group": "Toast-Einstellungen",
+  "ui-tts-settings-group": "Einstellungen für Text zu Sprache",
+  "ui-test-settings-group": "Testeinstellungen"
+}

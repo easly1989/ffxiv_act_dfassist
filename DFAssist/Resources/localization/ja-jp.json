@@ -1,85 +1,18 @@
 ﻿{
-  "l-plugin-started": "プラグインが起動しました!",
-  "l-plugin-stopped": "プラグインが停止しました!",
-
-  "l-settings-load-error": "設定の読み込み中にエラー: {0}.",
-  "l-settings-save-error": "設定の保存中にエラー.",
-
-  "l-assembly-load-error": "アセンブリをロードできません {0}.",
-
-  "l-unknown-instance": "不明なコンテンツ ({0})",
-  "l-unknown-roulette": "不明なルーレット ({0})",
-  "l-unknown-area": "不明なエリア ({0})",
-  "l-unknown-fate": "不明なFATE ({0})",
-
-  "l-process-set-success": "P: FFXIVプロセスを選択しました: {0}",
-  "l-process-set-failed": "P: FFXIVプロセスを選択できませんでした。",
-  "l-process-remove-failed": "P: FFXIVプロセスの削除に失敗しました.",
-
-  "l-toast-notification-error": "T: トースト通知を表示できません.",
-
-  "l-data-updated": "D: コンテンツデータはバージョン {0} へアップデートされました。",
-  "l-data-is-latest": "D: 最深のコンテンツデートを利用しています(バージョン {0})。",
-  "l-data-error": "D: コンテンツデータを処理中にエラーが発生しました。",
-
-  "l-packet-error-ip": "P: IPパケット解析エラー",
-  "l-packet-error-tcp": "P: TCPパケット解析エラー",
-
-  "l-network-started": "N: ネットワークパケットの監視を開始",
-  "l-network-starting": "N: ネットワークの監視を開始中...",
-  "l-network-stopped": "N: ネットワークの監視を停止しました。",
-  "l-network-stopping": "N: ネットワークの監視を停止中...",
-  "l-network-error-starting": "N: 開始に失敗",
-  "l-network-error-stopping": "N: 停止に失敗",
-  "l-network-error-already-started": "N: 既に開始しています",
-  "l-network-error-already-stopped": "N: 既に停止しています",
-  "l-network-error-no-connection": "N: ゲームサーバーとの接続を見つけられませんでした",
-  "l-network-error-receiving-packet": "N: パケット受信中にエラーが発生しました",
-  "l-network-error-filtering-packet": "N: パケットフィルタ中にエラーが発生しました",
-  "l-network-error-finding-lobby": "N: ロビーサーバーの情報を取得中にエラーが発生しました",
-  "l-network-error-loopback-found": "N: ループバック接続が見つかりました...無視されます!",
-  "l-network-detected-connection-closing": "N: ゲームサーバーとの切断を検知しました",
-  "l-network-detected-connection": "N: ゲームサーバーとの接続を検知しました: {0}",
-
-  "l-firewall-registered": "FW: 登録済み",
-  "l-firewall-error": "FW: 登録中にエラーが発生しました",
-
-  "l-analyze-error-length": "A: メッセージ解析中に長さエラーが発生しました: {0}, {1}/{2}",
-  "l-analyze-error-general": "A: メッセージ解析中にエラーが発生しました",
-  "l-analyze-error": "A: メッセージ処理中にエラーが発生しました",
-
-  "l-queue-started-general": "Q: コンテンツ参加申請開始 [{0}]",
-  "l-queue-started-roulette": "Q: コンテンツルーレット参加申請開始 [{0}] - {1}",
-  "l-queue-stopped": "Q: 参加申請停止",
-  "l-queue-entered": "Q: インスタンスエリアに入りました",
-  "l-queue-matched": "Q: 突入準備完了 [{0}] - {1}",
-  "l-queue-updated": "Q: 申請状態が更新されました [{0}, {1}]",
-
-  "l-fate-occured-info": "F: {0} FATE発生!",
-
-  "l-field-instance-entered": "I: インスタンスエリアに入りました [{0}]",
-  "l-field-instance-left": "I: インスタンスエリアから離れました",
-
   "ui-language-display-text": "言語",
 
-  "ui-toast-notification-display-text": "Toast通知を有効にする",
   "ui-toast-notification-test-title": "これを見たら...",
   "ui-toast-notification-test-message": "... トーストは機能する!",
 
   "ui-tts-notification-test-title": "これを聞いたら...",
   "ui-tts-notification-test-message": "... TTSは動作します!",
 
-  "ui-log-display-text": "ログ",
-  "ui-log-enable-display-text": "ロギングを有効にします",
   "ui-log-clear-display-text": "ログをクリアします",
 
   "ui-telegram-display-text": "テレグラム通知を有効にする",
   "ui-telegram-token-display-text": "トークン",
   "ui-telegram-chatid-display-text": "チャットID",
 
-  "ui-alerts-display-text": "アラート",
-  "ui-alerts-fate-display-text": "F.A.T.E.",
-  "ui-alerts-dutyfinder-display-text": "デューティファインダー",
   "ui-enable-test-environment": "テスト環境を有効にする",
 
   "ui-update-available-message": "DFAssistプラグインの更新版があります。 今すぐ更新しますか\n\nACTが更新された場合は、[いいえ]をクリックしてからACTを更新してください。",
@@ -87,6 +20,7 @@
 
   "ui-enable-tts": "テキスト読み上げを有効にする",
   "ui-tts-dutyfound": "義務が見つかりました！",
+
   "ui-persist-toasts": "乾杯を持続させる",
 
   "ui-enable-act-toasts": "ACTトーストを有効にする",
@@ -97,8 +31,5 @@
   "ui-general-settings-group": "一般設定",
   "ui-toast-settings-group": "トースト設定",
   "ui-tts-settings-group": "テキスト読み上げ設定",
-  "ui-test-settings-group": "テスト設定",
-
-  "ui-persistent-toast-warning-title": "しつこいトーストの警告!",
-  "ui-persistent-toast-warning-message": "レジストリに変更を加えた後\n変更を有効にするためにPCを再起動する必要があるかもしれません!"
+  "ui-test-settings-group": "テスト設定"
 }

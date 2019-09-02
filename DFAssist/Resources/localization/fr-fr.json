@@ -1,85 +1,18 @@
 {
-  "l-plugin-started": "Plugin démarré!",
-  "l-plugin-stopped": "Plugin arrêté!",
-
-  "l-settings-load-error": "Erreur lors du chargement des paramètres: {0}.",
-  "l-settings-save-error": "Erreur d'enregistrement des paramètres.",
-
-  "l-assembly-load-error": "Impossible de charger l'assemblage {0}.",
-
-  "l-unknown-instance": "Mission inconnue ({0})",
-  "l-unknown-roulette": "Mission aléatoire inconnue ({0})",
-  "l-unknown-area": "Zone inconnue ({0})",
-  "l-unknown-fate": "ALEA inconnu ({0})",
-
-  "l-process-set-success": "P: Processus FFXIV sélectionné: {0}",
-  "l-process-set-failed": "P: Impossible de sélectionner le processus FFXIV.",
-  "l-process-remove-failed": "P: Impossible d'enlever le processus FFXIV.",
-
-  "l-toast-notification-error": "T: Impossible d'afficher la notification du toast.",
-
-  "l-data-updated": "D: Données M/A mises à jour à la version {0}.",
-  "l-data-is-latest": "D: Données M/A à jour (Version {0}).",
-  "l-data-error": "D: Erreur lors du traitement des données M/A",
-
-  "l-packet-error-ip": "P: Erreur de récupération des paquets IP",
-  "l-packet-error-tcp": "P: Erreur de récupération des paquets TCP",
-
-  "l-network-started": "N: Début de lecture des paquets réseau",
-  "l-network-starting": "N: Début de scan du réseau...",
-  "l-network-stopped": "N: Scan réseau interrompu",
-  "l-network-stopping": "N: Interruption du scan réseau en cours...",
-  "l-network-error-starting": "N: Erreur lors du démarrage",
-  "l-network-error-stopping": "N: Erreur lors de l'arrêt",
-  "l-network-error-already-started": "N: Déjà démarré",
-  "l-network-error-already-stopped": "N: Déjà arrêté",
-  "l-network-error-no-connection": "N: Impossible de trouver une connection au serveur de jeu",
-  "l-network-error-receiving-packet": "N: Erreur lors de la réception de paquets",
-  "l-network-error-filtering-packet": "N: Erreur lors du filtrage des paquets",
-  "l-network-error-finding-lobby": "N: Erreur à la réception des paquets d'instance",
-  "l-network-error-loopback-found": "N: Connexion en boucle trouvée ... Ignoré!",
-  "l-network-detected-connection-closing": "N: Déconnecté des serveurs de jeu",
-  "l-network-detected-connection": "N: Connection aux serveurs de jeu détectée: {0}",
-
-  "l-firewall-registered": "Pare-feu: enregistré",
-  "l-firewall-error": "Pare-feu: erreur d'enregistrement",
-
-  "l-analyze-error-length": "A: Erreur de longueur lors de l'analyse du message: {0}, {1}/{2}",
-  "l-analyze-error-general": "A: Erreur d'analyse du message",
-  "l-analyze-error": "A: Erreur de traitement du message",
-
-  "l-queue-started-general": "Q: Attente pour la mission [{0}]",
-  "l-queue-started-roulette": "Q: Attente pour la mission aléatoire [{0}] - {1}",
-  "l-queue-stopped": "Q: Attente interrompue",
-  "l-queue-entered": "Q: Entrée dans la zone instanciée",
-  "l-queue-matched": "Q: Attente terminée [{0}] - {1}",
-  "l-queue-updated": "Q: Mise à jour de la file d'attente [{0}, {1}]",
-
-  "l-fate-occured-info": "F: {0} ALEA en cours!",
-
-  "l-field-instance-entered": "I: Entrée dans la zone instanciée [{0}]",
-  "l-field-instance-left": "I: Sortie de la zone instanciée",
-
   "ui-language-display-text": "Langue",
 
-  "ui-toast-notification-display-text": "Activer les notifications Toast",
   "ui-toast-notification-test-title": "Si tu vois ça...",
   "ui-toast-notification-test-message": "... Toasts fonctionne!",
 
   "ui-tts-notification-test-title": "Si tu entends ça...",
-  "ui-tts-notification-test-message": "... tts fonctionne!",
+  "ui-tts-notification-test-message": "... Texte pour parler fonctionne!",
 
-  "ui-log-display-text": "Journaux",
-  "ui-log-enable-display-text": "Activer la journalisation",
   "ui-log-clear-display-text": "Effacer les journaux",
 
   "ui-telegram-display-text": "Activer les notifications de Telegram",
   "ui-telegram-token-display-text": "Jeton",
   "ui-telegram-chatid-display-text": "Identifiant de chat",
 
-  "ui-alerts-display-text": "Alertes",
-  "ui-alerts-fate-display-text": "A.L.E.A.",
-  "ui-alerts-dutyfinder-display-text": "Mission",
   "ui-enable-test-environment": "Activer l'environnement de test",
 
   "ui-update-available-message": "Il existe une version mise à jour du plug-in DFAssist. Mettez-le à jour maintenant?\n\n(S'il y a une mise à jour vers ACT, vous devez cliquer sur Non et mettre à jour ACT en premier.)",
@@ -87,6 +20,7 @@
 
   "ui-enable-tts": "Activer la synthèse vocale",
   "ui-tts-dutyfound": "Le devoir est trouvé!",
+  
   "ui-persist-toasts": "Rendre les toasts persistants",
 
   "ui-enable-act-toasts": "Activer les toasts de ACT",
@@ -97,8 +31,5 @@
   "ui-general-settings-group": "Paramètres généraux",
   "ui-toast-settings-group": "Paramètres de toasts",
   "ui-tts-settings-group": "Paramètres de synthèse vocale",
-  "ui-test-settings-group": "Paramètres de test",
-
-  "ui-persistent-toast-warning-title": "Avertissement de toasts persistants!",
-  "ui-persistent-toast-warning-message": "Après avoir apporté des modifications au registre, il peut être nécessaire de redémarrer le PC pour que les modifications soient prises en compte!"
+  "ui-test-settings-group": "Paramètres de test"
 }
