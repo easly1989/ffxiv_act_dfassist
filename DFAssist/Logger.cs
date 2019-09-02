@@ -3,22 +3,15 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
+using DFAssist.Core;
 using Splat;
 
 namespace DFAssist
 {
-    public class Logger : IActLogger
+    public class Logger : FileSystemLogger, IActLogger
     {
-        public LogLevel Level { get; private set; }
-
         private static readonly Regex EscapePattern = new Regex(@"\{(.+?)\}");
         private RichTextBox _richTextBox;
-
-        public Logger()
-        {
-            Level = LogLevel.Debug;
-        }
-
         public void SetLoggingLevel(LogLevel level)
         {
             Level = level;
@@ -74,25 +67,32 @@ namespace DFAssist
             return EscapePattern.Replace(line, "{{$1}}");
         }
 
-        public void Write(string message, LogLevel logLevel)
+        public new void Write(string message, LogLevel logLevel)
         {
+            base.Write(message, logLevel);
             Write(logLevel, message);
         }
 
-        public void Write(Exception exception, string message, LogLevel logLevel)
+        public new void Write(Exception exception, string message, LogLevel logLevel)
         {
+            base.Write(exception, message, logLevel);
             var exceptionMessage = Escape(exception.Message);
             Write(logLevel, $"{message}: {exceptionMessage}");
         }
 
-        public void Write(string message, Type type, LogLevel logLevel)
+        public new void Write(string message, Type type, LogLevel logLevel)
         {
             Write(message, logLevel);
         }
 
-        public void Write(Exception exception, string message, Type type, LogLevel logLevel)
+        public new void Write(Exception exception, string message, Type type, LogLevel logLevel)
         {
             Write(exception, message, logLevel);
+        }
+
+        public Logger() : base("", 5)
+        {
+            Level = LogLevel.Debug;
         }
     }
 }
