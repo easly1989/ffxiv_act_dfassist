@@ -10,8 +10,12 @@
   "ui-log-clear-display-text": "Protokolle löschen",
 
   "ui-telegram-display-text": "Telegrammbenachrichtigungen aktivieren",
-  "UI-Telegramm-Token-Display-Text": "Token",
+  "ui-telegram-token-display-text": "Token",
   "ui-telegram-chatid-display-text": "Chat-ID",
+
+  "ui-pushbullet-display-text": "Pusbullet Notifications aktivieren",
+  "ui-pushbullet-token-display-text": "Zugriffstoken",
+  "ui-pushbullet-deviceid-display-text": "Geräte-ID",
 
   "ui-enable-test-environment": "Testumgebung aktivieren",
 
@@ -31,5 +35,7 @@
   "ui-general-settings-group": "Allgemeine Einstellungen",
   "ui-toast-settings-group": "Toast-Einstellungen",
   "ui-tts-settings-group": "Einstellungen für Text zu Sprache",
-  "ui-test-settings-group": "Testeinstellungen"
+  "ui-test-settings-group": "Testeinstellungen",
+  "ui-telegram-settings-group": "Telegrammeinstellungen",
+  "ui-pushbullet-settings-group": "Pushbullet-Einstellungen"
 }

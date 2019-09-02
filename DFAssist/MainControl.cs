@@ -20,18 +20,35 @@ namespace DFAssist
         public GroupBox TestSettings;
         public GroupBox ToastSettings;
         public GroupBox TtsSettings;
+        public GroupBox TelegramSettings;
+        public GroupBox PushBulletSettings;
         public GroupBox GeneralSettings;
 
         public Button ClearLogButton;
+        
         public Label LanguageLabel;
         public Label AppTitle;
+        public Label TelegramChatIdLabel;
+        public Label TelegramTokenLabel;
+        public Label PushBulletDeviceIdlabel;
+        public Label PushBulletTokenLabel;
+        
+        public TextBox LanguageValue;
+        public TextBox TelegramChatIdTextBox;
+        public TextBox TelegramTokenTextBox;
+        public TextBox PushBulletDeviceIdTextBox;
+        public TextBox PushBulletTokenTextBox;
+
         public CheckBox TtsCheckBox;
         public CheckBox PersistToasts;
-        public TextBox LanguageValue;
         public CheckBox DisableToasts;
         public CheckBox EnableActToast;
         public CheckBox EnableTestEnvironment;
+        public CheckBox TelegramCheckBox;
+        public CheckBox PushBulletCheckbox;
+
         public ComboBox LanguageComboBox;
+        
         public RichTextBox LoggingRichTextBox;
 
         public IActPluginV1 Plugin;
@@ -64,6 +81,18 @@ namespace DFAssist
             _settingsPanel = new Panel();
             _settingsTableLayout = new TableLayoutPanel();
             TtsSettings = new GroupBox();
+            TelegramSettings = new GroupBox();
+            TelegramChatIdLabel = new Label();
+            TelegramChatIdTextBox = new TextBox();
+            TelegramCheckBox = new CheckBox();
+            TelegramTokenLabel = new Label();
+            TelegramTokenTextBox = new TextBox();
+            PushBulletSettings = new GroupBox();
+            PushBulletCheckbox = new CheckBox();
+            PushBulletDeviceIdTextBox = new TextBox();
+            PushBulletDeviceIdlabel = new Label();
+            PushBulletTokenLabel  = new Label();
+            PushBulletTokenTextBox = new TextBox();
             ToastSettings = new GroupBox();
             GeneralSettings = new GroupBox();
             TestSettings = new GroupBox();
@@ -74,6 +103,8 @@ namespace DFAssist
             _settingsPanel.SuspendLayout();
             _settingsTableLayout.SuspendLayout();
             TtsSettings.SuspendLayout();
+            TelegramSettings.SuspendLayout();
+            PushBulletSettings.SuspendLayout();
             ToastSettings.SuspendLayout();
             GeneralSettings.SuspendLayout();
             TestSettings.SuspendLayout();
@@ -138,12 +169,97 @@ namespace DFAssist
             TtsCheckBox.Text = "Enable Text To Speech";
             TtsCheckBox.UseVisualStyleBackColor = true;
             // 
+            // _telegramCheckBox
+            // 
+            TelegramCheckBox.AutoSize = true;
+            TelegramCheckBox.Location = new Point(6, 22);
+            TelegramCheckBox.Name = "TelegramCheckBox";
+            TelegramCheckBox.Size = new Size(167, 17);
+            TelegramCheckBox.TabIndex = 5;
+            TelegramCheckBox.Text = "Enable Telegram Notifications";
+            TelegramCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // _telegramTokenLabel
+            // 
+            TelegramTokenLabel.AutoSize = true;
+            TelegramTokenLabel.Location = new Point(6, 45);
+            TelegramTokenLabel.Name = "TelegramTokenLabel";
+            TelegramTokenLabel.Size = new Size(38, 13);
+            TelegramTokenLabel.TabStop = false;
+            TelegramTokenLabel.Text = "Token";
+            // 
+            // _TelegramTokenTextBox
+            // 
+            TelegramTokenTextBox.Location = new Point(70, 45);
+            TelegramTokenTextBox.Name = "TelegramTokenTextBox";
+            TelegramTokenTextBox.Size = new Size(390, 20);
+            TelegramTokenTextBox.TabIndex = 6;
+            // 
+            // _ChatIdLabel
+            // 
+            TelegramChatIdLabel.AutoSize = true;
+            TelegramChatIdLabel.Location = new Point(6, 68);
+            TelegramChatIdLabel.Name = "TelegramChatIdLabel";
+            TelegramChatIdLabel.Size = new Size(41, 13);
+            TelegramChatIdLabel.TabStop = false;
+            TelegramChatIdLabel.Text = "Chat Id";
+            // 
+            // _telegramChatIdTextBox
+            // 
+            TelegramChatIdTextBox.Location = new Point(70, 68);
+            TelegramChatIdTextBox.Name = "TelegramChatIdTextBox";
+            TelegramChatIdTextBox.Size = new Size(390, 20);
+            TelegramChatIdTextBox.TabIndex = 7;
+            // 
+            // _pushbulletCheckbox
+            // 
+            PushBulletCheckbox.AutoSize = true;
+            PushBulletCheckbox.Location = new Point(6, 22);
+            PushBulletCheckbox.Name = "PushBulletCheckbox";
+            PushBulletCheckbox.Size = new Size(172, 17);
+            PushBulletCheckbox.TabIndex = 8;
+            PushBulletCheckbox.Text = "Enable Pushbullet Notifications";
+            PushBulletCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // _pushbulletTokenLabel
+            // 
+            PushBulletTokenLabel.AutoSize = true;
+            PushBulletTokenLabel.Location = new Point(6, 45);
+            PushBulletTokenLabel.Name = "PushBulletTokenLabel";
+            PushBulletTokenLabel.Size = new Size(76, 13);
+            PushBulletTokenLabel.TabStop = false;
+            PushBulletTokenLabel.Text = "Access Token";
+            // 
+            // _pushbulletTokenTextBox
+            // 
+            PushBulletTokenTextBox.Location = new Point(90, 45);
+            PushBulletTokenTextBox.Name = "PushBulletTokenTextBox";
+            PushBulletTokenTextBox.Size = new Size(390, 20);
+            PushBulletTokenTextBox.TabIndex = 9;
+            // 
+            // _pushbulletDeviceIdlabel
+            // 
+            PushBulletDeviceIdlabel.AutoSize = true;
+            PushBulletDeviceIdlabel.Location = new Point(6, 68);
+            PushBulletDeviceIdlabel.Name = "PushBulletDeviceIdlabel";
+            PushBulletDeviceIdlabel.Size = new Size(53, 13);
+            PushBulletDeviceIdlabel.TabStop = false;
+            PushBulletDeviceIdlabel.Text = "Device Id";
+            // 
+            // _pushbulletDeviceIdTextBox
+            // 
+            PushBulletDeviceIdTextBox.Location = new Point(90, 68);
+            PushBulletDeviceIdTextBox.Name = "PushBulletDeviceIdTextBox";
+            PushBulletDeviceIdTextBox.Size = new Size(390, 20);
+            PushBulletDeviceIdTextBox.TabIndex = 10;
+            // 
+            // 
             // _enableTestEnvironment
             // 
             EnableTestEnvironment.AutoSize = true;
-            EnableTestEnvironment.Location = new Point(6, 20);
+            EnableTestEnvironment.Location = new Point(6, 22);
             EnableTestEnvironment.Name = "EnableTestEnvironment";
-            EnableTestEnvironment.TabIndex = 5;
+            EnableTestEnvironment.TabIndex = 11;
             EnableTestEnvironment.Text = "Enable Test Environment";
             EnableTestEnvironment.UseVisualStyleBackColor = true;
             // 
@@ -265,10 +381,12 @@ namespace DFAssist
             _settingsTableLayout.Controls.Add(GeneralSettings, 0, 0);
             _settingsTableLayout.Controls.Add(ToastSettings, 0, 1);
             _settingsTableLayout.Controls.Add(TtsSettings, 0, 2);
-            _settingsTableLayout.Controls.Add(TestSettings, 0, 3);
+            _settingsTableLayout.Controls.Add(TelegramSettings, 0, 2);
+            _settingsTableLayout.Controls.Add(PushBulletSettings, 0, 2);
+            _settingsTableLayout.Controls.Add(TestSettings, 0, 5);
             _settingsTableLayout.Location = new Point(0, 3);
             _settingsTableLayout.Name = "_settingsTableLayout";
-            _settingsTableLayout.RowCount = 5;
+            _settingsTableLayout.RowCount = 7;
             _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -305,6 +423,32 @@ namespace DFAssist
             TtsSettings.Name = "TtsSettings";
             TtsSettings.TabStop = false;
             TtsSettings.Text = "Text To Speech Settings";
+            // 
+            // _telegramSettings
+            // 
+            Dock = DockStyle.Top;
+            TelegramSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            TelegramSettings.Controls.Add(TelegramCheckBox);
+            TelegramSettings.Controls.Add(TelegramTokenLabel);
+            TelegramSettings.Controls.Add(TelegramTokenTextBox);
+            TelegramSettings.Controls.Add(TelegramChatIdLabel);
+            TelegramSettings.Controls.Add(TelegramChatIdTextBox);
+            TelegramSettings.Name = "TelegramSettings";
+            TelegramSettings.TabStop = false;
+            TelegramSettings.Text = "Telegram Settings";
+            // 
+            // _pushBulletSettings
+            // 
+            Dock = DockStyle.Top;
+            PushBulletSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            PushBulletSettings.Controls.Add(PushBulletDeviceIdTextBox);
+            PushBulletSettings.Controls.Add(PushBulletDeviceIdlabel);
+            PushBulletSettings.Controls.Add(PushBulletTokenTextBox);
+            PushBulletSettings.Controls.Add(PushBulletTokenLabel);
+            PushBulletSettings.Controls.Add(PushBulletCheckbox);
+            PushBulletSettings.Name = "PushBulletSettings";
+            PushBulletSettings.TabStop = false;
+            PushBulletSettings.Text = "PushBullet Settings";
             // 
             // _testSettings
             // 

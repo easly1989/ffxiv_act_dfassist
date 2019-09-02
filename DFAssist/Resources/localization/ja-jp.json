@@ -13,6 +13,10 @@
   "ui-telegram-token-display-text": "トークン",
   "ui-telegram-chatid-display-text": "チャットID",
 
+  "ui-pushbullet-display-text": "Pusbullet通知を有効にする",
+  "ui-pushbullet-token-display-text": "アクセストークン",
+  "ui-pushbullet-deviceid-display-text": "デバイスID",
+
   "ui-enable-test-environment": "テスト環境を有効にする",
 
   "ui-update-available-message": "DFAssistプラグインの更新版があります。 今すぐ更新しますか\n\nACTが更新された場合は、[いいえ]をクリックしてからACTを更新してください。",
@@ -31,5 +35,7 @@
   "ui-general-settings-group": "一般設定",
   "ui-toast-settings-group": "トースト設定",
   "ui-tts-settings-group": "テキスト読み上げ設定",
-  "ui-test-settings-group": "テスト設定"
+  "ui-test-settings-group": "テスト設定",
+  "ui-telegram-settings-group": "電報設定",
+  "ui-pushbullet-settings-group": "プッシュブレットの設定"
 }

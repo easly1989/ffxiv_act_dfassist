@@ -13,6 +13,10 @@
   "ui-telegram-token-display-text": "Jeton",
   "ui-telegram-chatid-display-text": "Identifiant de chat",
 
+  "ui-pushbullet-display-text": "Activer les notifications de Pushbullet",
+  "ui-pushbullet-token-display-text": "Jeton",
+  "ui-pushbullet-deviceid-display-text": "Identifiant de device",
+
   "ui-enable-test-environment": "Activer l'environnement de test",
 
   "ui-update-available-message": "Il existe une version mise à jour du plug-in DFAssist. Mettez-le à jour maintenant?\n\n(S'il y a une mise à jour vers ACT, vous devez cliquer sur Non et mettre à jour ACT en premier.)",
@@ -20,7 +24,7 @@
 
   "ui-enable-tts": "Activer la synthèse vocale",
   "ui-tts-dutyfound": "Le devoir est trouvé!",
-  
+
   "ui-persist-toasts": "Rendre les toasts persistants",
 
   "ui-enable-act-toasts": "Activer les toasts de ACT",
@@ -31,5 +35,7 @@
   "ui-general-settings-group": "Paramètres généraux",
   "ui-toast-settings-group": "Paramètres de toasts",
   "ui-tts-settings-group": "Paramètres de synthèse vocale",
-  "ui-test-settings-group": "Paramètres de test"
+  "ui-test-settings-group": "Paramètres de test",
+  "ui-telegram-settings-group": "Paramètres de Telegram",
+  "ui-pushbullet-settings-group": "Paramètres de Pushbullet"
 }

@@ -6,12 +6,16 @@
 
   "ui-tts-notification-test-title": "If you hear this...",
   "ui-tts-notification-test-message": "... Text to speech works!",
-  
+
   "ui-log-clear-display-text": "Clear Logs",
 
   "ui-telegram-display-text": "Enable Telegram Notifications",
   "ui-telegram-token-display-text": "Token",
   "ui-telegram-chatid-display-text": "Chat Id",
+
+  "ui-pushbullet-display-text": "Enable Pusbullet Notifications",
+  "ui-pushbullet-token-display-text": "Access Token",
+  "ui-pushbullet-deviceid-display-text": "Device Id",
 
   "ui-enable-test-environment": "Enable Test Environment",
 
@@ -31,5 +35,7 @@
   "ui-general-settings-group": "General Settings",
   "ui-toast-settings-group": "Toasts Settings",
   "ui-tts-settings-group": "Text To Speech Settings",
-  "ui-test-settings-group": "Test Settings"
+  "ui-test-settings-group": "Test Settings",
+  "ui-telegram-settings-group": "Telegram Settings",
+  "ui-pushbullet-settings-group": "Pushbullet Settings"
 }

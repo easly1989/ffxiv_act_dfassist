@@ -13,6 +13,10 @@
   "ui-telegram-token-display-text": "토큰",
   "ui-telegram-chatid-display-text": "채팅 ID",
 
+  "ui-pushbullet-display-text": "Pusbullet 알림 활성화",
+  "ui-pushbullet-token-display-text": "액세스 토큰",
+  "ui-pushbullet-deviceid-display-text": "장치 아이디",
+
   "ui-enable-test-environment": "테스트 환경 사용",
 
   "ui-update-available-message": "DFAssist Plugin의 업데이트 된 버전이 있습니다. 지금 업데이트 하시겠습니까?\n\n(ACT에 대한 업데이트가있는 경우, 아니요를 클릭하고 먼저 ACT를 업데이트해야합니다.)",
@@ -20,7 +24,7 @@
 
   "ui-enable-tts": "텍스트 음성 변환 사용",
   "ui-tts-dutyfound": "의무가 발견되었습니다!",
- 
+
   "ui-persist-toasts": "토스트를 지속적으로 만드십시오.",
 
   "ui-enable-act-toasts": "ACT 토스트 사용",
@@ -31,5 +35,7 @@
   "ui-general-settings-group": "일반 설정",
   "ui-toast-settings-group": "토스트 설정",
   "ui-tts-settings-group": "텍스트 음성 변환 설정",
-  "ui-test-settings-group": "테스트 설정"
+  "ui-test-settings-group": "테스트 설정",
+  "ui-telegram-settings-group": "전보 설정",
+  "ui-pushbullet-settings-group": "푸 bul 렛 설정"
 }

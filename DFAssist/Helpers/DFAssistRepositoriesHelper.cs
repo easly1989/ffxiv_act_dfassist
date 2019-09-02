@@ -61,6 +61,14 @@ namespace DFAssist.Helpers
             _mainControl.GeneralSettings.Text = _localizationRepository.GetText("ui-general-settings-group");
             _mainControl.ToastSettings.Text = _localizationRepository.GetText("ui-toast-settings-group");
             _mainControl.TtsSettings.Text = _localizationRepository.GetText("ui-tts-settings-group");
+            _mainControl.TelegramSettings.Text = _localizationRepository.GetText("ui-telegram-settings-group");
+            _mainControl.TelegramCheckBox.Text = _localizationRepository.GetText("ui-telegram-display-text");
+            _mainControl.TelegramChatIdLabel.Text = _localizationRepository.GetText("ui-telegram-chatid-display-text");
+            _mainControl.TelegramTokenLabel.Text = _localizationRepository.GetText("ui-telegram-token-display-text");
+            _mainControl.PushBulletSettings.Text = _localizationRepository.GetText("ui-pushbullet-settings-group");
+            _mainControl.PushBulletCheckbox.Text = _localizationRepository.GetText("ui-pushbullet-display-text");
+            _mainControl.PushBulletDeviceIdlabel.Text = _localizationRepository.GetText("ui-pushbullet-deviceid-display-text");
+            _mainControl.PushBulletTokenLabel.Text = _localizationRepository.GetText("ui-pushbullet-token-display-text");
             _mainControl.TestSettings.Text = _localizationRepository.GetText("ui-test-settings-group");
 
             _logger.Write("UI Updated!", LogLevel.Debug);
