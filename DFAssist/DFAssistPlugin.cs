@@ -130,12 +130,15 @@ namespace DFAssist
             if (eventType != EventType.MATCH_ALERT)
                 return;
 
-            var title = args[0] != 0 ? _dataRepository.GetRoulette(args[0]).Name : _localizationRepository.GetText("ui-tts-dutyfound");
+            var defaultTitle = _localizationRepository.GetText("ui-tts-dutyfound");
+            var title = args[0] != 0 ? _dataRepository.GetRoulette(args[0]).Name : defaultTitle;
             var testing = _mainControl.EnableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
             var instanceName = _dataRepository.GetInstance(args[1]).Name;
 
             ToastHelper.Instance.SendNotification(title, instanceName, testing);
-            TTSHelper.Instance.SendNotification(instanceName);
+            TTSHelper.Instance.SendNotification(defaultTitle, instanceName, testing);
+            TelegramHelper.Instance.SendNotification(title, instanceName, testing);
+            PushBulletHelper.Instance.SendNotification(title, instanceName, testing);
         }
 
         private void InitializePluginVariables(MainControl mainControl)
@@ -170,6 +173,8 @@ namespace DFAssist
         {
             ToastHelper.Instance.Dispose();
             TTSHelper.Instance.Dispose();
+            TelegramHelper.Instance.Dispose();
+            PushBulletHelper.Instance.Dispose();
             DFAssistRepositoriesHelper.Instance.Dispose();
             DFAssistUIInteractionHelper.Instance.Dispose();
             FFXIVNetworkProcessHelper.Instance.Dispose();

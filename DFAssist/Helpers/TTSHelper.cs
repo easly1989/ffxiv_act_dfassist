@@ -1,45 +1,46 @@
-﻿using System;
-using System.Speech.Synthesis;
+﻿using System.Speech.Synthesis;
 using DFAssist.Contracts.Repositories;
 using Splat;
 
 namespace DFAssist.Helpers
 {
     // ReSharper disable InconsistentNaming
-    public class TTSHelper : IDisposable
+    public class TTSHelper : BaseNotificationHelper<TTSHelper>
     {
-        private static TTSHelper _instance;
-        public static TTSHelper Instance => _instance ?? (_instance = new TTSHelper());
-
-        private MainControl _mainControl;
         private SpeechSynthesizer _synth;
         private ILocalizationRepository _localizationRepository;
 
         public TTSHelper()
         {
-            _mainControl = Locator.Current.GetService<MainControl>();
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
 
             _synth = new SpeechSynthesizer();
         }
 
-        public void SendNotification(string message, string title = "ui-tts-dutyfound")
+        protected override void OnSendNotification(string title, string message, string testing)
         {
-            if(!_mainControl.TtsCheckBox.Checked)
+            if(!MainControl.TtsCheckBox.Checked)
                 return;
 
+            Logger.Write("UI: Sending TTS Notification...", LogLevel.Debug);
             var dutyFound = _localizationRepository.GetText(title);
             _synth.SpeakAsync($"{dutyFound}; {message}");
+            Logger.Write("UI: TTS notification sent!", LogLevel.Debug);
         }
 
-        public void Dispose()
+        protected override void OnDisposeOwnedObjects()
         {
             _synth?.Dispose();
 
+            base.OnDisposeOwnedObjects();
+        }
+
+        protected override void OnSetNullOwnedObjects()
+        {
             _localizationRepository = null;
-            _mainControl = null;
             _synth = null;
-            _instance = null;
+
+            base.OnSetNullOwnedObjects();
         }
     }
     // ReSharper restore InconsistentNaming

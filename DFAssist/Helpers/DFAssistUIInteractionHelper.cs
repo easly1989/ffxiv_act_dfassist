@@ -25,7 +25,7 @@ namespace DFAssist.Helpers
 
         public void Subscribe()
         {
-            if(_subscribed)
+            if (_subscribed)
                 return;
 
             _subscribed = true;
@@ -39,9 +39,9 @@ namespace DFAssist.Helpers
 
         public void UnSubscribe()
         {
-            if(!_subscribed)
+            if (!_subscribed)
                 return;
-            
+
             _subscribed = false;
             _mainControl.DisableToasts.CheckStateChanged -= DisableToastsOnCheckedChanged;
             _mainControl.PersistToasts.CheckStateChanged -= PersistToastsOnCheckedChanged;
@@ -50,7 +50,7 @@ namespace DFAssist.Helpers
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
         }
 
-                private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
+        private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
         {
             _logger.Write($"UI: [DisableToasts] Desired Value: {_mainControl.DisableToasts.Checked}", LogLevel.Debug);
             _mainControl.EnableActToast.Enabled = !_mainControl.DisableToasts.Checked;
@@ -72,11 +72,11 @@ namespace DFAssist.Helpers
                 _logger.Write($"UI: [PersistentToasts] Desired Value: {_mainControl.PersistToasts.Checked}!", LogLevel.Debug);
 
                 var keyName = $@"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\{DFAssistPlugin.AppId}";
-                using(var key = Registry.CurrentUser.OpenSubKey(keyName, true))
+                using (var key = Registry.CurrentUser.OpenSubKey(keyName, true))
                 {
-                    if(_mainControl.PersistToasts.Checked)
+                    if (_mainControl.PersistToasts.Checked)
                     {
-                        if(key == null)
+                        if (key == null)
                         {
                             _logger.Write("UI: [PersistentToasts] Key not found in the registry, Adding a new one!", LogLevel.Debug);
                             Registry.SetValue($@"HKEY_CURRENT_USER\{keyName}", "ShowInActionCenter", 1, RegistryValueKind.DWord);
@@ -89,7 +89,7 @@ namespace DFAssist.Helpers
                     }
                     else
                     {
-                        if(key == null)
+                        if (key == null)
                         {
                             _logger.Write("UI: [PersistentToasts] Key not found in the registry, nothing to do!", LogLevel.Debug);
                             return;
@@ -100,7 +100,7 @@ namespace DFAssist.Helpers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.Write(ex, $"UI: Unable to remove/add the registry key to make Toasts persistent!", LogLevel.Error);
             }
@@ -109,7 +109,17 @@ namespace DFAssist.Helpers
         private void EnableTtsOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _logger.Write($"UI: [TTS] Desired Value: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
-            TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-message"), _localizationRepository.GetText("ui-tts-notification-test-title"));
+            TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
+        }
+
+        private void EnableTelegramOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            _logger.Write($"UI: [Telegram] Desired Value: {_mainControl.TelegramCheckBox.Checked}", LogLevel.Debug);
+        }
+
+        private void EnablePushBulletOnCheckedChanged(object sender, EventArgs eventArgs)
+        {
+            _logger.Write($"UI: [PushBullet] Desired Value: {_mainControl.PushBulletCheckbox.Checked}", LogLevel.Debug);
         }
 
         private void ClearLogsButton_Click(object sender, EventArgs e)
