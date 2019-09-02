@@ -41,7 +41,7 @@ namespace DFAssist.Core
                     if (logfile.Name.Equals("DFAssist.log"))
                     {
                         // if there is a log file named exactly DFAssist.log it needs to be renamed
-                        logfile.MoveTo(Path.Combine(logDir, $"DFAssist-{DateTime.Now:ddMMyyyy_HHmm}.log"));
+                        logfile.MoveTo(Path.Combine(logDir, $"DFAssist-{logfile.LastWriteTime:ddMMyyyy_HHmm}.log"));
                     }
 
                     logsToSave--;
@@ -50,10 +50,11 @@ namespace DFAssist.Core
             }
 
             // now we can create the new logfile
-            _logFile.Create();
-            using (var sw = _logFile.AppendText())
+            using(var stream = _logFile.Create())
+            using (var sw = new StreamWriter(stream))
             {
                 sw.WriteLine($"[{DateTime.Now:dd/MM/yyyy HH:mm}][{LogLevel.Info}]: DFAssist Logs Started...");
+                sw.Close();
             }
         }
 
@@ -62,6 +63,7 @@ namespace DFAssist.Core
             using (var sw = _logFile.AppendText())
             {
                 sw.WriteLine($"[{DateTime.Now:dd/MM/yyyy HH:mm}][{logLevel}]: {message}");
+                sw.Close();
             }
             base.Write(message, logLevel);
         }
@@ -74,6 +76,7 @@ namespace DFAssist.Core
                 sw.WriteLine("---------------------- Exception ----------------------");
                 sw.WriteLine($"{exception.Message}");
                 sw.WriteLine("---------------------- ######### ----------------------");
+                sw.Close();
             }
             base.Write(exception, message, logLevel);
         }
