@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
@@ -90,7 +91,7 @@ namespace DFAssist
             Write(exception, message, logLevel);
         }
 
-        public Logger() : base("", 5)
+        public Logger() : base($"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs", "DFAssist.log")}", 5)
         {
             Level = LogLevel.Debug;
         }

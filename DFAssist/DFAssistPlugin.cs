@@ -16,7 +16,7 @@ namespace DFAssist
     /// <summary>
     /// This class is needed because of the way ACT initializes the plugin
     /// To avoid that ACT loads the referenced DLL before the plugin initialization (and thus
-    /// before the AssemblyResolve event subscription) we need to move the code await from the
+    /// before the AssemblyResolve event subscription) we need to move the code away from the
     /// IActPluginV1 implementation.
     /// </summary>
     // ReSharper disable InconsistentNaming
@@ -175,6 +175,8 @@ namespace DFAssist
             FFXIVPluginHelper.Instance.Dispose();
             ACTPluginUpdateHelper.Instance.Dispose();
             ACTPluginSettingsHelper.Instance.Dispose();
+
+            _logger.Dispose();
         }
 
         private void SetNullOwnedObjects()
