@@ -33,6 +33,8 @@ namespace DFAssist.Helpers
             _mainControl.PersistToasts.CheckStateChanged += PersistToastsOnCheckedChanged;
             _mainControl.EnableActToast.CheckStateChanged += EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged += EnableTtsOnCheckedChanged;
+            _mainControl.TelegramCheckBox.CheckStateChanged += EnableTelegramOnCheckedChanged;
+            _mainControl.PushBulletCheckbox.CheckStateChanged += EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click += ClearLogsButton_Click;
 
         }
@@ -47,6 +49,8 @@ namespace DFAssist.Helpers
             _mainControl.PersistToasts.CheckStateChanged -= PersistToastsOnCheckedChanged;
             _mainControl.EnableActToast.CheckStateChanged -= EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged -= EnableTtsOnCheckedChanged;
+            _mainControl.TelegramCheckBox.CheckStateChanged -= EnableTelegramOnCheckedChanged;
+            _mainControl.PushBulletCheckbox.CheckStateChanged -= EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
         }
 
@@ -115,11 +119,15 @@ namespace DFAssist.Helpers
         private void EnableTelegramOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _logger.Write($"UI: [Telegram] Desired Value: {_mainControl.TelegramCheckBox.Checked}", LogLevel.Debug);
+            _mainControl.TelegramChatIdTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
+            _mainControl.TelegramTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
         }
 
         private void EnablePushBulletOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _logger.Write($"UI: [PushBullet] Desired Value: {_mainControl.PushBulletCheckbox.Checked}", LogLevel.Debug);
+            _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
+            _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
         }
 
         private void ClearLogsButton_Click(object sender, EventArgs e)

@@ -42,6 +42,12 @@ namespace DFAssist.Helpers
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PersistToasts.Name, _mainControl.PersistToasts);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableTestEnvironment.Name, _mainControl.EnableTestEnvironment);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableActToast.Name, _mainControl.EnableActToast);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.TelegramCheckBox.Name, _mainControl.TelegramCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.TelegramTokenTextBox.Name, _mainControl.TelegramTokenTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.TelegramChatIdTextBox.Name, _mainControl.TelegramChatIdTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.PushBulletCheckbox.Name, _mainControl.PushBulletCheckbox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.PushBulletTokenTextBox.Name, _mainControl.PushBulletTokenTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.PushBulletDeviceIdTextBox.Name, _mainControl.PushBulletDeviceIdTextBox);
 
             if (File.Exists(_settingsFile))
             {
@@ -91,6 +97,18 @@ namespace DFAssist.Helpers
             _logger.Write($"Enable Legacy Toasts: {_mainControl.EnableActToast.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Text To Speech: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Test Environment: {_mainControl.EnableTestEnvironment.Checked}", LogLevel.Debug);
+            _logger.Write($"Enable Telegram Notifications: {_mainControl.TelegramCheckBox.Checked}", LogLevel.Debug);
+            if(_mainControl.TelegramCheckBox.Checked)
+            {
+                _logger.Write($"Telegram Token: {_mainControl.TelegramTokenTextBox.Text}", LogLevel.Debug);
+                _logger.Write($"Telegram ChatId: {_mainControl.TelegramChatIdTextBox.Text}", LogLevel.Debug);
+            }
+            _logger.Write($"Enable Pushbullet Notifications: {_mainControl.PushBulletCheckbox.Checked}", LogLevel.Debug);
+            if(_mainControl.TelegramCheckBox.Checked)
+            {
+                _logger.Write($"Pushbullet Token: {_mainControl.PushBulletTokenTextBox.Text}", LogLevel.Debug);
+                _logger.Write($"Pushbullet ChatId: {_mainControl.PushBulletDeviceIdTextBox.Text}", LogLevel.Debug);
+            }
             _logger.Write("Settings Loaded!", LogLevel.Debug);
         }
 

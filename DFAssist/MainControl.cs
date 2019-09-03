@@ -128,9 +128,9 @@ namespace DFAssist
             // 
             LanguageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             LanguageComboBox.FormattingEnabled = true;
-            LanguageComboBox.Location = new Point(80, 23);
+            LanguageComboBox.Location = new Point(90, 23);
             LanguageComboBox.Name = "LanguageComboBox";
-            LanguageComboBox.Size = new Size(130, 25);
+            LanguageComboBox.Size = new Size(390, 25);
             LanguageComboBox.TabIndex = 0;
             // 
             // _disableToasts
@@ -174,8 +174,8 @@ namespace DFAssist
             TelegramCheckBox.AutoSize = true;
             TelegramCheckBox.Location = new Point(6, 22);
             TelegramCheckBox.Name = "TelegramCheckBox";
-            TelegramCheckBox.Size = new Size(167, 17);
             TelegramCheckBox.TabIndex = 5;
+            TelegramCheckBox.Size = new Size(390, 20);
             TelegramCheckBox.Text = "Enable Telegram Notifications";
             TelegramCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -188,14 +188,14 @@ namespace DFAssist
             TelegramTokenLabel.TabStop = false;
             TelegramTokenLabel.Text = "Token";
             // 
-            // _TelegramTokenTextBox
+            // _telegramTokenTextBox
             // 
-            TelegramTokenTextBox.Location = new Point(70, 45);
+            TelegramTokenTextBox.Location = new Point(90, 45);
             TelegramTokenTextBox.Name = "TelegramTokenTextBox";
             TelegramTokenTextBox.Size = new Size(390, 20);
             TelegramTokenTextBox.TabIndex = 6;
             // 
-            // _ChatIdLabel
+            // _telegramChatIdLabel
             // 
             TelegramChatIdLabel.AutoSize = true;
             TelegramChatIdLabel.Location = new Point(6, 68);
@@ -206,7 +206,7 @@ namespace DFAssist
             // 
             // _telegramChatIdTextBox
             // 
-            TelegramChatIdTextBox.Location = new Point(70, 68);
+            TelegramChatIdTextBox.Location = new Point(90, 68);
             TelegramChatIdTextBox.Name = "TelegramChatIdTextBox";
             TelegramChatIdTextBox.Size = new Size(390, 20);
             TelegramChatIdTextBox.TabIndex = 7;
@@ -216,8 +216,8 @@ namespace DFAssist
             PushBulletCheckbox.AutoSize = true;
             PushBulletCheckbox.Location = new Point(6, 22);
             PushBulletCheckbox.Name = "PushBulletCheckbox";
-            PushBulletCheckbox.Size = new Size(172, 17);
             PushBulletCheckbox.TabIndex = 8;
+            PushBulletCheckbox.Size = new Size(390, 20);
             PushBulletCheckbox.Text = "Enable Pushbullet Notifications";
             PushBulletCheckbox.UseVisualStyleBackColor = true;
             // 
