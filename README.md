@@ -6,12 +6,15 @@
 ![license](https://img.shields.io/github/license/easly1989/ffxiv_act_dfassist.svg)
 ![downloads](https://img.shields.io/github/downloads/easly1989/ffxiv_act_dfassist/total.svg)
 
-[UPDATE_IMAGE]
+![main](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/main.png)
 
 ## About this Plugin
 A simple plugin to scout the next dungoeon/trial/raid (instance to be generic) you are going to enter.<br>
 *It works only on windows 10 and, for the moment, only with final fantasy in Borderless Windowed Mode.*<br>
 If you find any bug or have any idea to share and optimize the plugin fill free to contact me or open an Issue (:
+
+## Telegram and Pushbullet Support!
+As of version 2.0.0, you can now set up Telegram and Pushbullet notifications directly from within DFAssist plugin settings!
 
 ## TTS Support!
 As of version 1.4.1, Text to Speech has been added, and can be enabled from the plugin page inside ACT!
@@ -30,7 +33,7 @@ You can download the latest binaries from [here](https://github.com/easly1989/ff
 
 ### Add the plugin to ACT
   - As usual add the plugin in ACT, after the [FFXIV_Parsing_Plugin](https://github.com/ravahn/FFXIV_ACT_Plugin) by [ravahn](https://github.com/ravahn)
-    [UPDATE_IMAGE]
+    ![install](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_1.png)
   - If everthing went ok you will see this toast in the bottom right corner of the screen
     ![toast](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_2.png)
   - Congratulations! You did it! (:
@@ -47,7 +50,7 @@ Building should be really straight forward
  4. Build!
  
 #### Side notes
-It should not be a problem building for x86, but (as of the latest news from SquareEnix) you should build for x64, as the game will drop support for x86 with the next expansion release
+It should not be a problem building for x86, but (as of the latest news from SquareEnix) you should build for x64, as the game dropped support for x86 with Shadowbringers!
  
 ### To-dos
 - [x] Automatic Updates from within ACT
@@ -55,8 +58,10 @@ It should not be a problem building for x86, but (as of the latest news from Squ
 - [x] Remove unused support for FATEs
 - [x] Handle Assembly resolve without locking dlls
 - [x] Handle test mode, enable users to see instances code
-- [ ] Inject toasts in game (to make it work even in full screen mode)
 - [x] add TTS support
+- [x] add Telegram support
+- [x] add PushBullet support
+- [ ] Inject toasts in game (to make it work even in full screen mode)
 
 ---
 
