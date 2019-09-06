@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Advanced_Combat_Tracker;
 using DFAssist.Contracts.DataModel;
 using DFAssist.Contracts.Repositories;
 using Splat;
@@ -12,6 +13,7 @@ namespace DFAssist.Helpers
         private static DFAssistRepositoriesHelper _instance;
         public static DFAssistRepositoriesHelper Instance => _instance ?? (_instance = new DFAssistRepositoriesHelper());
 
+        private ActPluginData _pluginData;
         private MainControl _mainControl;
         private IActLogger _logger;
         private IDataRepository _dataRepository;
@@ -21,6 +23,7 @@ namespace DFAssist.Helpers
 
         public DFAssistRepositoriesHelper()
         {
+            _pluginData = Locator.Current.GetService<ActPluginData>();
             _mainControl = Locator.Current.GetService<MainControl>();
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _dataRepository = Locator.Current.GetService<IDataRepository>();
@@ -38,8 +41,9 @@ namespace DFAssist.Helpers
             _lastSelectedLanguage = newLanguage.Code;
             _mainControl.LanguageValue.Text = newLanguage.Name;
 
-            _localizationRepository.LocalUpdate(newLanguage.Code);
-            _dataRepository.LocalUpdate(newLanguage.Code);
+            var pluginFolder = _pluginData.pluginFile.Directory?.FullName;
+            _localizationRepository.LocalUpdate(pluginFolder, newLanguage.Code);
+            _dataRepository.LocalUpdate(pluginFolder, newLanguage.Code);
 
             UpdateTranslations();
 
@@ -85,6 +89,7 @@ namespace DFAssist.Helpers
                 _mainControl.LanguageComboBox.SelectedValueChanged -= LanguageComboBox_SelectedValueChanged;
 
             _logger = null;
+            _pluginData = null;
             _localizationRepository = null;
             _dataRepository = null;
             _mainControl = null;

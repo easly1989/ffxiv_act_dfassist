@@ -14,8 +14,22 @@ namespace DFAssist.Helpers
         {
             _toastEventCallback = delegate (int code)
             {
-                // todo: handle the various codes
-                Logger.Write($"This is the Code: {code}", LogLevel.Info);
+                if(code == 0)
+                    Logger.Write("UI: Toast Clicked", LogLevel.Debug);
+                else if(code == 1)
+                    Logger.Write("UI: Toast Dismissed", LogLevel.Debug);
+                else if(code == 2)
+                    Logger.Write("UI: Toast Timed out", LogLevel.Debug);
+                else if(code == 3)
+                    Logger.Write("UI: Toast Hidden by application", LogLevel.Debug);
+                else if(code == 4)
+                    Logger.Write("UI: Toast was not activated", LogLevel.Warn);
+                else if(code == 11)
+                    Logger.Write("UI: Toast showing, waiting for interaction...", LogLevel.Debug);
+                else if(code > 4 && code < 11)
+                    Logger.Write($"UI: An Error occurred, code:[{code}]", LogLevel.Error);
+                else
+                    Logger.Write($"UI: Interacted with the toast, using a button, code:[{code}]", LogLevel.Debug);
             };
         }
 

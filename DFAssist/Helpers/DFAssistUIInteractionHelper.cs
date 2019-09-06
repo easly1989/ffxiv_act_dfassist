@@ -21,6 +21,14 @@ namespace DFAssist.Helpers
             _mainControl = Locator.Current.GetService<MainControl>();
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _logger = Locator.Current.GetService<IActLogger>();
+
+            // Startup defaults
+            _mainControl.EnableActToast.Enabled = !_mainControl.DisableToasts.Checked;
+            _mainControl.PersistToasts.Enabled = !_mainControl.DisableToasts.Checked && !_mainControl.EnableActToast.Checked;
+            _mainControl.TelegramChatIdTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
+            _mainControl.TelegramTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
+            _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
+            _mainControl.PushBulletDeviceIdTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
         }
 
         public void Subscribe()
@@ -58,7 +66,9 @@ namespace DFAssist.Helpers
         {
             _logger.Write($"UI: [DisableToasts] Desired Value: {_mainControl.DisableToasts.Checked}", LogLevel.Debug);
             _mainControl.EnableActToast.Enabled = !_mainControl.DisableToasts.Checked;
-            _mainControl.PersistToasts.Enabled = _mainControl.EnableActToast.Enabled && !_mainControl.EnableActToast.Checked;
+            _mainControl.PersistToasts.Enabled = !_mainControl.DisableToasts.Checked && !_mainControl.EnableActToast.Checked;
+
+            ToastHelper.Instance.SendNotification(_localizationRepository.GetText("ui-toast-notification-test-title"), _localizationRepository.GetText("ui-toast-notification-test-message"));
         }
 
         private void EnableActToastsOnCheckedChanged(object sender, EventArgs e)
@@ -126,8 +136,8 @@ namespace DFAssist.Helpers
         private void EnablePushBulletOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _logger.Write($"UI: [PushBullet] Desired Value: {_mainControl.PushBulletCheckbox.Checked}", LogLevel.Debug);
-            _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
-            _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
+            _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
+            _mainControl.PushBulletDeviceIdTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
         }
 
         private void ClearLogsButton_Click(object sender, EventArgs e)

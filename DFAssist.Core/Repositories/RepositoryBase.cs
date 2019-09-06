@@ -9,13 +9,13 @@ namespace DFAssist.Core.Repositories
     public abstract class RepositoryBase : IRepository
     {
         private static readonly string[] SupportedLanguages = { "en-us", "fr-fr", "ja-jp", "ko-kr"};
-
+        
         public bool Initialized { get; protected set; }
         public decimal Version { get; protected set; }
         public string CurrentLanguage { get; protected set; }
 
         protected ILogger Logger { get; }
-
+        
         protected RepositoryBase()
         {
             Initialized = false;
@@ -26,7 +26,7 @@ namespace DFAssist.Core.Repositories
             WebUpdate();
         }
 
-        public void LocalUpdate(string language)
+        public void LocalUpdate(string pluginPath, string language)
         {
             if(CurrentLanguage.Equals(language, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -34,7 +34,7 @@ namespace DFAssist.Core.Repositories
                 return;
             }
 
-            OnLocalUpdatedRequested(language);
+            OnLocalUpdatedRequested(pluginPath, language);
         }
 
         public void WebUpdate()
@@ -118,7 +118,7 @@ namespace DFAssist.Core.Repositories
             return string.Empty;
         }
 
-        protected abstract void OnLocalUpdatedRequested(string language);
+        protected abstract void OnLocalUpdatedRequested(string pluginPath, string language);
         protected abstract void OnWebUpdateRequested();
     }
 }

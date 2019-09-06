@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using DFAssist.Contracts.Repositories;
 using Newtonsoft.Json;
 using Splat;
@@ -44,10 +45,10 @@ namespace DFAssist.Core.Repositories
             return string.IsNullOrWhiteSpace(fallBackMessage) ? codeToTranslate : fallBackMessage;
         }
 
-        protected override void OnLocalUpdatedRequested(string language)
+        protected override void OnLocalUpdatedRequested(string pluginPath, string language)
         {
             Logger.Write($"Changing language to {language}...", LogLevel.Debug);
-            var result = ReadFromFile($"localization/{language}.json");
+            var result = ReadFromFile(Path.Combine(pluginPath, "localization", $"{language}.json"));
             if(string.IsNullOrWhiteSpace(result))
             {
                 Logger.Write($"Unable to read {language} file", LogLevel.Error);

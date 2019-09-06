@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DFAssist.Contracts.DataModel;
 using DFAssist.Contracts.Repositories;
@@ -37,10 +38,10 @@ namespace DFAssist.Core.Repositories
             return new Roulette { Name = $"Unknown Roulette ({code})" };
         }
 
-        protected override void OnLocalUpdatedRequested(string language)
+        protected override void OnLocalUpdatedRequested(string pluginPath, string language)
         {
             Logger.Write($"Updating data for language {language}...", LogLevel.Debug);
-            var result = ReadFromFile($"data/{language}.json");
+            var result = ReadFromFile(Path.Combine(pluginPath, "data", $"{language}.json"));
             if (string.IsNullOrWhiteSpace(result))
             {
                 Logger.Write($"Unable to read {language} file", LogLevel.Error);
