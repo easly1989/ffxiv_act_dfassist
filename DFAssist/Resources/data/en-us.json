@@ -1449,45 +1449,7 @@
       "name": "the Dancing Plague (Extreme)",
       "tank": "2",
       "healer": "2",
-      "dps": "4",
-      "macro": "/p H1   (水 Water)    H2
-      /p MT
-      /p 　D1
-      D2 /p
-      ST /p
-      D3 D4
-      /p ------
-      2連頭割り 2
-      Split ------
-      /p 西
-      West: MT-H1-D1-D3
-      /p 東
-      East: ST-H2-D2-D4
-      /p 時計回りの回転
-      Clockwise Rotation
-      /p ----------
-      連鎖 1
-      Chain 1
-      ---------- /p
-      北西
-      N/W: Tank
-      Healer |
-      南東
-      S/E: DPS
-      /p --
-      Tether
-      テザー: 9時受
-      (①西 West)】--
-      /p ST->D1->D2->D3->-D4->H1
-      /p ----------
-      連鎖 2
-      Chain 2
-      ---------- /p
-      北
-      North: Tank
-      Healer |
-      南
-      South: DPS"
+      "dps": "4"
     },
     "666": {
       "name": "the Crown of the Immaculate",

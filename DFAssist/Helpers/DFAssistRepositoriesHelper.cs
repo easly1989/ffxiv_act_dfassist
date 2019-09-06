@@ -59,7 +59,8 @@ namespace DFAssist.Helpers
 
             UpdateTranslations();
 
-            _mainControl.LanguageComboBox.SelectedValueChanged += LanguageComboBox_SelectedValueChanged;
+            _mainControl.LanguageComboBox.SelectedIndexChanged -= LanguageComboBox_SelectedValueChanged;
+            _mainControl.LanguageComboBox.SelectedIndexChanged += LanguageComboBox_SelectedValueChanged;
         }
 
         private void UpdateTranslations()
@@ -98,7 +99,7 @@ namespace DFAssist.Helpers
         public void Dispose()
         {
             if (_mainControl.LanguageComboBox != null)
-                _mainControl.LanguageComboBox.SelectedValueChanged -= LanguageComboBox_SelectedValueChanged;
+                _mainControl.LanguageComboBox.SelectedIndexChanged -= LanguageComboBox_SelectedValueChanged;
 
             _logger = null;
             _pluginData = null;
