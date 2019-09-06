@@ -15,6 +15,6 @@
         /// Used to updated the local file from the github reference files
         /// It simply downloads the new files, and overwrites the old ones
         /// </summary>
-        void WebUpdate();
+        void WebUpdate(string pluginPath);
     }
 }

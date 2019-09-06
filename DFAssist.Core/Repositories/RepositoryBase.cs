@@ -19,11 +19,10 @@ namespace DFAssist.Core.Repositories
         protected RepositoryBase()
         {
             Initialized = false;
-            Version = default(decimal);
+            Version = default;
             CurrentLanguage = string.Empty;
 
             Logger = Locator.Current.GetService<ILogger>();
-            WebUpdate();
         }
 
         public void LocalUpdate(string pluginPath, string language)
@@ -37,24 +36,24 @@ namespace DFAssist.Core.Repositories
             OnLocalUpdatedRequested(pluginPath, language);
         }
 
-        public void WebUpdate()
+        public void WebUpdate(string pluginPath)
         {
-            OnWebUpdateRequested();
+            OnWebUpdateRequested(pluginPath);
         }
 
-        protected void WebUpdateRoutine(string folderLocation)
+        protected void WebUpdateRoutine(string pluginPath, string folderName)
         {
             foreach (var supportedLanguage in SupportedLanguages)
             {
                 Logger.Write($"Downloading {supportedLanguage} file", LogLevel.Debug);
-                var json = DownloadString($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/DFAssist/Resources/{folderLocation}/{supportedLanguage}.json");
+                var json = DownloadString($"https://raw.githubusercontent.com/easly1989/ffxiv_act_dfassist/master/DFAssist/Resources/{folderName}/{supportedLanguage}.json");
                 if(string.IsNullOrWhiteSpace(json))
                 {
                     Logger.Write($"Unable to update {supportedLanguage} file", LogLevel.Warn);
                     continue;
                 }
 
-                SaveToFile(json, $"{folderLocation}/{supportedLanguage}.json");
+                SaveToFile(json, Path.Combine(pluginPath, folderName, $"{supportedLanguage}.json"));
                 Logger.Write($"Updated {supportedLanguage} file", LogLevel.Debug);
             }
         }
@@ -119,6 +118,6 @@ namespace DFAssist.Core.Repositories
         }
 
         protected abstract void OnLocalUpdatedRequested(string pluginPath, string language);
-        protected abstract void OnWebUpdateRequested();
+        protected abstract void OnWebUpdateRequested(string pluginPath);
     }
 }

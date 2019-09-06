@@ -90,23 +90,28 @@ namespace DFAssist
             _pluginData.tpPluginSpace.Controls.Add(_mainControl);
 
             ACTPluginSettingsHelper.Instance.LoadSettings();
-            DFAssistRepositoriesHelper.Instance.LoadData();
-            DFAssistUIInteractionHelper.Instance.Subscribe();
+            var updateTask = DFAssistRepositoriesHelper.Instance.UpdateData();
+            updateTask.ContinueWith(_ =>
+            {
+                DFAssistRepositoriesHelper.Instance.LoadData();
+                DFAssistUIInteractionHelper.Instance.Subscribe();
 
-            _pluginData.lblPluginStatus.Text = "Starting...";
-            _pluginData.lblPluginStatus.Text = "Plugin Started!";
-            _pluginData.tpPluginSpace.Text = nameof(DFAssist);
+                _pluginData.lblPluginStatus.Text = "Starting...";
+                _pluginData.lblPluginStatus.Text = "Plugin Started!";
+                _pluginData.tpPluginSpace.Text = nameof(DFAssist);
 
-            _logger.Write("Plugin Started!", LogLevel.Debug);
+                _logger.Write("Plugin Started!", LogLevel.Debug);
 
-            FFXIVNetworkProcessHelper.Instance.Subscribe();
+                FFXIVNetworkProcessHelper.Instance.Subscribe();
 
-            IsPluginEnabled = true;
-            _logger.Write("Plugin Enabled", LogLevel.Debug);
+                IsPluginEnabled = true;
+                _logger.Write("Plugin Enabled", LogLevel.Debug);
 
-            ACTPluginUpdateHelper.Instance.Subscribe();
+                ACTPluginUpdateHelper.Instance.Subscribe();
 
-            _pluginInitializing = false;
+                _pluginInitializing = false;
+            });
+            updateTask.Start();
         }
 
         public void DeInitPlugin()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts.DataModel;
 using DFAssist.Contracts.Repositories;
@@ -28,6 +29,17 @@ namespace DFAssist.Helpers
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _dataRepository = Locator.Current.GetService<IDataRepository>();
             _logger = Locator.Current.GetService<IActLogger>();
+        }
+
+        public Task UpdateData()
+        {
+            return new Task(() =>
+            {
+                var pluginFolder = _pluginData.pluginFile.Directory?.FullName;
+                _localizationRepository.WebUpdate(pluginFolder);
+                _dataRepository.WebUpdate(pluginFolder);
+                LoadData();
+            });
         }
 
         public void LoadData(Language defaultLanguage = null)

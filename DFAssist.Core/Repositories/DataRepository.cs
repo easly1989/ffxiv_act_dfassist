@@ -52,10 +52,10 @@ namespace DFAssist.Core.Repositories
             Logger.Write(_instances.Any() && _roulettes.Any() ? $"Data {Version} Initialized!" : "Unable to initialize Data!", LogLevel.Debug);
         }
 
-        protected override void OnWebUpdateRequested()
+        protected override void OnWebUpdateRequested(string pluginPath)
         {
             Logger.Write("Updating data files from web...", LogLevel.Debug);
-            WebUpdateRoutine("data");
+            WebUpdateRoutine(pluginPath, "data");
             Logger.Write("Data files update completed", LogLevel.Debug);
         }
 

@@ -62,10 +62,10 @@ namespace DFAssist.Core.Repositories
             Logger.Write($"Language changed to {language}", LogLevel.Info);
         }
 
-        protected override void OnWebUpdateRequested()
+        protected override void OnWebUpdateRequested(string pluginPath)
         {
             Logger.Write("Updating Localization files from web...", LogLevel.Debug);
-            WebUpdateRoutine("localization");
+            WebUpdateRoutine(pluginPath, "localization");
             Logger.Write("Localization files update completed", LogLevel.Debug);
         }
     }
