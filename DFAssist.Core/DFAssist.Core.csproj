@@ -43,7 +43,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileSystemLogger.cs" />
     <Compile Include="DllInjector.cs" />
     <Compile Include="Network\Connection.cs" />
     <Compile Include="Network\FFXIVPacketHandler.cs" />

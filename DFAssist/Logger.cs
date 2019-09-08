@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
-using DFAssist.Core;
 using Splat;
 
 namespace DFAssist
 {
-    public class Logger : FileSystemLogger, IActLogger
+    public class Logger : DebugLogger, IActLogger
     {
         private static readonly Regex EscapePattern = new Regex(@"\{(.+?)\}");
         private RichTextBox _richTextBox;
+
         public void SetLoggingLevel(LogLevel level)
         {
             Level = level;
@@ -91,7 +90,12 @@ namespace DFAssist
             Write(exception, message, logLevel);
         }
 
-        public Logger() : base($"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs", "DFAssist.log")}", 5)
+        public void Dispose()
+        {
+            _richTextBox = null;
+        }
+
+        public Logger()
         {
             Level = LogLevel.Debug;
         }
