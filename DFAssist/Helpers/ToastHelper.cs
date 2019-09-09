@@ -55,7 +55,7 @@ namespace DFAssist.Helpers
                 traySlider.ButtonNW.Visible = false;
                 traySlider.ButtonSW.Visible = true;
                 traySlider.ButtonSW.Text = LocalizationRepository.GetText("ui-close-act-toast");
-                traySlider.ShowTraySlider($"{title}\n{message}\n{testing}");
+                traySlider.ShowTraySlider($"{message}\n{testing}", title);
             }
             else
             {

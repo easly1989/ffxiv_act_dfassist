@@ -218,7 +218,7 @@ namespace DFAssist.Core.Network
                         state = MatchingState.MATCHED;
                         FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
 
-                        _logger.Write($"Q: Matched [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Info);
+                        _logger.Write($"Q: Matched [{roulette} - - {_dataRepository.GetInstance(code).Name}] - [{code} - {_dataRepository.GetInstance(code).Name}]", LogLevel.Info);
                     }
                 }
                 else if (opcode == 0x006F)

@@ -167,7 +167,6 @@ namespace DFAssist.Helpers
             }
 
             ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now, "00|" + DateTime.Now.ToString("O") + "|0048|F|" + text);
-            // TODO: add toast helper
             DFAssistPlugin.Instance.OnNetworkEventReceived(eventType, args);
         }
 
