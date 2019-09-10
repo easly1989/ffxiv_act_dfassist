@@ -159,6 +159,9 @@ namespace DFAssist.Core.Network
                 if (opcode == 0x022F) // Entering/Leaving an instance
                 {
                     var code = BitConverter.ToInt16(data, 4);
+                    if(code == 0)
+                        return;
+
                     var type = data[8];
 
                     if (type == 0x0B)
@@ -214,6 +217,8 @@ namespace DFAssist.Core.Network
                     {
                         var roulette = data[20];
                         var code = BitConverter.ToUInt16(data, 22);
+                        if(code == 0)
+                            return;
 
                         state = MatchingState.MATCHED;
                         FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
@@ -232,6 +237,9 @@ namespace DFAssist.Core.Network
                 else if (opcode == 0x0079) // Status during matching
                 {
                     var code = BitConverter.ToUInt16(data, 0);
+                    if(code == 0)
+                        return;
+
                     byte status;
                     byte tank;
                     byte dps;
