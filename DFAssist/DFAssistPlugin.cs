@@ -55,6 +55,8 @@ namespace DFAssist
             if (!EnsureActMainFormIsLoaded())
                 return;
 
+            InitializePluginVariables(mainControl);
+
             if (!FFXIVPluginHelper.Instance.Check(_pluginData, ffPluginIsEnabled =>
              {
                  if (ffPluginIsEnabled)
@@ -67,7 +69,7 @@ namespace DFAssist
             _pluginInitializing = true;
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
 
-            InitializePluginVariables(mainControl);
+            
 
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _dataRepository = Locator.Current.GetService<IDataRepository>();
