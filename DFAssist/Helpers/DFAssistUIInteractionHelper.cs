@@ -44,6 +44,7 @@ namespace DFAssist.Helpers
             _mainControl.TelegramCheckBox.CheckStateChanged += EnableTelegramOnCheckedChanged;
             _mainControl.PushBulletCheckbox.CheckStateChanged += EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click += ClearLogsButton_Click;
+            _mainControl.TestConfigurationButton.Click += TestConfigurationButton_Click;
 
         }
 
@@ -60,6 +61,7 @@ namespace DFAssist.Helpers
             _mainControl.TelegramCheckBox.CheckStateChanged -= EnableTelegramOnCheckedChanged;
             _mainControl.PushBulletCheckbox.CheckStateChanged -= EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
+            _mainControl.TestConfigurationButton.Click -= TestConfigurationButton_Click;
         }
 
         private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
@@ -143,6 +145,16 @@ namespace DFAssist.Helpers
         private void ClearLogsButton_Click(object sender, EventArgs e)
         {
             _mainControl.LoggingRichTextBox.Clear();
+        }
+
+        private void TestConfigurationButton_Click(object sender, EventArgs e)
+        {
+            var title = _localizationRepository.GetText("ui-toast-notification-test-title");
+            var message = _localizationRepository.GetText("ui-toast-notification-test-message");
+            ToastHelper.Instance.SendNotification(title, message);
+            TelegramHelper.Instance.SendNotification(title, message);
+            PushBulletHelper.Instance.SendNotification(title, message);
+            TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
         }
 
         public void Dispose()

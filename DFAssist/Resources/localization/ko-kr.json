@@ -17,6 +17,8 @@
   "ui-pushbullet-token-display-text": "액세스 토큰",
   "ui-pushbullet-deviceid-display-text": "장치 아이디",
 
+  "ui-test-settings-display-text": "테스트 구성",
+
   "ui-enable-test-environment": "테스트 환경 사용",
 
   "ui-update-available-message": "DFAssist Plugin의 업데이트 된 버전이 있습니다. 지금 업데이트 하시겠습니까?\n\n(ACT에 대한 업데이트가있는 경우, 아니요를 클릭하고 먼저 ACT를 업데이트해야합니다.)",

@@ -17,6 +17,8 @@
   "ui-pushbullet-token-display-text": "アクセストークン",
   "ui-pushbullet-deviceid-display-text": "デバイスID",
 
+  "ui-test-settings-display-text": "テスト構成",
+
   "ui-enable-test-environment": "テスト環境を有効にする",
 
   "ui-update-available-message": "DFAssistプラグインの更新版があります。 今すぐ更新しますか\n\nACTが更新された場合は、[いいえ]をクリックしてからACTを更新してください。",

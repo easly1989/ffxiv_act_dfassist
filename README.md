@@ -34,8 +34,11 @@ You can download the latest binaries from [here](https://github.com/easly1989/ff
 ### Add the plugin to ACT
   - As usual add the plugin in ACT, after the [FFXIV_Parsing_Plugin](https://github.com/ravahn/FFXIV_ACT_Plugin) by [ravahn](https://github.com/ravahn)
     ![install](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_1.png)
-  - If everthing went ok you will see this toast in the bottom right corner of the screen
-    ![toast](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_2.png)
+  - Once installed you can go into the plugin tab and edit the settings
+  - You can check the default settings, or test your custom settings clicking the "Test Configuration" button located in the General Settings panel
+	![settings](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_2.png)
+  - By default you should see this when clicking the Test Configuration button (unless you have changed the settings)
+    ![toast](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_3.png)
   - Congratulations! You did it! (:
 
 ## Building from Sources

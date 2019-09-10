@@ -25,6 +25,7 @@ namespace DFAssist
         public GroupBox GeneralSettings;
 
         public Button ClearLogButton;
+        public Button TestConfigurationButton;
         
         public Label LanguageLabel;
         public Label AppTitle;
@@ -74,6 +75,7 @@ namespace DFAssist
             _mainTabPage = new TabPage();
             _mainTableLayout = new TableLayoutPanel();
             ClearLogButton = new Button();
+            TestConfigurationButton = new Button();
             LoggingRichTextBox = new RichTextBox();
             AppTitle = new Label();
             _copyrightLink = new LinkLabel();
@@ -132,6 +134,16 @@ namespace DFAssist
             LanguageComboBox.Name = "LanguageComboBox";
             LanguageComboBox.Size = new Size(390, 25);
             LanguageComboBox.TabIndex = 0;
+            //
+            // _testConfigurationButton
+            //
+            TestConfigurationButton.AutoSize = true;
+            TestConfigurationButton.Name = "TestConfigurationButton";
+            TestConfigurationButton.Location = new Point(6, 45);
+            TestConfigurationButton.MinimumSize = new Size(100, 25);
+            TestConfigurationButton.TabIndex = 0;
+            TestConfigurationButton.Text = "Test Configuration";
+            TestConfigurationButton.UseVisualStyleBackColor = true;
             // 
             // _disableToasts
             // 
@@ -400,6 +412,7 @@ namespace DFAssist
             GeneralSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             GeneralSettings.Controls.Add(LanguageLabel);
             GeneralSettings.Controls.Add(LanguageComboBox);
+            GeneralSettings.Controls.Add(TestConfigurationButton);
             GeneralSettings.Name = "GeneralSettings";
             GeneralSettings.TabStop = false;
             GeneralSettings.Text = "General Settings";

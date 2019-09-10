@@ -17,6 +17,8 @@
   "ui-pushbullet-token-display-text": "Access Token",
   "ui-pushbullet-deviceid-display-text": "Device Id",
 
+  "ui-test-settings-display-text": "Test Configuration",
+
   "ui-enable-test-environment": "Enable Test Environment",
 
   "ui-update-available-message": "There is an updated version of the DFAssist Plugin. Update it now?\n\n(If there is an update to ACT, you should click No and update ACT first.)",

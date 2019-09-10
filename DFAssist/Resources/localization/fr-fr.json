@@ -17,6 +17,8 @@
   "ui-pushbullet-token-display-text": "Jeton",
   "ui-pushbullet-deviceid-display-text": "Identifiant de device",
 
+  "ui-test-settings-display-text": "Test de configuration",
+
   "ui-enable-test-environment": "Activer l'environnement de test",
 
   "ui-update-available-message": "Il existe une version mise à jour du plug-in DFAssist. Mettez-le à jour maintenant?\n\n(S'il y a une mise à jour vers ACT, vous devez cliquer sur Non et mettre à jour ACT en premier.)",

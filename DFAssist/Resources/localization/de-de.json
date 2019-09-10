@@ -17,6 +17,8 @@
   "ui-pushbullet-token-display-text": "Zugriffstoken",
   "ui-pushbullet-deviceid-display-text": "Geräte-ID",
 
+  "ui-test-settings-display-text": "Konfiguration testen",
+
   "ui-enable-test-environment": "Testumgebung aktivieren",
 
   "ui-update-available-message": "Es ist eine aktualisierte Version des DFAssist-Plugins vorhanden. Jetzt aktualisieren? \\ n \\ n (Wenn ein Update für ACT vorhanden ist, müssen Sie zuerst auf Nein klicken und ACT aktualisieren.)",
