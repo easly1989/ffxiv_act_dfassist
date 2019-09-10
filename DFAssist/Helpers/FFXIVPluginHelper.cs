@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
 using Advanced_Combat_Tracker;
 
 namespace DFAssist.Helpers
@@ -28,15 +29,15 @@ namespace DFAssist.Helpers
             // than this plugin cannot start
             if (_ffxivPluginData == null)
             {
+                MessageBox.Show($"{ffxivActPluginDll} must be installed BEFORE DFAssist!");
                 dfAssistPluginData.cbEnabled.Checked = false;
-                dfAssistPluginData.lblPluginStatus.Text = $"{ffxivActPluginDll} must be installed BEFORE DFAssist!";
                 return false;
             }
 
             if (!_ffxivPluginData.cbEnabled.Checked)
             {
+                MessageBox.Show($"{ffxivActPluginDll} must be enabled");
                 dfAssistPluginData.cbEnabled.Checked = false;
-                dfAssistPluginData.lblPluginStatus.Text = $"{ffxivActPluginDll} must be enabled";
                 return false;
             }
 
