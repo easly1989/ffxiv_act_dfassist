@@ -52,10 +52,10 @@ namespace DFAssist
             if (_pluginInitializing)
                 return;
 
+            InitializePluginVariables(mainControl);
+            
             if (!EnsureActMainFormIsLoaded())
                 return;
-
-            InitializePluginVariables(mainControl);
 
             if (!FFXIVPluginHelper.Instance.Check(_pluginData, ffPluginIsEnabled =>
              {
@@ -150,6 +150,9 @@ namespace DFAssist
 
         private void InitializePluginVariables(MainControl mainControl)
         {
+            if(_mainControl != null)
+                return;
+
             _mainControl = mainControl;
             _pluginData = ActGlobals.oFormActMain.PluginGetSelfData(mainControl.Plugin);
 
