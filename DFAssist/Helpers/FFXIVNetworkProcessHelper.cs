@@ -10,6 +10,7 @@ using DFAssist.Contracts.Duty;
 using DFAssist.Contracts.Repositories;
 using DFAssist.Core.Network;
 using Splat;
+using Timer = System.Timers.Timer;
 
 namespace DFAssist.Helpers
 {
@@ -19,27 +20,21 @@ namespace DFAssist.Helpers
         private static FFXIVNetworkProcessHelper _instance;
         public static FFXIVNetworkProcessHelper Instance => _instance ?? (_instance = new FFXIVNetworkProcessHelper());
 
-        private IActLogger _logger;
-        private IPacketHandler _packetHandler;
-        private IDataRepository _dataRepository;
-        private Timer _timer;
-        private ConcurrentDictionary<int, ProcessNetwork> _networks;
+        private IActLogger _logger = Locator.Current.GetService<IActLogger>();
+        private IPacketHandler _packetHandler = Locator.Current.GetService<IPacketHandler>();
+        private IDataRepository _dataRepository = Locator.Current.GetService<IDataRepository>();
+        private Timer _timer = new Timer { Interval = 10000 };
+        private ConcurrentDictionary<int, ProcessNetwork> _networks = new ConcurrentDictionary<int, ProcessNetwork>();
 
         public FFXIVNetworkProcessHelper()
         {
-            _logger = Locator.Current.GetService<IActLogger>();
-            _packetHandler = Locator.Current.GetService<IPacketHandler>();
-            _dataRepository = Locator.Current.GetService<IDataRepository>();
-
-            _networks = new ConcurrentDictionary<int, ProcessNetwork>();
-            _timer = new Timer { Interval = 30000 };
-            _timer.Tick += Timer_Tick;
+            _timer.Elapsed += Timer_Tick;
         }
 
         public void Subscribe()
         {
             UpdateProcesses();
-            _timer?.Start();
+            _timer.Start();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -63,7 +58,7 @@ namespace DFAssist.Helpers
                     var pn = new ProcessNetwork(process, new Network());
                     _packetHandler.OnEventReceived += Network_onReceiveEvent;
                     _networks.TryAdd(process.Id, pn);
-                    _logger.Write("P: FFXIV Process Selected: {process.Id}", LogLevel.Info);
+                    _logger.Write($"P: FFXIV Process Selected: {process.Id}", LogLevel.Info);
                 }
             }
             catch (Exception e)
@@ -177,7 +172,7 @@ namespace DFAssist.Helpers
                 if (_timer.Enabled)
                     _timer.Stop();
 
-                _timer.Tick -= Timer_Tick;
+                _timer.Elapsed -= Timer_Tick;
                 _timer.Dispose();
                 _timer = null;
             }
