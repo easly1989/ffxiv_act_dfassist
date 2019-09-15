@@ -37,6 +37,7 @@ namespace DFAssist.Helpers
                 return;
 
             _subscribed = true;
+            _mainControl.FlashTaskbar.CheckStateChanged += FlashTaskbarOnCheckedChanged;
             _mainControl.DisableToasts.CheckStateChanged += DisableToastsOnCheckedChanged;
             _mainControl.PersistToasts.CheckStateChanged += PersistToastsOnCheckedChanged;
             _mainControl.EnableActToast.CheckStateChanged += EnableActToastsOnCheckedChanged;
@@ -54,6 +55,7 @@ namespace DFAssist.Helpers
                 return;
 
             _subscribed = false;
+            _mainControl.FlashTaskbar.CheckStateChanged -= FlashTaskbarOnCheckedChanged;
             _mainControl.DisableToasts.CheckStateChanged -= DisableToastsOnCheckedChanged;
             _mainControl.PersistToasts.CheckStateChanged -= PersistToastsOnCheckedChanged;
             _mainControl.EnableActToast.CheckStateChanged -= EnableActToastsOnCheckedChanged;
@@ -62,6 +64,12 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletCheckbox.CheckStateChanged -= EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click -= TestConfigurationButton_Click;
+        }
+
+        private void FlashTaskbarOnCheckedChanged(object sender, EventArgs e)
+        {
+            _logger.Write($"UI: [FlashTaskbar] Desired Value: {_mainControl.FlashTaskbar.Checked}", LogLevel.Debug);
+            TaskbarFlashHelper.Instance.SendNotification();
         }
 
         private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
@@ -151,7 +159,7 @@ namespace DFAssist.Helpers
         {
             var title = _localizationRepository.GetText("ui-toast-notification-test-title");
             var message = _localizationRepository.GetText("ui-toast-notification-test-message");
-            TaskbarFlashHelper.OnSendNotification();
+            TaskbarFlashHelper.Instance.SendNotification();
             ToastHelper.Instance.SendNotification(title, message);
             TelegramHelper.Instance.SendNotification(title, message);
             PushBulletHelper.Instance.SendNotification(title, message);

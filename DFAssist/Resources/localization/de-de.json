@@ -33,6 +33,7 @@
   "ui-close-act-toast": "Toast schließen",
 
   "ui-disable-toasts": "Toasts deaktivieren",
+  "ui-flash-taskbar": "Flash-Taskleiste, wenn eine Benachrichtigung empfangen wird",
 
   "ui-general-settings-group": "Allgemeine Einstellungen",
   "ui-toast-settings-group": "Toast-Einstellungen",

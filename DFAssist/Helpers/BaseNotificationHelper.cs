@@ -21,7 +21,7 @@ namespace DFAssist.Helpers
             MainControl = Locator.Current.GetService<MainControl>();
         }
 
-        public void SendNotification(string title, string message, string testing = "")
+        public void SendNotification(string title = "", string message = "", string testing = "")
         {
             OnSendNotification(title, message, testing);
         }

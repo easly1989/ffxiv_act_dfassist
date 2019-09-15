@@ -33,6 +33,7 @@
   "ui-close-act-toast": "Close Toast",
 
   "ui-disable-toasts": "Disable Toasts",
+  "ui-flash-taskbar": "Flash Taskbar when a Notification is received",
 
   "ui-general-settings-group": "General Settings",
   "ui-toast-settings-group": "Toasts Settings",

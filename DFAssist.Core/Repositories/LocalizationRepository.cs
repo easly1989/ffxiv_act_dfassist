@@ -34,7 +34,7 @@ namespace DFAssist.Core.Repositories
                 if (_localizedMap.TryGetValue(codeToTranslate, out var value))
                     return string.Format(value, arguments);
 
-                Logger.Write("Unable to find the string {codeToTranslate}.", LogLevel.Warn);
+                Logger.Write($"Unable to find the string {codeToTranslate}.", LogLevel.Warn);
             }
             catch (Exception e)
             {

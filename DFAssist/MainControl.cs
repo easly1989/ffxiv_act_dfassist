@@ -47,6 +47,7 @@ namespace DFAssist
         public CheckBox EnableTestEnvironment;
         public CheckBox TelegramCheckBox;
         public CheckBox PushBulletCheckbox;
+        public CheckBox FlashTaskbar;
 
         public ComboBox LanguageComboBox;
         
@@ -69,6 +70,7 @@ namespace DFAssist
             EnableTestEnvironment = new CheckBox();
             TtsCheckBox = new CheckBox();
             PersistToasts = new CheckBox();
+            FlashTaskbar = new CheckBox();
             EnableActToast = new CheckBox();
             DisableToasts = new CheckBox();
             _appTabControl = new TabControl();
@@ -134,14 +136,23 @@ namespace DFAssist
             LanguageComboBox.Name = "LanguageComboBox";
             LanguageComboBox.Size = new Size(390, 25);
             LanguageComboBox.TabIndex = 0;
+            // 
+            // _flashTaskbar
+            // 
+            FlashTaskbar.AutoSize = true;
+            FlashTaskbar.Location = new Point(6, 45);
+            FlashTaskbar.Name = "FlashTaskbar";
+            FlashTaskbar.TabIndex = 1;
+            FlashTaskbar.Text = "Flash Taskbar when a Notification is received";
+            FlashTaskbar.UseVisualStyleBackColor = true;
             //
             // _testConfigurationButton
             //
             TestConfigurationButton.AutoSize = true;
             TestConfigurationButton.Name = "TestConfigurationButton";
-            TestConfigurationButton.Location = new Point(6, 45);
+            TestConfigurationButton.Location = new Point(6, 68);
             TestConfigurationButton.MinimumSize = new Size(100, 25);
-            TestConfigurationButton.TabIndex = 0;
+            TestConfigurationButton.TabIndex = 2;
             TestConfigurationButton.Text = "Test Configuration";
             TestConfigurationButton.UseVisualStyleBackColor = true;
             // 
@@ -150,7 +161,7 @@ namespace DFAssist
             DisableToasts.AutoSize = true;
             DisableToasts.Location = new Point(6, 22);
             DisableToasts.Name = "DisableToasts";
-            DisableToasts.TabIndex = 1;
+            DisableToasts.TabIndex = 3;
             DisableToasts.Text = "Disable Toasts";
             DisableToasts.UseVisualStyleBackColor = true;
             // 
@@ -159,7 +170,7 @@ namespace DFAssist
             PersistToasts.AutoSize = true;
             PersistToasts.Location = new Point(6, 45);
             PersistToasts.Name = "PersistToasts";
-            PersistToasts.TabIndex = 2;
+            PersistToasts.TabIndex = 4;
             PersistToasts.Text = "Make Toasts Persistent";
             PersistToasts.UseVisualStyleBackColor = true;
             // 
@@ -168,7 +179,7 @@ namespace DFAssist
             EnableActToast.AutoSize = true;
             EnableActToast.Location = new Point(6, 68);
             EnableActToast.Name = "EnableActToast";
-            EnableActToast.TabIndex = 3;
+            EnableActToast.TabIndex = 5;
             EnableActToast.Text = "Enable ACT Toasts";
             EnableActToast.UseVisualStyleBackColor = true;
             // 
@@ -177,7 +188,7 @@ namespace DFAssist
             TtsCheckBox.AutoSize = true;
             TtsCheckBox.Location = new Point(6, 22);
             TtsCheckBox.Name = "TtsCheckBox";
-            TtsCheckBox.TabIndex = 4;
+            TtsCheckBox.TabIndex = 6;
             TtsCheckBox.Text = "Enable Text To Speech";
             TtsCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -186,7 +197,7 @@ namespace DFAssist
             TelegramCheckBox.AutoSize = true;
             TelegramCheckBox.Location = new Point(6, 22);
             TelegramCheckBox.Name = "TelegramCheckBox";
-            TelegramCheckBox.TabIndex = 5;
+            TelegramCheckBox.TabIndex = 7;
             TelegramCheckBox.Size = new Size(390, 20);
             TelegramCheckBox.Text = "Enable Telegram Notifications";
             TelegramCheckBox.UseVisualStyleBackColor = true;
@@ -205,7 +216,7 @@ namespace DFAssist
             TelegramTokenTextBox.Location = new Point(90, 45);
             TelegramTokenTextBox.Name = "TelegramTokenTextBox";
             TelegramTokenTextBox.Size = new Size(390, 20);
-            TelegramTokenTextBox.TabIndex = 6;
+            TelegramTokenTextBox.TabIndex = 8;
             // 
             // _telegramChatIdLabel
             // 
@@ -221,14 +232,14 @@ namespace DFAssist
             TelegramChatIdTextBox.Location = new Point(90, 68);
             TelegramChatIdTextBox.Name = "TelegramChatIdTextBox";
             TelegramChatIdTextBox.Size = new Size(390, 20);
-            TelegramChatIdTextBox.TabIndex = 7;
+            TelegramChatIdTextBox.TabIndex = 9;
             // 
             // _pushbulletCheckbox
             // 
             PushBulletCheckbox.AutoSize = true;
             PushBulletCheckbox.Location = new Point(6, 22);
             PushBulletCheckbox.Name = "PushBulletCheckbox";
-            PushBulletCheckbox.TabIndex = 8;
+            PushBulletCheckbox.TabIndex = 10;
             PushBulletCheckbox.Size = new Size(390, 20);
             PushBulletCheckbox.Text = "Enable Pushbullet Notifications";
             PushBulletCheckbox.UseVisualStyleBackColor = true;
@@ -247,7 +258,7 @@ namespace DFAssist
             PushBulletTokenTextBox.Location = new Point(90, 45);
             PushBulletTokenTextBox.Name = "PushBulletTokenTextBox";
             PushBulletTokenTextBox.Size = new Size(390, 20);
-            PushBulletTokenTextBox.TabIndex = 9;
+            PushBulletTokenTextBox.TabIndex = 11;
             // 
             // _pushbulletDeviceIdlabel
             // 
@@ -263,7 +274,7 @@ namespace DFAssist
             PushBulletDeviceIdTextBox.Location = new Point(90, 68);
             PushBulletDeviceIdTextBox.Name = "PushBulletDeviceIdTextBox";
             PushBulletDeviceIdTextBox.Size = new Size(390, 20);
-            PushBulletDeviceIdTextBox.TabIndex = 10;
+            PushBulletDeviceIdTextBox.TabIndex = 12;
             // 
             // 
             // _enableTestEnvironment
@@ -271,7 +282,7 @@ namespace DFAssist
             EnableTestEnvironment.AutoSize = true;
             EnableTestEnvironment.Location = new Point(6, 22);
             EnableTestEnvironment.Name = "EnableTestEnvironment";
-            EnableTestEnvironment.TabIndex = 11;
+            EnableTestEnvironment.TabIndex = 13;
             EnableTestEnvironment.Text = "Enable Test Environment";
             EnableTestEnvironment.UseVisualStyleBackColor = true;
             // 
@@ -412,6 +423,7 @@ namespace DFAssist
             GeneralSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             GeneralSettings.Controls.Add(LanguageLabel);
             GeneralSettings.Controls.Add(LanguageComboBox);
+            GeneralSettings.Controls.Add(FlashTaskbar);
             GeneralSettings.Controls.Add(TestConfigurationButton);
             GeneralSettings.Name = "GeneralSettings";
             GeneralSettings.TabStop = false;

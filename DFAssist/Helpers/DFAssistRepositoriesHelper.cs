@@ -70,6 +70,7 @@ namespace DFAssist.Helpers
             _mainControl.LanguageLabel.Text = _localizationRepository.GetText("ui-language-display-text");
             _mainControl.ClearLogButton.Text = _localizationRepository.GetText("ui-log-clear-display-text");
             _mainControl.EnableTestEnvironment.Text = _localizationRepository.GetText("ui-enable-test-environment");
+            _mainControl.FlashTaskbar.Text = _localizationRepository.GetText("ui-flash-taskbar");
             _mainControl.TtsCheckBox.Text = _localizationRepository.GetText("ui-enable-tts");
             _mainControl.PersistToasts.Text = _localizationRepository.GetText("ui-persist-toasts");
             _mainControl.EnableActToast.Text = _localizationRepository.GetText("ui-enable-act-toasts");

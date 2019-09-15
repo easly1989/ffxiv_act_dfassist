@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DFAssist.Helpers
 {
-    public class TaskbarFlashHelper
+    public class TaskbarFlashHelper : BaseNotificationHelper<TaskbarFlashHelper>
     {
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -76,7 +76,7 @@ namespace DFAssist.Helpers
             return FlashWindowEx(ref fInfo);
         }
 
-        public static void OnSendNotification()
+        protected override void OnSendNotification(string title, string message, string testing)
         {
             var proc = FFXIVNetworkProcessHelper.Instance.ActiveProcess;
             if (proc != null)

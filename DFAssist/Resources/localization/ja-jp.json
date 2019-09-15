@@ -33,6 +33,7 @@
   "ui-close-act-toast": "トーストを閉じる",
 
   "ui-disable-toasts": "トーストを無効にする",
+  "ui-flash-taskbar": "通知を受け取ったときにタスクバーをフラッシュする",
 
   "ui-general-settings-group": "一般設定",
   "ui-toast-settings-group": "トースト設定",
