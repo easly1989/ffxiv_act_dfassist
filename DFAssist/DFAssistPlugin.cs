@@ -142,6 +142,8 @@ namespace DFAssist
             var testing = _mainControl.EnableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
             var instanceName = _dataRepository.GetInstance(args[1]).Name;
 
+
+            TaskbarFlashHelper.OnSendNotification();
             ToastHelper.Instance.SendNotification(title, instanceName, testing);
             TTSHelper.Instance.SendNotification(defaultTitle, instanceName, testing);
             TelegramHelper.Instance.SendNotification(title, instanceName, testing);

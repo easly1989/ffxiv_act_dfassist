@@ -151,6 +151,7 @@ namespace DFAssist.Helpers
         {
             var title = _localizationRepository.GetText("ui-toast-notification-test-title");
             var message = _localizationRepository.GetText("ui-toast-notification-test-message");
+            TaskbarFlashHelper.OnSendNotification();
             ToastHelper.Instance.SendNotification(title, message);
             TelegramHelper.Instance.SendNotification(title, message);
             PushBulletHelper.Instance.SendNotification(title, message);
