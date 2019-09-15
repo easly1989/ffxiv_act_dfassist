@@ -71,6 +71,7 @@
     <Compile Include="Helpers\ACTPluginUpdateHelper.cs" />
     <Compile Include="Helpers\BaseNotificationHelper.cs" />
     <Compile Include="Helpers\PushBulletHelper.cs" />
+    <Compile Include="Helpers\TaskbarFlashHelper.cs" />
     <Compile Include="Helpers\TelegramHelper.cs" />
     <Compile Include="Helpers\ToastHelper.cs" />
     <Compile Include="Helpers\TTSHelper.cs" />

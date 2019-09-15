@@ -26,6 +26,8 @@ namespace DFAssist.Helpers
         private Timer _timer = new Timer { Interval = 10000 };
         private ConcurrentDictionary<int, ProcessNetwork> _networks = new ConcurrentDictionary<int, ProcessNetwork>();
 
+        public Process ActiveProcess;
+
         public FFXIVNetworkProcessHelper()
         {
             _timer.Elapsed += Timer_Tick;
@@ -50,6 +52,8 @@ namespace DFAssist.Helpers
             var process = Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
             if (process == null)
                 return;
+
+            ActiveProcess = process;
 
             try
             {
