@@ -173,7 +173,7 @@ namespace DFAssist.Core.Network
                         _logger.Write($"I: Left Instance Area [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Debug);
                     }
                 }
-                else if (opcode == 0x0078) // Duties
+                else if (opcode == 0x008F) // Duties
                 {
                     var status = data[0];
                     var reason = data[4];
@@ -183,7 +183,7 @@ namespace DFAssist.Core.Network
                         _netCompatibility = false;
                         state = MatchingState.QUEUED;
 
-                        _rouletteCode = data[20];
+                        _rouletteCode = data[8];
 
                         if (_rouletteCode != 0 && (data[15] == 0 || data[15] == 64)
                         ) // Roulette, on Korean Server || on Global Server
@@ -195,7 +195,7 @@ namespace DFAssist.Core.Network
                             _logger.Write("Q: Matching started for duties: ", LogLevel.Debug);
                             for (var i = 0; i < 5; i++)
                             {
-                                var code = BitConverter.ToUInt16(data, 22 + i * 2);
+                                var code = BitConverter.ToUInt16(data, 12 + i * 4);
                                 if (code == 0)
                                     break;
 
@@ -203,7 +203,7 @@ namespace DFAssist.Core.Network
                             }
                         }
                     }
-                    else if (status == 3) // Cancel
+                    /*else if (status == 3) // Cancel
                     {
                         state = reason == 8 ? MatchingState.QUEUED : MatchingState.IDLE;
                         _logger.Write("Q: Matching Stopped", LogLevel.Debug);
@@ -224,7 +224,19 @@ namespace DFAssist.Core.Network
                         FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
 
                         _logger.Write($"Q: Matched [{roulette} - - {_dataRepository.GetInstance(code).Name}] - [{code} - {_dataRepository.GetInstance(code).Name}]", LogLevel.Info);
-                    }
+                    }*/
+                }
+                else if (opcode == 0x00B3)
+                {
+                    var roulette = _rouletteCode;
+                    var code = BitConverter.ToUInt16(data, 20);
+
+                    state = MatchingState.MATCHED;
+                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
+
+                    _logger.Write($"Q: Matched [{roulette} - - {_dataRepository.GetInstance(code).Name}] - [{code} - {_dataRepository.GetInstance(code).Name}]", LogLevel.Info);
+
+
                 }
                 else if (opcode == 0x006F)
                 {
@@ -234,73 +246,43 @@ namespace DFAssist.Core.Network
                 {
                     // used on standalone version to stop blink, for Global Server
                 }
-                else if (opcode == 0x0079) // Status during matching
+                else if (opcode == 0x0304) // Status during matching
                 {
                     var code = BitConverter.ToUInt16(data, 0);
-                    if(code == 0)
+                    if (code == 0)
                         return;
 
-                    byte status;
-                    byte tank;
-                    byte dps;
-                    byte healer;
-                    var member = 0;
                     var instance = _dataRepository.GetInstance(code);
+                    var order = data[6];
+                    var waitTime = data[7];
+                    var tank = data[8];
+                    var tankMax = data[9];
+                    var healer = data[10];
+                    var healerMax = data[11];
+                    var dps = data[12];
+                    var dpsMax = data[13];
 
-                    if (_netCompatibility)
+
+
+                    var member = tank * 10000 + dps * 100 + healer;
+
+                    if (state == MatchingState.MATCHED && _lastMember != member)
                     {
-                        status = data[8];
-                        tank = data[9];
-                        dps = data[10];
-                        healer = data[11];
+                        // We get here when the queue is stopped by someone else (?)
+                        state = MatchingState.QUEUED;
                     }
-                    else
+                    else if (state == MatchingState.IDLE)
                     {
-                        status = data[4];
-                        tank = data[5];
-                        dps = data[6];
-                        healer = data[7];
+                        // Plugin started with duty finder in progress
+                        state = MatchingState.QUEUED;
+                    }
+                    else if (state == MatchingState.QUEUED)
+                    {
+                        // in queue
                     }
 
-                    if (status == 0 && tank == 0 && healer == 0 && dps == 0) // v4.5~ compatibility (data location changed, original location sends "0")
-                    {
-                        _netCompatibility = true;
-                        status = data[8];
-                        tank = data[9];
-                        dps = data[10];
-                        healer = data[11];
-                    }
+                    _lastMember = member;
 
-                    if (status == 1)
-                    {
-                        member = tank * 10000 + dps * 100 + healer;
-
-                        if (state == MatchingState.MATCHED && _lastMember != member)
-                        {
-                            // We get here when the queue is stopped by someone else (?)
-                            state = MatchingState.QUEUED;
-                        }
-                        else if (state == MatchingState.IDLE)
-                        {
-                            // Plugin started with duty finder in progress
-                            state = MatchingState.QUEUED;
-                        }
-                        else if (state == MatchingState.QUEUED)
-                        {
-                            // in queue
-                        }
-
-                        _lastMember = member;
-                    }
-                    else if (status == 2)
-                    {
-                        // info about player partecipating in the duty (?)
-                        return;
-                    }
-                    else if (status == 4)
-                    {
-                        // Duty Accepted status
-                    }
 
                     var memberinfo = $"{tank}/{instance.Tank}, {healer}/{instance.Healer}, {dps}/{instance.Dps} | {member}";
                     _logger.Write($"Q: Matching State Updated [{instance.Name}, {memberinfo}]", LogLevel.Debug);
