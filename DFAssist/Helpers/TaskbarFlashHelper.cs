@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Splat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -78,6 +79,12 @@ namespace DFAssist.Helpers
 
         protected override void OnSendNotification(string title, string message, string testing)
         {
+            if(!MainControl.FlashTaskbar.Checked)
+            {
+                Logger.Write("UI: Taskbar Flashing is disabled", LogLevel.Debug);
+                return;
+            }
+
             var proc = FFXIVNetworkProcessHelper.Instance.ActiveProcess;
             if (proc != null)
             {
