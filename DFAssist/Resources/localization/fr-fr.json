@@ -2,41 +2,41 @@
   "ui-language-display-text": "Langue",
 
   "ui-toast-notification-test-title": "Si tu vois ça...",
-  "ui-toast-notification-test-message": "... Toasts fonctionne!",
+  "ui-toast-notification-test-message": "... Les notifications fonctionnent !",
 
   "ui-tts-notification-test-title": "Si tu entends ça...",
-  "ui-tts-notification-test-message": "... Texte pour parler fonctionne!",
+  "ui-tts-notification-test-message": "... Le TTS fonctionne !",
 
   "ui-log-clear-display-text": "Effacer les journaux",
 
   "ui-telegram-display-text": "Activer les notifications de Telegram",
   "ui-telegram-token-display-text": "Jeton",
-  "ui-telegram-chatid-display-text": "Identifiant de chat",
+  "ui-telegram-chatid-display-text": "Id. de chat",
 
   "ui-pushbullet-display-text": "Activer les notifications de Pushbullet",
   "ui-pushbullet-token-display-text": "Jeton",
-  "ui-pushbullet-deviceid-display-text": "Identifiant de device",
+  "ui-pushbullet-deviceid-display-text": "Id. appareil",
 
   "ui-test-settings-display-text": "Test de configuration",
 
   "ui-enable-test-environment": "Activer l'environnement de test",
 
   "ui-update-available-message": "Il existe une version mise à jour du plug-in DFAssist. Mettez-le à jour maintenant?\n\n(S'il y a une mise à jour vers ACT, vous devez cliquer sur Non et mettre à jour ACT en premier.)",
-  "ui-update-available-title": "Mise à jour de DFAssist disponible!",
+  "ui-update-available-title": "Mise à jour de DFAssist disponible !",
 
   "ui-enable-tts": "Activer la synthèse vocale",
-  "ui-tts-dutyfound": "Le devoir est trouvé!",
+  "ui-tts-dutyfound": "Groupe trouvé !",
 
-  "ui-persist-toasts": "Rendre les toasts persistants",
+  "ui-persist-toasts": "Rendre les notifications persistantes",
 
-  "ui-enable-act-toasts": "Activer les toasts de ACT",
-  "ui-close-act-toast": "Toast proche",
+  "ui-enable-act-toasts": "Activer les notifications ACT",
+  "ui-close-act-toast": "Fermer la notification",
 
-  "ui-disable-toasts": "Désactiver les Toasts",
-  "ui-flash-taskbar": "Barre de tâches Flash quand une notification est reçue",
+  "ui-disable-toasts": "Désactiver les notifications",
+  "ui-flash-taskbar": "La barre de tâches clignote quand une notification est reçue",
 
   "ui-general-settings-group": "Paramètres généraux",
-  "ui-toast-settings-group": "Paramètres de toasts",
+  "ui-toast-settings-group": "Paramètres des notifications",
   "ui-tts-settings-group": "Paramètres de synthèse vocale",
   "ui-test-settings-group": "Paramètres de test",
   "ui-telegram-settings-group": "Paramètres de Telegram",
