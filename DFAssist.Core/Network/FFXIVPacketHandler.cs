@@ -151,8 +151,7 @@ namespace DFAssist.Core.Network
                     opcode != 0x006F &&
                     opcode != 0x00B3 &&
                     opcode != 0x008F &&
-                    opcode != 0x022F &&
-                    opcode != 0x0080)
+                    opcode != 0x022F)
                     return;
 #endif
 #if DEBUG
@@ -280,16 +279,6 @@ namespace DFAssist.Core.Network
 
                     var memberinfo = $"Tanks: {tank}/{instance.Tank}, Healers: {healer}/{instance.Healer}, Dps: {dps}/{instance.Dps}";
                     _logger.Write($"Q: Matching State Updated [{instance.Name} - {memberinfo}]", LogLevel.Debug);
-                }
-                else if (opcode == 0x0080)
-                {
-                    var roulette = data[2];
-                    var code = BitConverter.ToUInt16(data, 4);
-
-                    state = MatchingState.MATCHED;
-                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
-
-                    _logger.Write($"Q: Matched [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Info);
                 }
             }
             catch (Exception ex)
