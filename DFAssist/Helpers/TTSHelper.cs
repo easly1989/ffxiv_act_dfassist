@@ -23,8 +23,7 @@ namespace DFAssist.Helpers
                 return;
 
             Logger.Write("UI: Sending TTS Notification...", LogLevel.Debug);
-            var dutyFound = _localizationRepository.GetText(title);
-            _synth.SpeakAsync($"{dutyFound}; {message}");
+            _synth.SpeakAsync($"{title}; {message}");
             Logger.Write("UI: TTS notification sent!", LogLevel.Debug);
         }
 

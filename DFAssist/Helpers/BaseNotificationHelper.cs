@@ -26,6 +26,9 @@ namespace DFAssist.Helpers
             OnSendNotification(title, message, testing);
         }
 
+        /// <summary>
+        /// all the strings passed should already be translated
+        /// </summary>
         protected abstract void OnSendNotification(string title, string message, string testing);
 
         public void Dispose()
