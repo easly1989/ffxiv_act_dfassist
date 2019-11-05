@@ -207,14 +207,15 @@ namespace DFAssist.Core.Network
                 }
                 else if (opcode == 0x00B3) // 5.1 Duty Matched
                 {
-                    var code = BitConverter.ToUInt16(data, 20);
+                    var matchedRoulette = BitConverter.ToUInt16(data, 2);
+                    var matchedCode = BitConverter.ToUInt16(data, 20);
 
                     state = MatchingState.MATCHED;
-                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { _rouletteCode, code });
+                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { matchedRoulette, matchedCode });
 
-                    var instanceString = $"{code} - {_dataRepository.GetInstance(code).Name}";
-                    _logger.Write(_rouletteCode != 0
-                            ? $"Q: Matched [{_rouletteCode} - {_dataRepository.GetRoulette(_rouletteCode).Name}] - [{instanceString}]"
+                    var instanceString = $"{matchedCode} - {_dataRepository.GetInstance(matchedCode).Name}";
+                    _logger.Write(matchedRoulette != 0
+                            ? $"Q: Matched [{matchedRoulette} - {_dataRepository.GetRoulette(matchedRoulette).Name}] - [{instanceString}]"
                             : $"Q: Matched [{instanceString}]", LogLevel.Info);
                 }
                 else if (opcode == 0x006F)

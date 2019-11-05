@@ -156,8 +156,11 @@ namespace DFAssist.Helpers
                     pos++;
                     break;
                 case EventType.MATCH_ALERT:
-                    text += _dataRepository.GetRoulette(args[0]).Name + "|";
-                    pos++;
+                    if (args[0] != 0)
+                    {
+                        text += _dataRepository.GetRoulette(args[0]).Name + "|";
+                        pos++;
+                    }
                     text += _dataRepository.GetInstance(args[1]).Name + "|";
                     pos++;
                     break;
