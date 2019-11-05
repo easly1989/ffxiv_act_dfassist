@@ -48,57 +48,60 @@ namespace DFAssist.Helpers
 
         private void UpdateProcesses()
         {
-            var process = Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
-            if (process == null)
-                return;
-
-            ActiveProcess = process;
-
-            try
+            lock (this)
             {
-                if (!_networks.ContainsKey(process.Id))
-                {
-                    var pn = new ProcessNetwork(process, new Network());
-                    _packetHandler.OnEventReceived += Network_onReceiveEvent;
-                    _networks.TryAdd(process.Id, pn);
-                    _logger.Write($"P: FFXIV Process Selected: {process.Id}", LogLevel.Info);
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Write(e, "P: Failed to set FFXIV Process", LogLevel.Error);
-            }
+                var process = Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
+                if (process == null)
+                    return;
 
-            var toDelete = new List<int>();
-            foreach (var entry in _networks)
-            {
-                if (entry.Value.Process.HasExited)
-                {
-                    entry.Value.Network.StopCapture();
-                    toDelete.Add(entry.Key);
-                }
-                else
-                {
-                    if (entry.Value.Network.IsRunning)
-                        entry.Value.Network.UpdateGameConnections(entry.Value.Process);
-                    else
-                    {
-                        if (!entry.Value.Network.StartCapture(entry.Value.Process))
-                            toDelete.Add(entry.Key);
-                    }
-                }
-            }
+                ActiveProcess = process;
 
-            foreach (var t in toDelete)
-            {
                 try
                 {
-                    _networks.TryRemove(t, out _);
-                    _packetHandler.OnEventReceived -= Network_onReceiveEvent;
+                    if (!_networks.ContainsKey(process.Id))
+                    {
+                        var pn = new ProcessNetwork(process, new Network());
+                        _packetHandler.OnEventReceived += Network_onReceiveEvent;
+                        _networks.TryAdd(process.Id, pn);
+                        _logger.Write($"P: FFXIV Process Selected: {process.Id}", LogLevel.Info);
+                    }
                 }
                 catch (Exception e)
                 {
-                    _logger.Write(e, "P: Failed to remove FFXIV Process", LogLevel.Error);
+                    _logger.Write(e, "P: Failed to set FFXIV Process", LogLevel.Error);
+                }
+
+                var toDelete = new List<int>();
+                foreach (var entry in _networks)
+                {
+                    if (entry.Value.Process.HasExited)
+                    {
+                        entry.Value.Network.StopCapture();
+                        toDelete.Add(entry.Key);
+                    }
+                    else
+                    {
+                        if (entry.Value.Network.IsRunning)
+                            entry.Value.Network.UpdateGameConnections(entry.Value.Process);
+                        else
+                        {
+                            if (!entry.Value.Network.StartCapture(entry.Value.Process))
+                                toDelete.Add(entry.Key);
+                        }
+                    }
+                }
+
+                foreach (var t in toDelete)
+                {
+                    try
+                    {
+                        _networks.TryRemove(t, out _);
+                        _packetHandler.OnEventReceived -= Network_onReceiveEvent;
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.Write(e, "P: Failed to remove FFXIV Process", LogLevel.Error);
+                    }
                 }
             }
         }
