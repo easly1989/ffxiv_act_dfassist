@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using DFAssist.Contracts.Repositories;
 using Microsoft.Win32;
 using Splat;
@@ -37,6 +38,8 @@ namespace DFAssist.Helpers
                 return;
 
             _subscribed = true;
+            _mainControl.CopyrightLink.LinkClicked += CopyrightLinkOnLinkClicked;
+            _mainControl.DonateLink.LinkClicked += DonateLinkOnLinkClicked;
             _mainControl.FlashTaskbar.CheckStateChanged += FlashTaskbarOnCheckedChanged;
             _mainControl.DisableToasts.CheckStateChanged += DisableToastsOnCheckedChanged;
             _mainControl.PersistToasts.CheckStateChanged += PersistToastsOnCheckedChanged;
@@ -55,6 +58,8 @@ namespace DFAssist.Helpers
                 return;
 
             _subscribed = false;
+            _mainControl.CopyrightLink.LinkClicked -= CopyrightLinkOnLinkClicked;
+            _mainControl.DonateLink.LinkClicked -= DonateLinkOnLinkClicked;
             _mainControl.FlashTaskbar.CheckStateChanged -= FlashTaskbarOnCheckedChanged;
             _mainControl.DisableToasts.CheckStateChanged -= DisableToastsOnCheckedChanged;
             _mainControl.PersistToasts.CheckStateChanged -= PersistToastsOnCheckedChanged;
@@ -64,6 +69,20 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletCheckbox.CheckStateChanged -= EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click -= TestConfigurationButton_Click;
+        }
+
+        private void DonateLinkOnLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            _mainControl.DonateLink.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://www.paypal.me/ruggierocarlo");
+            _logger.Write("Every little donation counts! Thank you :)", LogLevel.Info);
+        }
+
+        private void CopyrightLinkOnLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            _mainControl.CopyrightLink.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/easly1989/ffxiv_act_dfassist");
+            _logger.Write("Opening link to the DFAssist github repository!", LogLevel.Debug);
         }
 
         private void FlashTaskbarOnCheckedChanged(object sender, EventArgs e)

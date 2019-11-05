@@ -9,13 +9,15 @@ namespace DFAssist
 {
     public class MainControl : UserControl
     {
-        private LinkLabel _copyrightLink;
         private TableLayoutPanel _mainTableLayout;
         private TableLayoutPanel _settingsTableLayout;
         private TabControl _appTabControl;
         private TabPage _mainTabPage;
         private TabPage _settingsPage;
         private Panel _settingsPanel;
+
+        public LinkLabel CopyrightLink;
+        public LinkLabel DonateLink;
 
         public GroupBox TestSettings;
         public GroupBox ToastSettings;
@@ -80,7 +82,8 @@ namespace DFAssist
             TestConfigurationButton = new Button();
             LoggingRichTextBox = new RichTextBox();
             AppTitle = new Label();
-            _copyrightLink = new LinkLabel();
+            CopyrightLink = new LinkLabel();
+            DonateLink = new LinkLabel();
             _settingsPage = new TabPage();
             _settingsPanel = new Panel();
             _settingsTableLayout = new TableLayoutPanel();
@@ -311,14 +314,16 @@ namespace DFAssist
             // _mainTableLayout
             // 
             _mainTableLayout.Dock = DockStyle.Fill;
-            _mainTableLayout.ColumnCount = 3;
+            _mainTableLayout.ColumnCount = 4;
+            _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-            _mainTableLayout.Controls.Add(ClearLogButton, 2, 0);
+            _mainTableLayout.Controls.Add(ClearLogButton, 3, 0);
             _mainTableLayout.Controls.Add(LoggingRichTextBox, 0, 1);
             _mainTableLayout.Controls.Add(AppTitle, 0, 0);
-            _mainTableLayout.Controls.Add(_copyrightLink, 1, 0);
+            _mainTableLayout.Controls.Add(CopyrightLink, 1, 0);
+            _mainTableLayout.Controls.Add(DonateLink, 2, 0);
             _mainTableLayout.Location = new Point(0, 3);
             _mainTableLayout.Name = "_mainTableLayout";
             _mainTableLayout.RowCount = 2;
@@ -340,7 +345,7 @@ namespace DFAssist
             //
             LoggingRichTextBox.Dock = DockStyle.Fill;
             LoggingRichTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            _mainTableLayout.SetColumnSpan(LoggingRichTextBox, 3);
+            _mainTableLayout.SetColumnSpan(LoggingRichTextBox, 4);
             LoggingRichTextBox.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LoggingRichTextBox.Location = new Point(3, 32);
             LoggingRichTextBox.Name = "LoggingRichTextBox";
@@ -361,16 +366,29 @@ namespace DFAssist
             // 
             // _copyrightLink
             // 
-            _copyrightLink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
-            _copyrightLink.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            _copyrightLink.LinkBehavior = LinkBehavior.HoverUnderline;
-            _copyrightLink.Location = new Point(106, 0);
-            _copyrightLink.Name = "_copyrightLink";
-            _copyrightLink.TabIndex = 2;
-            _copyrightLink.TabStop = true;
-            _copyrightLink.Text = "© easly1989";
-            _copyrightLink.TextAlign = ContentAlignment.MiddleLeft;
-            _copyrightLink.AutoSize = true;
+            CopyrightLink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
+            CopyrightLink.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CopyrightLink.LinkBehavior = LinkBehavior.HoverUnderline;
+            CopyrightLink.Location = new Point(106, 0);
+            CopyrightLink.Name = "CopyrightLink";
+            CopyrightLink.TabIndex = 2;
+            CopyrightLink.TabStop = true;
+            CopyrightLink.Text = "© easly1989, ";
+            CopyrightLink.TextAlign = ContentAlignment.MiddleLeft;
+            CopyrightLink.AutoSize = true;
+            // 
+            // _donateLink
+            // 
+            DonateLink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
+            DonateLink.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            DonateLink.LinkBehavior = LinkBehavior.HoverUnderline;
+            DonateLink.Location = new Point(106, 0);
+            DonateLink.Name = "DonateLink";
+            DonateLink.TabIndex = 3;
+            DonateLink.TabStop = true;
+            DonateLink.Text = "support me via PayPal!";
+            DonateLink.TextAlign = ContentAlignment.MiddleLeft;
+            DonateLink.AutoSize = true;
             // 
             // _settingsPage
             // 
