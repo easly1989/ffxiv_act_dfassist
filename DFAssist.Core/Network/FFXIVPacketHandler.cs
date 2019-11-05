@@ -144,15 +144,19 @@ namespace DFAssist.Core.Network
                 var opcode = BitConverter.ToUInt16(message, 18);
 
 #if !DEBUG
-                if (opcode != 0x0078 &&
-                    opcode != 0x0079 &&
-                    opcode != 0x0080 &&
-                    opcode != 0x006C &&
-                    opcode != 0x006F &&
+                if (opcode != 0x00AE &&
+                    opcode != 0x0304 &&
                     opcode != 0x0121 &&
-                    opcode != 0x0143 &&
-                    opcode != 0x022F)
+                    opcode != 0x015E &&
+                    opcode != 0x006F &&
+                    opcode != 0x00B3 &&
+                    opcode != 0x008F &&
+                    opcode != 0x022F &&
+                    opcode != 0x0080)
                     return;
+#endif
+#if DEBUG
+                _logger.Write($"--- Received opcode: {opcode}", LogLevel.Warn);
 #endif
                 var data = message.Skip(32).ToArray();
                 if (opcode == 0x022F) // Entering/Leaving an instance
@@ -189,7 +193,7 @@ namespace DFAssist.Core.Network
                         _logger.Write($"Q: Duty Roulette Matching Started [{_rouletteCode}] - {_dataRepository.GetRoulette(_rouletteCode).Name}", LogLevel.Debug);
                     }
                     else // Specific Duty (Dungeon/Trial/Raid)
-                    { 
+                    {
                         _rouletteCode = 0;
                         _logger.Write("Q: Matching started for duties: ", LogLevel.Debug);
                         for (var i = 0; i < 5; i++)
@@ -223,7 +227,7 @@ namespace DFAssist.Core.Network
                     if (data[3] != 0) return;
 
                     state = MatchingState.IDLE;
-                    
+
                     _logger.Write("Duty Canceled!", LogLevel.Debug);
                 }
                 else if (opcode == 0x0121)
@@ -248,7 +252,7 @@ namespace DFAssist.Core.Network
                     switch (state)
                     {
                         case MatchingState.MATCHED when _lastMember != member:
-                            // Plugin started with duty finder in progress
+                        // Plugin started with duty finder in progress
                         case MatchingState.IDLE:
                             // We get here when the queue is stopped by someone else (?)
                             state = MatchingState.QUEUED;
@@ -259,7 +263,7 @@ namespace DFAssist.Core.Network
                     }
 
                     _lastMember = member;
-                    
+
                     var memberinfo = $"Tanks: {tank}, Healers: {healer}, Dps: {dps} | Total Members: {member}";
                     _logger.Write($"Q: Matching State Updated [{memberinfo}]", LogLevel.Debug);
                 }
