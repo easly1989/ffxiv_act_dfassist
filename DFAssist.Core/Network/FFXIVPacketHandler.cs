@@ -20,7 +20,6 @@ namespace DFAssist.Core.Network
 
         private int _lastMember;
         private byte _rouletteCode;
-        private bool _netCompatibility;
 
         public FFXIVPacketHandler()
         {
@@ -59,7 +58,7 @@ namespace DFAssist.Core.Network
                                 }
                                 else
                                 {
-                                    // .Net DeflateStream Bug (Force the previous 2 bytes)
+                                    // .Net DeflateStream (Force the previous 2 bytes)
                                     stream.Seek(2, SeekOrigin.Current);
                                     using (var z = new DeflateStream(stream, CompressionMode.Decompress))
                                     {
@@ -159,7 +158,7 @@ namespace DFAssist.Core.Network
                 if (opcode == 0x022F) // Entering/Leaving an instance
                 {
                     var code = BitConverter.ToInt16(data, 4);
-                    if(code == 0)
+                    if (code == 0)
                         return;
 
                     var type = data[8];
@@ -173,74 +172,59 @@ namespace DFAssist.Core.Network
                         _logger.Write($"I: Left Instance Area [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Debug);
                     }
                 }
-                else if (opcode == 0x008F) // Duties
+                else if (opcode == 0x008F) // 5.1 Duties
                 {
+                    // ReSharper disable UnusedVariable
                     var status = data[0];
                     var reason = data[4];
+                    // ReSharper restore UnusedVariable
 
-                    if (status == 0) // Apply for Duties
+                    state = MatchingState.QUEUED;
+
+                    _rouletteCode = data[20];
+                    _rouletteCode = data[8];
+
+                    if (_rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
                     {
-                        _netCompatibility = false;
-                        state = MatchingState.QUEUED;
-
-                        _rouletteCode = data[8];
-
-                        if (_rouletteCode != 0 && (data[15] == 0 || data[15] == 64)
-                        ) // Roulette, on Korean Server || on Global Server
+                        _logger.Write($"Q: Duty Roulette Matching Started [{_rouletteCode}] - {_dataRepository.GetRoulette(_rouletteCode).Name}", LogLevel.Debug);
+                    }
+                    else // Specific Duty (Dungeon/Trial/Raid)
+                    { 
+                        _rouletteCode = 0;
+                        _logger.Write("Q: Matching started for duties: ", LogLevel.Debug);
+                        for (var i = 0; i < 5; i++)
                         {
-                            _logger.Write($"Q: Duty Roulette Matching Started [{_rouletteCode}] - {_dataRepository.GetRoulette(_rouletteCode).Name}", LogLevel.Debug);
-                        }
-                        else // Specific Duty (Dungeon/Trial/Raid)
-                        {
-                            _logger.Write("Q: Matching started for duties: ", LogLevel.Debug);
-                            for (var i = 0; i < 5; i++)
-                            {
-                                var code = BitConverter.ToUInt16(data, 12 + i * 4);
-                                if (code == 0)
-                                    break;
+                            var code = BitConverter.ToUInt16(data, 12 + (i * 4));
+                            if (code == 0)
+                                break;
 
-                                _logger.Write($" {i}. [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Debug);
-                            }
+                            _logger.Write($" {i}. [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Debug);
                         }
                     }
-                    /*else if (status == 3) // Cancel
-                    {
-                        state = reason == 8 ? MatchingState.QUEUED : MatchingState.IDLE;
-                        _logger.Write("Q: Matching Stopped", LogLevel.Debug);
-                    }
-                    else if (status == 6) // Entered
-                    {
-                        state = MatchingState.IDLE;
-                        _logger.Write("Q: Entered Instance Area", LogLevel.Debug);
-                    }
-                    else if (status == 4) // Matched
-                    {
-                        var roulette = data[20];
-                        var code = BitConverter.ToUInt16(data, 22);
-                        if(code == 0)
-                            return;
-
-                        state = MatchingState.MATCHED;
-                        FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
-
-                        _logger.Write($"Q: Matched [{roulette} - - {_dataRepository.GetInstance(code).Name}] - [{code} - {_dataRepository.GetInstance(code).Name}]", LogLevel.Info);
-                    }*/
                 }
-                else if (opcode == 0x00B3)
+                else if (opcode == 0x00B3) // 5.1 Duty Matched
                 {
-                    var roulette = _rouletteCode;
                     var code = BitConverter.ToUInt16(data, 20);
 
                     state = MatchingState.MATCHED;
-                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { roulette, code });
+                    FireEvent(pid, EventType.MATCH_ALERT, new int[] { _rouletteCode, code });
 
-                    _logger.Write($"Q: Matched [{roulette} - - {_dataRepository.GetInstance(code).Name}] - [{code} - {_dataRepository.GetInstance(code).Name}]", LogLevel.Info);
-
-
+                    var instanceString = $"{code} - {_dataRepository.GetInstance(code).Name}";
+                    _logger.Write(_rouletteCode != 0
+                            ? $"Q: Matched [{_rouletteCode} - {_dataRepository.GetRoulette(_rouletteCode).Name}] - [{instanceString}]"
+                            : $"Q: Matched [{instanceString}]", LogLevel.Info);
                 }
                 else if (opcode == 0x006F)
                 {
                     // used on standalone version to stop blink
+                }
+                else if (opcode == 0x015E) // v5.1 Cancel Duty
+                {
+                    if (data[3] != 0) return;
+
+                    state = MatchingState.IDLE;
+                    
+                    _logger.Write("Duty Canceled!", LogLevel.Debug);
                 }
                 else if (opcode == 0x0121)
                 {
@@ -248,11 +232,7 @@ namespace DFAssist.Core.Network
                 }
                 else if (opcode == 0x0304) // Status during matching
                 {
-                    var code = BitConverter.ToUInt16(data, 0);
-                    if (code == 0)
-                        return;
-
-                    var instance = _dataRepository.GetInstance(code);
+                    // ReSharper disable UnusedVariable
                     var order = data[6];
                     var waitTime = data[7];
                     var tank = data[8];
@@ -261,31 +241,41 @@ namespace DFAssist.Core.Network
                     var healerMax = data[11];
                     var dps = data[12];
                     var dpsMax = data[13];
-
-
+                    // ReSharper restore UnusedVariable
 
                     var member = tank * 10000 + dps * 100 + healer;
 
-                    if (state == MatchingState.MATCHED && _lastMember != member)
+                    switch (state)
                     {
-                        // We get here when the queue is stopped by someone else (?)
-                        state = MatchingState.QUEUED;
-                    }
-                    else if (state == MatchingState.IDLE)
-                    {
-                        // Plugin started with duty finder in progress
-                        state = MatchingState.QUEUED;
-                    }
-                    else if (state == MatchingState.QUEUED)
-                    {
-                        // in queue
+                        case MatchingState.MATCHED when _lastMember != member:
+                            // Plugin started with duty finder in progress
+                        case MatchingState.IDLE:
+                            // We get here when the queue is stopped by someone else (?)
+                            state = MatchingState.QUEUED;
+                            break;
+                        case MatchingState.QUEUED:
+                            // in queue
+                            break;
                     }
 
                     _lastMember = member;
+                    
+                    var memberinfo = $"Tanks: {tank}, Healers: {healer}, Dps: {dps} | Total Members: {member}";
+                    _logger.Write($"Q: Matching State Updated [{memberinfo}]", LogLevel.Debug);
+                }
+                else if (opcode == 0x00AE) // Participant check status packet (received after matching)
+                {
+                    var code = BitConverter.ToUInt16(data, 0);
+                    if (code == 0)
+                        return;
 
+                    var instance = _dataRepository.GetInstance(code);
+                    var tank = data[12];
+                    var healer = data[14];
+                    var dps = data[16];
 
-                    var memberinfo = $"{tank}/{instance.Tank}, {healer}/{instance.Healer}, {dps}/{instance.Dps} | {member}";
-                    _logger.Write($"Q: Matching State Updated [{instance.Name}, {memberinfo}]", LogLevel.Debug);
+                    var memberinfo = $"Tanks: {tank}/{instance.Tank}, Healers: {healer}/{instance.Healer}, Dps: {dps}/{instance.Dps}";
+                    _logger.Write($"Q: Matching State Updated [{instance.Name} - {memberinfo}]", LogLevel.Debug);
                 }
                 else if (opcode == 0x0080)
                 {

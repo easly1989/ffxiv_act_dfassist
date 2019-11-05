@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts;
 using DFAssist.Contracts.Duty;
@@ -106,7 +105,8 @@ namespace DFAssist.Helpers
 
         private void Network_onReceiveEvent(int pid, EventType eventType, int[] args)
         {
-            var server = _networks[pid].Process.MainModule.FileName.Contains("KOREA") ? "KOREA" : "GLOBAL";
+            var processMainModule = _networks[pid].Process.MainModule;
+            var server = processMainModule != null && processMainModule.FileName.Contains("KOREA") ? "KOREA" : "GLOBAL";
             var text = pid + "|" + server + "|" + eventType + "|";
             var pos = 0;
 

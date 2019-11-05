@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist.Plugin", "DFAssist\DFAssist.Plugin.csproj", "{1D6BA59A-FB85-4ED2-90E1-DEB79FD5AFFC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -10,7 +10,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist.Plugin", "DFAssist
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{992679BB-39BD-4505-B886-AAC645B19CF0}"
 	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
 		PostBuildStep.bat = PostBuildStep.bat
+		README.md = README.md
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject

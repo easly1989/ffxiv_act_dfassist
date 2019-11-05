@@ -49,7 +49,9 @@ namespace DFAssist.Core.Network
             _packetHandler = Locator.Current.GetService<IPacketHandler>();
 
             RcvallIplevel = new byte[] { 3, 0, 0, 0 };
-            _exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+            var processModule = System.Diagnostics.Process.GetCurrentProcess().MainModule;
+            if (processModule != null)
+                _exePath = processModule.FileName;
         }
 
         public bool StartCapture(System.Diagnostics.Process process)
