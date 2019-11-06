@@ -48,6 +48,9 @@ namespace DFAssist.Helpers
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PushBulletCheckbox.Name, _mainControl.PushBulletCheckbox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PushBulletTokenTextBox.Name, _mainControl.PushBulletTokenTextBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PushBulletDeviceIdTextBox.Name, _mainControl.PushBulletDeviceIdTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.DiscordCheckBox.Name, _mainControl.DiscordCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.DiscordWebhookTextBox.Name, _mainControl.DiscordWebhookTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.DiscordUsernameTextBox.Name, _mainControl.DiscordUsernameTextBox);
 
             if (File.Exists(_settingsFile))
             {
@@ -97,6 +100,12 @@ namespace DFAssist.Helpers
             _logger.Write($"Enable Legacy Toasts: {_mainControl.EnableActToast.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Text To Speech: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Test Environment: {_mainControl.EnableTestEnvironment.Checked}", LogLevel.Debug);
+            _logger.Write($"Enable Discord Notifications: {_mainControl.DiscordCheckBox.Checked}", LogLevel.Debug);
+            if(_mainControl.DiscordCheckBox.Checked)
+            {
+                _logger.Write($"Discord Webhook URL: {_mainControl.DiscordWebhookTextBox.Text}", LogLevel.Debug);
+                _logger.Write($"Discord Username: {_mainControl.DiscordUsernameTextBox.Text}", LogLevel.Debug);
+            }
             _logger.Write($"Enable Telegram Notifications: {_mainControl.TelegramCheckBox.Checked}", LogLevel.Debug);
             if(_mainControl.TelegramCheckBox.Checked)
             {

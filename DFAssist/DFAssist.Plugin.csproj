@@ -70,6 +70,7 @@
     <Compile Include="Helpers\ACTPluginSettingsHelper.cs" />
     <Compile Include="Helpers\ACTPluginUpdateHelper.cs" />
     <Compile Include="Helpers\BaseNotificationHelper.cs" />
+    <Compile Include="Helpers\DiscordHelper.cs" />
     <Compile Include="Helpers\PushBulletHelper.cs" />
     <Compile Include="Helpers\TaskbarFlashHelper.cs" />
     <Compile Include="Helpers\TelegramHelper.cs" />
@@ -136,6 +137,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DiscordWebhooks">
+      <Version>1.0.4</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>
     </PackageReference>

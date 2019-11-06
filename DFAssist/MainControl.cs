@@ -23,22 +23,27 @@ namespace DFAssist
         public GroupBox ToastSettings;
         public GroupBox TtsSettings;
         public GroupBox TelegramSettings;
+        public GroupBox DiscordSettings;
         public GroupBox PushBulletSettings;
         public GroupBox GeneralSettings;
 
         public Button ClearLogButton;
         public Button TestConfigurationButton;
-        
+
         public Label LanguageLabel;
         public Label AppTitle;
         public Label TelegramChatIdLabel;
         public Label TelegramTokenLabel;
+        public Label DiscordWebhookLabel;
+        public Label DiscordUsernameLabel;
         public Label PushBulletDeviceIdlabel;
         public Label PushBulletTokenLabel;
-        
+
         public TextBox LanguageValue;
         public TextBox TelegramChatIdTextBox;
         public TextBox TelegramTokenTextBox;
+        public TextBox DiscordWebhookTextBox;
+        public TextBox DiscordUsernameTextBox;
         public TextBox PushBulletDeviceIdTextBox;
         public TextBox PushBulletTokenTextBox;
 
@@ -48,11 +53,12 @@ namespace DFAssist
         public CheckBox EnableActToast;
         public CheckBox EnableTestEnvironment;
         public CheckBox TelegramCheckBox;
+        public CheckBox DiscordCheckBox;
         public CheckBox PushBulletCheckbox;
         public CheckBox FlashTaskbar;
 
         public ComboBox LanguageComboBox;
-        
+
         public RichTextBox LoggingRichTextBox;
 
         public IActPluginV1 Plugin;
@@ -89,16 +95,22 @@ namespace DFAssist
             _settingsTableLayout = new TableLayoutPanel();
             TtsSettings = new GroupBox();
             TelegramSettings = new GroupBox();
+            DiscordSettings = new GroupBox();
             TelegramChatIdLabel = new Label();
             TelegramChatIdTextBox = new TextBox();
             TelegramCheckBox = new CheckBox();
+            DiscordCheckBox = new CheckBox();
+            DiscordWebhookTextBox = new TextBox();
+            DiscordUsernameTextBox = new TextBox();
             TelegramTokenLabel = new Label();
             TelegramTokenTextBox = new TextBox();
+            DiscordWebhookLabel = new Label();
+            DiscordUsernameLabel = new Label();
             PushBulletSettings = new GroupBox();
             PushBulletCheckbox = new CheckBox();
             PushBulletDeviceIdTextBox = new TextBox();
             PushBulletDeviceIdlabel = new Label();
-            PushBulletTokenLabel  = new Label();
+            PushBulletTokenLabel = new Label();
             PushBulletTokenTextBox = new TextBox();
             ToastSettings = new GroupBox();
             GeneralSettings = new GroupBox();
@@ -111,6 +123,7 @@ namespace DFAssist
             _settingsTableLayout.SuspendLayout();
             TtsSettings.SuspendLayout();
             TelegramSettings.SuspendLayout();
+            DiscordSettings.SuspendLayout();
             PushBulletSettings.SuspendLayout();
             ToastSettings.SuspendLayout();
             GeneralSettings.SuspendLayout();
@@ -195,12 +208,54 @@ namespace DFAssist
             TtsCheckBox.Text = "Enable Text To Speech";
             TtsCheckBox.UseVisualStyleBackColor = true;
             // 
+            // _discordCheckBox
+            // 
+            DiscordCheckBox.AutoSize = true;
+            DiscordCheckBox.Location = new Point(6, 22);
+            DiscordCheckBox.Name = "DiscordCheckBox";
+            DiscordCheckBox.TabIndex = 7;
+            DiscordCheckBox.Size = new Size(390, 20);
+            DiscordCheckBox.Text = "Enable Discord Notifications";
+            DiscordCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // _discordWebhookLabel
+            // 
+            DiscordWebhookLabel.AutoSize = true;
+            DiscordWebhookLabel.Location = new Point(6, 45);
+            DiscordWebhookLabel.Name = "DiscordWebhookLabel";
+            DiscordWebhookLabel.Size = new Size(38, 13);
+            DiscordWebhookLabel.TabStop = false;
+            DiscordWebhookLabel.Text = "Webhook URL";
+            // 
+            // _discordWebhookTextBox
+            // 
+            DiscordWebhookTextBox.Location = new Point(90, 45);
+            DiscordWebhookTextBox.Name = "DiscordWebhookTextBox";
+            DiscordWebhookTextBox.Size = new Size(390, 20);
+            DiscordWebhookTextBox.TabIndex = 8;
+            // 
+            // _discordUsernameLabel
+            // 
+            DiscordUsernameLabel.AutoSize = true;
+            DiscordUsernameLabel.Location = new Point(6, 68);
+            DiscordUsernameLabel.Name = "DiscordUsernameLabel";
+            DiscordUsernameLabel.Size = new Size(41, 13);
+            DiscordUsernameLabel.TabStop = false;
+            DiscordUsernameLabel.Text = "Username";
+            // 
+            // _discordUsernameTextBox
+            // 
+            DiscordUsernameTextBox.Location = new Point(90, 68);
+            DiscordUsernameTextBox.Name = "DiscordUsernameTextBox";
+            DiscordUsernameTextBox.Size = new Size(390, 20);
+            DiscordUsernameTextBox.TabIndex = 9;
+            // 
             // _telegramCheckBox
             // 
             TelegramCheckBox.AutoSize = true;
             TelegramCheckBox.Location = new Point(6, 22);
             TelegramCheckBox.Name = "TelegramCheckBox";
-            TelegramCheckBox.TabIndex = 7;
+            TelegramCheckBox.TabIndex = 10;
             TelegramCheckBox.Size = new Size(390, 20);
             TelegramCheckBox.Text = "Enable Telegram Notifications";
             TelegramCheckBox.UseVisualStyleBackColor = true;
@@ -219,7 +274,7 @@ namespace DFAssist
             TelegramTokenTextBox.Location = new Point(90, 45);
             TelegramTokenTextBox.Name = "TelegramTokenTextBox";
             TelegramTokenTextBox.Size = new Size(390, 20);
-            TelegramTokenTextBox.TabIndex = 8;
+            TelegramTokenTextBox.TabIndex = 11;
             // 
             // _telegramChatIdLabel
             // 
@@ -235,14 +290,14 @@ namespace DFAssist
             TelegramChatIdTextBox.Location = new Point(90, 68);
             TelegramChatIdTextBox.Name = "TelegramChatIdTextBox";
             TelegramChatIdTextBox.Size = new Size(390, 20);
-            TelegramChatIdTextBox.TabIndex = 9;
+            TelegramChatIdTextBox.TabIndex = 12;
             // 
             // _pushbulletCheckbox
             // 
             PushBulletCheckbox.AutoSize = true;
             PushBulletCheckbox.Location = new Point(6, 22);
             PushBulletCheckbox.Name = "PushBulletCheckbox";
-            PushBulletCheckbox.TabIndex = 10;
+            PushBulletCheckbox.TabIndex = 13;
             PushBulletCheckbox.Size = new Size(390, 20);
             PushBulletCheckbox.Text = "Enable Pushbullet Notifications";
             PushBulletCheckbox.UseVisualStyleBackColor = true;
@@ -261,7 +316,7 @@ namespace DFAssist
             PushBulletTokenTextBox.Location = new Point(90, 45);
             PushBulletTokenTextBox.Name = "PushBulletTokenTextBox";
             PushBulletTokenTextBox.Size = new Size(390, 20);
-            PushBulletTokenTextBox.TabIndex = 11;
+            PushBulletTokenTextBox.TabIndex = 14;
             // 
             // _pushbulletDeviceIdlabel
             // 
@@ -277,7 +332,7 @@ namespace DFAssist
             PushBulletDeviceIdTextBox.Location = new Point(90, 68);
             PushBulletDeviceIdTextBox.Name = "PushBulletDeviceIdTextBox";
             PushBulletDeviceIdTextBox.Size = new Size(390, 20);
-            PushBulletDeviceIdTextBox.TabIndex = 12;
+            PushBulletDeviceIdTextBox.TabIndex = 15;
             // 
             // 
             // _enableTestEnvironment
@@ -285,7 +340,7 @@ namespace DFAssist
             EnableTestEnvironment.AutoSize = true;
             EnableTestEnvironment.Location = new Point(6, 22);
             EnableTestEnvironment.Name = "EnableTestEnvironment";
-            EnableTestEnvironment.TabIndex = 13;
+            EnableTestEnvironment.TabIndex = 16;
             EnableTestEnvironment.Text = "Enable Test Environment";
             EnableTestEnvironment.UseVisualStyleBackColor = true;
             // 
@@ -421,13 +476,16 @@ namespace DFAssist
             _settingsTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             _settingsTableLayout.Controls.Add(GeneralSettings, 0, 0);
             _settingsTableLayout.Controls.Add(ToastSettings, 0, 1);
-            _settingsTableLayout.Controls.Add(TtsSettings, 0, 2);
-            _settingsTableLayout.Controls.Add(TelegramSettings, 0, 2);
-            _settingsTableLayout.Controls.Add(PushBulletSettings, 0, 2);
-            _settingsTableLayout.Controls.Add(TestSettings, 0, 5);
+            _settingsTableLayout.Controls.Add(DiscordSettings, 0, 2);
+            _settingsTableLayout.Controls.Add(TelegramSettings, 0, 3);
+            _settingsTableLayout.Controls.Add(PushBulletSettings, 0, 4);
+            _settingsTableLayout.Controls.Add(TtsSettings, 0, 5);
+            _settingsTableLayout.Controls.Add(TestSettings, 0, 6);
             _settingsTableLayout.Location = new Point(0, 3);
             _settingsTableLayout.Name = "_settingsTableLayout";
             _settingsTableLayout.RowCount = 7;
+            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
@@ -466,6 +524,19 @@ namespace DFAssist
             TtsSettings.Name = "TtsSettings";
             TtsSettings.TabStop = false;
             TtsSettings.Text = "Text To Speech Settings";
+            // 
+            // _discordSettings
+            // 
+            Dock = DockStyle.Top;
+            DiscordSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            DiscordSettings.Controls.Add(DiscordCheckBox);
+            DiscordSettings.Controls.Add(DiscordWebhookLabel);
+            DiscordSettings.Controls.Add(DiscordWebhookTextBox);
+            DiscordSettings.Controls.Add(DiscordUsernameLabel);
+            DiscordSettings.Controls.Add(DiscordUsernameTextBox);
+            DiscordSettings.Name = "DiscordSettings";
+            DiscordSettings.TabStop = false;
+            DiscordSettings.Text = "Discord Settings";
             // 
             // _telegramSettings
             // 

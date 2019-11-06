@@ -69,8 +69,6 @@ namespace DFAssist
             _pluginInitializing = true;
             ActGlobals.oFormActMain.Shown -= ActMainFormOnShown;
 
-            
-
             _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
             _dataRepository = Locator.Current.GetService<IDataRepository>();
 
@@ -148,6 +146,7 @@ namespace DFAssist
             TTSHelper.Instance.SendNotification(defaultTitle, instanceName, testing);
             TelegramHelper.Instance.SendNotification(title, instanceName, testing);
             PushBulletHelper.Instance.SendNotification(title, instanceName, testing);
+            DiscordHelper.Instance.SendNotification(title, instanceName, testing);
         }
 
         private void InitializePluginVariables(MainControl mainControl)
@@ -183,6 +182,7 @@ namespace DFAssist
 
         private void DisposeOwnedObjects()
         {
+            DiscordHelper.Instance.Dispose();
             ToastHelper.Instance.Dispose();
             TTSHelper.Instance.Dispose();
             TelegramHelper.Instance.Dispose();

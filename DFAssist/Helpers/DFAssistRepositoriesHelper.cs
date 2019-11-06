@@ -87,6 +87,10 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletCheckbox.Text = _localizationRepository.GetText("ui-pushbullet-display-text");
             _mainControl.PushBulletDeviceIdlabel.Text = _localizationRepository.GetText("ui-pushbullet-deviceid-display-text");
             _mainControl.PushBulletTokenLabel.Text = _localizationRepository.GetText("ui-pushbullet-token-display-text");
+            _mainControl.DiscordSettings.Text = _localizationRepository.GetText("ui-discord-settings-group");
+            _mainControl.DiscordCheckBox.Text = _localizationRepository.GetText("ui-discord-display-text");
+            _mainControl.DiscordUsernameLabel.Text = _localizationRepository.GetText("ui-discord-deviceid-display-text");
+            _mainControl.DiscordWebhookLabel.Text = _localizationRepository.GetText("ui-discord-token-display-text");
             _mainControl.TestSettings.Text = _localizationRepository.GetText("ui-test-settings-group");
 
             _logger.Write("UI Updated!", LogLevel.Debug);

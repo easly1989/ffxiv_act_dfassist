@@ -30,6 +30,8 @@ namespace DFAssist.Helpers
             _mainControl.TelegramTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
             _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
             _mainControl.PushBulletDeviceIdTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
+            _mainControl.DiscordWebhookTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+            _mainControl.DiscordUsernameTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
         }
 
         public void Subscribe()
@@ -46,6 +48,7 @@ namespace DFAssist.Helpers
             _mainControl.EnableActToast.CheckStateChanged += EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged += EnableTtsOnCheckedChanged;
             _mainControl.TelegramCheckBox.CheckStateChanged += EnableTelegramOnCheckedChanged;
+            _mainControl.DiscordCheckBox.CheckStateChanged += DiscordCheckBoxOnCheckStateChanged;
             _mainControl.PushBulletCheckbox.CheckStateChanged += EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click += ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click += TestConfigurationButton_Click;
@@ -66,6 +69,7 @@ namespace DFAssist.Helpers
             _mainControl.EnableActToast.CheckStateChanged -= EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged -= EnableTtsOnCheckedChanged;
             _mainControl.TelegramCheckBox.CheckStateChanged -= EnableTelegramOnCheckedChanged;
+            _mainControl.DiscordCheckBox.CheckStateChanged -= DiscordCheckBoxOnCheckStateChanged;
             _mainControl.PushBulletCheckbox.CheckStateChanged -= EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click -= TestConfigurationButton_Click;
@@ -162,6 +166,13 @@ namespace DFAssist.Helpers
             _mainControl.TelegramTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
         }
 
+        private void DiscordCheckBoxOnCheckStateChanged(object sender, EventArgs e)
+        {
+            _logger.Write($"UI: [Discord] Desired Value: {_mainControl.DiscordCheckBox.Checked}", LogLevel.Debug);
+            _mainControl.DiscordWebhookTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+            _mainControl.DiscordUsernameTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+        }
+
         private void EnablePushBulletOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             _logger.Write($"UI: [PushBullet] Desired Value: {_mainControl.PushBulletCheckbox.Checked}", LogLevel.Debug);
@@ -182,6 +193,7 @@ namespace DFAssist.Helpers
             ToastHelper.Instance.SendNotification(title, message);
             TelegramHelper.Instance.SendNotification(title, message);
             PushBulletHelper.Instance.SendNotification(title, message);
+            DiscordHelper.Instance.SendNotification(title, message);
             TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
         }
 
