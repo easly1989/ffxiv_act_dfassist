@@ -23,6 +23,8 @@
 
   "ui-update-available-message": "Es ist eine aktualisierte Version des DFAssist-Plugins vorhanden. Jetzt aktualisieren? \\ n \\ n (Wenn ein Update für ACT vorhanden ist, müssen Sie zuerst auf Nein klicken und ACT aktualisieren.)",
   "ui-update-available-title": "DFAssist Update verfügbar!",
+  "ui-update-restart-message": "Um sicherzustellen, dass das DFAssist-Plugin ordnungsgemäß funktioniert, starten Sie ACT!",
+  "ui-update-restart-title": "ACT neu starten Erforderlich",
 
   "ui-enable-tts": "Text für Sprache aktivieren",
   "ui-tts-dutyfound": "Pflicht gefunden!",

@@ -23,6 +23,8 @@
 
   "ui-update-available-message": "DFAssistプラグインの更新版があります。 今すぐ更新しますか\n\nACTが更新された場合は、[いいえ]をクリックしてからACTを更新してください。",
   "ui-update-available-title": "DFAssistアップデート公開!",
+  "ui-update-restart-message": "DFAssistプラグインが正しく機能することを確認するには、ACTを再起動してください！",
+  "ui-update-restart-title": "再起動ACTが必要",
 
   "ui-enable-tts": "テキスト読み上げを有効にする",
   "ui-tts-dutyfound": "義務が見つかりました！",

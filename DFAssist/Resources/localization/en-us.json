@@ -23,6 +23,8 @@
 
   "ui-update-available-message": "There is an updated version of the DFAssist Plugin. Update it now?\n\n(If there is an update to ACT, you should click No and update ACT first.)",
   "ui-update-available-title": "DFAssist Update Available!",
+  "ui-update-restart-message": "To ensure that DFAssist plugin works correctly, please Restart ACT!",
+  "ui-update-restart-title": "Restart ACT Required",
 
   "ui-enable-tts": "Enable Text To Speech",
   "ui-tts-dutyfound": "Duty Found!",

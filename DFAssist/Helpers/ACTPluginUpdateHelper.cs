@@ -53,6 +53,8 @@ namespace DFAssist.Helpers
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, false);
                 Application.DoEvents();
                 ThreadInvokes.CheckboxSetChecked(ActGlobals.oFormActMain, pluginData.cbEnabled, true);
+
+                MessageBox.Show(_localizationRepository.GetText("ui-update-restart-message"), _localizationRepository.GetText("ui-update-restart-title"), MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
             catch (Exception ex)
             {

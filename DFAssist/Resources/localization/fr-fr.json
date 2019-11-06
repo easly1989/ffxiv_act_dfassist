@@ -23,6 +23,8 @@
 
   "ui-update-available-message": "Il existe une version mise à jour du plug-in DFAssist. Mettez-le à jour maintenant?\n\n(S'il y a une mise à jour vers ACT, vous devez cliquer sur Non et mettre à jour ACT en premier.)",
   "ui-update-available-title": "Mise à jour de DFAssist disponible !",
+  "ui-update-restart-message": "Pour vous assurer que le plug-in DFAssist fonctionne correctement, veuillez redémarrer ACT!",
+  "ui-update-restart-title": "Redémarrer ACT requis",
 
   "ui-enable-tts": "Activer la synthèse vocale",
   "ui-tts-dutyfound": "Groupe trouvé !",

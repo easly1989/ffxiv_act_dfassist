@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,7 +14,9 @@ namespace DFAssist.Loader
         private bool _attached;
         private bool _initialized;
         private string _librariesPath;
+#if DEBUG
         private string _pdbPath;
+#endif
         private ActPluginData _pluginData;
         private IActPluginV1 _plugin;
 
@@ -106,7 +107,7 @@ namespace DFAssist.Loader
 
             // check if any of the assemblies of this plugin is requesting an AssemblyResolve
             var requestingAssemblyName = GetAssemblyName(args.RequestingAssembly.FullName);
-            if(requestingAssemblyName != "DFAssist"
+            if (requestingAssemblyName != "DFAssist"
                 && requestingAssemblyName != "DFAssist.Plugin"
                 && requestingAssemblyName != "DFAssist.Core"
                 && requestingAssemblyName != "DFAssist.Contracts"
