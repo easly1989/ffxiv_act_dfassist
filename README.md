@@ -5,7 +5,7 @@
 ![issues](https://img.shields.io/github/issues/easly1989/ffxiv_act_dfassist.svg)
 ![license](https://img.shields.io/github/license/easly1989/ffxiv_act_dfassist.svg)
 ![downloads](https://img.shields.io/github/downloads/easly1989/ffxiv_act_dfassist/total.svg)
-![<img src="https://img.shields.io/badge/support%20me-on%20paypal-blue">](https://www.paypal.me/ruggierocarlo)
+[![paypal](https://img.shields.io/badge/support%20me-on%20paypal-blue)](https://www.paypal.me/ruggierocarlo)
 
 ![main](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/main.png)
 
