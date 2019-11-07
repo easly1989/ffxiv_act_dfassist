@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 using DFAssist.Core.Toast;
 using Splat;
@@ -77,6 +78,16 @@ namespace DFAssist.Helpers
                     Logger.Write("UI: Creating new Toast...", LogLevel.Debug);
                     var attribution = nameof(DFAssist);
 
+                    var icon = new NotifyIcon
+                    {
+                        Icon = SystemIcons.WinLogo,
+                        Visible = true,
+                        BalloonTipTitle = title,
+                        BalloonTipText = message
+                    };
+                    icon.ShowBalloonTip(3000);
+                    icon.Dispose();
+
                     if (string.IsNullOrWhiteSpace(testing))
                     {
                         WinToastWrapper.CreateToast(
@@ -104,7 +115,17 @@ namespace DFAssist.Helpers
                 }
                 catch (Exception e)
                 {
-                    Logger.Write(e, "UI: Unable to show toast notification", LogLevel.Error);
+                    Logger.Write(e, "UI: Unable to use DFAssist.WinToast, using built in notifier...", LogLevel.Error);
+                    var icon = new NotifyIcon
+                    {
+                        Icon = SystemIcons.WinLogo,
+                        Text = "DFAssist",
+                        Visible = true,
+                        BalloonTipTitle = title,
+                        BalloonTipText = message
+                    };
+                    icon.ShowBalloonTip(3000);
+                    icon.Dispose();
                 }
             }
         }
