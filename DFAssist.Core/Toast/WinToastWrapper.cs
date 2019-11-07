@@ -63,7 +63,7 @@ namespace DFAssist.Core.Toast
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void ToastEventCallback(int messageCode);
 
-        [DllImport("DFAssist.WinToast.dll", EntryPoint = "CreateToast_Text01", ExactSpelling = true)]
+        [DllImport("libs/DFAssist.WinToast.dll", EntryPoint = "CreateToast_Text01", ExactSpelling = true)]
         public static extern void CreateToast(
             [MarshalAs(UnmanagedType.LPWStr)]string appName,
             [MarshalAs(UnmanagedType.LPWStr)]string appUserModelId,
@@ -74,7 +74,7 @@ namespace DFAssist.Core.Toast
             [MarshalAs(UnmanagedType.I4)]AudioSystemFile audioFile = AudioSystemFile.DefaultSound,
             [MarshalAs(UnmanagedType.I4)]AudioOption audioOption = AudioOption.Default);
 
-        [DllImport("DFAssist.WinToast.dll", EntryPoint = "CreateToast_Text02", ExactSpelling = true)]
+        [DllImport("libs/DFAssist.WinToast.dll", EntryPoint = "CreateToast_Text02", ExactSpelling = true)]
         public static extern void CreateToast(
             [MarshalAs(UnmanagedType.LPWStr)]string appName,
             [MarshalAs(UnmanagedType.LPWStr)]string appUserModelId,
@@ -87,7 +87,7 @@ namespace DFAssist.Core.Toast
             [MarshalAs(UnmanagedType.I4)]AudioSystemFile audioFile = AudioSystemFile.DefaultSound,
             [MarshalAs(UnmanagedType.I4)]AudioOption audioOption = AudioOption.Default);
 
-        [DllImport("DFAssist.WinToast.dll", EntryPoint = "CreateToast_Text03", ExactSpelling = true)]
+        [DllImport("libs/DFAssist.WinToast.dll", EntryPoint = "CreateToast_Text03", ExactSpelling = true)]
         public static extern void CreateToast(
             [MarshalAs(UnmanagedType.LPWStr)]string appName,
             [MarshalAs(UnmanagedType.LPWStr)]string appUserModelId,
@@ -100,7 +100,7 @@ namespace DFAssist.Core.Toast
             [MarshalAs(UnmanagedType.I4)]AudioSystemFile audioFile = AudioSystemFile.DefaultSound,
             [MarshalAs(UnmanagedType.I4)]AudioOption audioOption = AudioOption.Default);
         
-        [DllImport("DFAssist.WinToast.dll", EntryPoint = "CreateToast_ImageAndText01", ExactSpelling = true)]
+        [DllImport("libs/DFAssist.WinToast.dll", EntryPoint = "CreateToast_ImageAndText01", ExactSpelling = true)]
         public static extern void CreateToast(
             [MarshalAs(UnmanagedType.LPWStr)]string appName,
             [MarshalAs(UnmanagedType.LPWStr)]string appUserModelId,
@@ -112,7 +112,7 @@ namespace DFAssist.Core.Toast
             [MarshalAs(UnmanagedType.I4)]AudioSystemFile audioFile = AudioSystemFile.DefaultSound,
             [MarshalAs(UnmanagedType.I4)]AudioOption audioOption = AudioOption.Default);
 
-        [DllImport("DFAssist.WinToast.dll", EntryPoint = "CreateToast_ImageAndText02", ExactSpelling = true)]
+        [DllImport("libs/DFAssist.WinToast.dll", EntryPoint = "CreateToast_ImageAndText02", ExactSpelling = true)]
         public static extern void CreateToast(
             [MarshalAs(UnmanagedType.LPWStr)]string appName,
             [MarshalAs(UnmanagedType.LPWStr)]string appUserModelId,
@@ -126,7 +126,7 @@ namespace DFAssist.Core.Toast
             [MarshalAs(UnmanagedType.I4)]AudioSystemFile audioFile = AudioSystemFile.DefaultSound,
             [MarshalAs(UnmanagedType.I4)]AudioOption audioOption = AudioOption.Default);
 
-        [DllImport("DFAssist.WinToast.dll", EntryPoint = "CreateToast_ImageAndText03", ExactSpelling = true)]
+        [DllImport("libs/DFAssist.WinToast.dll", EntryPoint = "CreateToast_ImageAndText03", ExactSpelling = true)]
         public static extern void CreateToast(
             [MarshalAs(UnmanagedType.LPWStr)]string appName,
             [MarshalAs(UnmanagedType.LPWStr)]string appUserModelId,
