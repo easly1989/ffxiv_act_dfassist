@@ -5,6 +5,7 @@
 ![issues](https://img.shields.io/github/issues/easly1989/ffxiv_act_dfassist.svg)
 ![license](https://img.shields.io/github/license/easly1989/ffxiv_act_dfassist.svg)
 ![downloads](https://img.shields.io/github/downloads/easly1989/ffxiv_act_dfassist/total.svg)
+![<img src="https://img.shields.io/badge/support%20me-on%20paypal-blue">](https://www.paypal.me/ruggierocarlo)
 
 ![main](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/main.png)
 
@@ -64,6 +65,7 @@ It should not be a problem building for x86, but (as of the latest news from Squ
 - [x] add TTS support
 - [x] add Telegram support
 - [x] add PushBullet support
+- [ ] add Discord support
 - [ ] Inject toasts in game (to make it work even in full screen mode)
 
 ---
