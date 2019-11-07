@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using Advanced_Combat_Tracker;
 using DFAssist.Core.Toast;
 using Splat;
@@ -12,6 +14,16 @@ namespace DFAssist.Helpers
 
         public ToastHelper()
         {
+            // we need to force the dll folder for the DFAssist.WinToast c++ library
+            // should be necessary just once; 
+            // we can also avoid any check, because at this point all the libraries should be already loaded
+            // and all the check should have been done in the AssemblyResolver
+            // ReSharper disable AssignNullToNotNullAttribute
+            var lpPathName = Path.Combine(Path.GetDirectoryName(Locator.Current.GetService<ActPluginData>().pluginFile.ToString()), "libs");
+            if(WinToastWrapper.SetDllDirectory(lpPathName))
+                Logger.Write($"UI: Toast library path: {lpPathName}", LogLevel.Debug);
+            // ReSharper restore AssignNullToNotNullAttribute
+
             _toastEventCallback = delegate (int code)
             {
                 if(code == 0)
