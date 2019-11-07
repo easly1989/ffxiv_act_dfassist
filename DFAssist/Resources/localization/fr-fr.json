@@ -17,6 +17,10 @@
   "ui-pushbullet-token-display-text": "Jeton",
   "ui-pushbullet-deviceid-display-text": "Id. appareil",
 
+  "ui-discord-display-text": "Activer les notifications de Discord",
+  "ui-discord-username-display-text": "Nom d'utilisateur",
+  "ui-discord-webhook-display-text": "URL de Webhook",
+
   "ui-test-settings-display-text": "Test de configuration",
 
   "ui-enable-test-environment": "Activer l'environnement de test",
@@ -42,5 +46,6 @@
   "ui-tts-settings-group": "Paramètres de synthèse vocale",
   "ui-test-settings-group": "Paramètres de test",
   "ui-telegram-settings-group": "Paramètres de Telegram",
-  "ui-pushbullet-settings-group": "Paramètres de Pushbullet"
+  "ui-pushbullet-settings-group": "Paramètres de Pushbullet",
+  "ui-discord-settings-group": "Paramètres de Discord"
 }

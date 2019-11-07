@@ -17,6 +17,10 @@
   "ui-pushbullet-token-display-text": "Access Token",
   "ui-pushbullet-deviceid-display-text": "Device Id",
 
+  "ui-discord-display-text": "Enable Discord Notifications",
+  "ui-discord-username-display-text": "Username",
+  "ui-discord-webhook-display-text": "Webhook URL",
+
   "ui-test-settings-display-text": "Test Configuration",
 
   "ui-enable-test-environment": "Enable Test Environment",
@@ -42,5 +46,6 @@
   "ui-tts-settings-group": "Text To Speech Settings",
   "ui-test-settings-group": "Test Settings",
   "ui-telegram-settings-group": "Telegram Settings",
-  "ui-pushbullet-settings-group": "Pushbullet Settings"
+  "ui-pushbullet-settings-group": "Pushbullet Settings",
+  "ui-discord-settings-group": "Discord Settings"
 }

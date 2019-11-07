@@ -17,6 +17,10 @@
   "ui-pushbullet-token-display-text": "アクセストークン",
   "ui-pushbullet-deviceid-display-text": "デバイスID",
 
+  "ui-discord-display-text": "Discord通知を有効にする",
+  "ui-discord-username-display-text": "ユーザー名",
+  "ui-discord-webhook-display-text": "Webhook URL",
+
   "ui-test-settings-display-text": "テスト構成",
 
   "ui-enable-test-environment": "テスト環境を有効にする",
@@ -42,5 +46,6 @@
   "ui-tts-settings-group": "テキスト読み上げ設定",
   "ui-test-settings-group": "テスト設定",
   "ui-telegram-settings-group": "電報設定",
-  "ui-pushbullet-settings-group": "プッシュブレットの設定"
+  "ui-pushbullet-settings-group": "プッシュブレットの設定",
+  "ui-discord-settings-group": "不一致の設定"
 }
