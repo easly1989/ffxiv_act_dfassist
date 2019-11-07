@@ -35,12 +35,12 @@ using System.Runtime.InteropServices;
 // to distinguish one build from another. AssemblyFileVersion is specified
 // in AssemblyVersionInfo.cs so that it can be easily incremented by the
 // automated build process.
-[assembly: AssemblyVersion("2.1.7")]
+[assembly: AssemblyVersion("2.1.8")]
 
 // By default, the "Product version" shown in the file properties window is
 // the same as the value specified for AssemblyFileVersionAttribute.
 // Set AssemblyInformationalVersionAttribute to be the same as
 // AssemblyVersionAttribute so that the "Product version" in the file
 // properties window matches the version displayed in the GAC shell extension.
-[assembly: AssemblyInformationalVersion("2.1.7")] // a.k.a. "Product version"
+[assembly: AssemblyInformationalVersion("2.1.8")] // a.k.a. "Product version"
 
