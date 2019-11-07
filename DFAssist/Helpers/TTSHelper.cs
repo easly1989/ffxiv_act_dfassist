@@ -20,7 +20,10 @@ namespace DFAssist.Helpers
         protected override void OnSendNotification(string title, string message, string testing)
         {
             if(!MainControl.TtsCheckBox.Checked)
+            {
+                Logger.Write("UI: TTS is disabled!", LogLevel.Debug);
                 return;
+            }
 
             Logger.Write("UI: Sending TTS Notification...", LogLevel.Debug);
             _synth.SpeakAsync($"{title}; {message}");

@@ -8,7 +8,10 @@ namespace DFAssist.Helpers
         protected override void OnSendNotification(string title, string message, string testing)
         {
             if (!MainControl.DiscordCheckBox.Checked)
+            {
+                Logger.Write("UI: Discord Notifications are disabled!", LogLevel.Debug);
                 return;
+            }
 
             if(string.IsNullOrWhiteSpace(MainControl.DiscordUsernameTextBox.Text))
             {
