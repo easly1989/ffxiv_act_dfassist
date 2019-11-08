@@ -28,17 +28,19 @@ namespace DFAssist.Helpers
             if (MainControl.EnableActToast.Checked)
             {
                 Logger.Write("UI: Using ACT Toasts", LogLevel.Debug);
-                var traySlider = new TraySlider
-                {
-                    Font = new Font(FontFamily.GenericSerif, 16, FontStyle.Bold),
-                    ShowDurationMs = 30000
-                };
+                var traySlider = new TraySlider();
+                traySlider.ShowDurationMs = 30000;
                 traySlider.ButtonSE.Visible = false;
                 traySlider.ButtonNE.Visible = false;
                 traySlider.ButtonNW.Visible = false;
                 traySlider.ButtonSW.Visible = true;
                 traySlider.ButtonSW.Text = LocalizationRepository.GetText("ui-close-act-toast");
-                traySlider.ShowTraySlider($"{message}\nCode [{testing}]", title);
+                traySlider.TrayTitle.Font = new Font(FontFamily.GenericSerif, 16, FontStyle.Bold);
+                traySlider.TrayText.Font = new Font(FontFamily.GenericSerif, 12, FontStyle.Regular);
+                if(!string.IsNullOrWhiteSpace(testing))
+                    message += $"\nCode [{testing}]";
+
+                traySlider.ShowTraySlider(message, title);
             }
             else
             {
