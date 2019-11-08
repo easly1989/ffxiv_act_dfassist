@@ -9,6 +9,9 @@
 
 ![main](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/main.png)
 
+## .NET Framework 4.7.2 Required
+To ensure that the plugins works correctly please install [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/thank-you/net472)
+
 ## About this Plugin
 A simple plugin to scout the next dungoeon/trial/raid (instance to be generic) you are going to enter.<br>
 *It works only on windows 10 and, for the moment, only with final fantasy in Borderless Windowed Mode.*<br>
