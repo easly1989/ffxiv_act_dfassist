@@ -8,12 +8,12 @@ using Splat;
 namespace DFAssist.Helpers
 {
     // ReSharper disable InconsistentNaming
-    public class ACTPluginUpdateHelper : IDisposable
+    public class ACTPluginUpdateHelper
     {
         private static ACTPluginUpdateHelper _instance;
         public static ACTPluginUpdateHelper Instance => _instance ?? (_instance = new ACTPluginUpdateHelper());
 
-        private ILocalizationRepository _localizationRepository;
+        private readonly ILocalizationRepository _localizationRepository;
         private Thread _updateThread;
 
         public ACTPluginUpdateHelper()
@@ -27,7 +27,7 @@ namespace DFAssist.Helpers
             if (!ActGlobals.oFormActMain.GetAutomaticUpdatesAllowed())
                 return;
 
-            _updateThread = new Thread(FormActMain_UpdateCheckClicked);
+            _updateThread = new Thread(FormActMain_UpdateCheckClicked) { IsBackground = true };
             _updateThread.Start();
         }
 
@@ -60,25 +60,6 @@ namespace DFAssist.Helpers
             {
                 ActGlobals.oFormActMain.WriteExceptionLog(ex, "Plugin Update Check");
             }
-        }
-
-        public void Dispose()
-        {
-            ActGlobals.oFormActMain.UpdateCheckClicked -= FormActMain_UpdateCheckClicked;
-
-            try
-            {
-                if (_updateThread != null && _updateThread.IsAlive)
-                    _updateThread.Abort();
-            }
-            catch (Exception)
-            {
-                // Abort throws by default, we just ignore this!
-            }
-
-            _localizationRepository = null;
-            _updateThread = null;
-            _instance = null;
         }
     }
     // ReSharper restore InconsistentNaming

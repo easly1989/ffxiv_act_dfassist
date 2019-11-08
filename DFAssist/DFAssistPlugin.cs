@@ -191,7 +191,6 @@ namespace DFAssist
             DFAssistUIInteractionHelper.Instance.Dispose();
             FFXIVNetworkProcessHelper.Instance.Dispose();
             FFXIVPluginHelper.Instance.Dispose();
-            ACTPluginUpdateHelper.Instance.Dispose();
             ACTPluginSettingsHelper.Instance.Dispose();
 
             _logger.Dispose();

@@ -78,16 +78,6 @@ namespace DFAssist.Helpers
                     Logger.Write("UI: Creating new Toast...", LogLevel.Debug);
                     var attribution = nameof(DFAssist);
 
-                    var icon = new NotifyIcon
-                    {
-                        Icon = SystemIcons.WinLogo,
-                        Visible = true,
-                        BalloonTipTitle = title,
-                        BalloonTipText = message
-                    };
-                    icon.ShowBalloonTip(3000);
-                    icon.Dispose();
-
                     if (string.IsNullOrWhiteSpace(testing))
                     {
                         WinToastWrapper.CreateToast(
