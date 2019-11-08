@@ -269,7 +269,7 @@ namespace DFAssist.Core.Network
                 }
                 else if (opcode == 0x00AE) // Participant check status packet (received after matching)
                 {
-                    var code = BitConverter.ToUInt16(data, 0);
+                    var code = BitConverter.ToUInt16(data, 8);
                     if (code == 0)
                         return;
 
