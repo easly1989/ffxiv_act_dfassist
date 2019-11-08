@@ -1,49 +1,19 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 using DFAssist.Core.Toast;
+using DFAssist.Core.Toast.Base;
 using Splat;
 
 namespace DFAssist.Helpers
 {
     public class ToastHelper : BaseNotificationHelper<ToastHelper>
     {
-        private WinToastWrapper.ToastEventCallback _toastEventCallback;
-
         public ToastHelper()
         {
-            // we need to force the dll folder for the DFAssist.WinToast c++ library
-            // should be necessary just once; 
-            // we can also avoid any check, because at this point all the libraries should be already loaded
-            // and all the check should have been done in the AssemblyResolver
-            // ReSharper disable AssignNullToNotNullAttribute
-            var lpPathName = Path.Combine(Path.GetDirectoryName(Locator.Current.GetService<ActPluginData>().pluginFile.ToString()), "libs");
-            if(WinToastWrapper.SetDllDirectory(lpPathName))
-                Logger.Write($"UI: Toast library path: {lpPathName}", LogLevel.Debug);
-            // ReSharper restore AssignNullToNotNullAttribute
-
-            _toastEventCallback = delegate (int code)
-            {
-                if(code == 0)
-                    Logger.Write("UI: Toast Clicked", LogLevel.Debug);
-                else if(code == 1)
-                    Logger.Write("UI: Toast Dismissed", LogLevel.Debug);
-                else if(code == 2)
-                    Logger.Write("UI: Toast Timed out", LogLevel.Debug);
-                else if(code == 3)
-                    Logger.Write("UI: Toast Hidden by application", LogLevel.Debug);
-                else if(code == 4)
-                    Logger.Write("UI: Toast was not activated", LogLevel.Warn);
-                else if(code == 11)
-                    Logger.Write("UI: Toast showing, waiting for interaction...", LogLevel.Debug);
-                else if(code > 4 && code < 11)
-                    Logger.Write($"UI: An Error occurred, code:[{code}]", LogLevel.Error);
-                else
-                    Logger.Write($"UI: Interacted with the toast, using a button, code:[{code}]", LogLevel.Debug);
-            };
+            DesktopNotificationManagerCompat.RegisterAumidAndComServer<ToastNotificationActivator>(DFAssistPlugin.AppId);
+            DesktopNotificationManagerCompat.RegisterActivator<ToastNotificationActivator>();
         }
 
         protected override void OnSendNotification(string title, string message, string testing)
@@ -68,44 +38,22 @@ namespace DFAssist.Helpers
                 traySlider.ButtonNW.Visible = false;
                 traySlider.ButtonSW.Visible = true;
                 traySlider.ButtonSW.Text = LocalizationRepository.GetText("ui-close-act-toast");
-                traySlider.ShowTraySlider($"{message}\n{testing}", title);
+                traySlider.ShowTraySlider($"{message}\nCode [{testing}]", title);
             }
             else
             {
                 Logger.Write("UI: Using Windows Toasts", LogLevel.Debug);
                 try
                 {
-                    Logger.Write("UI: Creating new Toast...", LogLevel.Debug);
-                    var attribution = nameof(DFAssist);
+                    // clearing old toasts if needed
+                    DesktopNotificationManagerCompat.History.Clear();
 
-                    if (string.IsNullOrWhiteSpace(testing))
-                    {
-                        WinToastWrapper.CreateToast(
-                            DFAssistPlugin.AppId,
-                            DFAssistPlugin.AppId,
-                            title,
-                            message,
-                            _toastEventCallback,
-                            attribution,
-                            true,
-                            Duration.Long);
-                    }
-                    else
-                    {
-                        WinToastWrapper.CreateToast(
-                            DFAssistPlugin.AppId,
-                            DFAssistPlugin.AppId,
-                            title,
-                            message,
-                            $"Code [{testing}]",
-                            _toastEventCallback,
-                            attribution,
-                            Duration.Long);
-                    }
+                    Logger.Write("UI: Creating new Toast...", LogLevel.Debug);
+                    ToastManager.ShowToast(title, message, testing);
                 }
                 catch (Exception e)
                 {
-                    Logger.Write(e, "UI: Unable to use DFAssist.WinToast, using built in notifier...", LogLevel.Error);
+                    Logger.Write(e, "UI: Using built in notifier...", LogLevel.Error);
                     var icon = new NotifyIcon
                     {
                         Icon = SystemIcons.WinLogo,
@@ -118,13 +66,6 @@ namespace DFAssist.Helpers
                     icon.Dispose();
                 }
             }
-        }
-
-        protected override void OnSetNullOwnedObjects()
-        {
-            _toastEventCallback = null;
-
-            base.OnSetNullOwnedObjects();
         }
     }
 }

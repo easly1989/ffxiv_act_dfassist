@@ -110,8 +110,7 @@ namespace DFAssist.Loader
             if (requestingAssemblyName != "DFAssist"
                 && requestingAssemblyName != "DFAssist.Plugin"
                 && requestingAssemblyName != "DFAssist.Core"
-                && requestingAssemblyName != "DFAssist.Contracts"
-                && requestingAssemblyName != "DFAssist.WinToast")
+                && requestingAssemblyName != "DFAssist.Contracts")
                 return null;
 
             var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.FullName == args.Name);

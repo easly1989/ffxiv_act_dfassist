@@ -10,6 +10,7 @@
     <RootNamespace>DFAssist.Core</RootNamespace>
     <AssemblyName>DFAssist.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -57,9 +58,12 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xaml" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Windows.Data" />
+    <Reference Include="Windows.UI" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -77,10 +81,17 @@
     <Compile Include="Repositories\DataRepository.cs" />
     <Compile Include="Repositories\LocalizationRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Toast\WinToastWrapper.cs" />
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Toast\Base\DesktopNotificationManagerCompat.cs" />
+    <Compile Include="Toast\Base\DesktopBridgeHelpers.cs" />
+    <Compile Include="Toast\Base\DesktopNotificationHistoryCompat.cs" />
+    <Compile Include="Toast\Base\INotificationActivationCallback.cs" />
+    <Compile Include="Toast\Base\NotificationActivator.cs" />
+    <Compile Include="Toast\Base\NotificationUserInput.cs" />
+    <Compile Include="Toast\ToastNotificationActivator.cs" />
+    <Compile Include="Toast\ToastManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
