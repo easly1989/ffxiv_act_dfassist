@@ -42,6 +42,7 @@ namespace DFAssist.Helpers
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsVoicesComboBox.Name, _mainControl.TtsVoicesComboBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PersistToasts.Name, _mainControl.PersistToasts);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableTestEnvironment.Name, _mainControl.EnableTestEnvironment);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.LogLevelComboBox.Name, _mainControl.LogLevelComboBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableActToast.Name, _mainControl.EnableActToast);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TelegramCheckBox.Name, _mainControl.TelegramCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TelegramTokenTextBox.Name, _mainControl.TelegramTokenTextBox);
@@ -104,7 +105,6 @@ namespace DFAssist.Helpers
             {
                 _logger.Write($"Selected TTS Voice: {_mainControl.TtsVoicesComboBox.SelectedValue}", LogLevel.Debug);
             }
-            _logger.Write($"Enable Test Environment: {_mainControl.EnableTestEnvironment.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Discord Notifications: {_mainControl.DiscordCheckBox.Checked}", LogLevel.Debug);
             if(_mainControl.DiscordCheckBox.Checked)
             {
@@ -123,6 +123,8 @@ namespace DFAssist.Helpers
                 _logger.Write($"Pushbullet Token: {_mainControl.PushBulletTokenTextBox.Text}", LogLevel.Debug);
                 _logger.Write($"Pushbullet ChatId: {_mainControl.PushBulletDeviceIdTextBox.Text}", LogLevel.Debug);
             }
+            _logger.Write($"Enable Test Environment: {_mainControl.EnableTestEnvironment.Checked}", LogLevel.Debug);
+            _logger.Write($"Log Level Selected: {_mainControl.LogLevelComboBox.SelectedValue}", LogLevel.Debug);
             _logger.Write("Settings Loaded!", LogLevel.Debug);
         }
 

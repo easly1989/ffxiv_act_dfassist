@@ -93,6 +93,7 @@ namespace DFAssist.Helpers
             _mainControl.DiscordUsernameLabel.Text = _localizationRepository.GetText("ui-discord-username-display-text");
             _mainControl.DiscordWebhookLabel.Text = _localizationRepository.GetText("ui-discord-webhook-display-text");
             _mainControl.TestSettings.Text = _localizationRepository.GetText("ui-test-settings-group");
+            _mainControl.LogLevelSelectionLabel.Text = _localizationRepository.GetText("ui-test-log-level-selction-label");
 
             _logger.Write("UI Updated!", LogLevel.Debug);
         }

@@ -41,6 +41,8 @@
 
   "ui-disable-toasts": "Disable Toasts",
   "ui-flash-taskbar": "Flash Taskbar when a Notification is received",
+  
+  "ui-test-log-level-selction-label": "Log Level",
 
   "ui-general-settings-group": "General Settings",
   "ui-toast-settings-group": "Toasts Settings",

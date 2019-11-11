@@ -42,6 +42,8 @@
   "ui-disable-toasts": "Désactiver les notifications",
   "ui-flash-taskbar": "La barre de tâches clignote quand une notification est reçue",
 
+  "ui-test-log-level-selction-label": "Niveau de journalisation",
+
   "ui-general-settings-group": "Paramètres généraux",
   "ui-toast-settings-group": "Paramètres des notifications",
   "ui-tts-settings-group": "Paramètres de synthèse vocale",

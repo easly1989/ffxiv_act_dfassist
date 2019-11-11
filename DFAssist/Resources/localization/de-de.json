@@ -42,6 +42,8 @@
   "ui-disable-toasts": "Toasts deaktivieren",
   "ui-flash-taskbar": "Flash-Taskleiste, wenn eine Benachrichtigung empfangen wird",
 
+  "ui-test-log-level-selction-label": "Protokollstufe",
+
   "ui-general-settings-group": "Allgemeine Einstellungen",
   "ui-toast-settings-group": "Toast-Einstellungen",
   "ui-tts-settings-group": "Einstellungen für Text zu Sprache",

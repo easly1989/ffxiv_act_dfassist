@@ -89,7 +89,15 @@ namespace DFAssist
             _mainControl.LanguageComboBox.ValueMember = "Code";
 
             _mainControl.TtsVoicesComboBox.DataSource = TTSHelper.Instance.AvailableVoices.Select(x => x.VoiceInfo.Name).ToArray();
-            
+            _mainControl.LogLevelComboBox.DataSource = new []
+            {
+                "Debug",
+                "Info",
+                "Warn",
+                "Error",
+                "Fatal",
+            };
+
             _pluginData.tpPluginSpace.Controls.Add(_mainControl);
 
             ACTPluginSettingsHelper.Instance.LoadSettings();

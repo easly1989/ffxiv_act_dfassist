@@ -35,6 +35,10 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletDeviceIdTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
             _mainControl.DiscordWebhookTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
             _mainControl.DiscordUsernameTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+
+            // force initialization of combobox values, not related a subvalue (like the language)
+            LogLevelComboBoxOnSelectedValueChanged(this, new EventArgs());
+            TtsVoicesComboBoxOnSelectedValueChanged(this, new EventArgs());
         }
 
         public void Subscribe()
@@ -56,10 +60,9 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletCheckbox.CheckStateChanged += EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click += ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click += TestConfigurationButton_Click;
-
+            _mainControl.LogLevelComboBox.SelectedValueChanged += LogLevelComboBoxOnSelectedValueChanged;
         }
 
-        
         public void UnSubscribe()
         {
             if (!_subscribed)
@@ -79,6 +82,20 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletCheckbox.CheckStateChanged -= EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click -= TestConfigurationButton_Click;
+            _mainControl.LogLevelComboBox.SelectedValueChanged += LogLevelComboBoxOnSelectedValueChanged;
+        }
+
+        private void LogLevelComboBoxOnSelectedValueChanged(object sender, EventArgs e)
+        {
+            var selectedValue = _mainControl.LogLevelComboBox.SelectedValue as string;
+            if(string.IsNullOrWhiteSpace(selectedValue) || !Enum.TryParse(selectedValue, out LogLevel logLevel))
+            {
+                _logger.Write($"UI: [LogLevel] Unable to change log level", LogLevel.Error);
+                return;
+            }
+
+            _logger.SetLoggingLevel(logLevel);
+            _logger.Write($"UI: [LogLevel] Desired Value: {_mainControl.LogLevelComboBox.SelectedValue}", LogLevel.Debug);
         }
 
         private void TtsVoicesComboBoxOnSelectedValueChanged(object sender, EventArgs e)
@@ -155,14 +172,14 @@ namespace DFAssist.Helpers
                             return;
                         }
 
-                        _logger.Write($"UI: [PersistentToasts] Key found in the registry, Removing value!", LogLevel.Debug);
+                        _logger.Write("UI: [PersistentToasts] Key found in the registry, Removing value!", LogLevel.Debug);
                         key.DeleteValue("ShowInActionCenter");
                     }
                 }
             }
             catch (Exception ex)
             {
-                _logger.Write(ex, $"UI: Unable to remove/add the registry key to make Toasts persistent!", LogLevel.Error);
+                _logger.Write(ex, "UI: Unable to remove/add the registry key to make Toasts persistent!", LogLevel.Error);
             }
         }
 

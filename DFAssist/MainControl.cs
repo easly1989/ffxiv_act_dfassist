@@ -39,6 +39,7 @@ namespace DFAssist
         public Label PushBulletDeviceIdlabel;
         public Label PushBulletTokenLabel;
         public Label TtsVoiceSelectionLabel;
+        public Label LogLevelSelectionLabel;
 
         public TextBox LanguageValue;
         public TextBox TelegramChatIdTextBox;
@@ -60,6 +61,7 @@ namespace DFAssist
 
         public ComboBox LanguageComboBox;
         public ComboBox TtsVoicesComboBox;
+        public ComboBox LogLevelComboBox;
 
         public RichTextBox LoggingRichTextBox;
 
@@ -78,6 +80,8 @@ namespace DFAssist
             LanguageValue = new TextBox();
             LanguageComboBox = new ComboBox();
             TtsVoicesComboBox = new ComboBox();
+            LogLevelSelectionLabel = new Label();
+            LogLevelComboBox = new ComboBox();
             EnableTestEnvironment = new CheckBox();
             TtsVoiceSelectionLabel = new Label();
             TtsCheckBox = new CheckBox();
@@ -365,6 +369,23 @@ namespace DFAssist
             EnableTestEnvironment.Text = "Enable Test Environment";
             EnableTestEnvironment.UseVisualStyleBackColor = true;
             // 
+            // _logLevelSelectionLabel
+            // 
+            LogLevelSelectionLabel.AutoSize = true;
+            LogLevelSelectionLabel.Location = new Point(3, 45);
+            LogLevelSelectionLabel.Name = "LogLevelSelectionLabel";
+            LogLevelSelectionLabel.TabStop = false;
+            LogLevelSelectionLabel.Text = "Selected Voice";
+            // 
+            // _logLevelComboBox
+            // 
+            LogLevelComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            LogLevelComboBox.FormattingEnabled = true;
+            LogLevelComboBox.Location = new Point(90, 45);
+            LogLevelComboBox.Name = "LogLevelComboBox";
+            LogLevelComboBox.Size = new Size(390, 25);
+            LogLevelComboBox.TabIndex = 18;
+            // 
             // _appTabControl
             //
             _appTabControl.Dock = DockStyle.Fill;
@@ -592,6 +613,8 @@ namespace DFAssist
             Dock = DockStyle.Top;
             TestSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TestSettings.Controls.Add(EnableTestEnvironment);
+            TestSettings.Controls.Add(LogLevelSelectionLabel);
+            TestSettings.Controls.Add(LogLevelComboBox);
             TestSettings.Name = "TestSettings";
             TestSettings.TabStop = false;
             TestSettings.Text = "Test Settings";

@@ -42,6 +42,8 @@
   "ui-disable-toasts": "토스트 비활성화",
   "ui-flash-taskbar": "알림이 수신되면 Flash 작업 표시 줄",
 
+  "ui-test-log-level-selction-label": "로그 레벨",
+
   "ui-general-settings-group": "일반 설정",
   "ui-toast-settings-group": "토스트 설정",
   "ui-tts-settings-group": "TTS 설정",

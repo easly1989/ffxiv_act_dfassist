@@ -42,6 +42,8 @@
   "ui-disable-toasts": "トーストを無効にする",
   "ui-flash-taskbar": "通知を受け取ったときにタスクバーをフラッシュする",
 
+  "ui-test-log-level-selction-label": "ログレベル",
+
   "ui-general-settings-group": "一般設定",
   "ui-toast-settings-group": "トースト設定",
   "ui-tts-settings-group": "テキスト読み上げ設定",
