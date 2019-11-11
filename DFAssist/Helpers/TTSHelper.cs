@@ -1,5 +1,5 @@
-﻿using System.Speech.Synthesis;
-using DFAssist.Contracts.Repositories;
+﻿using System.Linq;
+using System.Speech.Synthesis;
 using Splat;
 
 namespace DFAssist.Helpers
@@ -8,13 +8,19 @@ namespace DFAssist.Helpers
     public class TTSHelper : BaseNotificationHelper<TTSHelper>
     {
         private SpeechSynthesizer _synth;
-        private ILocalizationRepository _localizationRepository;
+
+        public InstalledVoice[] AvailableVoices => _synth != null
+                                                   ? _synth.GetInstalledVoices().Where(x => x.Enabled).ToArray()
+                                                   : new InstalledVoice[] {};
 
         public TTSHelper()
         {
-            _localizationRepository = Locator.Current.GetService<ILocalizationRepository>();
-
             _synth = new SpeechSynthesizer();
+        }
+
+        public void SelectVoice(string voiceName)
+        {
+            _synth?.SelectVoice(voiceName);
         }
 
         protected override void OnSendNotification(string title, string message, string testing)
@@ -39,7 +45,6 @@ namespace DFAssist.Helpers
 
         protected override void OnSetNullOwnedObjects()
         {
-            _localizationRepository = null;
             _synth = null;
 
             base.OnSetNullOwnedObjects();

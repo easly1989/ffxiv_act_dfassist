@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
@@ -87,6 +88,8 @@ namespace DFAssist
             _mainControl.LanguageComboBox.DisplayMember = "Name";
             _mainControl.LanguageComboBox.ValueMember = "Code";
 
+            _mainControl.TtsVoicesComboBox.DataSource = TTSHelper.Instance.AvailableVoices.Select(x => x.VoiceInfo.Name).ToArray();
+            
             _pluginData.tpPluginSpace.Controls.Add(_mainControl);
 
             ACTPluginSettingsHelper.Instance.LoadSettings();

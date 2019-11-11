@@ -32,6 +32,7 @@
 
   "ui-enable-tts": "Activer la synthèse vocale",
   "ui-tts-dutyfound": "Groupe trouvé !",
+  "ui-tts-voice-selection-label": "Voix sélectionnée",
 
   "ui-persist-toasts": "Rendre les notifications persistantes",
 

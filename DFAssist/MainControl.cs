@@ -38,6 +38,7 @@ namespace DFAssist
         public Label DiscordUsernameLabel;
         public Label PushBulletDeviceIdlabel;
         public Label PushBulletTokenLabel;
+        public Label TtsVoiceSelectionLabel;
 
         public TextBox LanguageValue;
         public TextBox TelegramChatIdTextBox;
@@ -58,6 +59,7 @@ namespace DFAssist
         public CheckBox FlashTaskbar;
 
         public ComboBox LanguageComboBox;
+        public ComboBox TtsVoicesComboBox;
 
         public RichTextBox LoggingRichTextBox;
 
@@ -75,7 +77,9 @@ namespace DFAssist
             LanguageLabel = new Label();
             LanguageValue = new TextBox();
             LanguageComboBox = new ComboBox();
+            TtsVoicesComboBox = new ComboBox();
             EnableTestEnvironment = new CheckBox();
+            TtsVoiceSelectionLabel = new Label();
             TtsCheckBox = new CheckBox();
             PersistToasts = new CheckBox();
             FlashTaskbar = new CheckBox();
@@ -208,12 +212,29 @@ namespace DFAssist
             TtsCheckBox.Text = "Enable Text To Speech";
             TtsCheckBox.UseVisualStyleBackColor = true;
             // 
+            // _ttsVoiceSelectionLabel
+            // 
+            TtsVoiceSelectionLabel.AutoSize = true;
+            TtsVoiceSelectionLabel.Location = new Point(3, 45);
+            TtsVoiceSelectionLabel.Name = "TtsVoiceSelectionLabel";
+            TtsVoiceSelectionLabel.TabStop = false;
+            TtsVoiceSelectionLabel.Text = "Selected Voice";
+            // 
+            // _ttsVoicesComboBox
+            // 
+            TtsVoicesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            TtsVoicesComboBox.FormattingEnabled = true;
+            TtsVoicesComboBox.Location = new Point(90, 45);
+            TtsVoicesComboBox.Name = "TtsVoicesComboBox";
+            TtsVoicesComboBox.Size = new Size(390, 25);
+            TtsVoicesComboBox.TabIndex = 7;
+            // 
             // _discordCheckBox
             // 
             DiscordCheckBox.AutoSize = true;
             DiscordCheckBox.Location = new Point(6, 22);
             DiscordCheckBox.Name = "DiscordCheckBox";
-            DiscordCheckBox.TabIndex = 7;
+            DiscordCheckBox.TabIndex = 8;
             DiscordCheckBox.Size = new Size(390, 20);
             DiscordCheckBox.Text = "Enable Discord Notifications";
             DiscordCheckBox.UseVisualStyleBackColor = true;
@@ -232,7 +253,7 @@ namespace DFAssist
             DiscordWebhookTextBox.Location = new Point(90, 45);
             DiscordWebhookTextBox.Name = "DiscordWebhookTextBox";
             DiscordWebhookTextBox.Size = new Size(390, 20);
-            DiscordWebhookTextBox.TabIndex = 8;
+            DiscordWebhookTextBox.TabIndex = 9;
             // 
             // _discordUsernameLabel
             // 
@@ -248,14 +269,14 @@ namespace DFAssist
             DiscordUsernameTextBox.Location = new Point(90, 68);
             DiscordUsernameTextBox.Name = "DiscordUsernameTextBox";
             DiscordUsernameTextBox.Size = new Size(390, 20);
-            DiscordUsernameTextBox.TabIndex = 9;
+            DiscordUsernameTextBox.TabIndex = 10;
             // 
             // _telegramCheckBox
             // 
             TelegramCheckBox.AutoSize = true;
             TelegramCheckBox.Location = new Point(6, 22);
             TelegramCheckBox.Name = "TelegramCheckBox";
-            TelegramCheckBox.TabIndex = 10;
+            TelegramCheckBox.TabIndex = 11;
             TelegramCheckBox.Size = new Size(390, 20);
             TelegramCheckBox.Text = "Enable Telegram Notifications";
             TelegramCheckBox.UseVisualStyleBackColor = true;
@@ -274,7 +295,7 @@ namespace DFAssist
             TelegramTokenTextBox.Location = new Point(90, 45);
             TelegramTokenTextBox.Name = "TelegramTokenTextBox";
             TelegramTokenTextBox.Size = new Size(390, 20);
-            TelegramTokenTextBox.TabIndex = 11;
+            TelegramTokenTextBox.TabIndex = 12;
             // 
             // _telegramChatIdLabel
             // 
@@ -290,14 +311,14 @@ namespace DFAssist
             TelegramChatIdTextBox.Location = new Point(90, 68);
             TelegramChatIdTextBox.Name = "TelegramChatIdTextBox";
             TelegramChatIdTextBox.Size = new Size(390, 20);
-            TelegramChatIdTextBox.TabIndex = 12;
+            TelegramChatIdTextBox.TabIndex = 13;
             // 
             // _pushbulletCheckbox
             // 
             PushBulletCheckbox.AutoSize = true;
             PushBulletCheckbox.Location = new Point(6, 22);
             PushBulletCheckbox.Name = "PushBulletCheckbox";
-            PushBulletCheckbox.TabIndex = 13;
+            PushBulletCheckbox.TabIndex = 14;
             PushBulletCheckbox.Size = new Size(390, 20);
             PushBulletCheckbox.Text = "Enable Pushbullet Notifications";
             PushBulletCheckbox.UseVisualStyleBackColor = true;
@@ -316,7 +337,7 @@ namespace DFAssist
             PushBulletTokenTextBox.Location = new Point(90, 45);
             PushBulletTokenTextBox.Name = "PushBulletTokenTextBox";
             PushBulletTokenTextBox.Size = new Size(390, 20);
-            PushBulletTokenTextBox.TabIndex = 14;
+            PushBulletTokenTextBox.TabIndex = 15;
             // 
             // _pushbulletDeviceIdlabel
             // 
@@ -332,7 +353,7 @@ namespace DFAssist
             PushBulletDeviceIdTextBox.Location = new Point(90, 68);
             PushBulletDeviceIdTextBox.Name = "PushBulletDeviceIdTextBox";
             PushBulletDeviceIdTextBox.Size = new Size(390, 20);
-            PushBulletDeviceIdTextBox.TabIndex = 15;
+            PushBulletDeviceIdTextBox.TabIndex = 16;
             // 
             // 
             // _enableTestEnvironment
@@ -340,7 +361,7 @@ namespace DFAssist
             EnableTestEnvironment.AutoSize = true;
             EnableTestEnvironment.Location = new Point(6, 22);
             EnableTestEnvironment.Name = "EnableTestEnvironment";
-            EnableTestEnvironment.TabIndex = 16;
+            EnableTestEnvironment.TabIndex = 17;
             EnableTestEnvironment.Text = "Enable Test Environment";
             EnableTestEnvironment.UseVisualStyleBackColor = true;
             // 
@@ -521,6 +542,8 @@ namespace DFAssist
             Dock = DockStyle.Top;
             TtsSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TtsSettings.Controls.Add(TtsCheckBox);
+            TtsSettings.Controls.Add(TtsVoiceSelectionLabel);
+            TtsSettings.Controls.Add(TtsVoicesComboBox);
             TtsSettings.Name = "TtsSettings";
             TtsSettings.TabStop = false;
             TtsSettings.Text = "Text To Speech Settings";

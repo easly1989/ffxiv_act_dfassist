@@ -39,6 +39,7 @@ namespace DFAssist.Helpers
             _xmlSettingsSerializer.AddControlSetting(_mainControl.DisableToasts.Name, _mainControl.DisableToasts);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.LanguageValue.Name, _mainControl.LanguageValue);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsCheckBox.Name, _mainControl.TtsCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsVoicesComboBox.Name, _mainControl.TtsVoicesComboBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PersistToasts.Name, _mainControl.PersistToasts);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableTestEnvironment.Name, _mainControl.EnableTestEnvironment);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.EnableActToast.Name, _mainControl.EnableActToast);
@@ -99,6 +100,10 @@ namespace DFAssist.Helpers
             _logger.Write($"Make Toasts Persistent: {_mainControl.PersistToasts.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Legacy Toasts: {_mainControl.EnableActToast.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Text To Speech: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
+            if(_mainControl.TtsCheckBox.Checked)
+            {
+                _logger.Write($"Selected TTS Voice: {_mainControl.TtsVoicesComboBox.SelectedValue}", LogLevel.Debug);
+            }
             _logger.Write($"Enable Test Environment: {_mainControl.EnableTestEnvironment.Checked}", LogLevel.Debug);
             _logger.Write($"Enable Discord Notifications: {_mainControl.DiscordCheckBox.Checked}", LogLevel.Debug);
             if(_mainControl.DiscordCheckBox.Checked)

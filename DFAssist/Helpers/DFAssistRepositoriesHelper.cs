@@ -79,6 +79,7 @@ namespace DFAssist.Helpers
             _mainControl.GeneralSettings.Text = _localizationRepository.GetText("ui-general-settings-group");
             _mainControl.ToastSettings.Text = _localizationRepository.GetText("ui-toast-settings-group");
             _mainControl.TtsSettings.Text = _localizationRepository.GetText("ui-tts-settings-group");
+            _mainControl.TtsVoiceSelectionLabel.Text = _localizationRepository.GetText("ui-tts-voice-selection-label");
             _mainControl.TelegramSettings.Text = _localizationRepository.GetText("ui-telegram-settings-group");
             _mainControl.TelegramCheckBox.Text = _localizationRepository.GetText("ui-telegram-display-text");
             _mainControl.TelegramChatIdLabel.Text = _localizationRepository.GetText("ui-telegram-chatid-display-text");

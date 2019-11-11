@@ -32,6 +32,7 @@
 
   "ui-enable-tts": "Text für Sprache aktivieren",
   "ui-tts-dutyfound": "Pflicht gefunden!",
+  "ui-tts-voice-selection-label": "Ausgewählte Stimme",
 
   "ui-persist-toasts": "Toast dauerhaft machen",
 

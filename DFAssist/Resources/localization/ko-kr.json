@@ -32,6 +32,7 @@
 
   "ui-enable-tts": "TTS 사용",
   "ui-tts-dutyfound": "임무 발견!",
+  "ui-tts-voice-selection-label": "선택된 음색",
 
   "ui-persist-toasts": "토스트 알림 지속",
 

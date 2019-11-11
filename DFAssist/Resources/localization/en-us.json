@@ -32,6 +32,7 @@
 
   "ui-enable-tts": "Enable Text To Speech",
   "ui-tts-dutyfound": "Duty Found!",
+  "ui-tts-voice-selection-label": "Selected Voice",
 
   "ui-persist-toasts": "Make Toasts Persistent",
 

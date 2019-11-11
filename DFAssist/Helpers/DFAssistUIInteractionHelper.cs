@@ -28,6 +28,7 @@ namespace DFAssist.Helpers
             _mainControl.DiscordCheckBox.Enabled = false;
             _mainControl.EnableActToast.Enabled = !_mainControl.DisableToasts.Checked;
             _mainControl.PersistToasts.Enabled = !_mainControl.DisableToasts.Checked && !_mainControl.EnableActToast.Checked;
+            _mainControl.TtsVoicesComboBox.Enabled = _mainControl.TtsCheckBox.Checked;
             _mainControl.TelegramChatIdTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
             _mainControl.TelegramTokenTextBox.Enabled = _mainControl.TelegramCheckBox.Checked;
             _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
@@ -49,6 +50,7 @@ namespace DFAssist.Helpers
             _mainControl.PersistToasts.CheckStateChanged += PersistToastsOnCheckedChanged;
             _mainControl.EnableActToast.CheckStateChanged += EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged += EnableTtsOnCheckedChanged;
+            _mainControl.TtsVoicesComboBox.SelectedValueChanged += TtsVoicesComboBoxOnSelectedValueChanged;
             _mainControl.TelegramCheckBox.CheckStateChanged += EnableTelegramOnCheckedChanged;
             _mainControl.DiscordCheckBox.CheckStateChanged += DiscordCheckBoxOnCheckStateChanged;
             _mainControl.PushBulletCheckbox.CheckStateChanged += EnablePushBulletOnCheckedChanged;
@@ -57,6 +59,7 @@ namespace DFAssist.Helpers
 
         }
 
+        
         public void UnSubscribe()
         {
             if (!_subscribed)
@@ -70,11 +73,19 @@ namespace DFAssist.Helpers
             _mainControl.PersistToasts.CheckStateChanged -= PersistToastsOnCheckedChanged;
             _mainControl.EnableActToast.CheckStateChanged -= EnableActToastsOnCheckedChanged;
             _mainControl.TtsCheckBox.CheckStateChanged -= EnableTtsOnCheckedChanged;
+            _mainControl.TtsVoicesComboBox.SelectedValueChanged -= TtsVoicesComboBoxOnSelectedValueChanged;
             _mainControl.TelegramCheckBox.CheckStateChanged -= EnableTelegramOnCheckedChanged;
             _mainControl.DiscordCheckBox.CheckStateChanged -= DiscordCheckBoxOnCheckStateChanged;
             _mainControl.PushBulletCheckbox.CheckStateChanged -= EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click -= ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click -= TestConfigurationButton_Click;
+        }
+
+        private void TtsVoicesComboBoxOnSelectedValueChanged(object sender, EventArgs e)
+        {
+            TTSHelper.Instance.SelectVoice(_mainControl.TtsVoicesComboBox.SelectedValue as string);
+            _logger.Write($"UI: [TTS] Selected Voice - Desired Value: {_mainControl.TtsVoicesComboBox.SelectedValue}", LogLevel.Debug);
+            TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
         }
 
         private void DonateLinkOnLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -157,6 +168,7 @@ namespace DFAssist.Helpers
 
         private void EnableTtsOnCheckedChanged(object sender, EventArgs eventArgs)
         {
+            _mainControl.TtsVoicesComboBox.Enabled = _mainControl.TtsCheckBox.Checked;
             _logger.Write($"UI: [TTS] Desired Value: {_mainControl.TtsCheckBox.Checked}", LogLevel.Debug);
             TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
         }

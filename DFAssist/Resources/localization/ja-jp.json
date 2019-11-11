@@ -32,6 +32,7 @@
 
   "ui-enable-tts": "テキスト読み上げを有効にする",
   "ui-tts-dutyfound": "義務が見つかりました！",
+  "ui-tts-voice-selection-label": "選択された声",
 
   "ui-persist-toasts": "乾杯を持続させる",
 
