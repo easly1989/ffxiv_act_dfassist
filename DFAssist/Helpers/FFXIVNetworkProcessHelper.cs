@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts;
 using DFAssist.Contracts.Duty;
 using DFAssist.Contracts.Repositories;
-using DFAssist.Core.Network;
+using Machina.FFXIV;
 using Splat;
-using Timer = System.Timers.Timer;
 
 namespace DFAssist.Helpers
 {
@@ -22,95 +18,52 @@ namespace DFAssist.Helpers
         private IActLogger _logger = Locator.Current.GetService<IActLogger>();
         private IPacketHandler _packetHandler = Locator.Current.GetService<IPacketHandler>();
         private IDataRepository _dataRepository = Locator.Current.GetService<IDataRepository>();
-        private Timer _timer = new Timer { Interval = 10000 };
-        private ConcurrentDictionary<int, ProcessNetwork> _networks = new ConcurrentDictionary<int, ProcessNetwork>();
 
-        public Process ActiveProcess;
+        private FFXIVNetworkMonitor _ffxivNetworkMonitor;
+
+        public Process ActiveProcess
+        {
+            get
+            {
+                if (_ffxivNetworkMonitor == null)
+                    return default;
+
+                var pid = Convert.ToInt32(_ffxivNetworkMonitor.ProcessID);
+                if(pid == 0)
+                    return default;
+
+                var activeProcess = Process.GetProcessById(pid);
+                return activeProcess;
+            }
+        }
 
         public FFXIVNetworkProcessHelper()
         {
-            _timer.Elapsed += Timer_Tick;
+            _ffxivNetworkMonitor = new FFXIVNetworkMonitor
+            {
+                MessageReceived = (connection, epoch, message) => _packetHandler.HandleMessage(message, OnMessageReceived)
+            };
         }
 
         public void Subscribe()
         {
-            UpdateProcesses();
-            _timer.Start();
+            _ffxivNetworkMonitor.Start();
+            _logger.Write("N: FFXIV Network Monitor Started!", LogLevel.Info);
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void OnMessageReceived(EventType eventType, int[] args)
         {
-            if (!DFAssistPlugin.Instance.IsPluginEnabled)
-                return;
+            _logger.Write("N: FFXIV Network packet received...", LogLevel.Debug);
 
-            UpdateProcesses();
-        }
-
-        private void UpdateProcesses()
-        {
-            lock (this)
+            var text = string.Empty;
+            if (ActiveProcess != null)
             {
-                var process = Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
-                if (process == null)
-                    return;
-
-                ActiveProcess = process;
-
-                try
-                {
-                    if (!_networks.ContainsKey(process.Id))
-                    {
-                        var pn = new ProcessNetwork(process, new Network());
-                        _packetHandler.OnEventReceived += Network_onReceiveEvent;
-                        _networks.TryAdd(process.Id, pn);
-                        _logger.Write($"P: FFXIV Process Selected: {process.Id}", LogLevel.Info);
-                    }
-                }
-                catch (Exception e)
-                {
-                    _logger.Write(e, "P: Failed to set FFXIV Process", LogLevel.Error);
-                }
-
-                var toDelete = new List<int>();
-                foreach (var entry in _networks)
-                {
-                    if (entry.Value.Process.HasExited)
-                    {
-                        entry.Value.Network.StopCapture();
-                        toDelete.Add(entry.Key);
-                    }
-                    else
-                    {
-                        if (entry.Value.Network.IsRunning)
-                            entry.Value.Network.UpdateGameConnections(entry.Value.Process);
-                        else
-                        {
-                            if (!entry.Value.Network.StartCapture(entry.Value.Process))
-                                toDelete.Add(entry.Key);
-                        }
-                    }
-                }
-
-                foreach (var t in toDelete)
-                {
-                    try
-                    {
-                        _networks.TryRemove(t, out _);
-                        _packetHandler.OnEventReceived -= Network_onReceiveEvent;
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.Write(e, "P: Failed to remove FFXIV Process", LogLevel.Error);
-                    }
-                }
+                var processMainModule = ActiveProcess.MainModule;
+                var server = processMainModule != null && processMainModule.FileName.Contains("KOREA") ? "KOREA" : "GLOBAL";
+                text = ActiveProcess.Id + "|" + server + "|";
             }
-        }
 
-        private void Network_onReceiveEvent(int pid, EventType eventType, int[] args)
-        {
-            var processMainModule = _networks[pid].Process.MainModule;
-            var server = processMainModule != null && processMainModule.FileName.Contains("KOREA") ? "KOREA" : "GLOBAL";
-            var text = pid + "|" + server + "|" + eventType + "|";
+            text += eventType + "|";
             var pos = 0;
 
             switch (eventType)
@@ -177,23 +130,13 @@ namespace DFAssist.Helpers
 
         public void Dispose()
         {
-            if (_timer != null)
+            if (_ffxivNetworkMonitor != null)
             {
-                if (_timer.Enabled)
-                    _timer.Stop();
-
-                _timer.Elapsed -= Timer_Tick;
-                _timer.Dispose();
-                _timer = null;
+                _ffxivNetworkMonitor.Stop();
+                _ffxivNetworkMonitor.MessageReceived = null;
             }
 
-            foreach (var entry in _networks)
-            {
-                entry.Value.Network.StopCapture();
-            }
-
-            _networks.Clear();
-            _networks = null;
+            _ffxivNetworkMonitor = null;
             _packetHandler = null;
             _logger = null;
             _dataRepository = null;
