@@ -13,13 +13,15 @@ namespace DFAssist.Helpers
                 return;
             }
 
-            if(string.IsNullOrWhiteSpace(MainControl.DiscordUsernameTextBox.Text))
+            var username = MainControl.DiscordUsernameTextBox.Text;
+            if(string.IsNullOrWhiteSpace(username))
             {
                 Logger.Write("UI: Specify a Username for the Discord settings", LogLevel.Warn);
                 return;
             }
 
-            if(string.IsNullOrWhiteSpace(MainControl.DiscordWebhookTextBox.Text))
+            var webhookUrl = MainControl.DiscordWebhookTextBox.Text;
+            if(string.IsNullOrWhiteSpace(webhookUrl))
             {
                 Logger.Write("UI: Specify a valid Webhook URL for the Discord settings", LogLevel.Warn);
                 return;
@@ -27,14 +29,14 @@ namespace DFAssist.Helpers
 
             Logger.Write("UI: Sending Discord Notification...", LogLevel.Debug);
 
-            var content = $"{title}\n>>>>> {message}";
+            var content = $"@{username} | {title}\n>>>>> {message}";
             if(!string.IsNullOrWhiteSpace(testing))
                 content += $" [{testing}]";
 
-            var webhook = new Webhook(MainControl.DiscordWebhookTextBox.Text);
+            var webhook = new Webhook(webhookUrl);
             var webHookObj = new WebhookObject
             {
-                username = MainControl.DiscordUsernameTextBox.Text,
+                username = username,
                 content = content
             };
 
