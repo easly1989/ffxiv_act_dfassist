@@ -35,38 +35,20 @@ namespace DFAssist.Core.Network
                 var opcode = BitConverter.ToUInt16(message, 18);
 
 #if !DEBUG
-                if (opcode != 0x00AE &&
-                    opcode != 0x0304 &&
-                    opcode != 0x0121 &&
-                    opcode != 0x015E &&
-                    opcode != 0x006F &&
-                    opcode != 0x00B3 &&
-                    opcode != 0x008F &&
-                    opcode != 0x022F)
+                if (opcode != 0x0164 &&
+                    opcode != 0x032D &&
+                    opcode != 0x03CF &&
+                    opcode != 0x02A8 &&
+                    opcode != 0x032F &&
+                    opcode != 0x0339 &&
+                    opcode != 0x0002)
                     return;
 #endif
 #if DEBUG
                 _logger.Write($"--- Received opcode: {opcode}", LogLevel.Warn);
 #endif
                 var data = message.Skip(32).ToArray();
-                if (opcode == 0x022F) // Entering/Leaving an instance
-                {
-                    var code = BitConverter.ToInt16(data, 4);
-                    if (code == 0)
-                        return;
-
-                    var type = data[8];
-
-                    if (type == 0x0B)
-                    {
-                        _logger.Write($"I: Entered Instance Area [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Debug);
-                    }
-                    else if (type == 0x0C)
-                    {
-                        _logger.Write($"I: Left Instance Area [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Debug);
-                    }
-                }
-                else if (opcode == 0x008F) // 5.1 Duties
+                if (opcode == 0x0164) // 5.11 Duties
                 {
                     _rouletteCode = data[8];
 
@@ -81,14 +63,12 @@ namespace DFAssist.Core.Network
                         for (var i = 0; i < 5; i++)
                         {
                             var code = BitConverter.ToUInt16(data, 12 + (i * 4));
-                            if (code == 0)
-                                break;
-
-                            _logger.Write($" {i}. [{code}] - {_dataRepository.GetInstance(code).Name}", LogLevel.Debug);
+                            var instanceName = code == 0 ? "Unknown Instance" : _dataRepository.GetInstance(code).Name;
+                            _logger.Write($" {i}. [{code}] - {instanceName}", LogLevel.Debug);
                         }
                     }
                 }
-                else if (opcode == 0x00B3) // 5.1 Duty Matched
+                else if (opcode == 0x032D) // 5.11 Duty Matched
                 {
                     var matchedRoulette = BitConverter.ToUInt16(data, 2);
                     var matchedCode = BitConverter.ToUInt16(data, 20);
@@ -97,27 +77,24 @@ namespace DFAssist.Core.Network
 
                     var instanceString = $"{matchedCode} - {_dataRepository.GetInstance(matchedCode).Name}";
                     _logger.Write(matchedRoulette != 0
-                            ? $"Q: Matched [{matchedRoulette} - {_dataRepository.GetRoulette(matchedRoulette).Name}] - [{instanceString}]"
-                            : $"Q: Matched [{instanceString}]", LogLevel.Info);
+                        ? $"Q: Matched [{matchedRoulette} - {_dataRepository.GetRoulette(matchedRoulette).Name}] - [{instanceString}]"
+                        : $"Q: Matched [{instanceString}]", LogLevel.Info);
                 }
-                else if (opcode == 0x006F)
+                else if (opcode == 0x03CF) // 5.11 Duty Operations
                 {
-                    // used on standalone version to stop blink
+                    switch (data[0])
+                    {
+                        case 0x73: // Duty Canceled (by me?)
+                            _logger.Write("Duty Canceled!", LogLevel.Debug);
+                            break;
+                        case 0x81: // Duty Requested
+                            _logger.Write("Duty Requested!", LogLevel.Debug);
+                            break;
+                    }
                 }
-                else if (opcode == 0x015E) // v5.1 Cancel Duty
+                else if (opcode == 0x0304) // 5.11 Duty Wait Queue Updated
                 {
-                    if (data[3] != 0) return;
-
-                    _logger.Write("Duty Canceled!", LogLevel.Debug);
-                }
-                else if (opcode == 0x0121)
-                {
-                    // used on standalone version to stop blink, for Global Server
-                }
-                else if (opcode == 0x0304) // Status during matching
-                {
-                    // ReSharper disable UnusedVariable
-                    var order = data[6];
+                    var waitList = data[6];
                     var waitTime = data[7];
                     var tank = data[8];
                     var tankMax = data[9];
@@ -125,25 +102,45 @@ namespace DFAssist.Core.Network
                     var healerMax = data[11];
                     var dps = data[12];
                     var dpsMax = data[13];
-                    // ReSharper restore UnusedVariable
                     
                     var memberinfo = $"Tanks: {tank}/{tankMax}, Healers: {healer}/{healerMax}, Dps: {dps}/{dpsMax}";
-                    _logger.Write($"Q: Matching State Updated [{memberinfo}]", LogLevel.Debug);
+                    _logger.Write($"Q: Matching State Updated [{memberinfo}] - WaitList: {waitList} | WaitTime: {waitTime}", LogLevel.Debug);
                 }
-                else if (opcode == 0x00AE) // Participant check status packet (received after matching)
+                else if (opcode == 0x032F) // 5.11 Duty Matched Status Updated (received after matching)
                 {
-                    var code = BitConverter.ToUInt16(data, 8);
-                    if (code == 0)
-                        return;
-
-                    var instance = _dataRepository.GetInstance(code);
                     var tank = data[12];
+                    var tankMax = data[13];
                     var healer = data[14];
+                    var healerMax = data[15];
                     var dps = data[16];
+                    var dpsMax = data[15];
+                    var memberinfo = $"Tanks: {tank}/{tankMax}, Healers: {healer}/{healerMax}, Dps: {dps}/{dpsMax}";
 
-                    var memberinfo = $"Tanks: {tank}/{instance.Tank}, Healers: {healer}/{instance.Healer}, Dps: {dps}/{instance.Dps}";
-                    _logger.Write($"Q: Matching State Updated [{instance.Name} - {memberinfo}]", LogLevel.Debug);
+                    var code = BitConverter.ToUInt16(data, 8);
+                    _logger.Write(code != 0
+                            ? $"Q: Matching State Updated [{_dataRepository.GetInstance(code).Name} - {memberinfo}]"
+                            : $"Q: Matching State Updated [{memberinfo}]", LogLevel.Debug);
                 }
+                else if (opcode == 0x0339) // 5.11 Entering/Leaving an Instance (Zone change?)
+                {
+                    var code = BitConverter.ToInt16(data, 4);
+                    var instanceName = code == 0 ? "Unknown Instance" : _dataRepository.GetInstance(code).Name;
+
+                    switch (data[8])
+                    {
+                        case 0x0B: // Entering
+                            _logger.Write($"I: Entered Instance Area [{code}] - {instanceName}", LogLevel.Debug);
+                            break;
+                        case 0x0C: // Leaving
+                            _logger.Write($"I: Left Instance Area [{code}] - {instanceName}", LogLevel.Debug);
+                            break;
+                    }
+                }
+                else if(opcode == 0x0002) // 5.11 Duty Matching Complete
+                {
+                    _logger.Write("Q: Matching Completed!", LogLevel.Debug);
+                }
+
             }
             catch (Exception ex)
             {

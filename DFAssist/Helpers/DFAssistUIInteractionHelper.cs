@@ -24,8 +24,6 @@ namespace DFAssist.Helpers
             _logger = Locator.Current.GetService<IActLogger>();
 
             // Startup defaults
-            // Discord must be disabled for the moment, still under development
-            _mainControl.DiscordCheckBox.Enabled = false;
             _mainControl.EnableActToast.Enabled = !_mainControl.DisableToasts.Checked;
             _mainControl.PersistToasts.Enabled = !_mainControl.DisableToasts.Checked && !_mainControl.EnableActToast.Checked;
             _mainControl.TtsVoicesComboBox.Enabled = _mainControl.TtsCheckBox.Checked;
