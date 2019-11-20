@@ -1,5 +1,5 @@
 # Duty Finder Assist Plugin for ACT
-### Based on the work from [devunt](https://github.com/devunt/DFAssist) and [lalafellsleep](https://github.com/lalafellsleep/ACTFate)
+### Based on the work from [devunt](https://github.com/devunt/DFAssist) and [lalafellsleep](https://github.com/lalafellsleep)
 
 ![releases](https://img.shields.io/github/tag/easly1989/ffxiv_act_dfassist.svg)
 ![issues](https://img.shields.io/github/issues/easly1989/ffxiv_act_dfassist.svg)
@@ -8,6 +8,9 @@
 [![paypal](https://img.shields.io/badge/support%20me-on%20paypal-blue)](https://www.paypal.me/ruggierocarlo)
 
 ![main](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/main.png)
+
+## WIKI
+For guides on how to install, build or use the plugin, please refer to the [Wiki page!](https://github.com/easly1989/ffxiv_act_dfassist/wiki) :)
 
 ## .NET Framework 4.7.2 Required
 To ensure that the plugins works correctly please install [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/thank-you/net472)
@@ -30,34 +33,6 @@ Starting from version 1.3.11 DFAssist supports AutoUpdating directly from within
 ### Why another rework?!?
 It seems like **lalafellsleep** simply stopped the development, and using an external tool (like the one from **devunt**) seems a bit like an overkill...<br>
 ... We already use ACT for various things, so integrate this feature seems like a better option (:
-
-## Installation
-### Download Binaries
-You can download the latest binaries from [here](https://github.com/easly1989/ffxiv_act_dfassist/releases/latest)<br>
-
-### Add the plugin to ACT
-  - As usual add the plugin in ACT, after the [FFXIV_Parsing_Plugin](https://github.com/ravahn/FFXIV_ACT_Plugin) by [ravahn](https://github.com/ravahn)
-    ![install](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_1.png)
-  - Once installed you can go into the plugin tab and edit the settings
-  - You can check the default settings, or test your custom settings clicking the "Test Configuration" button located in the General Settings panel
-	![settings](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_2.png)
-  - By default you should see this when clicking the Test Configuration button (unless you have changed the settings)
-    ![toast](https://github.com/easly1989/ffxiv_act_dfassist/blob/master/images/install_3.png)
-  - Congratulations! You did it! (:
-
-## Building from Sources
-Building should be really straight forward
-#### Required components
- - [Visual Studio 2017 (any version will do)](https://visualstudio.microsoft.com/it/downloads/)
- - [Advanced Combat Tracker (latest version)](https://advancedcombattracker.com/includes/page-download.php?id=57)
-#### How To Build
- 1. Download or checkout the sources
- 2. Open the **DFAssist.sln**
- 3. Add the reference to your **Advanced Combat Tracker.exe** in **DFAssist.csproj**
- 4. Build!
- 
-#### Side notes
-It should not be a problem building for x86, but (as of the latest news from SquareEnix) you should build for x64, as the game dropped support for x86 with Shadowbringers!
  
 ### To-dos
 - [x] Automatic Updates from within ACT
@@ -68,7 +43,7 @@ It should not be a problem building for x86, but (as of the latest news from Squ
 - [x] add TTS support
 - [x] add Telegram support
 - [x] add PushBullet support
-- [ ] add Discord support
+- [x] add Discord support
 - [ ] Inject toasts in game (to make it work even in full screen mode)
 
 ---
