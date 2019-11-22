@@ -38,6 +38,7 @@ namespace DFAssist.Helpers
             // All the settings to deserialize
             _xmlSettingsSerializer.AddControlSetting(_mainControl.DisableToasts.Name, _mainControl.DisableToasts);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.LanguageValue.Name, _mainControl.LanguageValue);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.FlashTaskbar.Name, _mainControl.FlashTaskbar);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsCheckBox.Name, _mainControl.TtsCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsVoicesComboBox.Name, _mainControl.TtsVoicesComboBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PersistToasts.Name, _mainControl.PersistToasts);
