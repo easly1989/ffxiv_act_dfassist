@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts;
 using DFAssist.Contracts.Duty;
@@ -21,6 +22,8 @@ namespace DFAssist.Helpers
 
         private FFXIVNetworkMonitor _ffxivNetworkMonitor;
 
+
+        private Process _process;
         public Process ActiveProcess
         {
             get
@@ -28,12 +31,19 @@ namespace DFAssist.Helpers
                 if (_ffxivNetworkMonitor == null)
                     return default;
 
-                var pid = Convert.ToInt32(_ffxivNetworkMonitor.ProcessID);
-                if(pid == 0)
-                    return default;
 
-                var activeProcess = Process.GetProcessById(pid);
-                return activeProcess;
+                if (_process != null && !_process.HasExited)
+                    return _process;
+
+                var pid = (int)_ffxivNetworkMonitor.ProcessID;
+                if (pid == 0)
+                {
+                    _process = Process.GetProcessesByName("ffxiv_dx11").FirstOrDefault();
+                    return _process;
+                }
+
+                _process = Process.GetProcessById(pid);
+                return _process;
             }
         }
 
