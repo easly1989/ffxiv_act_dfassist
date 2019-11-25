@@ -2,14 +2,14 @@
   "ui-language-display-text": "言語",
 
   "ui-toast-notification-test-title": "これを見たら...",
-  "ui-toast-notification-test-message": "... トーストは機能する!",
+  "ui-toast-notification-test-message": "... トーストは機能する！",
 
   "ui-tts-notification-test-title": "これを聞いたら...",
-  "ui-tts-notification-test-message": "... TTSは動作します!",
+  "ui-tts-notification-test-message": "... TTSは動作します！",
 
   "ui-log-clear-display-text": "ログをクリアします",
 
-  "ui-telegram-display-text": "テレグラム通知を有効にする",
+  "ui-telegram-display-text": "Telegram通知を有効にする",
   "ui-telegram-token-display-text": "トークン",
   "ui-telegram-chatid-display-text": "チャットID",
 
@@ -25,16 +25,16 @@
 
   "ui-enable-test-environment": "テスト環境を有効にする",
 
-  "ui-update-available-message": "DFAssistプラグインの更新版があります。 今すぐ更新しますか\n\nACTが更新された場合は、[いいえ]をクリックしてからACTを更新してください。",
-  "ui-update-available-title": "DFAssistアップデート公開!",
+  "ui-update-available-message": "DFAssistプラグインの更新版があります。今すぐ更新しますか？\n\nACTが更新された場合は、[いいえ]をクリックしてからACTを更新してください。",
+  "ui-update-available-title": "DFAssistアップデート公開！",
   "ui-update-restart-message": "DFAssistプラグインが正しく機能することを確認するには、ACTを再起動してください！",
-  "ui-update-restart-title": "再起動ACTが必要",
+  "ui-update-restart-title": "ACTの再起動が必要です",
 
   "ui-enable-tts": "テキスト読み上げを有効にする",
-  "ui-tts-dutyfound": "義務が見つかりました！",
+  "ui-tts-dutyfound": "コンテンツが見つかりました！",
   "ui-tts-voice-selection-label": "選択された声",
 
-  "ui-persist-toasts": "乾杯を持続させる",
+  "ui-persist-toasts": "トーストを持続させる",
 
   "ui-enable-act-toasts": "ACTトーストを有効にする",
   "ui-close-act-toast": "トーストを閉じる",
@@ -48,7 +48,7 @@
   "ui-toast-settings-group": "トースト設定",
   "ui-tts-settings-group": "テキスト読み上げ設定",
   "ui-test-settings-group": "テスト設定",
-  "ui-telegram-settings-group": "電報設定",
-  "ui-pushbullet-settings-group": "プッシュブレットの設定",
-  "ui-discord-settings-group": "不一致の設定"
+  "ui-telegram-settings-group": "Telegram設定",
+  "ui-pushbullet-settings-group": "Pushbullet設定",
+  "ui-discord-settings-group": "Discord設定"
 }
