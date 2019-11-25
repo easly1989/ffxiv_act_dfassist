@@ -13,7 +13,7 @@
   "ui-telegram-token-display-text": "Token",
   "ui-telegram-chatid-display-text": "Chat Id",
 
-  "ui-pushbullet-display-text": "Enable Pusbullet Notifications",
+  "ui-pushbullet-display-text": "Enable Pushbullet Notifications",
   "ui-pushbullet-token-display-text": "Access Token",
   "ui-pushbullet-deviceid-display-text": "Device Id",
 
@@ -41,7 +41,7 @@
 
   "ui-disable-toasts": "Disable Toasts",
   "ui-flash-taskbar": "Flash Taskbar when a Notification is received",
-  
+
   "ui-test-log-level-selction-label": "Log Level",
 
   "ui-general-settings-group": "General Settings",
