@@ -33,14 +33,18 @@ namespace DFAssist.Core.Network
                 var opcode = BitConverter.ToUInt16(message, 18);
 
 #if !DEBUG
-                if (opcode != 0x0164 &&
-                    opcode != 0x032D &&
-                    opcode != 0x03CF &&
-                    opcode != 0x02A8 &&
-                    opcode != 0x032F &&
-                    opcode != 0x0339 &&
-                    opcode != 0x0002)
+                if(opcode != 0x02B0)
                     return;
+
+                // todo: looking for the rest of the opcodes...
+                //if (opcode != 0x0164 &&
+                //    opcode != 0x02B0 &&
+                //    opcode != 0x03CF &&
+                //    opcode != 0x02A8 &&
+                //    opcode != 0x032F &&
+                //    opcode != 0x0339 &&
+                //    opcode != 0x0002)
+                //    return;
 #endif
 #if DEBUG
                 _logger.Write($"--- Received opcode: {opcode}", LogLevel.Warn);
@@ -65,7 +69,7 @@ namespace DFAssist.Core.Network
                         }
                     }
                 }
-                else if (opcode == 0x032D) // 5.11 Duty Matched
+                else if (opcode == 0x02B0) 
                 {
                     var matchedRoulette = BitConverter.ToUInt16(data, 2);
                     var matchedCode = BitConverter.ToUInt16(data, 20);

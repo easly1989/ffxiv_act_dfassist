@@ -1,4 +1,6 @@
-﻿using DiscordWebhook;
+﻿using System;
+using Discord;
+using Discord.Webhook;
 using Splat;
 
 namespace DFAssist.Helpers
@@ -13,8 +15,8 @@ namespace DFAssist.Helpers
                 return;
             }
 
-            var username = MainControl.DiscordUsernameTextBox.Text;
-            if(string.IsNullOrWhiteSpace(username))
+            var userId = MainControl.DiscordUsernameTextBox.Text;
+            if(string.IsNullOrWhiteSpace(userId))
             {
                 Logger.Write("UI: Specify a Username for the Discord settings", LogLevel.Warn);
                 return;
@@ -29,18 +31,27 @@ namespace DFAssist.Helpers
 
             Logger.Write("UI: Sending Discord Notification...", LogLevel.Debug);
 
-            var content = $"@{username} | {title}\n>>>>> {message}";
+            var content = $"@>>>>> {message}";
             if(!string.IsNullOrWhiteSpace(testing))
                 content += $" [{testing}]";
 
-            var webhook = new Webhook(webhookUrl);
-            var webHookObj = new WebhookObject
+            using (var client = new DiscordWebhookClient(webhookUrl))
             {
-                username = username,
-                content = content
-            };
+                var embed = new EmbedBuilder()
+                    .WithTitle(title)
+                    .WithDescription(content)
+                    .WithColor(new Color(0xA5DB17))
+                    .WithTimestamp(DateTimeOffset.Now)
+                    .WithFooter(footer => {
+                        footer
+                            .WithText("Advanced Combat Tracker")
+                            .WithIconUrl("https://advancedcombattracker.com/act_data/act_banner1.png");
+                    })
+                    .Build();
 
-            webhook.PostData(webHookObj);
+                client.SendMessageAsync(username: "DFAssist", text: $"<@!{userId}>", embeds: new []{ embed })
+                    .Wait();
+            }
 
             Logger.Write("UI: Discord notification sent!", LogLevel.Debug);
         }

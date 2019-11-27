@@ -134,8 +134,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DiscordWebhooks">
-      <Version>1.0.4</Version>
+    <PackageReference Include="Discord.Net.Webhook">
+      <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>

@@ -107,10 +107,8 @@ namespace DFAssist.Loader
 
             // check if any of the assemblies of this plugin is requesting an AssemblyResolve
             var requestingAssemblyName = GetAssemblyName(args.RequestingAssembly.FullName);
-            if (requestingAssemblyName != "DFAssist"
-                && requestingAssemblyName != "DFAssist.Plugin"
-                && requestingAssemblyName != "DFAssist.Core"
-                && requestingAssemblyName != "DFAssist.Contracts")
+            if (requestingAssemblyName.StartsWith("DFAssist", StringComparison.InvariantCultureIgnoreCase)
+                && requestingAssemblyName.StartsWith("Discord.Net", StringComparison.InvariantCultureIgnoreCase))
                 return null;
 
             var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.FullName == args.Name);
