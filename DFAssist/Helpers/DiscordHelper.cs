@@ -15,7 +15,7 @@ namespace DFAssist.Helpers
                 return;
             }
 
-            var userId = MainControl.DiscordUsernameTextBox.Text;
+            var userId = MainControl.DiscordUseridTextBox.Text;
             if(string.IsNullOrWhiteSpace(userId))
             {
                 Logger.Write("UI: Specify a Username for the Discord settings", LogLevel.Warn);
@@ -31,7 +31,7 @@ namespace DFAssist.Helpers
 
             Logger.Write("UI: Sending Discord Notification...", LogLevel.Debug);
 
-            var content = $"@>>>>> {message}";
+            var content = $">>>>> {message}";
             if(!string.IsNullOrWhiteSpace(testing))
                 content += $" [{testing}]";
 

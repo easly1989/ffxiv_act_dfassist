@@ -18,7 +18,7 @@
   "ui-pushbullet-deviceid-display-text": "장치 ID",
 
   "ui-discord-display-text": "불일치 알림 사용",
-  "ui-discord-username-display-text": "사용자 이름",
+  "ui-discord-userid-display-text": "아이디",
   "ui-discord-webhook-display-text": "웹 후크 URL",
 
   "ui-test-settings-display-text": "환경설정 테스트",
@@ -50,5 +50,8 @@
   "ui-test-settings-group": "테스트 설정",
   "ui-telegram-settings-group": "텔레그램 설정",
   "ui-pushbullet-settings-group": "푸시불렛 설정",
-  "ui-discord-settings-group": "불일치 설정"
+  "ui-discord-settings-group": "불일치 설정",
+
+  "ui-test-configuration-button": "테스트 구성",
+  "ui-save-configuration-button": "구성 저장"
 }

@@ -31,6 +31,7 @@ namespace DFAssist
 
         public Button ClearLogButton;
         public Button TestConfigurationButton;
+        public Button SaveConfigurationButton;
 
         public Label LanguageLabel;
         public Label AppTitle;
@@ -47,7 +48,7 @@ namespace DFAssist
         public TextBox TelegramChatIdTextBox;
         public TextBox TelegramTokenTextBox;
         public TextBox DiscordWebhookTextBox;
-        public TextBox DiscordUsernameTextBox;
+        public TextBox DiscordUseridTextBox;
         public TextBox PushBulletDeviceIdTextBox;
         public TextBox PushBulletTokenTextBox;
 
@@ -91,7 +92,7 @@ namespace DFAssist
                 LogLevelSelectionLabel
             };
 
-            var result = 0;
+            int result;
             using (var graphics = Graphics.FromImage(new Bitmap(1, 1)))
             {
                 result = labelsToCheck
@@ -123,6 +124,7 @@ namespace DFAssist
             _mainTableLayout = new TableLayoutPanel();
             ClearLogButton = new Button();
             TestConfigurationButton = new Button();
+            SaveConfigurationButton = new Button();
             LoggingRichTextBox = new RichTextBox();
             AppTitle = new Label();
             CopyrightLink = new LinkLabel();
@@ -138,7 +140,7 @@ namespace DFAssist
             TelegramCheckBox = new CheckBox();
             DiscordCheckBox = new CheckBox();
             DiscordWebhookTextBox = new TextBox();
-            DiscordUsernameTextBox = new TextBox();
+            DiscordUseridTextBox = new TextBox();
             TelegramTokenLabel = new Label();
             TelegramTokenTextBox = new TextBox();
             DiscordWebhookLabel = new Label();
@@ -208,6 +210,16 @@ namespace DFAssist
             TestConfigurationButton.TabIndex = 2;
             TestConfigurationButton.Text = "Test Configuration";
             TestConfigurationButton.UseVisualStyleBackColor = true;
+            //
+            // _saveConfigurationButton
+            //
+            SaveConfigurationButton.AutoSize = true;
+            SaveConfigurationButton.Name = "SaveConfigurationButton";
+            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 10, 70);
+            SaveConfigurationButton.MinimumSize = new Size(100, 25);
+            SaveConfigurationButton.TabIndex = 2;
+            SaveConfigurationButton.Text = "Save Configuration";
+            SaveConfigurationButton.UseVisualStyleBackColor = true;
             // 
             // _disableToasts
             // 
@@ -297,11 +309,11 @@ namespace DFAssist
             DiscordUsernameLabel.TabStop = false;
             DiscordUsernameLabel.Text = "Username";
             // 
-            // _discordUsernameTextBox
+            // _discordUseridTextBox
             // 
-            DiscordUsernameTextBox.Name = "DiscordUsernameTextBox";
-            DiscordUsernameTextBox.Size = new Size(400, 25);
-            DiscordUsernameTextBox.TabIndex = 10;
+            DiscordUseridTextBox.Name = "DiscordUseridTextBox";
+            DiscordUseridTextBox.Size = new Size(400, 25);
+            DiscordUseridTextBox.TabIndex = 10;
             // 
             // _telegramCheckBox
             // 
@@ -563,6 +575,7 @@ namespace DFAssist
             GeneralSettings.Controls.Add(LanguageComboBox);
             GeneralSettings.Controls.Add(FlashTaskbar);
             GeneralSettings.Controls.Add(TestConfigurationButton);
+            GeneralSettings.Controls.Add(SaveConfigurationButton);
             GeneralSettings.Name = "GeneralSettings";
             GeneralSettings.TabStop = false;
             GeneralSettings.Text = "General Settings";
@@ -597,7 +610,7 @@ namespace DFAssist
             DiscordSettings.Controls.Add(DiscordWebhookLabel);
             DiscordSettings.Controls.Add(DiscordWebhookTextBox);
             DiscordSettings.Controls.Add(DiscordUsernameLabel);
-            DiscordSettings.Controls.Add(DiscordUsernameTextBox);
+            DiscordSettings.Controls.Add(DiscordUseridTextBox);
             DiscordSettings.Name = "DiscordSettings";
             DiscordSettings.TabStop = false;
             DiscordSettings.Text = "Discord Settings";
@@ -668,8 +681,14 @@ namespace DFAssist
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
             LogLevelSelectionLabel.TextChanged += LogLevelSelectionLabelOnTextChanged;
+            TestConfigurationButton.SizeChanged += TestConfigurationButtonOnSizeChanged;
             DFAssistPlugin.Instance.InitPlugin(this);
             UpdateLabelDependantLayout();
+        }
+
+        private void TestConfigurationButtonOnSizeChanged(object sender, EventArgs e)
+        {
+            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 10, 70);
         }
 
         private void UpdateLabelDependantLayout()
@@ -678,7 +697,7 @@ namespace DFAssist
             LanguageComboBox.Location = new Point(width, 25);
             TtsVoicesComboBox.Location = new Point(width, 50);
             DiscordWebhookTextBox.Location = new Point(width, 50);
-            DiscordUsernameTextBox.Location = new Point(width, 75);
+            DiscordUseridTextBox.Location = new Point(width, 75);
             TelegramTokenTextBox.Location = new Point(width, 50);
             TelegramChatIdTextBox.Location = new Point(width, 75);
             PushBulletTokenTextBox.Location = new Point(width, 50);
@@ -693,6 +712,7 @@ namespace DFAssist
 
         public void DeInitPlugin()
         {
+            TestConfigurationButton.SizeChanged -= TestConfigurationButtonOnSizeChanged;
             LogLevelSelectionLabel.TextChanged -= LogLevelSelectionLabelOnTextChanged;
             DFAssistPlugin.Instance.DeInitPlugin();
         }

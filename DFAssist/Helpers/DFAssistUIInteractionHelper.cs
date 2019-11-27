@@ -32,7 +32,7 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
             _mainControl.PushBulletDeviceIdTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
             _mainControl.DiscordWebhookTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
-            _mainControl.DiscordUsernameTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+            _mainControl.DiscordUseridTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
 
             // force initialization of combobox values, not related a subvalue (like the language)
             LogLevelComboBoxOnSelectedValueChanged(this, new EventArgs());
@@ -58,6 +58,7 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletCheckbox.CheckStateChanged += EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click += ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click += TestConfigurationButton_Click;
+            _mainControl.SaveConfigurationButton.Click += SaveConfigurationButtonOnClick;
             _mainControl.LogLevelComboBox.SelectedValueChanged += LogLevelComboBoxOnSelectedValueChanged;
         }
 
@@ -199,7 +200,7 @@ namespace DFAssist.Helpers
         {
             _logger.Write($"UI: [Discord] Desired Value: {_mainControl.DiscordCheckBox.Checked}", LogLevel.Debug);
             _mainControl.DiscordWebhookTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
-            _mainControl.DiscordUsernameTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+            _mainControl.DiscordUseridTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
         }
 
         private void EnablePushBulletOnCheckedChanged(object sender, EventArgs eventArgs)
@@ -224,6 +225,11 @@ namespace DFAssist.Helpers
             PushBulletHelper.Instance.SendNotification(title, message);
             DiscordHelper.Instance.SendNotification(title, message);
             TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
+        }
+
+        private void SaveConfigurationButtonOnClick(object sender, EventArgs e)
+        {
+            ACTPluginSettingsHelper.Instance.SaveSettings();
         }
 
         public void Dispose()

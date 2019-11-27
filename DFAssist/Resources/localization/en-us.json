@@ -18,7 +18,7 @@
   "ui-pushbullet-deviceid-display-text": "Device Id",
 
   "ui-discord-display-text": "Enable Discord Notifications",
-  "ui-discord-username-display-text": "Username",
+  "ui-discord-userid-display-text": "User ID",
   "ui-discord-webhook-display-text": "Webhook URL",
 
   "ui-test-settings-display-text": "Test Configuration",
@@ -50,5 +50,8 @@
   "ui-test-settings-group": "Test Settings",
   "ui-telegram-settings-group": "Telegram Settings",
   "ui-pushbullet-settings-group": "Pushbullet Settings",
-  "ui-discord-settings-group": "Discord Settings"
+  "ui-discord-settings-group": "Discord Settings",
+
+  "ui-test-configuration-button": "Test Configuration",
+  "ui-save-configuration-button": "Save Configuration"
 }

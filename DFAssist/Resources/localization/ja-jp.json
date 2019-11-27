@@ -18,7 +18,7 @@
   "ui-pushbullet-deviceid-display-text": "デバイスID",
 
   "ui-discord-display-text": "Discord通知を有効にする",
-  "ui-discord-username-display-text": "ユーザー名",
+  "ui-discord-userid-display-text": "ユーザーID",
   "ui-discord-webhook-display-text": "Webhook URL",
 
   "ui-test-settings-display-text": "テスト構成",
@@ -50,5 +50,8 @@
   "ui-test-settings-group": "テスト設定",
   "ui-telegram-settings-group": "Telegram設定",
   "ui-pushbullet-settings-group": "Pushbullet設定",
-  "ui-discord-settings-group": "Discord設定"
+  "ui-discord-settings-group": "Discord設定",
+
+  "ui-test-configuration-button": "テスト構成",
+  "ui-save-configuration-button": "設定を保存する"
 }
