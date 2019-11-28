@@ -215,7 +215,7 @@ namespace DFAssist
             //
             SaveConfigurationButton.AutoSize = true;
             SaveConfigurationButton.Name = "SaveConfigurationButton";
-            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 10, 70);
+            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 20, 70);
             SaveConfigurationButton.MinimumSize = new Size(100, 25);
             SaveConfigurationButton.TabIndex = 2;
             SaveConfigurationButton.Text = "Save Configuration";
@@ -688,7 +688,7 @@ namespace DFAssist
 
         private void TestConfigurationButtonOnSizeChanged(object sender, EventArgs e)
         {
-            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 10, 70);
+            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 20, 70);
         }
 
         private void UpdateLabelDependantLayout()

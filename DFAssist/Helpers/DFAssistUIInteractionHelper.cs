@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DFAssist.Contracts.Repositories;
+using FFXIV_ACT_Plugin;
 using Microsoft.Win32;
 using Splat;
 
@@ -36,7 +37,7 @@ namespace DFAssist.Helpers
 
             // force initialization of combobox values, not related a subvalue (like the language)
             LogLevelComboBoxOnSelectedValueChanged(this, new EventArgs());
-            TtsVoicesComboBoxOnSelectedValueChanged(this, new EventArgs());
+            TtsVoicesComboBoxOnSelectedValueChanged(this, new BoolEventArgs(true));
         }
 
         public void Subscribe()
@@ -99,9 +100,12 @@ namespace DFAssist.Helpers
 
         private void TtsVoicesComboBoxOnSelectedValueChanged(object sender, EventArgs e)
         {
+            var sendNotification = !(e is BoolEventArgs x) || !x.BoolValue;
             TTSHelper.Instance.SelectVoice(_mainControl.TtsVoicesComboBox.SelectedValue as string);
             _logger.Write($"UI: [TTS] Selected Voice - Desired Value: {_mainControl.TtsVoicesComboBox.SelectedValue}", LogLevel.Debug);
-            TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
+            
+            if(sendNotification)
+                TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
         }
 
         private void DonateLinkOnLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
