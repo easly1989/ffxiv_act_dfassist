@@ -32,8 +32,8 @@ namespace DFAssist.Helpers
                 if (_process != null && !_process.HasExited)
                     return _process;
 
-
-                _process = Process
+                _process = _ffPlugin.DataRepository.GetCurrentFFXIVProcess()
+                           ?? Process
                     .GetProcessesByName("ffxiv_dx11")
                     .FirstOrDefault();
 
