@@ -33,18 +33,9 @@ namespace DFAssist.Core.Network
                 var opcode = BitConverter.ToUInt16(message, 18);
 
 #if !DEBUG
-                if(opcode != 0x02B0)
+                if(opcode != 0x02B0 && 
+                   opcode != 0x022F) 
                     return;
-
-                // todo: looking for the rest of the opcodes...
-                //if (opcode != 0x0164 &&
-                //    opcode != 0x02B0 &&
-                //    opcode != 0x03CF &&
-                //    opcode != 0x02A8 &&
-                //    opcode != 0x032F &&
-                //    opcode != 0x0339 &&
-                //    opcode != 0x0002)
-                //    return;
 #endif
 #if DEBUG
                 _logger.Write($"--- Received opcode: {opcode}", LogLevel.Warn);
@@ -122,7 +113,7 @@ namespace DFAssist.Core.Network
                             ? $"Q: Matching State Updated [{_dataRepository.GetInstance(code).Name} - {memberinfo}]"
                             : $"Q: Matching State Updated [{memberinfo}]", LogLevel.Debug);
                 }
-                else if (opcode == 0x0339) // 5.11 Entering/Leaving an Instance (Zone change?)
+                else if (opcode == 0x022F) // 5.11 Entering/Leaving an Instance (Zone change?)
                 {
                     var code = BitConverter.ToInt16(data, 4);
 
