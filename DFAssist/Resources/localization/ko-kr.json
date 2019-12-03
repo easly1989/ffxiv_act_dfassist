@@ -13,34 +13,34 @@
   "ui-telegram-token-display-text": "토큰",
   "ui-telegram-chatid-display-text": "채팅 ID",
 
-  "ui-pushbullet-display-text": "푸시불렛 알림 사용",
+  "ui-pushbullet-display-text": "Pushbullet 알림 사용",
   "ui-pushbullet-token-display-text": "액세스 토큰",
   "ui-pushbullet-deviceid-display-text": "장치 ID",
 
-  "ui-discord-display-text": "불일치 알림 사용",
-  "ui-discord-userid-display-text": "아이디",
-  "ui-discord-webhook-display-text": "웹 후크 URL",
+  "ui-discord-display-text": "Discord 알림 사용",
+  "ui-discord-userid-display-text": "사용자명",
+  "ui-discord-webhook-display-text": "웹후크 URL",
 
   "ui-test-settings-display-text": "환경설정 테스트",
 
   "ui-enable-test-environment": "테스트 환경 활성화",
 
-  "ui-update-available-message": "DFAssist Plugin의 업데이트 된 버전이 있습니다. 지금 업데이트 하시겠습니까?\n\n(ACT에 대한 업데이트가있는 경우, 아니요를 클릭하고 먼저 ACT를 업데이트해야합니다.)",
+  "ui-update-available-message": "DFAssist Plugin 업데이트가 있습니다. 지금 하시겠습니까?\n\n(ACT에 대한 업데이트가 있는 경우, 아니요를 클릭하고 먼저 ACT를 업데이트 해야 합니다.)",
   "ui-update-available-title": "DFAssist 업데이트 사용 가능!",
-  "ui-update-restart-message": "DFAssist 플러그인이 올바르게 작동하도록하려면 ACT를 다시 시작하십시오!",
+  "ui-update-restart-message": "DFAssist 플러그인이 올바르게 작동하려면 ACT를 재시작 해야 합니다!",
   "ui-update-restart-title": "ACT 재시작 필요",
 
   "ui-enable-tts": "TTS 사용",
-  "ui-tts-dutyfound": "임무 발견!",
-  "ui-tts-voice-selection-label": "선택된 음색",
+  "ui-tts-dutyfound": "임무 매칭!",
+  "ui-tts-voice-selection-label": "선택된 음성",
 
-  "ui-persist-toasts": "토스트 알림 지속",
+  "ui-persist-toasts": "토스트 알림 남기기",
 
   "ui-enable-act-toasts": "ACT 토스트 사용",
   "ui-close-act-toast": "토스트 닫기",
 
   "ui-disable-toasts": "토스트 비활성화",
-  "ui-flash-taskbar": "알림이 수신되면 Flash 작업 표시 줄",
+  "ui-flash-taskbar": "알림 수신시 작업표시줄 깜빡이기",
 
   "ui-test-log-level-selction-label": "로그 레벨",
 
@@ -49,9 +49,9 @@
   "ui-tts-settings-group": "TTS 설정",
   "ui-test-settings-group": "테스트 설정",
   "ui-telegram-settings-group": "텔레그램 설정",
-  "ui-pushbullet-settings-group": "푸시불렛 설정",
-  "ui-discord-settings-group": "불일치 설정",
+  "ui-pushbullet-settings-group": "Pushbullet 설정",
+  "ui-discord-settings-group": "Discord 설정",
 
-  "ui-test-configuration-button": "테스트 구성",
-  "ui-save-configuration-button": "구성 저장"
+  "ui-test-configuration-button": "설정 테스트",
+  "ui-save-configuration-button": "설정 저장"
 }
