@@ -50,7 +50,7 @@
   "ui-test-settings-group": "테스트 설정",
   "ui-telegram-settings-group": "텔레그램 설정",
   "ui-pushbullet-settings-group": "Pushbullet 설정",
-  "ui-discord-settings-group": "Discord 설정"
+  "ui-discord-settings-group": "Discord 설정",
 
   "ui-test-configuration-button": "설정 테스트",
   "ui-save-configuration-button": "설정 저장"
