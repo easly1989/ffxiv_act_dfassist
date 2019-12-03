@@ -18,7 +18,7 @@
   "ui-pushbullet-deviceid-display-text": "장치 ID",
 
   "ui-discord-display-text": "Discord 알림 사용",
-  "ui-discord-username-display-text": "사용자명",
+  "ui-discord-userid-display-text": "사용자명",
   "ui-discord-webhook-display-text": "웹후크 URL",
 
   "ui-test-settings-display-text": "환경설정 테스트",
