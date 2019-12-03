@@ -38,6 +38,7 @@ namespace DFAssist.Helpers
             // All the settings to deserialize
             _xmlSettingsSerializer.AddControlSetting(_mainControl.DisableToasts.Name, _mainControl.DisableToasts);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.LanguageValue.Name, _mainControl.LanguageValue);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.FlashTaskbar.Name, _mainControl.FlashTaskbar);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsCheckBox.Name, _mainControl.TtsCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.TtsVoicesComboBox.Name, _mainControl.TtsVoicesComboBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PersistToasts.Name, _mainControl.PersistToasts);
@@ -52,7 +53,7 @@ namespace DFAssist.Helpers
             _xmlSettingsSerializer.AddControlSetting(_mainControl.PushBulletDeviceIdTextBox.Name, _mainControl.PushBulletDeviceIdTextBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.DiscordCheckBox.Name, _mainControl.DiscordCheckBox);
             _xmlSettingsSerializer.AddControlSetting(_mainControl.DiscordWebhookTextBox.Name, _mainControl.DiscordWebhookTextBox);
-            _xmlSettingsSerializer.AddControlSetting(_mainControl.DiscordUsernameTextBox.Name, _mainControl.DiscordUsernameTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_mainControl.DiscordUseridTextBox.Name, _mainControl.DiscordUseridTextBox);
 
             if (File.Exists(_settingsFile))
             {
@@ -109,7 +110,7 @@ namespace DFAssist.Helpers
             if(_mainControl.DiscordCheckBox.Checked)
             {
                 _logger.Write($"Discord Webhook URL: {_mainControl.DiscordWebhookTextBox.Text}", LogLevel.Debug);
-                _logger.Write($"Discord Username: {_mainControl.DiscordUsernameTextBox.Text}", LogLevel.Debug);
+                _logger.Write($"Discord Username: {_mainControl.DiscordUseridTextBox.Text}", LogLevel.Debug);
             }
             _logger.Write($"Enable Telegram Notifications: {_mainControl.TelegramCheckBox.Checked}", LogLevel.Debug);
             if(_mainControl.TelegramCheckBox.Checked)
@@ -153,7 +154,7 @@ namespace DFAssist.Helpers
                     xmlTextWriter.Flush(); // Flush the file buffer to disk
                     xmlTextWriter.Close();
 
-                    _logger.Write("Settings Saved!", LogLevel.Debug);
+                    _logger.Write("Settings Saved!", LogLevel.Info);
                 }
             }
             catch (Exception ex)

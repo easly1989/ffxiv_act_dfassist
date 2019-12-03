@@ -14,8 +14,6 @@ namespace DFAssist.Core.Network
         private readonly ILogger _logger;
         private readonly IDataRepository _dataRepository;
 
-        private byte _rouletteCode;
-
         public FFXIVPacketHandler()
         {
             _logger = Locator.Current.GetService<ILogger>();
@@ -35,13 +33,8 @@ namespace DFAssist.Core.Network
                 var opcode = BitConverter.ToUInt16(message, 18);
 
 #if !DEBUG
-                if (opcode != 0x0164 &&
-                    opcode != 0x032D &&
-                    opcode != 0x03CF &&
-                    opcode != 0x02A8 &&
-                    opcode != 0x032F &&
-                    opcode != 0x0339 &&
-                    opcode != 0x0002)
+                if(opcode != 0x02B0 && 
+                   opcode != 0x022F) 
                     return;
 #endif
 #if DEBUG
@@ -50,15 +43,14 @@ namespace DFAssist.Core.Network
                 var data = message.Skip(32).ToArray();
                 if (opcode == 0x0164) // 5.11 Duties
                 {
-                    _rouletteCode = data[8];
+                    var rouletteCode = data[8];
 
-                    if (_rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
+                    if (rouletteCode != 0 && (data[15] == 0 || data[15] == 64)) // Roulette, on Korean Server || on Global Server
                     {
-                        _logger.Write($"Q: Duty Roulette Matching Started [{_rouletteCode}] - {_dataRepository.GetRoulette(_rouletteCode).Name}", LogLevel.Debug);
+                        _logger.Write($"Q: Duty Roulette Matching Started [{rouletteCode}] - {_dataRepository.GetRoulette(rouletteCode).Name}", LogLevel.Debug);
                     }
                     else // Specific Duty (Dungeon/Trial/Raid)
                     {
-                        _rouletteCode = 0;
                         _logger.Write("Q: Matching started for duties: ", LogLevel.Debug);
                         for (var i = 0; i < 5; i++)
                         {
@@ -68,7 +60,7 @@ namespace DFAssist.Core.Network
                         }
                     }
                 }
-                else if (opcode == 0x032D) // 5.11 Duty Matched
+                else if (opcode == 0x02B0) 
                 {
                     var matchedRoulette = BitConverter.ToUInt16(data, 2);
                     var matchedCode = BitConverter.ToUInt16(data, 20);
@@ -102,7 +94,7 @@ namespace DFAssist.Core.Network
                     var healerMax = data[11];
                     var dps = data[12];
                     var dpsMax = data[13];
-                    
+
                     var memberinfo = $"Tanks: {tank}/{tankMax}, Healers: {healer}/{healerMax}, Dps: {dps}/{dpsMax}";
                     _logger.Write($"Q: Matching State Updated [{memberinfo}] - WaitList: {waitList} | WaitTime: {waitTime}", LogLevel.Debug);
                 }
@@ -113,7 +105,7 @@ namespace DFAssist.Core.Network
                     var healer = data[14];
                     var healerMax = data[15];
                     var dps = data[16];
-                    var dpsMax = data[15];
+                    var dpsMax = data[17];
                     var memberinfo = $"Tanks: {tank}/{tankMax}, Healers: {healer}/{healerMax}, Dps: {dps}/{dpsMax}";
 
                     var code = BitConverter.ToUInt16(data, 8);
@@ -121,22 +113,22 @@ namespace DFAssist.Core.Network
                             ? $"Q: Matching State Updated [{_dataRepository.GetInstance(code).Name} - {memberinfo}]"
                             : $"Q: Matching State Updated [{memberinfo}]", LogLevel.Debug);
                 }
-                else if (opcode == 0x0339) // 5.11 Entering/Leaving an Instance (Zone change?)
+                else if (opcode == 0x022F) // 5.11 Entering/Leaving an Instance (Zone change?)
                 {
                     var code = BitConverter.ToInt16(data, 4);
-                    var instanceName = code == 0 ? "Unknown Instance" : _dataRepository.GetInstance(code).Name;
 
                     switch (data[8])
                     {
                         case 0x0B: // Entering
+                            var instanceName = code == 0 ? "Unknown Instance" : _dataRepository.GetInstance(code).Name;
                             _logger.Write($"I: Entered Instance Area [{code}] - {instanceName}", LogLevel.Debug);
                             break;
                         case 0x0C: // Leaving
-                            _logger.Write($"I: Left Instance Area [{code}] - {instanceName}", LogLevel.Debug);
+                            _logger.Write($"I: Left Instance Area [{code}]", LogLevel.Debug);
                             break;
                     }
                 }
-                else if(opcode == 0x0002) // 5.11 Duty Matching Complete
+                else if (opcode == 0x0002) // 5.11 Duty Matching Complete
                 {
                     _logger.Write("Q: Matching Completed!", LogLevel.Debug);
                 }

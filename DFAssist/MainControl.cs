@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 using FontStyle = System.Drawing.FontStyle;
@@ -29,6 +31,7 @@ namespace DFAssist
 
         public Button ClearLogButton;
         public Button TestConfigurationButton;
+        public Button SaveConfigurationButton;
 
         public Label LanguageLabel;
         public Label AppTitle;
@@ -45,7 +48,7 @@ namespace DFAssist
         public TextBox TelegramChatIdTextBox;
         public TextBox TelegramTokenTextBox;
         public TextBox DiscordWebhookTextBox;
-        public TextBox DiscordUsernameTextBox;
+        public TextBox DiscordUseridTextBox;
         public TextBox PushBulletDeviceIdTextBox;
         public TextBox PushBulletTokenTextBox;
 
@@ -74,6 +77,33 @@ namespace DFAssist
             InitializeComponent();
         }
 
+        private int GetMaxLabelWidth()
+        {
+            var labelsToCheck = new[]
+            {
+                LanguageLabel,
+                TelegramChatIdLabel,
+                TelegramTokenLabel,
+                DiscordWebhookLabel,
+                DiscordUsernameLabel,
+                PushBulletDeviceIdlabel,
+                PushBulletTokenLabel,
+                TtsVoiceSelectionLabel,
+                LogLevelSelectionLabel
+            };
+
+            int result;
+            using (var graphics = Graphics.FromImage(new Bitmap(1, 1)))
+            {
+                result = labelsToCheck
+                    .Select(label => graphics.MeasureString(label.Text, new Font("Segoe UI", 10, FontStyle.Regular, GraphicsUnit.Point)))
+                    .Select(size => (int)size.Width)
+                    .Max();
+            }
+
+            return result;
+        }
+
         private void InitializeComponent()
         {
             LanguageLabel = new Label();
@@ -94,6 +124,7 @@ namespace DFAssist
             _mainTableLayout = new TableLayoutPanel();
             ClearLogButton = new Button();
             TestConfigurationButton = new Button();
+            SaveConfigurationButton = new Button();
             LoggingRichTextBox = new RichTextBox();
             AppTitle = new Label();
             CopyrightLink = new LinkLabel();
@@ -109,7 +140,7 @@ namespace DFAssist
             TelegramCheckBox = new CheckBox();
             DiscordCheckBox = new CheckBox();
             DiscordWebhookTextBox = new TextBox();
-            DiscordUsernameTextBox = new TextBox();
+            DiscordUseridTextBox = new TextBox();
             TelegramTokenLabel = new Label();
             TelegramTokenTextBox = new TextBox();
             DiscordWebhookLabel = new Label();
@@ -141,7 +172,7 @@ namespace DFAssist
             // LanguageLabel
             // 
             LanguageLabel.AutoSize = true;
-            LanguageLabel.Location = new Point(3, 23);
+            LanguageLabel.Location = new Point(5, 25);
             LanguageLabel.Name = "LanguageLabel";
             LanguageLabel.TabStop = false;
             LanguageLabel.Text = "Language";
@@ -156,17 +187,17 @@ namespace DFAssist
             // 
             LanguageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             LanguageComboBox.FormattingEnabled = true;
-            LanguageComboBox.Location = new Point(90, 23);
             LanguageComboBox.Name = "LanguageComboBox";
-            LanguageComboBox.Size = new Size(390, 25);
+            LanguageComboBox.Size = new Size(400, 25);
             LanguageComboBox.TabIndex = 0;
             // 
             // _flashTaskbar
             // 
             FlashTaskbar.AutoSize = true;
-            FlashTaskbar.Location = new Point(6, 45);
+            FlashTaskbar.Location = new Point(5, 50);
             FlashTaskbar.Name = "FlashTaskbar";
             FlashTaskbar.TabIndex = 1;
+            FlashTaskbar.Size = new Size(400, 25);
             FlashTaskbar.Text = "Flash Taskbar when a Notification is received";
             FlashTaskbar.UseVisualStyleBackColor = true;
             //
@@ -174,52 +205,66 @@ namespace DFAssist
             //
             TestConfigurationButton.AutoSize = true;
             TestConfigurationButton.Name = "TestConfigurationButton";
-            TestConfigurationButton.Location = new Point(6, 68);
+            TestConfigurationButton.Location = new Point(5, 70);
             TestConfigurationButton.MinimumSize = new Size(100, 25);
             TestConfigurationButton.TabIndex = 2;
             TestConfigurationButton.Text = "Test Configuration";
             TestConfigurationButton.UseVisualStyleBackColor = true;
+            //
+            // _saveConfigurationButton
+            //
+            SaveConfigurationButton.AutoSize = true;
+            SaveConfigurationButton.Name = "SaveConfigurationButton";
+            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 20, 70);
+            SaveConfigurationButton.MinimumSize = new Size(100, 25);
+            SaveConfigurationButton.TabIndex = 2;
+            SaveConfigurationButton.Text = "Save Configuration";
+            SaveConfigurationButton.UseVisualStyleBackColor = true;
             // 
             // _disableToasts
             // 
             DisableToasts.AutoSize = true;
-            DisableToasts.Location = new Point(6, 22);
+            DisableToasts.Location = new Point(5, 25);
             DisableToasts.Name = "DisableToasts";
             DisableToasts.TabIndex = 3;
+            DisableToasts.Size = new Size(400, 25);
             DisableToasts.Text = "Disable Toasts";
             DisableToasts.UseVisualStyleBackColor = true;
             // 
             // _persistToasts
             // 
             PersistToasts.AutoSize = true;
-            PersistToasts.Location = new Point(6, 45);
+            PersistToasts.Location = new Point(5, 50);
             PersistToasts.Name = "PersistToasts";
             PersistToasts.TabIndex = 4;
+            PersistToasts.Size = new Size(400, 25);
             PersistToasts.Text = "Make Toasts Persistent";
             PersistToasts.UseVisualStyleBackColor = true;
             // 
-            // _enableLegacyToast
+            // _enableActToast
             // 
             EnableActToast.AutoSize = true;
-            EnableActToast.Location = new Point(6, 68);
+            EnableActToast.Location = new Point(5, 75);
             EnableActToast.Name = "EnableActToast";
             EnableActToast.TabIndex = 5;
+            EnableActToast.Size = new Size(400, 25);
             EnableActToast.Text = "Enable ACT Toasts";
             EnableActToast.UseVisualStyleBackColor = true;
             // 
             // _ttsCheckBox
             // 
             TtsCheckBox.AutoSize = true;
-            TtsCheckBox.Location = new Point(6, 22);
+            TtsCheckBox.Location = new Point(5, 25);
             TtsCheckBox.Name = "TtsCheckBox";
             TtsCheckBox.TabIndex = 6;
+            TtsCheckBox.Size = new Size(400, 25);
             TtsCheckBox.Text = "Enable Text To Speech";
             TtsCheckBox.UseVisualStyleBackColor = true;
             // 
             // _ttsVoiceSelectionLabel
             // 
             TtsVoiceSelectionLabel.AutoSize = true;
-            TtsVoiceSelectionLabel.Location = new Point(3, 45);
+            TtsVoiceSelectionLabel.Location = new Point(5, 50);
             TtsVoiceSelectionLabel.Name = "TtsVoiceSelectionLabel";
             TtsVoiceSelectionLabel.TabStop = false;
             TtsVoiceSelectionLabel.Text = "Selected Voice";
@@ -228,151 +273,139 @@ namespace DFAssist
             // 
             TtsVoicesComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             TtsVoicesComboBox.FormattingEnabled = true;
-            TtsVoicesComboBox.Location = new Point(90, 45);
             TtsVoicesComboBox.Name = "TtsVoicesComboBox";
-            TtsVoicesComboBox.Size = new Size(390, 25);
+            TtsVoicesComboBox.Size = new Size(400, 25);
             TtsVoicesComboBox.TabIndex = 7;
             // 
             // _discordCheckBox
             // 
             DiscordCheckBox.AutoSize = true;
-            DiscordCheckBox.Location = new Point(6, 22);
+            DiscordCheckBox.Location = new Point(5, 25);
             DiscordCheckBox.Name = "DiscordCheckBox";
             DiscordCheckBox.TabIndex = 8;
-            DiscordCheckBox.Size = new Size(390, 20);
+            DiscordCheckBox.Size = new Size(400, 25);
             DiscordCheckBox.Text = "Enable Discord Notifications";
             DiscordCheckBox.UseVisualStyleBackColor = true;
             // 
             // _discordWebhookLabel
             // 
             DiscordWebhookLabel.AutoSize = true;
-            DiscordWebhookLabel.Location = new Point(6, 45);
+            DiscordWebhookLabel.Location = new Point(5, 50);
             DiscordWebhookLabel.Name = "DiscordWebhookLabel";
-            DiscordWebhookLabel.Size = new Size(38, 13);
             DiscordWebhookLabel.TabStop = false;
             DiscordWebhookLabel.Text = "Webhook URL";
             // 
             // _discordWebhookTextBox
             // 
-            DiscordWebhookTextBox.Location = new Point(90, 45);
             DiscordWebhookTextBox.Name = "DiscordWebhookTextBox";
-            DiscordWebhookTextBox.Size = new Size(390, 20);
+            DiscordWebhookTextBox.Size = new Size(400, 25);
             DiscordWebhookTextBox.TabIndex = 9;
             // 
             // _discordUsernameLabel
             // 
             DiscordUsernameLabel.AutoSize = true;
-            DiscordUsernameLabel.Location = new Point(6, 68);
+            DiscordUsernameLabel.Location = new Point(5, 75);
             DiscordUsernameLabel.Name = "DiscordUsernameLabel";
-            DiscordUsernameLabel.Size = new Size(41, 13);
             DiscordUsernameLabel.TabStop = false;
             DiscordUsernameLabel.Text = "Username";
             // 
-            // _discordUsernameTextBox
+            // _discordUseridTextBox
             // 
-            DiscordUsernameTextBox.Location = new Point(90, 68);
-            DiscordUsernameTextBox.Name = "DiscordUsernameTextBox";
-            DiscordUsernameTextBox.Size = new Size(390, 20);
-            DiscordUsernameTextBox.TabIndex = 10;
+            DiscordUseridTextBox.Name = "DiscordUseridTextBox";
+            DiscordUseridTextBox.Size = new Size(400, 25);
+            DiscordUseridTextBox.TabIndex = 10;
             // 
             // _telegramCheckBox
             // 
             TelegramCheckBox.AutoSize = true;
-            TelegramCheckBox.Location = new Point(6, 22);
+            TelegramCheckBox.Location = new Point(5, 25);
             TelegramCheckBox.Name = "TelegramCheckBox";
             TelegramCheckBox.TabIndex = 11;
-            TelegramCheckBox.Size = new Size(390, 20);
+            TelegramCheckBox.Size = new Size(400, 25);
             TelegramCheckBox.Text = "Enable Telegram Notifications";
             TelegramCheckBox.UseVisualStyleBackColor = true;
             // 
             // _telegramTokenLabel
             // 
             TelegramTokenLabel.AutoSize = true;
-            TelegramTokenLabel.Location = new Point(6, 45);
+            TelegramTokenLabel.Location = new Point(5, 50);
             TelegramTokenLabel.Name = "TelegramTokenLabel";
-            TelegramTokenLabel.Size = new Size(38, 13);
             TelegramTokenLabel.TabStop = false;
             TelegramTokenLabel.Text = "Token";
             // 
             // _telegramTokenTextBox
             // 
-            TelegramTokenTextBox.Location = new Point(90, 45);
             TelegramTokenTextBox.Name = "TelegramTokenTextBox";
-            TelegramTokenTextBox.Size = new Size(390, 20);
+            TelegramTokenTextBox.Size = new Size(400, 25);
             TelegramTokenTextBox.TabIndex = 12;
             // 
             // _telegramChatIdLabel
             // 
             TelegramChatIdLabel.AutoSize = true;
-            TelegramChatIdLabel.Location = new Point(6, 68);
+            TelegramChatIdLabel.Location = new Point(5, 75);
             TelegramChatIdLabel.Name = "TelegramChatIdLabel";
-            TelegramChatIdLabel.Size = new Size(41, 13);
             TelegramChatIdLabel.TabStop = false;
             TelegramChatIdLabel.Text = "Chat Id";
             // 
             // _telegramChatIdTextBox
             // 
-            TelegramChatIdTextBox.Location = new Point(90, 68);
             TelegramChatIdTextBox.Name = "TelegramChatIdTextBox";
-            TelegramChatIdTextBox.Size = new Size(390, 20);
+            TelegramChatIdTextBox.Size = new Size(400, 25);
             TelegramChatIdTextBox.TabIndex = 13;
             // 
             // _pushbulletCheckbox
             // 
             PushBulletCheckbox.AutoSize = true;
-            PushBulletCheckbox.Location = new Point(6, 22);
+            PushBulletCheckbox.Location = new Point(5, 25);
             PushBulletCheckbox.Name = "PushBulletCheckbox";
             PushBulletCheckbox.TabIndex = 14;
-            PushBulletCheckbox.Size = new Size(390, 20);
+            PushBulletCheckbox.Size = new Size(400, 25);
             PushBulletCheckbox.Text = "Enable Pushbullet Notifications";
             PushBulletCheckbox.UseVisualStyleBackColor = true;
             // 
             // _pushbulletTokenLabel
             // 
             PushBulletTokenLabel.AutoSize = true;
-            PushBulletTokenLabel.Location = new Point(6, 45);
+            PushBulletTokenLabel.Location = new Point(5, 50);
             PushBulletTokenLabel.Name = "PushBulletTokenLabel";
-            PushBulletTokenLabel.Size = new Size(76, 13);
             PushBulletTokenLabel.TabStop = false;
             PushBulletTokenLabel.Text = "Access Token";
             // 
             // _pushbulletTokenTextBox
             // 
-            PushBulletTokenTextBox.Location = new Point(90, 45);
             PushBulletTokenTextBox.Name = "PushBulletTokenTextBox";
-            PushBulletTokenTextBox.Size = new Size(390, 20);
+            PushBulletTokenTextBox.Size = new Size(400, 25);
             PushBulletTokenTextBox.TabIndex = 15;
             // 
             // _pushbulletDeviceIdlabel
             // 
             PushBulletDeviceIdlabel.AutoSize = true;
-            PushBulletDeviceIdlabel.Location = new Point(6, 68);
+            PushBulletDeviceIdlabel.Location = new Point(5, 75);
             PushBulletDeviceIdlabel.Name = "PushBulletDeviceIdlabel";
-            PushBulletDeviceIdlabel.Size = new Size(53, 13);
             PushBulletDeviceIdlabel.TabStop = false;
             PushBulletDeviceIdlabel.Text = "Device Id";
             // 
             // _pushbulletDeviceIdTextBox
             // 
-            PushBulletDeviceIdTextBox.Location = new Point(90, 68);
             PushBulletDeviceIdTextBox.Name = "PushBulletDeviceIdTextBox";
-            PushBulletDeviceIdTextBox.Size = new Size(390, 20);
+            PushBulletDeviceIdTextBox.Size = new Size(400, 25);
             PushBulletDeviceIdTextBox.TabIndex = 16;
             // 
             // 
             // _enableTestEnvironment
             // 
             EnableTestEnvironment.AutoSize = true;
-            EnableTestEnvironment.Location = new Point(6, 22);
+            EnableTestEnvironment.Location = new Point(5, 25);
             EnableTestEnvironment.Name = "EnableTestEnvironment";
             EnableTestEnvironment.TabIndex = 17;
+            EnableTestEnvironment.Size = new Size(400, 25);
             EnableTestEnvironment.Text = "Enable Test Environment";
             EnableTestEnvironment.UseVisualStyleBackColor = true;
             // 
             // _logLevelSelectionLabel
             // 
             LogLevelSelectionLabel.AutoSize = true;
-            LogLevelSelectionLabel.Location = new Point(3, 45);
+            LogLevelSelectionLabel.Location = new Point(5, 50);
             LogLevelSelectionLabel.Name = "LogLevelSelectionLabel";
             LogLevelSelectionLabel.TabStop = false;
             LogLevelSelectionLabel.Text = "Selected Voice";
@@ -381,9 +414,8 @@ namespace DFAssist
             // 
             LogLevelComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             LogLevelComboBox.FormattingEnabled = true;
-            LogLevelComboBox.Location = new Point(90, 45);
             LogLevelComboBox.Name = "LogLevelComboBox";
-            LogLevelComboBox.Size = new Size(390, 25);
+            LogLevelComboBox.Size = new Size(400, 25);
             LogLevelComboBox.TabIndex = 18;
             // 
             // _appTabControl
@@ -543,6 +575,7 @@ namespace DFAssist
             GeneralSettings.Controls.Add(LanguageComboBox);
             GeneralSettings.Controls.Add(FlashTaskbar);
             GeneralSettings.Controls.Add(TestConfigurationButton);
+            GeneralSettings.Controls.Add(SaveConfigurationButton);
             GeneralSettings.Name = "GeneralSettings";
             GeneralSettings.TabStop = false;
             GeneralSettings.Text = "General Settings";
@@ -577,7 +610,7 @@ namespace DFAssist
             DiscordSettings.Controls.Add(DiscordWebhookLabel);
             DiscordSettings.Controls.Add(DiscordWebhookTextBox);
             DiscordSettings.Controls.Add(DiscordUsernameLabel);
-            DiscordSettings.Controls.Add(DiscordUsernameTextBox);
+            DiscordSettings.Controls.Add(DiscordUseridTextBox);
             DiscordSettings.Name = "DiscordSettings";
             DiscordSettings.TabStop = false;
             DiscordSettings.Text = "Discord Settings";
@@ -647,11 +680,40 @@ namespace DFAssist
 
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
         {
+            LogLevelSelectionLabel.TextChanged += LogLevelSelectionLabelOnTextChanged;
+            TestConfigurationButton.SizeChanged += TestConfigurationButtonOnSizeChanged;
             DFAssistPlugin.Instance.InitPlugin(this);
+            UpdateLabelDependantLayout();
+        }
+
+        private void TestConfigurationButtonOnSizeChanged(object sender, EventArgs e)
+        {
+            SaveConfigurationButton.Location = new Point(TestConfigurationButton.Width + 20, 70);
+        }
+
+        private void UpdateLabelDependantLayout()
+        {
+            var width = GetMaxLabelWidth();
+            LanguageComboBox.Location = new Point(width, 25);
+            TtsVoicesComboBox.Location = new Point(width, 50);
+            DiscordWebhookTextBox.Location = new Point(width, 50);
+            DiscordUseridTextBox.Location = new Point(width, 75);
+            TelegramTokenTextBox.Location = new Point(width, 50);
+            TelegramChatIdTextBox.Location = new Point(width, 75);
+            PushBulletTokenTextBox.Location = new Point(width, 50);
+            PushBulletDeviceIdTextBox.Location = new Point(width, 75);
+            LogLevelComboBox.Location = new Point(width, 50);
+        }
+
+        private void LogLevelSelectionLabelOnTextChanged(object sender, EventArgs e)
+        {
+            UpdateLabelDependantLayout();
         }
 
         public void DeInitPlugin()
         {
+            TestConfigurationButton.SizeChanged -= TestConfigurationButtonOnSizeChanged;
+            LogLevelSelectionLabel.TextChanged -= LogLevelSelectionLabelOnTextChanged;
             DFAssistPlugin.Instance.DeInitPlugin();
         }
     }

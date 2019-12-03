@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Advanced_Combat_Tracker;
 using DFAssist.Contracts;
 using DFAssist.Contracts.Duty;
 using DFAssist.Contracts.Repositories;
-using Machina.FFXIV;
 using Splat;
 
 namespace DFAssist.Helpers
@@ -18,37 +18,38 @@ namespace DFAssist.Helpers
         private IActLogger _logger = Locator.Current.GetService<IActLogger>();
         private IPacketHandler _packetHandler = Locator.Current.GetService<IPacketHandler>();
         private IDataRepository _dataRepository = Locator.Current.GetService<IDataRepository>();
+        private FFXIV_ACT_Plugin.FFXIV_ACT_Plugin _ffPlugin = Locator.Current.GetService<FFXIV_ACT_Plugin.FFXIV_ACT_Plugin>();
 
-        private FFXIVNetworkMonitor _ffxivNetworkMonitor;
-
+        private Process _process;
         public Process ActiveProcess
         {
             get
             {
-                if (_ffxivNetworkMonitor == null)
+                if (_ffPlugin == null)
                     return default;
 
-                var pid = Convert.ToInt32(_ffxivNetworkMonitor.ProcessID);
-                if(pid == 0)
-                    return default;
 
-                var activeProcess = Process.GetProcessById(pid);
-                return activeProcess;
+                if (_process != null && !_process.HasExited)
+                    return _process;
+
+                _process = _ffPlugin.DataRepository.GetCurrentFFXIVProcess()
+                           ?? Process
+                    .GetProcessesByName("ffxiv_dx11")
+                    .FirstOrDefault();
+
+                return _process;
             }
-        }
-
-        public FFXIVNetworkProcessHelper()
-        {
-            _ffxivNetworkMonitor = new FFXIVNetworkMonitor
-            {
-                MessageReceived = (connection, epoch, message) => _packetHandler.HandleMessage(message, OnMessageReceived)
-            };
         }
 
         public void Subscribe()
         {
-            _ffxivNetworkMonitor.Start();
+            _ffPlugin.DataSubscription.NetworkReceived += DataSubscriptionOnNetworkReceived;
             _logger.Write("N: FFXIV Network Monitor Started!", LogLevel.Info);
+        }
+
+        private void DataSubscriptionOnNetworkReceived(string connection, long epoch, byte[] message)
+        {
+            _packetHandler.HandleMessage(message, OnMessageReceived);
         }
 
         private void OnMessageReceived(EventType eventType, int[] args)
@@ -130,13 +131,12 @@ namespace DFAssist.Helpers
 
         public void Dispose()
         {
-            if (_ffxivNetworkMonitor != null)
+            if (_ffPlugin != null)
             {
-                _ffxivNetworkMonitor.Stop();
-                _ffxivNetworkMonitor.MessageReceived = null;
+                _ffPlugin.DataSubscription.NetworkReceived -= DataSubscriptionOnNetworkReceived;
             }
 
-            _ffxivNetworkMonitor = null;
+            _ffPlugin = null;
             _packetHandler = null;
             _logger = null;
             _dataRepository = null;

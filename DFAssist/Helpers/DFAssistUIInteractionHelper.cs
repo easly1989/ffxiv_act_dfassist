@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DFAssist.Contracts.Repositories;
+using FFXIV_ACT_Plugin;
 using Microsoft.Win32;
 using Splat;
 
@@ -32,11 +33,11 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletTokenTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
             _mainControl.PushBulletDeviceIdTextBox.Enabled = _mainControl.PushBulletCheckbox.Checked;
             _mainControl.DiscordWebhookTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
-            _mainControl.DiscordUsernameTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+            _mainControl.DiscordUseridTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
 
             // force initialization of combobox values, not related a subvalue (like the language)
             LogLevelComboBoxOnSelectedValueChanged(this, new EventArgs());
-            TtsVoicesComboBoxOnSelectedValueChanged(this, new EventArgs());
+            TtsVoicesComboBoxOnSelectedValueChanged(this, new BoolEventArgs(true));
         }
 
         public void Subscribe()
@@ -58,6 +59,7 @@ namespace DFAssist.Helpers
             _mainControl.PushBulletCheckbox.CheckStateChanged += EnablePushBulletOnCheckedChanged;
             _mainControl.ClearLogButton.Click += ClearLogsButton_Click;
             _mainControl.TestConfigurationButton.Click += TestConfigurationButton_Click;
+            _mainControl.SaveConfigurationButton.Click += SaveConfigurationButtonOnClick;
             _mainControl.LogLevelComboBox.SelectedValueChanged += LogLevelComboBoxOnSelectedValueChanged;
         }
 
@@ -98,9 +100,12 @@ namespace DFAssist.Helpers
 
         private void TtsVoicesComboBoxOnSelectedValueChanged(object sender, EventArgs e)
         {
+            var sendNotification = !(e is BoolEventArgs x) || !x.BoolValue;
             TTSHelper.Instance.SelectVoice(_mainControl.TtsVoicesComboBox.SelectedValue as string);
             _logger.Write($"UI: [TTS] Selected Voice - Desired Value: {_mainControl.TtsVoicesComboBox.SelectedValue}", LogLevel.Debug);
-            TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
+            
+            if(sendNotification)
+                TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
         }
 
         private void DonateLinkOnLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -199,7 +204,7 @@ namespace DFAssist.Helpers
         {
             _logger.Write($"UI: [Discord] Desired Value: {_mainControl.DiscordCheckBox.Checked}", LogLevel.Debug);
             _mainControl.DiscordWebhookTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
-            _mainControl.DiscordUsernameTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
+            _mainControl.DiscordUseridTextBox.Enabled = _mainControl.DiscordCheckBox.Checked;
         }
 
         private void EnablePushBulletOnCheckedChanged(object sender, EventArgs eventArgs)
@@ -224,6 +229,11 @@ namespace DFAssist.Helpers
             PushBulletHelper.Instance.SendNotification(title, message);
             DiscordHelper.Instance.SendNotification(title, message);
             TTSHelper.Instance.SendNotification(_localizationRepository.GetText("ui-tts-notification-test-title"), _localizationRepository.GetText("ui-tts-notification-test-message"));
+        }
+
+        private void SaveConfigurationButtonOnClick(object sender, EventArgs e)
+        {
+            ACTPluginSettingsHelper.Instance.SaveSettings();
         }
 
         public void Dispose()

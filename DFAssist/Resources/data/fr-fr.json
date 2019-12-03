@@ -13,19 +13,19 @@
       "dps": "2"
     },
     "8": {
-      "name": "le Bivouac de Brayflox",
+      "name": "Le Bivouac de Brayflox",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "10": {
-      "name": "le Palais du Vagabond",
+      "name": "Le Palais du Vagabond",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "3": {
-      "name": "les Mines de Clochecuivre",
+      "name": "Les Mines de Clochecuivre",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -37,55 +37,55 @@
       "dps": "2"
     },
     "9": {
-      "name": "le Temple enseveli de Qarn",
+      "name": "Le Temple enseveli de Qarn",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "2": {
-      "name": "l'Hypogée de Tam-Tara",
+      "name": "L'Hypogée de Tam-Tara",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "6": {
-      "name": "le Manoir des Haukke",
+      "name": "Le Manoir des Haukke",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "14": {
-      "name": "le Château d'Amdapor",
+      "name": "Le Château d'Amdapor",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "11": {
-      "name": "le Vigile de Pierre",
+      "name": "Le Vigile de Pierre",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "1": {
-      "name": "les Mille Gueules de Toto-Rak",
+      "name": "Les Mille Gueules de Toto-Rak",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "12": {
-      "name": "le Gouffre hurlant",
+      "name": "Le Gouffre hurlant",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "13": {
-      "name": "la Forteresse de Dzemael",
+      "name": "La Forteresse de Dzemael",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "5": {
-      "name": "le Val d'Aurum",
+      "name": "Le Val d'Aurum",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -97,7 +97,7 @@
       "dps": "4"
     },
     "16": {
-      "name": "le Praetorium",
+      "name": "Le Praetorium",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -105,13 +105,13 @@
 
     // 2.0 Trials
     "56": {
-      "name": "le Cratère des tisons",
+      "name": "Le Cratère des tisons",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "57": {
-      "name": "le Nombril",
+      "name": "Le Nombril",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -123,13 +123,13 @@
       "dps": "2"
     },
     "59": {
-      "name": "le Cratère des tisons (brutal)",
+      "name": "Le Cratère des tisons (brutal)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "60": {
-      "name": "le Nombril (brutal)",
+      "name": "Le Nombril (brutal)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -141,7 +141,7 @@
       "dps": "4"
     },
     "62": {
-      "name": "le Cap Vendouest",
+      "name": "Le Cap Vendouest",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -151,19 +151,19 @@
     // 2.1 A Realm Awoken
     // 2.1 Dungeons
     "17": {
-      "name": "le Phare de Sirius",
+      "name": "Le Phare de Sirius",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "18": {
-      "name": "les Mines de Clochecuivre (brutal)",
+      "name": "Les Mines de Clochecuivre (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "19": {
-      "name": "le Manoir des Haukke (brutal)",
+      "name": "Le Manoir des Haukke (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -171,19 +171,19 @@
 
     // 2.1 Trials
     "66": {
-      "name": "la Lisière de ronces (brutal)",
+      "name": "La Lisière de ronces (brutal)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "63": {
-      "name": "le Cratère des tisons (extrême)",
+      "name": "Le Cratère des tisons (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "64": {
-      "name": "le Nombril (extrême)",
+      "name": "Le Nombril (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -195,20 +195,20 @@
       "dps": "4"
     },
     "68": {
-      "name": "le fléau d'Ultima",
+      "name": "Le fléau d'Ultima",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     // 2.16 Trials
     "74": {
-      "name": "la chimère dhorme du Coerthas",
+      "name": "La chimère dhorme du Coerthas",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "75": {
-      "name": "l'hydre d'Halatali",
+      "name": "L'hydre d'Halatali",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -216,37 +216,37 @@
 
     // 2.1 Raids
     "92": {
-      "name": "la Tour de Cristal - Dédale antique",
+      "name": "La Tour de Cristal - Dédale antique",
       "tank": "3",
       "healer": "6",
       "dps": "15"
     },
     "93": {
-      "name": "le Labyrinthe de Bahamut I",
+      "name": "Le Labyrinthe de Bahamut I",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "94": {
-      "name": "le Labyrinthe de Bahamut II",
+      "name": "Le Labyrinthe de Bahamut II",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "95": {
-      "name": "le Labyrinthe de Bahamut III",
+      "name": "Le Labyrinthe de Bahamut III",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "96": {
-      "name": "le Labyrinthe de Bahamut IV",
+      "name": "Le Labyrinthe de Bahamut IV",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "97": {
-      "name": "le Labyrinthe de Bahamut V",
+      "name": "Le Labyrinthe de Bahamut V",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -256,7 +256,7 @@
     // 2.2 Through the Maelstrom
     // 2.2 Dungeons
     "22": {
-      "name": "les Vestiges de la cité d'Amdapor",
+      "name": "Les Vestiges de la cité d'Amdapor",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -268,7 +268,7 @@
       "dps": "2"
     },
     "20": {
-      "name": "le Bivouac de Brayflox (brutal)",
+      "name": "Le Bivouac de Brayflox (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -276,19 +276,19 @@
 
     // 2.2 Trials
     "72": {
-      "name": "le Briseur de marées (brutal)",
+      "name": "Le Briseur de marées (brutal)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "73": {
-      "name": "le Briseur de marées (extrême)",
+      "name": "Le Briseur de marées (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "67": {
-      "name": "la Lisière de ronces (extrême)",
+      "name": "La Lisière de ronces (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -302,25 +302,25 @@
 
     // 2.2 Raids
     "98": {
-      "name": "les Méandres de Bahamut I",
+      "name": "Les Méandres de Bahamut I",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "99": {
-      "name": "les Méandres de Bahamut II",
+      "name": "Les Méandres de Bahamut II",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "100": {
-      "name": "les Méandres de Bahamut III",
+      "name": "Les Méandres de Bahamut III",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "101": {
-      "name": "les Méandres de Bahamut IV",
+      "name": "Les Méandres de Bahamut IV",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -330,19 +330,19 @@
     // 2.3 Defenders of Eorzea
     // 2.3 Dungeons
     "23": {
-      "name": "l'Île de Crèvecarène",
+      "name": "L'Île de Crèvecarène",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "25": {
-      "name": "le Vigile de Pierre (brutal)",
+      "name": "Le Vigile de Pierre (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "24": {
-      "name": "l'Hypogée de Tam-Tara (brutal)",
+      "name": "L'Hypogée de Tam-Tara (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -350,13 +350,13 @@
 
     // 2.3 Trials
     "77": {
-      "name": "l'Arbre du jugement (brutal)",
+      "name": "L'Arbre du jugement (brutal)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "78": {
-      "name": "l'Arbre du jugement (extrême)",
+      "name": "L'Arbre du jugement (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -364,31 +364,31 @@
 
     // 2.3 Raids
     "102": {
-      "name": "la Tour de Cristal - Tour de Syrcus",
+      "name": "La Tour de Cristal - Tour de Syrcus",
       "tank": "3",
       "healer": "6",
       "dps": "15"
     },
     "103": {
-      "name": "les Méandres de Bahamut I (sadique)",
+      "name": "Les Méandres de Bahamut I (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "104": {
-      "name": "les Méandres de Bahamut II (sadique)",
+      "name": "Les Méandres de Bahamut II (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "105": {
-      "name": "les Méandres de Bahamut III (sadique)",
+      "name": "Les Méandres de Bahamut III (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "106": {
-      "name": "les Méandres de Bahamut IV (sadique)",
+      "name": "Les Méandres de Bahamut IV (sadique)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -404,7 +404,7 @@
       "dps": "2"
     },
     "26": {
-      "name": "le Temple enseveli de Qarn (brutal)",
+      "name": "Le Temple enseveli de Qarn (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -418,19 +418,19 @@
 
     // 2.4 Trials
     "79": {
-      "name": "l'Amphithéâtre d'Akh Afah (brutal)",
+      "name": "L'Amphithéâtre d'Akh Afah (brutal)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "80": {
-      "name": "l'Amphithéâtre d'Akh Afah (extrême)",
+      "name": "L'Amphithéâtre d'Akh Afah (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "81": {
-      "name": "le Col du dragon",
+      "name": "Le Col du dragon",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -438,25 +438,25 @@
 
     // 2.4 Raids
     "107": {
-      "name": "l'Abîme de Bahamut I",
+      "name": "L'Abîme de Bahamut I",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "108": {
-      "name": "l'Abîme de Bahamut II",
+      "name": "L'Abîme de Bahamut II",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "109": {
-      "name": "l'Abîme de Bahamut III",
+      "name": "L'Abîme de Bahamut III",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "110": {
-      "name": "l'Abîme de Bahamut IV",
+      "name": "L'Abîme de Bahamut IV",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -466,19 +466,19 @@
     // 2.5 Before the Fall
     // 2.5 Dungeons
     "32": {
-      "name": "le Gardien du lac",
+      "name": "Le Gardien du lac",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "30": {
-      "name": "le Palais du Vagabond (brutal)",
+      "name": "Le Palais du Vagabond (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "29": {
-      "name": "le Château d'Amdapor (brutal)",
+      "name": "Le Château d'Amdapor (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -492,7 +492,7 @@
       "dps": "4"
     },
     "82": {
-      "name": "la Fontaine d'Urth",
+      "name": "La Fontaine d'Urth",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -505,7 +505,7 @@
     },
     // 2.55 Trials
     "83": {
-      "name": "le Siège de la sainte Cité d'Ishgard",
+      "name": "Le Siège de la sainte Cité d'Ishgard",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -513,7 +513,7 @@
 
     // 2.5 Raids
     "111": {
-      "name": "la Tour de Cristal - Monde des Ténèbres",
+      "name": "La Tour de Cristal - Monde des Ténèbres",
       "tank": "3",
       "healer": "6",
       "dps": "15"
@@ -529,7 +529,7 @@
       "dps": "2"
     },
     "31": {
-      "name": "la Grande bibliothèque de Gubal",
+      "name": "La Grande bibliothèque de Gubal",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -547,13 +547,13 @@
       "dps": "2"
     },
     "36": {
-      "name": "le Vigile du Crépuscule",
+      "name": "Le Vigile du Crépuscule",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "38": {
-      "name": "le Laboratoire de magismologie",
+      "name": "Le Laboratoire de magismologie",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -585,7 +585,7 @@
       "dps": "4"
     },
     "90": {
-      "name": "le Réacteur de singularité",
+      "name": "Le Réacteur de singularité",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -658,13 +658,13 @@
     // 3.1 As Goes Light So Goes Darkness
     // 3.1 Dungeons
     "40": {
-      "name": "le Phare de Sirius (brutal)",
+      "name": "Le Phare de Sirius (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "41": {
-      "name": "l'Arboretum Sainte-Mocianne",
+      "name": "L'Arboretum Sainte-Mocianne",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -672,7 +672,7 @@
 
     // 3.1 Trials
     "91": {
-      "name": "le règne de Thordan",
+      "name": "Le règne de Thordan",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -680,7 +680,7 @@
 
     // 3.1 Raids
     "120": {
-      "name": "l'Arche du néant",
+      "name": "L'Arche du néant",
       "tank": "3",
       "healer": "6",
       "dps": "15"
@@ -716,7 +716,7 @@
       "dps": "2"
     },
     "140": {
-      "name": "les Vestiges de la cité d'Amdapor (brutal)",
+      "name": "Les Vestiges de la cité d'Amdapor (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -796,7 +796,7 @@
       "dps": "2"
     },
     "172": {
-      "name": "l'Île de Crèvecarène (brutal)",
+      "name": "L'Île de Crèvecarène (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -804,13 +804,13 @@
 
     // 3.3 Trials
     "169": {
-      "name": "la Dernière avancée de la Foi",
+      "name": "La Dernière avancée de la Foi",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "170": {
-      "name": "l'ire de Nidhogg",
+      "name": "L'ire de Nidhogg",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -818,7 +818,7 @@
 
     // 3.3 Raids
     "168": {
-      "name": "la Cité défendue de Mhach",
+      "name": "La Cité défendue de Mhach",
       "tank": "3",
       "healer": "6",
       "dps": "15"
@@ -826,7 +826,7 @@
 
     // 3.3 Party Contents
     "179": {
-      "name": "l'Aquapole",
+      "name": "L'Aquapole",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -842,7 +842,7 @@
       "dps": "2"
     },
     "196": {
-      "name": "la Grande bibliothèque de Gubal (brutal)",
+      "name": "La Grande bibliothèque de Gubal (brutal)",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -916,7 +916,7 @@
     // 3.5 The Far Edge of Fate
     // 3.5 Dungeons
     "219": {
-      "name": "la Muraille de Baelsar",
+      "name": "La Muraille de Baelsar",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -954,25 +954,25 @@
     // 4.0 Stormblood
     // 4.0 Dungeons
     "238": {
-      "name": "la Mer du Chant des sirènes",
+      "name": "La Mer du Chant des sirènes",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "235": {
-      "name": "le Palais aux Marées violettes",
+      "name": "Le Palais aux Marées violettes",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "240": {
-      "name": "la Force de Bardam",
+      "name": "La Force de Bardam",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "241": {
-      "name": "le Château de Doma",
+      "name": "Le Château de Doma",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -990,13 +990,13 @@
       "dps": "2"
     },
     "262": {
-      "name": "le Château de Kugane",
+      "name": "Le Château de Kugane",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "236": {
-      "name": "le Temple du Poing",
+      "name": "Le Temple du Poing",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -1004,13 +1004,13 @@
 
     // 4.0 Trials
     "243": {
-      "name": "la Crique aux tributs",
+      "name": "La Crique aux tributs",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "244": {
-      "name": "la Crique aux tributs (extrême)",
+      "name": "La Crique aux tributs (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -1028,7 +1028,7 @@
       "dps": "4"
     },
     "239": {
-      "name": "la Ménagerie royale",
+      "name": "La Ménagerie royale",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -1088,7 +1088,7 @@
 
     //4.05 Party Contents
     "268": {
-      "name": "les Canaux perdus d'Uznair",
+      "name": "Les Canaux perdus d'Uznair",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -1098,7 +1098,7 @@
     // 4.1 The Legend Returns
     // 4.1 Dungeon
     "279": {
-      "name": "la Cité engloutie de Skalla",
+      "name": "La Cité engloutie de Skalla",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -1114,7 +1114,7 @@
 
     // 4.1 Raids
     "281": {
-      "name": "la Cité royale de Rabanastre",
+      "name": "La Cité royale de Rabanastre",
       "tank": "3",
       "healer": "6",
       "dps": "15"
@@ -1122,7 +1122,7 @@
 
     //4.1 Party Contents
     "276": {
-      "name": "les Canaux cachés d'Uznair",
+      "name": "Les Canaux cachés d'Uznair",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -1130,7 +1130,7 @@
 
     //4.11 Raids
     "280": {
-      "name": "l'Abîme infini de Bahamut (fatal)",
+      "name": "L'Abîme infini de Bahamut (fatal)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -1285,13 +1285,13 @@
 
     // 4.4 Trials
     "596": {
-      "name": "le Nid des Lamentations",
+      "name": "Le Nid des Lamentations",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "597": {
-      "name": "le Nid des Lamentations (extrême)",
+      "name": "Le Nid des Lamentations (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4"
@@ -1411,13 +1411,13 @@
       "dps": "2"
     },
     "656": {
-      "name": "le Puits de Malikah",
+      "name": "Le Puits de Malikah",
       "tank": "1",
       "healer": "1",
       "dps": "2"
     },
     "659": {
-      "name": "le Mont Gulg",
+      "name": "Le Mont Gulg",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -1429,7 +1429,7 @@
       "dps": "2"
     },
     "655": {
-      "name": "la Macle de Syrcus",
+      "name": "La Macle de Syrcus",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -1443,13 +1443,13 @@
 
     // 5.0 Trials
     "657": {
-      "name": "la Valse du Monarque",
+      "name": "La Valse du Monarque",
       "tank": "2",
       "healer": "2",
       "dps": "4"
     },
     "658": {
-      "name": "la Valse du Monarque (extrême)",
+      "name": "La Valse du Monarque (extrême)",
       "tank": "2",
       "healer": "2",
       "dps": "4",
@@ -1559,7 +1559,7 @@
     },
 
     "692": {
-      "name": "le Cosmos coruscant",
+      "name": "Le Cosmos coruscant",
       "tank": "1",
       "healer": "1",
       "dps": "2"
@@ -1906,13 +1906,13 @@
 
     // PvP
     "127": {
-      "name": "les Ruines frontalières (annexion)",
+      "name": "Les Ruines frontalières (annexion)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "130": {
-      "name": "le Rocher des tréfonds (invasion)",
+      "name": "Le Rocher des tréfonds (invasion)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -1984,7 +1984,7 @@
       "dps": "0"
     },
     "180": {
-      "name": "les Champs de la Gloire (brise-glace)",
+      "name": "Les Champs de la Gloire (brise-glace)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2006,121 +2006,121 @@
     // Deep Dungeons
     // The Palace of the Dead
     "174": {
-      "name": "le Palais des morts (sous-sols 1-10)",
+      "name": "Le Palais des morts (sous-sols 1-10)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "175": {
-      "name": "le Palais des morts (sous-sols 11-20)",
+      "name": "Le Palais des morts (sous-sols 11-20)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "176": {
-      "name": "le Palais des morts (sous-sols 21-30)",
+      "name": "Le Palais des morts (sous-sols 21-30)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "177": {
-      "name": "le Palais des morts (sous-sols 31-40)",
+      "name": "Le Palais des morts (sous-sols 31-40)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "178": {
-      "name": "le Palais des morts (sous-sols 41-50)",
+      "name": "Le Palais des morts (sous-sols 41-50)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "204": {
-      "name": "le Palais des morts (sous-sols 51-60)",
+      "name": "Le Palais des morts (sous-sols 51-60)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "205": {
-      "name": "le Palais des morts (sous-sols 61-70)",
+      "name": "Le Palais des morts (sous-sols 61-70)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "206": {
-      "name": "le Palais des morts (sous-sols 71-80)",
+      "name": "Le Palais des morts (sous-sols 71-80)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "207": {
-      "name": "le Palais des morts (sous-sols 81-90)",
+      "name": "Le Palais des morts (sous-sols 81-90)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "208": {
-      "name": "le Palais des morts (sous-sols 91-100)",
+      "name": "Le Palais des morts (sous-sols 91-100)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "209": {
-      "name": "le Palais des morts (sous-sols 101-110)",
+      "name": "Le Palais des morts (sous-sols 101-110)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "210": {
-      "name": "le Palais des morts (sous-sols 111-120)",
+      "name": "Le Palais des morts (sous-sols 111-120)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "211": {
-      "name": "le Palais des morts (sous-sols 121-130)",
+      "name": "Le Palais des morts (sous-sols 121-130)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "212": {
-      "name": "le Palais des morts (sous-sols 131-140)",
+      "name": "Le Palais des morts (sous-sols 131-140)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "213": {
-      "name": "le Palais des morts (sous-sols 141-150)",
+      "name": "Le Palais des morts (sous-sols 141-150)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "214": {
-      "name": "le Palais des morts (sous-sols 151-160)",
+      "name": "Le Palais des morts (sous-sols 151-160)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "215": {
-      "name": "le Palais des morts (sous-sols 161-170)",
+      "name": "Le Palais des morts (sous-sols 161-170)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "216": {
-      "name": "le Palais des morts (sous-sols 171-180)",
+      "name": "Le Palais des morts (sous-sols 171-180)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "217": {
-      "name": "le Palais des morts (sous-sols 181-190)",
+      "name": "Le Palais des morts (sous-sols 181-190)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
     },
     "218": {
-      "name": "le Palais des morts (sous-sols 191-200)",
+      "name": "Le Palais des morts (sous-sols 191-200)",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2322,7 +2322,7 @@
 
     //Event Instance
     "181": {
-      "name": "le Manoir hanté",
+      "name": "Le Manoir hanté",
       "tank": "0",
       "healer": "0",
       "dps": "0"
@@ -2331,25 +2331,25 @@
 
   // Duty Roulette
   "roulettes": {
-    "1": "Mission aléatorie: gain de niveaux",
-    "2": "Mission aléatorie: donjons nv 50/60/70",
-    "3": "Mission aléatorie: épopée",
-    "4": "Mission aléatorie: opérations de guilde",
-    "5": "Mission aléatorie: expert",
-    "6": "Mission aléatorie: défis",
-    "7": "Mission aléatorie: Front",
-    "8": "Mission aléatorie: donjons nv 80",
-    "9": "Mission aléatorie: Mentor",
+    "1": "Mission aléatoire : gain de niveaux",
+    "2": "Mission aléatoire : donjons nv 50/60/70",
+    "3": "Mission aléatoire : épopée",
+    "4": "Mission aléatoire : opérations de guilde",
+    "5": "Mission aléatoire : expert",
+    "6": "Mission aléatoire : défis",
+    "7": "Mission aléatoire : Front",
+    "8": "Mission aléatoire : donjons nv 80",
+    "9": "Mission aléatoire : Mentor",
     "10": "The Feast (8x8/entraînement)",
     "13": "The Feast (4x4/classé)",
-    "15": "Mission aléatorie: raids en alliance",
-    "17": "Mission aléatorie: raids"
+    "15": "Mission aléatoire : raids en alliance",
+    "17": "Mission aléatoire : raids"
   },
 
   // FATEs
   "areas": {
     "134": {
-      "name": "la Noscea centrale",
+      "name": "La Noscea centrale",
       "fates": {
         "649": "La famille avant tout",
         "688": "Manigances manifestes: la tour infernale",
@@ -2371,7 +2371,7 @@
       }
     },
     "135": {
-      "name": "la Basse-Noscea",
+      "name": "La Basse-Noscea",
       "fates": {
         "257": "Défi: une bonne digestion",
         "260": "Mise au placard",
@@ -2388,7 +2388,7 @@
       }
     },
     "137": {
-      "name": "la Noscea orientale",
+      "name": "La Noscea orientale",
       "fates": {
         "267": "Partage de la soif",
         "268": "Plan de poivrots",
@@ -2415,7 +2415,7 @@
       }
     },
     "138": {
-      "name": "la Noscea occidentale",
+      "name": "La Noscea occidentale",
       "fates": {
         "568": "Reconnaissance au barrage du nord",
         "569": "Percée du barrage du nord",
@@ -2445,7 +2445,7 @@
       }
     },
     "139": {
-      "name": "la Haute-Noscea",
+      "name": "La Haute-Noscea",
       "fates": {
         "314": "Défi: Simurgh le redoutable",
         "317": "Escorte pour le Guet",
@@ -2464,7 +2464,7 @@
       }
     },
     "180": {
-      "name": "la Noscea extérieure",
+      "name": "La Noscea extérieure",
       "fates": {
         "580": "De hauteur de golem",
         "581": "Défi: un coeurl à prendre",

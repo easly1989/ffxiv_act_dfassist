@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
+using Splat;
 
 namespace DFAssist.Helpers
 {
@@ -21,6 +22,8 @@ namespace DFAssist.Helpers
         {
             var plugins = ActGlobals.oFormActMain.ActPlugins;
             _ffxivPluginData = plugins.FirstOrDefault(x => x.lblPluginTitle.Text == ffxivActPluginDll);
+            if(_ffxivPluginData != null)
+                Locator.CurrentMutable.RegisterConstant(_ffxivPluginData.pluginObj, typeof(FFXIV_ACT_Plugin.FFXIV_ACT_Plugin));
         }
 
         public bool Check(ActPluginData dfAssistPluginData, Action<bool> onIsEnabledChanged)

@@ -13,12 +13,12 @@
   "ui-telegram-token-display-text": "Token",
   "ui-telegram-chatid-display-text": "Chat Id",
 
-  "ui-pushbullet-display-text": "Enable Pusbullet Notifications",
+  "ui-pushbullet-display-text": "Enable Pushbullet Notifications",
   "ui-pushbullet-token-display-text": "Access Token",
   "ui-pushbullet-deviceid-display-text": "Device Id",
 
   "ui-discord-display-text": "Enable Discord Notifications",
-  "ui-discord-username-display-text": "Username",
+  "ui-discord-userid-display-text": "User ID",
   "ui-discord-webhook-display-text": "Webhook URL",
 
   "ui-test-settings-display-text": "Test Configuration",
@@ -41,7 +41,7 @@
 
   "ui-disable-toasts": "Disable Toasts",
   "ui-flash-taskbar": "Flash Taskbar when a Notification is received",
-  
+
   "ui-test-log-level-selction-label": "Log Level",
 
   "ui-general-settings-group": "General Settings",
@@ -50,5 +50,8 @@
   "ui-test-settings-group": "Test Settings",
   "ui-telegram-settings-group": "Telegram Settings",
   "ui-pushbullet-settings-group": "Pushbullet Settings",
-  "ui-discord-settings-group": "Discord Settings"
+  "ui-discord-settings-group": "Discord Settings",
+
+  "ui-test-configuration-button": "Test Configuration",
+  "ui-save-configuration-button": "Save Configuration"
 }
