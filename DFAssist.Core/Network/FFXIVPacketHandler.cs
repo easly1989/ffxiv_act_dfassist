@@ -33,7 +33,8 @@ namespace DFAssist.Core.Network
                 var opcode = BitConverter.ToUInt16(message, 18);
 
 #if !DEBUG
-                if(opcode != 0x02B0 && 
+                if(opcode != 0x0135 && 
+                   opcode != 0x0193 &&
                    opcode != 0x022F) 
                     return;
 #endif
@@ -41,7 +42,7 @@ namespace DFAssist.Core.Network
                 _logger.Write($"--- Received opcode: {opcode}", LogLevel.Warn);
 #endif
                 var data = message.Skip(32).ToArray();
-                if (opcode == 0x0164) // 5.11 Duties
+                if (opcode == 0x0193) // 5.11 Duties
                 {
                     var rouletteCode = data[8];
 
@@ -60,7 +61,7 @@ namespace DFAssist.Core.Network
                         }
                     }
                 }
-                else if (opcode == 0x02B0) 
+                else if (opcode == 0x0135) 
                 {
                     var matchedRoulette = BitConverter.ToUInt16(data, 2);
                     var matchedCode = BitConverter.ToUInt16(data, 20);
@@ -72,7 +73,7 @@ namespace DFAssist.Core.Network
                         ? $"Q: Matched [{matchedRoulette} - {_dataRepository.GetRoulette(matchedRoulette).Name}] - [{instanceString}]"
                         : $"Q: Matched [{instanceString}]", LogLevel.Info);
                 }
-                else if (opcode == 0x03CF) // 5.11 Duty Operations
+                else if (opcode == 0x03CF)
                 {
                     switch (data[0])
                     {
@@ -84,7 +85,7 @@ namespace DFAssist.Core.Network
                             break;
                     }
                 }
-                else if (opcode == 0x0304) // 5.11 Duty Wait Queue Updated
+                else if (opcode == 0x0304)
                 {
                     var waitList = data[6];
                     var waitTime = data[7];
@@ -98,7 +99,7 @@ namespace DFAssist.Core.Network
                     var memberinfo = $"Tanks: {tank}/{tankMax}, Healers: {healer}/{healerMax}, Dps: {dps}/{dpsMax}";
                     _logger.Write($"Q: Matching State Updated [{memberinfo}] - WaitList: {waitList} | WaitTime: {waitTime}", LogLevel.Debug);
                 }
-                else if (opcode == 0x032F) // 5.11 Duty Matched Status Updated (received after matching)
+                else if (opcode == 0x032F)
                 {
                     var tank = data[12];
                     var tankMax = data[13];
@@ -113,7 +114,7 @@ namespace DFAssist.Core.Network
                             ? $"Q: Matching State Updated [{_dataRepository.GetInstance(code).Name} - {memberinfo}]"
                             : $"Q: Matching State Updated [{memberinfo}]", LogLevel.Debug);
                 }
-                else if (opcode == 0x022F) // 5.11 Entering/Leaving an Instance (Zone change?)
+                else if (opcode == 0x022F)
                 {
                     var code = BitConverter.ToInt16(data, 4);
 
@@ -128,7 +129,7 @@ namespace DFAssist.Core.Network
                             break;
                     }
                 }
-                else if (opcode == 0x0002) // 5.11 Duty Matching Complete
+                else if (opcode == 0x0002)
                 {
                     _logger.Write("Q: Matching Completed!", LogLevel.Debug);
                 }
