@@ -62,8 +62,6 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Xaml" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Windows.Data" />
-    <Reference Include="Windows.UI" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -86,11 +84,14 @@
     <Compile Include="Toast\ToastManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts">
+      <Version>10.0.18362.2005</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="Splat">
-      <Version>9.2.11</Version>
+      <Version>9.3.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
