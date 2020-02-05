@@ -1,5 +1,5 @@
 # As of 05 February 2020 
-## The plugin is in full maintenance mode
+### The plugin is in full maintenance mode
 ### This means that, until further notice, the plugin will not be updated
 > Unfortunately I'm not actively playing FFXIV anymore, and lost interests also in the plugin development scenario.
 > 
