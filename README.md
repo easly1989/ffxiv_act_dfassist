@@ -1,10 +1,16 @@
-# As of 05 February 2020 - The plugin is in full maintenance mode
-### this means that, until further notice, the plugin will not be updated
-Unfortunately I'm not actively playing FFXIV anymore, and lost interests also in the plugin development scenario.
-I'm not deleting the repository, or archiving it, as you may not know when the will to come back to the game (and this plugin development) will return.
-I hope that, by luck or good coding, you will still be able to use the plugin in the near future.
-I wish every old (and new) user a very nice and safe journey in Eorzea, may the light of the crystal shine your paths!
-Farewell! :)
+# As of 05 February 2020 
+## The plugin is in full maintenance mode
+### This means that, until further notice, the plugin will not be updated
+> Unfortunately I'm not actively playing FFXIV anymore, and lost interests also in the plugin development scenario.
+> 
+> I'm not deleting the repository, or archiving it, as you may not know when the will to come back to the game (and this plugin development) will return.
+> 
+> I hope that, by luck or good coding, you will still be able to use the plugin in the near future.
+> I wish every old (and new) user a very nice and safe journey in Eorzea, may the light of the crystal shine your paths!
+> 
+> Farewell! :)
+>
+>                                                              - Carlo (easly1989)
 
 # Duty Finder Assist Plugin for ACT
 ### Based on the work from [devunt](https://github.com/devunt/DFAssist) and [lalafellsleep](https://github.com/lalafellsleep)
