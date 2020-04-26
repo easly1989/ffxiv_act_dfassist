@@ -5,6 +5,9 @@ namespace DFAssist.Contracts
 {
     public interface IPacketHandler
     {
-        void HandleMessage(byte[] message, Action<EventType, int[]> fireEvent);
+        void UnregisterHandlers();
+        void UnRegisterMessageHandler(ushort opcode);
+        void RegisterMessageHandler(ushort opcode, Action<byte[]> eventhandler);
+        void HandleMessage(byte[] message);
     }
 }

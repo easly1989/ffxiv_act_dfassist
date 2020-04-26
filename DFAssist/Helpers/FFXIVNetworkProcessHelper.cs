@@ -43,13 +43,66 @@ namespace DFAssist.Helpers
 
         public void Subscribe()
         {
+            var opcode = new OpCodeHelper();
+
+
+            var alertOpCode = opcode.GetAlertOpCode();
+            _logger.Write($"alertOpCode:0x{alertOpCode:X}",LogLevel.Warn);
+            _packetHandler.RegisterMessageHandler(alertOpCode, AlertEventHandler);
+            
             _ffPlugin.DataSubscription.NetworkReceived += DataSubscriptionOnNetworkReceived;
             _logger.Write("N: FFXIV Network Monitor Started!", LogLevel.Info);
         }
 
+        private void AlertEventHandler(byte[] data)
+        {
+            var matchedRoulette = BitConverter.ToUInt16(data, 2);
+            var matchedCode = BitConverter.ToUInt16(data, 20);
+
+
+
+            var args = new int[] {matchedRoulette, matchedCode};
+            var instanceString = $"{matchedCode} - {_dataRepository.GetInstance(matchedCode).Name}";
+            _logger.Write(matchedRoulette != 0
+                ? $"Q: Matched [{matchedRoulette} - {_dataRepository.GetRoulette(matchedRoulette).Name}] - [{instanceString}]"
+                : $"Q: Matched [{instanceString}]", LogLevel.Info);
+
+
+
+
+            var text = string.Empty;
+            if (ActiveProcess != null)
+            {
+                var processMainModule = ActiveProcess.MainModule;
+                var server = processMainModule != null && processMainModule.FileName.Contains("KOREA") ? "KOREA" : "GLOBAL";
+                text = ActiveProcess.Id + "|" + server + "|";
+            }
+
+
+
+            text += EventType.MATCH_ALERT + "|";
+            var pos = 0;
+
+            if (args[0] != 0)
+            {
+                text += _dataRepository.GetRoulette(args[0]).Name + "|";
+                pos++;
+            }
+            text += _dataRepository.GetInstance(args[1]).Name + "|";
+            pos++;
+
+            for (var i = pos; i < args.Length; i++)
+            {
+                text += args[i] + "|";
+            }
+
+            ActGlobals.oFormActMain.ParseRawLogLine(false, DateTime.Now, "00|" + DateTime.Now.ToString("O") + "|0048|F|" + text);
+            DFAssistPlugin.Instance.OnNetworkEventReceived(EventType.MATCH_ALERT, args);
+        }
+
         private void DataSubscriptionOnNetworkReceived(string connection, long epoch, byte[] message)
         {
-            _packetHandler.HandleMessage(message, OnMessageReceived);
+            _packetHandler.HandleMessage(message);
         }
 
         private void OnMessageReceived(EventType eventType, int[] args)
@@ -135,6 +188,8 @@ namespace DFAssist.Helpers
             {
                 _ffPlugin.DataSubscription.NetworkReceived -= DataSubscriptionOnNetworkReceived;
             }
+
+            _packetHandler?.UnregisterHandlers();
 
             _ffPlugin = null;
             _packetHandler = null;

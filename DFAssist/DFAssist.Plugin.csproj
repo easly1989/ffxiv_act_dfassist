@@ -44,6 +44,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\Release\libs\</OutputPath>
@@ -52,6 +53,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Advanced Combat Tracker">
@@ -79,7 +81,11 @@
     <Compile Include="Helpers\ACTPluginUpdateHelper.cs" />
     <Compile Include="Helpers\BaseNotificationHelper.cs" />
     <Compile Include="Helpers\DiscordHelper.cs" />
+    <Compile Include="Helpers\MemHelper.cs" />
+    <Compile Include="Helpers\OpCodeHelper.cs" />
+    <Compile Include="Helpers\PatternScanner.cs" />
     <Compile Include="Helpers\PushBulletHelper.cs" />
+    <Compile Include="Helpers\SizeCache.cs" />
     <Compile Include="Helpers\TaskbarFlashHelper.cs" />
     <Compile Include="Helpers\TelegramHelper.cs" />
     <Compile Include="Helpers\ToastHelper.cs" />
