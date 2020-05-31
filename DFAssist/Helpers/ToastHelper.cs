@@ -2,19 +2,12 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
-using DFAssist.Core.Toast;
-using DFAssist.Core.Toast.Base;
 using Splat;
 
 namespace DFAssist.Helpers
 {
     public class ToastHelper : BaseNotificationHelper<ToastHelper>
     {
-        public ToastHelper()
-        {
-            DesktopNotificationManagerCompat.RegisterAumidAndComServer<ToastNotificationActivator>(DFAssistPlugin.AppId);
-            DesktopNotificationManagerCompat.RegisterActivator<ToastNotificationActivator>();
-        }
 
         protected override void OnSendNotification(string title, string message, string testing)
         {
@@ -44,29 +37,17 @@ namespace DFAssist.Helpers
             }
             else
             {
-                Logger.Write("UI: Using Windows Toasts", LogLevel.Debug);
-                try
+                Logger.Write("UI: Using built in notifier...", LogLevel.Info);
+                var icon = new NotifyIcon
                 {
-                    // clearing old toasts if needed
-                    DesktopNotificationManagerCompat.History.Clear();
-
-                    Logger.Write("UI: Creating new Toast...", LogLevel.Debug);
-                    ToastManager.ShowToast(title, message, testing);
-                }
-                catch (Exception e)
-                {
-                    Logger.Write(e, "UI: Using built in notifier...", LogLevel.Error);
-                    var icon = new NotifyIcon
-                    {
-                        Icon = SystemIcons.WinLogo,
-                        Text = "DFAssist",
-                        Visible = true,
-                        BalloonTipTitle = title,
-                        BalloonTipText = message
-                    };
-                    icon.ShowBalloonTip(3000);
-                    icon.Dispose();
-                }
+                    Icon = SystemIcons.WinLogo,
+                    Text = "DFAssist",
+                    Visible = true,
+                    BalloonTipTitle = title,
+                    BalloonTipText = message
+                };
+                icon.ShowBalloonTip(3000);
+                icon.Dispose();
             }
         }
     }
