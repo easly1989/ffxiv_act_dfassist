@@ -31,7 +31,7 @@ namespace DFAssist.Helpers
                 return (value ^ 0x80) - 0x80;
             });
 
-            _logger.Write($"Jumptable index offset 0x{jumpTableIndexOffset:X}", LogLevel.Warn);
+            _logger.Write($"Jumptable index offset 0x{(int)jumpTableIndexOffset:X}", LogLevel.Warn);
 
             var functionptr = patternscanner.FindSingle("48 89 5C 24 ? 57 48 83 EC 60 48 8B D9 48 8D 0D ? ? ? ?");
 
@@ -43,7 +43,7 @@ namespace DFAssist.Helpers
             var jumplocation = functionRef - 0x13;
 
             var jumptablevalues =
-                patternscanner.FindSingle("41 8B 8C 80 ? ? ? ? 49 03 C8 FF E1 B9 ? ? ? ? 48 8B D6", ptr =>
+                patternscanner.FindSingle("41 8B 8C 80 ? ? ? ? 49 03 C8 FF E1 B9 ? ? ? ? ? ? ? ? ? ? 48", ptr =>
                 {
                     var jumptableAddress = memhelper.BaseAddress + memhelper.Read<int>(ptr + 4);
                     _logger.Write($"Found jumptable of 0x{(ulong)jumptableAddress:X} at 0x{(ulong)ptr:X}", LogLevel.Warn);
@@ -69,7 +69,7 @@ namespace DFAssist.Helpers
 
                 }
             }
-
+            _logger.Write($"Failed to find alert opcode", LogLevel.Warn);
             throw new Exception("Failed to find alert opcode");
         }
     }
