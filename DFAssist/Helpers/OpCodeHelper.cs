@@ -33,7 +33,7 @@ namespace DFAssist.Helpers
 
             _logger.Write($"Jumptable index offset 0x{(int)jumpTableIndexOffset:X}", LogLevel.Warn);
 
-            var functionptr = patternscanner.FindSingle("48 89 5C 24 ? 57 48 83 EC 60 48 8B D9 48 8D 0D ? ? ? ?");
+            var functionptr = patternscanner.FindSingle("48 89 5C 24 ? 57 48 83 EC 70 48 8B D9 48 8D 0D ? ? ? ?");
 
             var functionRef = patternscanner.FindFunctionCall(functionptr);
 
