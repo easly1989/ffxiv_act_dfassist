@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist.Contracts", "DFAss
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFAssist", "DFAssist.Loader\DFAssist.csproj", "{67D5CCFB-C77F-4A77-A37D-ECCE57279150}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DFDumper", "DFDumper\DFDumper.csproj", "{36CBF5D9-67A5-4320-BDA5-7EC54D35B357}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,10 @@ Global
 		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Debug|x64.Build.0 = Debug|x64
 		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|x64.ActiveCfg = Release|x64
 		{67D5CCFB-C77F-4A77-A37D-ECCE57279150}.Release|x64.Build.0 = Release|x64
+		{36CBF5D9-67A5-4320-BDA5-7EC54D35B357}.Debug|x64.ActiveCfg = Debug|x64
+		{36CBF5D9-67A5-4320-BDA5-7EC54D35B357}.Debug|x64.Build.0 = Debug|x64
+		{36CBF5D9-67A5-4320-BDA5-7EC54D35B357}.Release|x64.ActiveCfg = Release|x64
+		{36CBF5D9-67A5-4320-BDA5-7EC54D35B357}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

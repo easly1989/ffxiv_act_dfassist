@@ -1,0 +1,4 @@
+[submodule "SaintCoinach"]
+	path = SaintCoinach
+	url = https://github.com/ufx/SaintCoinach.git
+	branch = master

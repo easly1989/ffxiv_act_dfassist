@@ -55,7 +55,7 @@ namespace DFAssist.Core.Repositories
         protected override void OnWebUpdateRequested(string pluginPath)
         {
             Logger.Write("Updating data files from web...", LogLevel.Debug);
-            WebUpdateRoutine(pluginPath, "data");
+            //WebUpdateRoutine(pluginPath, "data");
             Logger.Write("Data files update completed", LogLevel.Debug);
         }
 
