@@ -19,7 +19,13 @@ namespace DFAssist.Helpers
             memhelper = new MemHelper(target);
             patternscanner = new PatternScanner(memhelper);
         }
-
+        public static string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2} ", b);
+            return hex.ToString();
+        }
 
         public ushort GetAlertOpCode()
         {
@@ -33,11 +39,41 @@ namespace DFAssist.Helpers
 
             _logger.Write($"Jumptable index offset 0x{(int)jumpTableIndexOffset:X}", LogLevel.Warn);
 
-            var functionptr = patternscanner.FindSingle("48 89 5C 24 ? 57 48 83 EC 70 48 8B D9 48 8D 0D ? ? ? ?");
-
+            var functionptr = patternscanner.FindSingle("48 89 5C 24 ? 57 48 83 EC 20 80 79 55 00");
             var functionRef = patternscanner.FindFunctionCall(functionptr);
 
             _logger.Write($"Found function call of 0x{(ulong)functionptr:X} at 0x{(ulong)functionRef:X}",LogLevel.Warn);
+
+
+
+
+
+            //Read backwards until 0xCC CC is found to get the start of the queue function
+            var memory = memhelper.ReadBytes(functionRef - 0x200, 0x205);
+            //_logger.Write("read bytes",LogLevel.Warn);
+            Array.Reverse(memory);
+            //_logger.Write(ByteArrayToString(memory),LogLevel.Warn);
+            functionptr = IntPtr.Zero;
+            for (int i = 0; i < memory.Length; i++)
+            {
+                //if (memory[i] == 0xCC && memory[i - 1] == 0xCC && memory[i - 2] == 0xCC && memory[i - 3] == 0xCC)
+                var m = BitConverter.ToUInt32(memory, i);
+                //_logger.Write($"Fo 0x{m:X} {i}", LogLevel.Warn);
+                if (m == 0xCCCCCCCC)
+                {
+                    functionptr = functionRef - i + 5;
+                    _logger.Write($"functionRef:0x{(ulong)functionRef:X} functionptr:0x{(ulong)functionptr:X} {i}", LogLevel.Warn);
+                    break;
+                }
+            }
+
+
+            //_logger.Write("Finished loop", LogLevel.Warn);
+            functionRef = patternscanner.FindFunctionCall(functionptr);
+            _logger.Write($"Found function call of 0x{(ulong)functionptr:X} at 0x{(ulong)functionRef:X}", LogLevel.Warn);
+
+
+
 
             //Go back 0x13 bytes from the function call location to get where the jumptable points to
             var jumplocation = functionRef - 0x13;

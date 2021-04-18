@@ -311,12 +311,23 @@ namespace DFAssist.Helpers
         {
             bool funcTest(int start)
             {
-                if (_data[start] != 0xE9) return false;
+                if (_data[start] == 0xE9)
+                {
+                    var val = BitConverter.ToUInt32(_data, start + 1) + 5;
+                    var address = (long) _baseAddress + start + val;
 
-                var val = BitConverter.ToUInt32(_data, start + 1) + 5;
-                var address = (long) _baseAddress + start + val;
+                    return (IntPtr) address == functionAddress;
+                }
 
-                return (IntPtr) address == functionAddress;
+                if (_data[start] == 0xE8)
+                {
+                    var val = BitConverter.ToInt32(_data, start + 1) + 5;
+                    var address = (long)_baseAddress + start + val;
+
+                    return (IntPtr)address == functionAddress;
+                }
+
+                return false;
             }
 
             uint plen = (uint)5;
