@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
@@ -34,13 +35,15 @@ namespace DFAssist.Helpers
         private void FormActMain_UpdateCheckClicked()
         {
             const int pluginId = 71;
-            
+            var _logger = Locator.Current.GetService<IActLogger>();
             try
             {
                 var pluginData = Locator.Current.GetService<ActPluginData>();
-                var localVersion = ActGlobals.oFormActMain.PluginGetSelfData(pluginData.pluginObj).pluginVersion;
+                var localVersion = typeof(ACTPluginUpdateHelper).Assembly.GetName().Version;
                 var remoteVersion = ActGlobals.oFormActMain.PluginGetRemoteVersion(pluginId);
-                if (Version.Parse(localVersion) >= Version.Parse(remoteVersion))
+                _logger.Write($"{localVersion} vs {remoteVersion}" ,LogLevel.Warn);
+
+                if (localVersion >= Version.Parse(remoteVersion))
                     return;
 
                 var result = MessageBox.Show(_localizationRepository.GetText("ui-update-available-message"), _localizationRepository.GetText("ui-update-available-title"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
