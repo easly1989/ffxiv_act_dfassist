@@ -1,5 +1,5 @@
 {
-  "version": "20213605.1",
+  "version": "20211920.1",
   "instances": {
     "1": {
       "name": "The Thousand Maws of Toto–Rak"
@@ -1627,9 +1627,6 @@
     "756": {
       "name": "Triple Triad Invitational Parlor"
     },
-    "757": {
-      "name": "The Navel (Unreal)"
-    },
     "758": {
       "name": "Eden's Promise: Eternity"
     },
@@ -1683,6 +1680,21 @@
     },
     "775": {
       "name": "Ocean Fishing"
+    },
+    "776": {
+      "name": "The Whorleater (Unreal)"
+    },
+    "777": {
+      "name": "Paglth'an"
+    },
+    "779": {
+      "name": "The Tower at Paradigm's Breach"
+    },
+    "781": {
+      "name": "The Cloud Deck"
+    },
+    "782": {
+      "name": "The Cloud Deck (Extreme)"
     }
   },
   "roulettes": {

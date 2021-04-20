@@ -1,5 +1,5 @@
 {
-  "version": "20213605.1",
+  "version": "20211920.1",
   "instances": {
     "1": {
       "name": "Les Mille Gueules de Toto-Rak"
@@ -1627,9 +1627,6 @@
     "756": {
       "name": "Salle de tournoi libre de Triple Triade"
     },
-    "757": {
-      "name": "Le Nombril (irréel)"
-    },
     "758": {
       "name": "La Promesse d'Éden - Éternité"
     },
@@ -1683,6 +1680,21 @@
     },
     "775": {
       "name": "Pêche en mer"
+    },
+    "776": {
+      "name": "Le Briseur de marées (irréel)"
+    },
+    "777": {
+      "name": "La grande prairie de Paglth'an"
+    },
+    "779": {
+      "name": "La tour de la Contingence"
+    },
+    "781": {
+      "name": "Le Tillac des Cirrus"
+    },
+    "782": {
+      "name": "Le Tillac des Cirrus (extrême)"
     }
   },
   "roulettes": {
@@ -1704,10 +1716,10 @@
     "19": "Course de chocobos : Costa del Sol",
     "20": "Course de chocobos : Sentes tranquilles",
     "21": "Course de chocobos : aléatoire",
-    "22": "Course de chocobos : Route de Sagolii (aucune récompense)",
-    "23": "Course de chocobos : Costa del Sol (aucune récompense)",
-    "24": "Course de chocobos : Sentes tranquilles (aucune récompense)",
-    "25": "Course de chocobos : aléatoire (aucune récompense)",
+    "22": "Course de chocobos : Route de Sagolii (sans récompense)",
+    "23": "Course de chocobos : Costa del Sol (sans récompense)",
+    "24": "Course de chocobos : Sentes tranquilles (sans récompense)",
+    "25": "Course de chocobos : aléatoire (sans récompense)",
     "26": "Course de chocobos : aléatoire",
     "27": "Course de chocobos : aléatoire",
     "28": "Course de chocobos : aléatoire",

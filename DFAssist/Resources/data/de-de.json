@@ -1,5 +1,5 @@
 {
-  "version": "20213605.1",
+  "version": "20211920.1",
   "instances": {
     "1": {
       "name": "Tausend Löcher von Toto-Rak"
@@ -1627,9 +1627,6 @@
     "756": {
       "name": "Triple Triad: Privatturnier"
     },
-    "757": {
-      "name": "Traumprüfung - Titan"
-    },
     "758": {
       "name": "Edens Verheißung - Ewigkeit"
     },
@@ -1683,6 +1680,21 @@
     },
     "775": {
       "name": "Auf großer Fahrt"
+    },
+    "776": {
+      "name": "Traumprüfung - Leviathan"
+    },
+    "777": {
+      "name": "Die Goldene Ebene von Paglth'an"
+    },
+    "779": {
+      "name": "Der Turm, Paradigmenbrecher"
+    },
+    "781": {
+      "name": "Diamantblitz - Entfesselung"
+    },
+    "782": {
+      "name": "Diamantblitz - Trauma"
     }
   },
   "roulettes": {
