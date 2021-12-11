@@ -7,6 +7,14 @@ using Splat;
 
 namespace DFAssist.Helpers
 {
+
+    public class BoolEventArgs : EventArgs
+    {
+        public BoolEventArgs(bool boolValue) => this.BoolValue = boolValue;
+
+        public bool BoolValue { get; private set; }
+    }
+
     // ReSharper disable InconsistentNaming
     public class DFAssistUIInteractionHelper : IDisposable
     {
