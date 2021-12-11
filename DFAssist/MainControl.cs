@@ -506,19 +506,6 @@ namespace DFAssist
             CopyrightLink.TextAlign = ContentAlignment.MiddleLeft;
             CopyrightLink.AutoSize = true;
             // 
-            // _donateLink
-            // 
-            DonateLink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
-            DonateLink.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            DonateLink.LinkBehavior = LinkBehavior.HoverUnderline;
-            DonateLink.Location = new Point(106, 0);
-            DonateLink.Name = "DonateLink";
-            DonateLink.TabIndex = 3;
-            DonateLink.TabStop = true;
-            DonateLink.Text = "support me via PayPal!";
-            DonateLink.TextAlign = ContentAlignment.MiddleLeft;
-            DonateLink.AutoSize = true;
-            // 
             // _settingsPage
             // 
             _settingsPage.Dock = DockStyle.Fill;
