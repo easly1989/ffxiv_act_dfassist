@@ -29,7 +29,7 @@ namespace DFAssist.Helpers
 
         public ushort GetAlertOpCode()
         {
-            var jumpTableIndexOffset = patternscanner.FindSingle("8D 42 9B 3D ? ? ? ?", ptr =>
+            var jumpTableIndexOffset = patternscanner.FindSingle("8D 42 ? 3D ? ? ? ? 0F 87 ? ? ? ? 4C 8D 05 ? ? ? ? 48 98 48", ptr =>
             {
                 byte value = memhelper.Read<byte>(ptr + 0x2);
                 _logger.Write($"raw offset {value}", LogLevel.Warn);

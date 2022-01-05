@@ -1,5 +1,5 @@
 {
-  "version": "20214311.1",
+  "version": "20221905.1",
   "instances": {
     "1": {
       "name": "The Thousand Maws of Toto–Rak"
@@ -1747,6 +1747,12 @@
     "799": {
       "name": "To Calmer Seas"
     },
+    "800": {
+      "name": "Asphodelos: The Fourth Circle"
+    },
+    "801": {
+      "name": "Asphodelos: The Fourth Circle (Savage)"
+    },
     "802": {
       "name": "The Dark Inside"
     },
@@ -1758,6 +1764,24 @@
     },
     "805": {
       "name": "A Path Unveiled"
+    },
+    "806": {
+      "name": "Asphodelos: The Third Circle"
+    },
+    "807": {
+      "name": "Asphodelos: The Third Circle (Savage)"
+    },
+    "808": {
+      "name": "Asphodelos: The First Circle"
+    },
+    "809": {
+      "name": "Asphodelos: The First Circle (Savage)"
+    },
+    "810": {
+      "name": "Asphodelos: The Second Circle"
+    },
+    "811": {
+      "name": "Asphodelos: The Second Circle (Savage)"
     },
     "812": {
       "name": "A Frosty Reception"
@@ -1779,6 +1803,9 @@
     },
     "818": {
       "name": "Laid to Rest"
+    },
+    "819": {
+      "name": "The Excitatron 6000"
     },
     "820": {
       "name": "The Gift of Mercy"

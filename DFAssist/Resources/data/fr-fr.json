@@ -1,5 +1,5 @@
 {
-  "version": "20214311.1",
+  "version": "20221905.1",
   "instances": {
     "1": {
       "name": "Les Mille Gueules de Toto-Rak"
@@ -1747,6 +1747,12 @@
     "799": {
       "name": "Cap sur la paix"
     },
+    "800": {
+      "name": "Les Limbes du Pandæmonium - Abîme"
+    },
+    "801": {
+      "name": "Les Limbes du Pandæmonium - Abîme (sadique)"
+    },
     "802": {
       "name": "Le Cratère des Martyrs"
     },
@@ -1758,6 +1764,24 @@
     },
     "805": {
       "name": "Des esprits et des hommes"
+    },
+    "806": {
+      "name": "Les Limbes du Pandæmonium - Fournaise"
+    },
+    "807": {
+      "name": "Les Limbes du Pandæmonium - Fournaise (sadique)"
+    },
+    "808": {
+      "name": "Les Limbes du Pandæmonium - Parvis"
+    },
+    "809": {
+      "name": "Les Limbes du Pandæmonium - Parvis (sadique)"
+    },
+    "810": {
+      "name": "Les Limbes du Pandæmonium - Cloaque"
+    },
+    "811": {
+      "name": "Les Limbes du Pandæmonium - Cloaque (sadique)"
     },
     "812": {
       "name": "Un accueil glacial"
@@ -1779,6 +1803,9 @@
     },
     "818": {
       "name": "Des adieux domiens"
+    },
+    "819": {
+      "name": "Le Ludodrome"
     },
     "820": {
       "name": "Acceptation"

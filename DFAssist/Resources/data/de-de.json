@@ -1,5 +1,5 @@
 {
-  "version": "20214311.1",
+  "version": "20221905.1",
   "instances": {
     "1": {
       "name": "Tausend Löcher von Toto-Rak"
@@ -1742,10 +1742,16 @@
       "name": "Lustiges Bankett"
     },
     "798": {
-      "name": "Das Ende der Morgenröte"
+      "name": "Endschreiter"
     },
     "799": {
       "name": "Im Hafen des Friedens"
+    },
+    "800": {
+      "name": "Asphodelos - Vierter Kreis"
+    },
+    "801": {
+      "name": "Asphodelos - Vierter Kreis (episch)"
     },
     "802": {
       "name": "Prophetie - Zodiark"
@@ -1758,6 +1764,24 @@
     },
     "805": {
       "name": "Offen für neue Wege"
+    },
+    "806": {
+      "name": "Asphodelos - Dritter Kreis"
+    },
+    "807": {
+      "name": "Asphodelos - Dritter Kreis (episch)"
+    },
+    "808": {
+      "name": "Asphodelos - Erster Kreis"
+    },
+    "809": {
+      "name": "Asphodelos - Erster Kreis (episch)"
+    },
+    "810": {
+      "name": "Asphodelos - Zweiter Kreis"
+    },
+    "811": {
+      "name": "Asphodelos - Zweiter Kreis (episch)"
     },
     "812": {
       "name": "Ein frostiger Empfang"
@@ -1779,6 +1803,9 @@
     },
     "818": {
       "name": "Domanisches Begräbnis"
+    },
+    "819": {
+      "name": "Euphoratron"
     },
     "820": {
       "name": "Trauer und Hoffnung"
